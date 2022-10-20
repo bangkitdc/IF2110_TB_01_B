@@ -1,0 +1,6 @@
+cmake_minimum_required(VERSION 3.10)
+project(IF2110_TB_01_B VERSION 1.0)
+file(GLOB_RECURSE sources CONFIGURE_DEPENDS src/*.h src/*.c)
+list(FILTER sources EXCLUDE REGEX "_driver.c")
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+add_executable(main ${sources})
