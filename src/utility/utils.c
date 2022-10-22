@@ -1,7 +1,6 @@
 #include <stdio.h>
 
-int main()
-{
+int utils() {
 
     return 0;
 }

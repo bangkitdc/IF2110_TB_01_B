@@ -1,6 +1,7 @@
 #include <stdio.h>
 
-int main() {
+int queue()
+{
 
     return 0;
 }
