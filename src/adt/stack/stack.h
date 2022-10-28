@@ -6,18 +6,28 @@
 #define stackt_H
 
 #include "../../utility/boolean.h"
+#include "../time/time.h"
+#include "../makanan/makanan.h"
+#include "../point/point.h"
+#include "../queue/Prioqueue.h"
+
 
 #define Nil -1
 #define MaxEl 100
 /* Nil adalah stack dengan elemen kosong . */
 
-typedef int infotype;
+typedef struct
+{
+  TIME waktu;
+  POINT koordinat;
+  infotype inventory; // Makanan dalam inventory yang disertai waktu expired
+} state; // State yang disimpan di dalam stack
 typedef int address;   /* indeks tabel */
 
 /* Contoh deklarasi variabel bertype stack dengan ciri TOP : */
 /* Versi I : dengan menyimpan tabel dan alamat top secara eksplisit*/
 typedef struct { 
-  infotype T[MaxEl]; /* tabel penyimpan elemen */
+  state T[MaxEl]; /* tabel penyimpan elemen */
   address TOP;  /* alamat TOP: elemen puncak */
 } Stack;
 /* Definisi stack S kosong : S.TOP = Nil */
@@ -29,6 +39,9 @@ typedef struct {
 /* Definisi akses dengan Selektor : Set dan Get */
 #define Top(S) (S).TOP
 #define InfoTop(S) (S).T[(S).TOP]
+#define InfoWaktu(X) (X).waktu;
+#define InfoKoordinat(X) (X).koordinat;
+#define InfoInventory(X) (X).inventory;
 
 /* ************ Prototype ************ */
 /* *** Konstruktor/Kreator *** */
@@ -44,18 +57,14 @@ boolean IsEmpty(Stack S);
 boolean IsFull(Stack S);
 /* Mengirim true jika tabel penampung nilai elemen stack penuh */
 
-/* ************ Memperoleh elemen TOP dari Stack ************ */
-infotype getTop(Stack S);
-/* Mengembalikan elemen TOP dari Stack */
-
 /* ************ Menambahkan sebuah elemen ke Stack ************ */
-void Push(Stack * S, infotype X);
+void Push(Stack * S, state X);
 /* Menambahkan X sebagai elemen Stack S. */
 /* I.S. S mungkin kosong, tabel penampung elemen stack TIDAK penuh */
 /* F.S. X menjadi TOP yang baru,TOP bertambah 1 */
 
 /* ************ Menghapus sebuah elemen Stack ************ */
-void Pop(Stack * S, infotype* X);
+void Pop(Stack * S, state* X);
 /* Menghapus X dari Stack S. */
 /* I.S. S  tidak mungkin kosong */
 /* F.S. X adalah nilai elemen TOP yang lama, TOP berkurang 1 */
