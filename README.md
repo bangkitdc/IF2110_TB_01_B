@@ -11,3 +11,4 @@
 
 # Disclaimer
 - Use MinGW, if you want to use msys, change the `start.bat` file and add `C:\MinGW\msys\1.0\bin` to your local PATH
+- https://stackoverflow.com/questions/23723364/windows-7-make-is-not-recognized-as-an-internal-or-external-command-operabl
