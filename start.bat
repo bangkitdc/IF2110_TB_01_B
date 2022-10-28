@@ -22,7 +22,7 @@ echo:
 echo Running Make . . .
 echo:
 cd build
-@make.exe
+@mingw32-make
 goto RUN
 
 :RUN
