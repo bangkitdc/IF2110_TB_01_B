@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "utils.h"
+#include "boolean.h"
 
 const char *bnmo[] = {
     "        .................        ",
@@ -36,3 +37,7 @@ void startMenu(){
     printf("1. START\n");
     printf("2. EXIT\n");
 }
+
+boolean Start() {
+    
+} 
