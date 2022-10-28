@@ -21,6 +21,14 @@ boolean IsFull(Stack S) {
 /* Mengirim true jika tabel penampung nilai elemen stack penuh */
     return (Top(S) == MaxEl - 1);
 }
+
+/* ************ Memperoleh elemen TOP dari Stack ************ */
+infotype getTop(Stack S) {
+    return (Top(S));
+}
+
+/* Mengembalikan elemen TOP dari Stack */
+
 /* ************ Menambahkan sebuah elemen ke Stack ************ */
 void Push(Stack * S, infotype X) {
 /* Menambahkan X sebagai elemen Stack S. */

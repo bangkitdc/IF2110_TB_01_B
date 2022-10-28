@@ -44,6 +44,10 @@ boolean IsEmpty(Stack S);
 boolean IsFull(Stack S);
 /* Mengirim true jika tabel penampung nilai elemen stack penuh */
 
+/* ************ Memperoleh elemen TOP dari Stack ************ */
+infotype getTop(Stack S);
+/* Mengembalikan elemen TOP dari Stack */
+
 /* ************ Menambahkan sebuah elemen ke Stack ************ */
 void Push(Stack * S, infotype X);
 /* Menambahkan X sebagai elemen Stack S. */
