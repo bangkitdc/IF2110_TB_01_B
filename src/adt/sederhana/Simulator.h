@@ -4,12 +4,16 @@
 #ifndef ADTSIMULATOR_H
 #define ADTSIMULATOR_H
 
+#include <stdlib.h>
 #include "../queue/Prioqueue.h"
+#include "../stack/stack.h"
+#include "../time/time.h"
 #include "../../utility/boolean.h"
 #include "../point/point.h"
+#include "../matrix/matrix.h"
 
 typedef struct {
-    char username[20]; //username maksimal 20 digit
+    char* username;
     POINT lokasi;
     PrioQueue inventory;
 } Simulator;
@@ -19,11 +23,28 @@ typedef struct {
 #define Inventory(x)    (x).inventory
 
 /* PRIMITIF SIMULATOR*/
-void gantiUser(Simulator* s);
+void createSimulator(Simulator* s, char* Username, POINT lokasi, PrioQueue inventory);
+/* Mengassign simulator */
+
+void gantiUser(Simulator * s, char* username);
 /* Mengganti username */
+
+void gantiLokasi(Simulator * s, POINT p);
+/* Mengganti lokasi simulator */
 
 void gerakUser(Simulator* s, char x);
 /* Menggerakkan user */
+
+state simulatorToState(Simulator s, TIME currentTime);
+/* mengkonversi simulator s ke state*/
+/* digunakan saat mau menyimpan state ke stack */
+
+void loadState(Simulator * s, state st, TIME * currentTime, char * currentUsername);
+/* mengkonversi state dari stack ke simulator dan menyimpannya di simulator */
+/* digunakan saat undo dan redo */
+
+void setInventory(Simulator * s, PrioQueue inventory);
+/* mengassign inventory di awal */
 
 void pindahKeKulkas(Simulator* s, int id);
 /* Memindahkan makanan di inventori ke kulkas */
