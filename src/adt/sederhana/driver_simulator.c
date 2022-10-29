@@ -15,8 +15,8 @@ int main () {
 
     scanf("%s", username);
     CreatePoint(&posisi, 1, 1);
-    MakeEmpty(&Q, 10);
-    MakeEmpty(&Q2, 10);
+    CreateEmptyPrioqueue(&Q, 10);
+    CreateEmptyPrioqueue(&Q2, 10);
 
     createSimulator(&s, username, posisi, Q);
     

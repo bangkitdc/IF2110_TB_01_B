@@ -9,8 +9,8 @@ int main() {
     Makanan tempmakanan, tempmakanan2;
     TIME temptime, temptime2;
 
-    MakeEmpty(&Q, max);
-    MakeEmpty(&Qcopy, max);
+    CreateEmptyPrioqueue(&Q, max);
+    CreateEmptyPrioqueue(&Qcopy, max);
 
     CreateTime(&temptime, 0, 0, 2);
     createMakanan(&tempmakanan, 12, "ayam", temptime, 'R', temptime);

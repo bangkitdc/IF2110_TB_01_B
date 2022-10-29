@@ -32,7 +32,7 @@ int NBElmtPrioqueue (PrioQueue Q) {
 }
 
 /* *** Kreator *** */
-void MakeEmpty (PrioQueue * Q, int Max) {
+void CreateEmptyPrioqueue (PrioQueue * Q, int Max) {
 /* I.S. sembarang */
 /* F.S. Sebuah Q kosong terbentuk dan salah satu kondisi sbb: */
 /* Jika alokasi berhasil, Tabel memori dialokasi berukuran Max+1 */
@@ -115,7 +115,7 @@ void Enqueue (PrioQueue * Q, infotype X) {
 
     /* ALGORITMA */
     if (IsFullPrioqueue(*Q)) {
-        MakeEmpty(&temp, MaxElPrioqueue(*Q));
+        CreateEmptyPrioqueue(&temp, MaxElPrioqueue(*Q));
 
         // salin ke temp
         while (!IsEmptyPrioqueue(*Q)) {
@@ -124,7 +124,7 @@ void Enqueue (PrioQueue * Q, infotype X) {
         }
 
         DeAlokasi(Q);
-        MakeEmpty(Q, 2 * MaxElPrioqueue(temp));
+        CreateEmptyPrioqueue(Q, 2 * MaxElPrioqueue(temp));
 
         // salin kembali ke Q
         while (!IsEmptyPrioqueue(temp)) {
@@ -173,7 +173,7 @@ void Delete (PrioQueue * Q, int id, infotype * X) {
     // ALGORITMA
     found = false;
 
-    MakeEmpty(&Q2, MaxElPrioqueue(*Q));
+    CreateEmptyPrioqueue(&Q2, MaxElPrioqueue(*Q));
 
     while (!found) {
         Dequeue(Q, &temp);
@@ -194,7 +194,7 @@ void Delete (PrioQueue * Q, int id, infotype * X) {
     }
 
     DeAlokasi(Q);
-    MakeEmpty(Q, MaxElPrioqueue(Q2));
+    CreateEmptyPrioqueue(Q, MaxElPrioqueue(Q2));
 
     // salin kembali dari Q2 ke Q
     while (!IsEmptyPrioqueue(Q2)) {
@@ -213,7 +213,7 @@ void CopyQueue (PrioQueue *Q1, PrioQueue * Q2) {
     PrioQueue Qtemp;
 
     // ALGORITMA
-    MakeEmpty(&Qtemp, MaxElPrioqueue(*Q1));
+    CreateEmptyPrioqueue(&Qtemp, MaxElPrioqueue(*Q1));
 
     // menyalin elemen Q1 ke Q2
     while (!IsEmptyPrioqueue(*Q1)) {
@@ -273,7 +273,7 @@ void PasstimeQueue(PrioQueue * Q, int x) {
     boolean kadaluarsa;
 
     // ALGORITMA 
-    MakeEmpty(&temp, MaxElPrioqueue(*Q));
+    CreateEmptyPrioqueue(&temp, MaxElPrioqueue(*Q));
     kadaluarsa = false;
     ctr = 1;
     printf("Notifikasi: ");
@@ -299,7 +299,7 @@ void PasstimeQueue(PrioQueue * Q, int x) {
         // salin kembali dari temp ke Q
         CopyQueue(&temp, Q);
         DeAlokasi(&temp);
-        MakeEmpty(&temp, MaxElPrioqueue(*Q));
+        CreateEmptyPrioqueue(&temp, MaxElPrioqueue(*Q));
     }
 
     if (!kadaluarsa) {
