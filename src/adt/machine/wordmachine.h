@@ -75,4 +75,13 @@ ListWord readLine();
 ListWord readLineFile();
 /* Membaca line masukan user dari file*/
 
+bolean isWordEq(w1, w2);
+/* Menghasilkan true jika word sama */
+
+void copyWord(Word w1, Word *w2);
+/* Copy Word w1 ke Word w2 */
+
+Word concatWord(Word w1, Word w2);
+/* Concat Word w1 dan Word w2 menjadi Word baru */
+
 #endif
