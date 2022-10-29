@@ -1,6 +1,6 @@
-#include "../queue/Prioqueue.c"
-#include "../time/time.c"
-#include "../point/point.c"
+#include "../queue/Prioqueue.h"
+#include "../time/time.h"
+#include "../point/point.h"
 #include "simulator.h"
 #include <stdio.h>
 
