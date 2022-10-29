@@ -4,7 +4,7 @@
 #ifndef __MESINKATA_H__
 #define __MESINKATA_H__
 
-#include "../../utility/boolean.h"
+#include "../../include/boolean.h"
 #include "charmachine.h"
 
 #define NMax 100
@@ -75,7 +75,7 @@ ListWord readLine();
 ListWord readLineFile();
 /* Membaca line masukan user dari file*/
 
-bolean isWordEq(w1, w2);
+boolean isWordEq(Word w1, Word w2);
 /* Menghasilkan true jika word sama */
 
 void copyWord(Word w1, Word *w2);
@@ -83,5 +83,7 @@ void copyWord(Word w1, Word *w2);
 
 Word concatWord(Word w1, Word w2);
 /* Concat Word w1 dan Word w2 menjadi Word baru */
+
+char *ListWordToString(ListWord L);
 
 #endif
