@@ -2,7 +2,6 @@
 #include "../utility/utils.h"
 
 int main() {
-    /* Game */
     startMenu();
     int input;
 
