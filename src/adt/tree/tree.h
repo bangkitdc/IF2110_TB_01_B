@@ -5,7 +5,7 @@
 #ifndef POHON_H
 #define POHON_H
 
-#include "../../include/boolean.h"
+#include "boolean.h"
 
 /* Selektor */
 #define ROOT(p) (p)->info

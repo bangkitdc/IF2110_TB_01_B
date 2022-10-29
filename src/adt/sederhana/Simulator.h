@@ -5,9 +5,8 @@
 #define ADTSIMULATOR_H
 
 #include "../queue/Prioqueue.h"
-#include "../../include/boolean.h"
+#include "../../utility/boolean.h"
 #include "../point/point.h"
-#include "../matrix/matrix.h"
 
 typedef struct {
     char username[20]; //username maksimal 20 digit
