@@ -13,7 +13,7 @@
 #include "../matrix/matrix.h"
 
 typedef struct {
-    char username[20]; //username maksimal 20 digit
+    char* username;
     POINT lokasi;
     PrioQueue inventory;
 } Simulator;
@@ -23,14 +23,8 @@ typedef struct {
 #define Inventory(x)    (x).inventory
 
 /* PRIMITIF SIMULATOR*/
-void dealocateSimulator(Simulator *s);
-/* mendealokasi simulator */
-
 void createSimulator(Simulator* s, char* Username, POINT lokasi, PrioQueue inventory);
 /* Mengassign simulator */
-
-void inputUser(char* username);
-/* menginput username */
 
 void gantiUser(Simulator * s, char* username);
 /* Mengganti username */
@@ -41,7 +35,7 @@ void gantiLokasi(Simulator * s, POINT p);
 void gerakUser(Simulator* s, char x);
 /* Menggerakkan user */
 
-state simulatorToState(Simulator * s, TIME currentTime);
+state simulatorToState(Simulator s, TIME currentTime);
 /* mengkonversi simulator s ke state*/
 /* digunakan saat mau menyimpan state ke stack */
 

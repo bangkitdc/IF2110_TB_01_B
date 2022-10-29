@@ -1,14 +1,10 @@
-#include "../queue/Prioqueue.h"
+#include "../queue/Prioqueue.c"
+#include "../time/time.c"
+#include "../point/point.c"
 #include "simulator.h"
 #include <stdio.h>
 
 /* PRIMITIF SIMULATOR*/
-void dealocateSimulator(Simulator *s) {
-/* mendealokasi simulator */
-    // ALGORITMA 
-    free(s);
-}
-
 void createSimulator(Simulator* s, char* Username, POINT lokasi, PrioQueue inventory) {
 /* Mengassign simulator */
 
@@ -18,20 +14,6 @@ void createSimulator(Simulator* s, char* Username, POINT lokasi, PrioQueue inven
     setInventory(s, inventory);
 }
 
-void inputUser(char* username) {
-/* menginput username */
-    // KAMUS
-    char nama[20];
-    int i;
-
-    // ALGORITMA
-    scanf("%s\n", nama);
-
-    for (i = 0; i <= 19 && nama[i] != '\0'; i++) {
-        username[i] = nama[i];
-    }
-}
-
 void gantiUser(Simulator * s, char* username) {
 /* Mengganti username */
 
@@ -39,9 +21,7 @@ void gantiUser(Simulator * s, char* username) {
     int i;
 
     // ALGORITMA
-    for (i = 0; i <= 19 && username[i] != '\0'; i++) {
-        Username(*s)[i] = username[i];
-    }
+    Username(*s) = username;
 }
 
 void gantiLokasi(Simulator * s, POINT p) {
@@ -75,7 +55,7 @@ void gerakUser(Simulator * s, char x) {
     }
 }
 
-state simulatorToState(Simulator * s, TIME currentTime) {
+state simulatorToState(Simulator s, TIME currentTime) {
 /* mengkonversi simulator s ke state*/
 /* digunakan saat mau menyimpan state ke stack */
 
@@ -84,8 +64,8 @@ state simulatorToState(Simulator * s, TIME currentTime) {
 
     // ALGORITMA
     InfoWaktu(temp) = currentTime;
-    InfoKoordinat(temp) = Lokasi(*s);
-    InfoInventory(temp) = Inventory(*s);
+    InfoKoordinat(temp) = Lokasi(s);
+    InfoInventory(temp) = Inventory(s);
 
     return temp;
 }
@@ -95,8 +75,8 @@ void loadState(Simulator * s, state st, TIME * currentTime, char * currentUserna
 /* digunakan saat undo dan redo */
 
     // ALGORITMA
-    dealocateSimulator(s);
     createSimulator(s, currentUsername, InfoKoordinat(st), InfoInventory(st));
+    *currentTime = InfoWaktu(st);
 }
 
 void setInventory(Simulator * s, PrioQueue inventory) {
