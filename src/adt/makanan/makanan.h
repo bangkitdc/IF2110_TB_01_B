@@ -4,7 +4,7 @@
 #ifndef MAKANAN_H
 #define MAKANAN_H
 
-#include "../../utility/boolean.h"
+#include "../../include/boolean.h"
 #include "../time/time.h"
 #include "../point/point.h"
 

@@ -9,8 +9,9 @@ int main() {
 
     L = readLine();
 
-    char *name = ListWordToString(ListWord L);
+    char *name;
+    name = ListWordToString(L);
 
-    printf("%s", name);
+    printf("%s\n", name);
     return 0;
 }

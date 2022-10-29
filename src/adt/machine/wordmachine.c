@@ -1,6 +1,7 @@
 /* File: wordmachine.c */
 /* Implementasi Mesin Kata */
 
+#include <stdlib.h>
 #include <stdio.h>
 #include "charmachine.h"
 #include "wordmachine.h"
@@ -196,12 +197,19 @@ char *ListWordToString(ListWord L) {
          len ++;
       }
    }
-   char res[len];
+   len += L.Length - 1;
+   char *res = malloc(len * sizeof(char));
    int counter = 0;
    for (i = 0; i < L.Length; i ++) {
       for (j = 0; j < L.TabWords[i].Length; j ++) {
-         res[counter++] = L.TabWords[i].TabWord[j];
+         res[counter] = L.TabWords[i].TabWord[j];
+         counter ++;
+      }
+      if (i != L.Length - 1) {
+         res[counter] = ' ';
+         counter ++;
       }
    }
+   res[counter] = '\0';
    return res;
 }

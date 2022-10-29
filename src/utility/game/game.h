@@ -13,10 +13,9 @@ typedef enum {
 } ConfigType;
 
 typedef struct {
-    // ListStatik listMakanan;
-    // ListStatik listResep;
+    ListStatik listMakanan;
+    ListStatik listResep;
     Matrix map;
-    ListDin notifikasi;
     boolean endGame;
 } Game;
 
