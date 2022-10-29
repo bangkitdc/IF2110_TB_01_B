@@ -1,7 +1,7 @@
 /* File: makanan.h */
 /* Implementasi Object Makanan */
 
-#include "../../utility/boolean.h"
+#include "../../include/boolean.h"
 #include "makanan.h"
 
 /* Konstruktor */

@@ -4,13 +4,14 @@
 /*
 int main() {
     int max = 1; // walaupun max = 0, jika di enqueue nanti maxel = 2*0 + 1
-    PrioQueue Q, Qcopy;
+    PrioQueue Q, Qcopy, currentinventory;
     infotype temp, temp2, tempdel;
     Makanan tempmakanan, tempmakanan2;
     TIME temptime, temptime2;
 
     CreateEmptyPrioqueue(&Q, max);
     CreateEmptyPrioqueue(&Qcopy, max);
+    CreateEmptyPrioqueue(&currentinventory, max);
 
     CreateTime(&temptime, 0, 0, 2);
     createMakanan(&tempmakanan, 12, "ayam", temptime, 'R', temptime);
@@ -56,9 +57,13 @@ int main() {
         PasstimeQueue(&Qcopy, 1); // ceritanya bakal dipake di setiap operasi, bakal mendahului segala command, dan menampilkan barang-barang yang kedaluwarsa
         PrintPrioQueue(Qcopy);
         printf("\n");
+
+        printf("ini ceritanya kalo misal Qcopy itu delivery list sama currentinventory itu inventory di simulator\n");
+        printf("ceritanya juga di skip 1 menit\n");
+        PassTimeDelivery(&Qcopy, &currentinventory, 1);
+        PrintPrioQueue(currentinventory);
     }
 
     return 0;
 }
-
 */

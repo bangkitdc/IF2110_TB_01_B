@@ -5,7 +5,7 @@
 #ifndef prioqueue_H
 #define prioqueue_H
 
-#include "../../utility/boolean.h"
+#include "../../include/boolean.h"
 #include "../time/time.h"
 #include "../makanan/makanan.h"
 
@@ -105,9 +105,15 @@ void PrintPrioQueue (PrioQueue Q);
 #
 */
 
+/* Operasi untuk mengurus inventory dan delivery list */
 void PasstimeQueue(PrioQueue * Q, int x);
 /* Mengurangi waktu tiap elemen di queue */
 /* I.S. Q mungkin kosong */
 /* F.S. setiap elemen di Q waktunya berkurang sesuai dengan jumlah waktu yang telah berlalu, jika waktunya menjadi 0 maka elemen tersebut akan dihapus dari queue */
+
+void PassTimeDelivery(PrioQueue * deliList, PrioQueue * destination, int x);
+/* Mengurangi waktu tiap elemen di queue */
+/* I.S. Q mungkin kosong */
+/* F.S. setiap elemen di Q waktunya berkurang sesuai dengan jumlah waktu yang telah berlalu, jika waktunya menjadi 0 maka elemen tersebut akan dihapus dari delivery list dan dipindahkan ke inventory */
 
 #endif
