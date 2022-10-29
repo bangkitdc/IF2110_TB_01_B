@@ -2,7 +2,8 @@
 #define GAME_H
 
 #include <stdio.h>
-#include "../adt/adt.h"
+#include "../../include/boolean.h"
+#include "../../adt/adt.h"
 
 void startGame(Game *game);
 

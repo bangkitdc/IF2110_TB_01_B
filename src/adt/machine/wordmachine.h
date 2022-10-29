@@ -4,7 +4,7 @@
 #ifndef __MESINKATA_H__
 #define __MESINKATA_H__
 
-#include "../../utility/boolean.h"
+#include "../../include/boolean.h"
 #include "charmachine.h"
 
 #define NMax 100

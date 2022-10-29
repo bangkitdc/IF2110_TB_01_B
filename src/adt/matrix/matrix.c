@@ -1,6 +1,5 @@
 /* ********** Definisi TYPE Matrix dengan Index dan elemen integer ********** */
 #include <stdio.h>
-#include "boolean.h"
 #include "matrix.h"
 
 /* rowEff >= 1 dan colEff >= 1 */
