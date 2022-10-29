@@ -7,14 +7,14 @@
 /* Konstruktor : create List kosong untuk list makanan */
 void createLSMakanan(ListStatik *l){
     for (int i = 0; i < CAPACITY; i++){
-        ELMT(*l,i) = MARK;
+        ID(ELMT(*l,i)) = MARK;
     }
 }
 
 /* *** Banyaknya elemen *** */
 int listLength(ListStatik l){
     int i = 0;
-    while (ELMT(l,i) != MARK && i < CAPACITY){
+    while (ID(ELMT(l,i)) != MARK && i < CAPACITY){
         i+=1;
     }
     return i;
