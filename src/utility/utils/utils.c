@@ -88,17 +88,23 @@ void inputConfigFile(Game *g, Word PATH, int type) {
                 ADVNewline();
                 int i, j, k;
                 for (i = 0; i < n; i++) {
+                    Makanan M;
+                    int id;
+                    char *name;
+                    TIME exp;
+                    char loc;
+                    TIME delivery;
                     for (j = 0; j < 5; j++) {
                         LFile = readLineFile();
                         switch (j) {
                             case 0:     /* ID */
-                                
+                                id = wordToInt(LFile.TabWords[0]);
                                 break;  /* Nama Makanan */
                             case 1:
-
+                                name = 
                                 break;
                             case 2:     /* Waktu Expired */
-
+                                
                                 break;
                             case 3:     /* Waktu Delivery */
 

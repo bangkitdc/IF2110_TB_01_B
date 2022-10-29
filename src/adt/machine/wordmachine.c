@@ -1,7 +1,7 @@
 /* File: wordmachine.c */
 /* Implementasi Mesin Kata */
 
-#include "../../include/boolean.h"
+#include <stdlib.h>
 #include <stdio.h>
 #include "charmachine.h"
 #include "wordmachine.h"
@@ -116,8 +116,7 @@ void displayWord(Word w) {
 int wordToInt(Word currentWord) {
    int i;
    int val = 0;
-   for (i = 0; i < currentWord.Length; i++)
-   {
+   for (i = 0; i < currentWord.Length; i++) {
       val = val * 10 + (currentWord.TabWord[i] - '0');
    }
    return val;
@@ -150,7 +149,7 @@ ListWord readLine() {
    return L;
 }
 
-bolean isWordEq(Word w1, Word w2) {
+boolean isWordEq(Word w1, Word w2) {
    if (w1.Length != w2.Length) {
       return false;
    } else {
@@ -187,5 +186,30 @@ Word concatWord(Word w1, Word w2) {
    for (i = 0; i < w2.Length; i ++) {
       res.TabWord[i + w1.Length] = w2.TabWord[i];
    }
+   return res;
+}
+
+char *ListWordToString(ListWord L) {
+   int len = 0;
+   int i, j;
+   for (i = 0; i < L.Length; i ++) {
+      for (j = 0; j < L.TabWords[i].Length; j ++) {
+         len ++;
+      }
+   }
+   len += L.Length - 1;
+   char *res = malloc(len * sizeof(char));
+   int counter = 0;
+   for (i = 0; i < L.Length; i ++) {
+      for (j = 0; j < L.TabWords[i].Length; j ++) {
+         res[counter] = L.TabWords[i].TabWord[j];
+         counter ++;
+      }
+      if (i != L.Length - 1) {
+         res[counter] = ' ';
+         counter ++;
+      }
+   }
+   res[counter] = '\0';
    return res;
 }
