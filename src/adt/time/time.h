@@ -5,7 +5,7 @@
 #ifndef TIME_H
 #define TIME_H
 
-#include "../../utility/boolean.h"
+#include "../../include/boolean.h"
 
 /* *** Definisi TYPE TIME <HH:MM:SS> *** */
 typedef struct { 

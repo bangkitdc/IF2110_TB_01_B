@@ -1,7 +1,7 @@
 /* File: wordmachine.c */
 /* Implementasi Mesin Kata */
 
-#include "../../utility/boolean.h"
+#include "../../include/boolean.h"
 #include <stdio.h>
 #include "charmachine.h"
 #include "wordmachine.h"

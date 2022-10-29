@@ -3,8 +3,8 @@
 #ifndef LISTSTATIK_H
 #define LISTSTATIK_H
 
-#include "boolean.h"
-#include "makanan.h"
+#include "../../include/boolean.h"
+#include "../makanan/makanan.h"
 
 /*  Kamus Umum */
 #define CAPACITY 1000

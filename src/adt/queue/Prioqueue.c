@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "../../utility/boolean.h"
+#include "../../include/boolean.h"
 #include "prioqueue.h"
 #include "../time/time.h"
 
@@ -261,6 +261,7 @@ void PrintPrioQueue (PrioQueue Q) {
     }
 }
 
+/* Operasi untuk mengurus inventory dan delivery list */
 void PasstimeQueue(PrioQueue * Q, int x) {
 /* Mengurangi waktu tiap elemen di queue */
 /* I.S. Q mungkin kosong */
@@ -305,5 +306,38 @@ void PasstimeQueue(PrioQueue * Q, int x) {
     if (!kadaluarsa) {
 
         printf("-\n");
+    }
+}
+
+void PassTimeDelivery(PrioQueue * deliList, PrioQueue * destination, int x) {
+/* Mengurangi waktu tiap elemen di queue */
+/* I.S. Q mungkin kosong */
+/* F.S. setiap elemen di Q waktunya berkurang sesuai dengan jumlah waktu yang telah berlalu, jika waktunya menjadi 0 maka elemen tersebut akan dihapus dari delivery list dan dipindahkan ke inventory */
+
+    // KAMUS
+    int i;
+    PrioQueue temp;
+    infotype tempvar;
+
+    // ALGORITMA 
+    CreateEmptyPrioqueue(&temp, MaxElPrioqueue(*deliList));
+
+    // looping setiap menit
+    for (i = 1; i <= x; i++) {
+        while (!IsEmptyPrioqueue(*deliList)) {
+            Dequeue(deliList, &tempvar);
+            Time(tempvar)--;
+            if (Time(tempvar) == 0) {
+                Time(tempvar) = TIMEToMenit(EXP(Info(tempvar)));
+                Enqueue(destination, tempvar);
+            } else {
+                Enqueue(&temp, tempvar);
+            }
+        }
+
+        // salin kembali dari temp ke Q
+        CopyQueue(&temp, deliList);
+        DeAlokasi(&temp);
+        CreateEmptyPrioqueue(&temp, MaxElPrioqueue(*deliList));
     }
 }
