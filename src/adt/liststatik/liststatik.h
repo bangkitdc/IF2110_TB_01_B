@@ -34,10 +34,12 @@ void createLSMakanan(ListStatik *l);
 int listLength(ListStatik l);
 
 /* *** Menambahkan elemen terakhir *** */
-void insertLast(ListStatik *l, Makanan val);
-/* Proses: Menambahkan val sebagai elemen terakhir List */
+void insertFood(ListStatik *l, Makanan food);
+/* Proses: Menambahkan food ke dalam list */
 /* I.S. List l boleh kosong, tetapi tidak penuh */
-/* F.S. val adalah elemen terakhir l yang baru */
+/* F.S. food adalah elemen terakhir l yang baru jika id nya tidak sama 
+dengan id makanan yang sudah ada dalam list sebelumnya. Jika Id nya sama dengan makanan sebelumnya,
+maka food akan menimpa makanan yang sudah didefinisikan sebelumnya. */
 
 /* Konstruktor : create List kosong untuk list resep */
 
