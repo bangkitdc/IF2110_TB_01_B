@@ -10,5 +10,5 @@
 2. If you want to delete your build, type `start.bat clean` on your terminal
 
 # Disclaimer
-- Use MinGW, if you want to use msys, change the `start.bat` file and add `C:\MinGW\msys\1.0\bin` to your local PATH
+- Please use MinGW if you want to start the batch file, if you want to use MSYS change the `start.bat` file (use `make` instead of `mingw32-make` and change any `MinGW` to `MSYS`) and add `C:\MinGW\msys\1.0\bin` to your env PATH
 - https://stackoverflow.com/questions/23723364/windows-7-make-is-not-recognized-as-an-internal-or-external-command-operabl
