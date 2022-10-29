@@ -5,7 +5,7 @@
 #ifndef prioqueue_H
 #define prioqueue_H
 
-#include "../../utility/boolean.h"
+#include "../../include/boolean.h"
 #include "../time/time.h"
 #include "../makanan/makanan.h"
 

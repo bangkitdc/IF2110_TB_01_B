@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include "utils.h"
-#include "boolean.h"
+#include "../include/boolean.h"
 
 const char *bnmo[] = {
     "        .................        ",
