@@ -7,7 +7,8 @@
 typedef struct {
     // ListStatik listMakanan;
     // ListStatik listResep;
-    Matrix
+    Matrix map;
+    
 } Game;
 
 void startGame(Game *game);
