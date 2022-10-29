@@ -149,3 +149,43 @@ ListWord readLine() {
    }
    return L;
 }
+
+bolean isWordEq(Word w1, Word w2) {
+   if (w1.Length != w2.Length) {
+      return false;
+   } else {
+      int i = 0;
+      boolean isEq = true;
+
+      while (i < w1.Length && isEq) {
+         if (w1.TabWord[i] != w2.TabWord[i]) {
+            isEq = false;
+         }
+         i ++;
+      }
+
+      return isEq;
+   }
+}
+
+void copyWord(Word w1, Word *w2) {
+   int i;
+
+   w2->Length = w1.Length;
+   for (i = 0; i < w1.Length; i ++) {
+      w2->TabWord[i] = w1.TabWord[i];
+   }
+}
+
+Word concatWord(Word w1, Word w2) {
+   Word res;
+   res.Length = w1.Length + w2.Length;
+   int i;
+   for (i = 0; i < w1.Length; i ++) {
+      res.TabWord[i] = w1.TabWord[i];
+   }
+   for (i = 0; i < w2.Length; i ++) {
+      res.TabWord[i + w1.Length] = w2.TabWord[i];
+   }
+   return res;
+}

@@ -39,9 +39,9 @@ typedef struct {
 /* Definisi akses dengan Selektor : Set dan Get */
 #define Top(S) (S).TOP
 #define InfoTop(S) (S).T[(S).TOP]
-#define InfoWaktu(X) (X).waktu
-#define InfoKoordinat(X) (X).koordinat
-#define InfoInventory(X) (X).inventory
+#define InfoWaktu(X) (X).waktu;
+#define InfoKoordinat(X) (X).koordinat;
+#define InfoInventory(X) (X).inventory;
 
 /* ************ Prototype ************ */
 /* *** Konstruktor/Kreator *** */
