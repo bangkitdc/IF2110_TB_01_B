@@ -14,47 +14,47 @@
 
 /* Definisi elemen dan address */
 typedef struct {
-    long time;              /* berisi waktu dalam menit */
-    Makanan info;           /* makanan */
+    long time;       /* berisi waktu dalam menit */
+    Makanan info;   /* makanan */
 } infotype;
-typedef int address;        /* indeks tabel */
+typedef int address;   /* indeks tabel */
 /* Contoh deklarasi variabel bertype PrioQueue : */
 /* Versi I : tabel dinamik, Head dan Tail eksplisit, ukuran disimpan */
 typedef struct {
-    infotype * T;           /* tabel penyimpan elemen */
-    address HEAD;           /* alamat penghapusan */
-    address TAIL;           /* alamat penambahan */
-    int MaxElPrioqueue;     /* Max elemen queue */
+    infotype * T;   /* tabel penyimpan elemen */
+    address HEAD;   /* alamat penghapusan */
+    address TAIL;   /* alamat penambahan */
+    int MaxEl;      /* Max elemen queue */
 } PrioQueue;
-/* Definisi PrioQueue kosong: HEAD=Nil; TAIL=Nil. (saat pertama kali didefinisikan) */
+/* Definisi PrioQueue kosong: HEAD=Nil; TAIL=Nil. */
 /* Catatan implementasi: T[0] tidak pernah dipakai */
 
 /* ********* AKSES (Selektor) ********* */
 /* Jika e adalah infotype dan Q adalah PrioQueue, maka akses elemen : */
-#define Time(e)             (e).time
-#define Info(e)             (e).info
-#define Head(Q)             (Q).HEAD
-#define Tail(Q)             (Q).TAIL
-#define InfoHead(Q)         (Q).T[(Q).HEAD]
-#define InfoTail(Q)         (Q).T[(Q).TAIL]
-#define MaxElPrioqueue(Q)   (Q).MaxElPrioqueue
-#define Elmt(Q,i)           (Q).T[(i)]
+#define Time(e)     (e).time
+#define Info(e)     (e).info
+#define Head(Q)     (Q).HEAD
+#define Tail(Q)     (Q).TAIL
+#define InfoHead(Q) (Q).T[(Q).HEAD]
+#define InfoTail(Q) (Q).T[(Q).TAIL]
+#define MaxEl(Q)    (Q).MaxEl
+#define Elmt(Q,i)   (Q).T[(i)]
 
 /* ********* Prototype ********* */
-boolean IsEmptyPrioqueue (PrioQueue Q);
+boolean IsEmpty (PrioQueue Q);
 /* Mengirim true jika Q kosong: lihat definisi di atas */
-boolean IsFullPrioqueue (PrioQueue Q);
+boolean IsFull (PrioQueue Q);
 /* Mengirim true jika tabel penampung elemen Q sudah penuh */
-/* yaitu mengandung elemen sebanyak MaxElPrioqueue */
-int NBElmtPrioqueue (PrioQueue Q);
+/* yaitu mengandung elemen sebanyak MaxEl */
+int NBElmt (PrioQueue Q);
 /* Mengirimkan banyaknya elemen queue. Mengirimkan 0 jika Q kosong. */
 
 /* *** Kreator *** */
-void CreateEmptyPrioqueue (PrioQueue * Q, int Max);
+void MakeEmpty (PrioQueue * Q, int Max);
 /* I.S. sembarang */
 /* F.S. Sebuah Q kosong terbentuk dan salah satu kondisi sbb: */
 /* Jika alokasi berhasil, Tabel memori dialokasi berukuran Max+1 */
-/* atau : jika alokasi gagal, Q kosong dg MaxElPrioqueue=0 */
+/* atau : jika alokasi gagal, Q kosong dg MaxEl=0 */
 /* Proses : Melakukan alokasi, membuat sebuah Q kosong */
 
 void MakeinfoType (infotype * x, Makanan m);
@@ -66,7 +66,7 @@ void MakeinfoType (infotype * x, Makanan m);
 void DeAlokasi(PrioQueue * Q);
 /* Proses: Mengembalikan memori Q */
 /* I.S. Q pernah dialokasi */
-/* F.S. Q menjadi tidak terdefinisi lagi, MaxElPrioqueue(Q) diset 0 */
+/* F.S. Q menjadi tidak terdefinisi lagi, MaxEl(Q) diset 0 */
 
 /* *** Primitif Add/Delete *** */
 void Enqueue1 (PrioQueue * Q, infotype X);
@@ -82,7 +82,8 @@ void Enqueue (PrioQueue * Q, infotype X);
 void Dequeue (PrioQueue * Q, infotype * X);
 /* Proses: Menghapus X pada Q dengan aturan FIFO */
 /* I.S. Q tidak mungkin kosong */
-/* F.S. X = nilai elemen HEAD pd I.S., HEAD "maju", Q mungkin kosong */
+/* F.S. X = nilai elemen HEAD pd I.S., HEAD "maju" dengan mekanisme circular buffer;
+        Q mungkin kosong */
 
 void Delete (PrioQueue * Q, int id, infotype * X) ;
 /* Proses: Menghapus elemen dengan id x pertama pada Q */

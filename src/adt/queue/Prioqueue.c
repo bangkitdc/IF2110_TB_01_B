@@ -2,50 +2,49 @@
 #include <stdlib.h>
 #include "../../utility/boolean.h"
 #include "prioqueue.h"
-#include "../time/time.h"
 
 /* ********* Prototype ********* */
-boolean IsEmptyPrioqueue (PrioQueue Q) {
+boolean IsEmpty (PrioQueue Q) {
 /* Mengirim true jika Q kosong: lihat definisi di atas */
     
     /* ALGORITMA */
     return (Head(Q) == Nil && Tail(Q) == Nil);
 }
 
-boolean IsFullPrioqueue (PrioQueue Q) {
+boolean IsFull (PrioQueue Q) {
 /* Mengirim true jika tabel penampung elemen Q sudah penuh */
-/* yaitu mengandung elemen sebanyak MaxElPrioqueue */
+/* yaitu mengandung elemen sebanyak MaxEl */
 
     /* ALGORITMA */
-    return (Tail(Q) + 1 == MaxElPrioqueue(Q));
+    return (Tail(Q) - Head(Q) + 1 == MaxEl(Q));
 }
 
-int NBElmtPrioqueue (PrioQueue Q) {
+int NBElmt (PrioQueue Q) {
 /* Mengirimkan banyaknya elemen queue. Mengirimkan 0 jika Q kosong. */
     
     /* ALGORITMA */
-    if (IsEmptyPrioqueue(Q)) {
+    if (IsEmpty(Q)) {
         return 0;
     } else {
-        return(Tail(Q) - Head(Q) + 1);
+        return(Tail(Q) + 1);
     }
 }
 
 /* *** Kreator *** */
-void CreateEmptyPrioqueue (PrioQueue * Q, int Max) {
+void MakeEmpty (PrioQueue * Q, int Max) {
 /* I.S. sembarang */
 /* F.S. Sebuah Q kosong terbentuk dan salah satu kondisi sbb: */
 /* Jika alokasi berhasil, Tabel memori dialokasi berukuran Max+1 */
-/* atau : jika alokasi gagal, Q kosong dg MaxElPrioqueue=0 */
+/* atau : jika alokasi gagal, Q kosong dg MaxEl=0 */
 /* Proses : Melakukan alokasi, membuat sebuah Q kosong */
 
     /* ALGORITMA */
     (*Q).T = (infotype *)malloc((Max + 1) * sizeof(infotype));
 
     if ((*Q).T == NULL) {
-        MaxElPrioqueue(*Q) = 0;
+        MaxEl(*Q) = 0;
     } else {
-        MaxElPrioqueue(*Q) = Max;
+        MaxEl(*Q) = Max;
         Head(*Q) = Nil;
         Tail(*Q) = Nil;
     }
@@ -67,28 +66,25 @@ void MakeinfoType (infotype * x, Makanan m) {
 void DeAlokasi(PrioQueue * Q) {
 /* Proses: Mengembalikan memori Q */
 /* I.S. Q pernah dialokasi */
-/* F.S. Q menjadi tidak terdefinisi lagi, MaxElPrioqueue(Q) diset 0 */
+/* F.S. Q menjadi tidak terdefinisi lagi, MaxEl(Q) diset 0 */
 
     /* ALGORITMA */
-    MaxElPrioqueue(*Q) = 0;
+    MaxEl(*Q) = 0;
     free((*Q).T);
 }
 
 /* *** Primitif Add/Delete *** */
 void Enqueue1 (PrioQueue * Q, infotype X) {
-/* Proses: Menambahkan X pada Q dengan aturan priority queue, terurut membesar berdasarkan time */
-/* I.S. Q mungkin kosong, tabel penampung elemen Q TIDAK penuh */
-/* F.S. X disisipkan pada posisi yang tepat sesuai dengan prioritas */
     // KAMUS
     int counter, tempidx;
 
     // ALGORITMA
-    if (IsEmptyPrioqueue(*Q)) {
-        Head(*Q) = 0;
-        Tail(*Q) = 0;
+    if (IsEmpty(*Q)) {
+        Head(*Q) = 1;
+        Tail(*Q) = 1;
         InfoTail(*Q) = X;
     } else {
-        counter = NBElmtPrioqueue(*Q);
+        counter = NBElmt(*Q);
         tempidx = Tail(*Q);
 
         // geser yang timenya > x ke kanan
@@ -106,28 +102,30 @@ void Enqueue1 (PrioQueue * Q, infotype X) {
 
 void Enqueue (PrioQueue * Q, infotype X) {
 /* Proses: Menambahkan X pada Q dengan aturan priority queue, terurut membesar berdasarkan time */
-/* I.S. Q mungkin kosong dan penuh */
-/* F.S. X disisipkan pada posisi yang tepat sesuai dengan prioritas, TAIL "maju"*/
+/* I.S. Q mungkin kosong, tabel penampung elemen Q TIDAK penuh */
+/* F.S. X disisipkan pada posisi yang tepat sesuai dengan prioritas,
+        TAIL "maju" dengan mekanisme circular buffer; */
 
     /* KAMUS */
     PrioQueue temp;
     infotype tempinfo;
+    int counter, tempidx;
 
     /* ALGORITMA */
-    if (IsFullPrioqueue(*Q)) {
-        CreateEmptyPrioqueue(&temp, MaxElPrioqueue(*Q));
+    if (IsFull(*Q)) {
+        MakeEmpty(&temp, MaxEl(*Q));
 
         // salin ke temp
-        while (!IsEmptyPrioqueue(*Q)) {
+        while (!IsEmpty(*Q)) {
             Dequeue(Q, &tempinfo);
             Enqueue1(&temp, tempinfo);
         }
 
         DeAlokasi(Q);
-        CreateEmptyPrioqueue(Q, 2 * MaxElPrioqueue(temp));
+        MakeEmpty(Q, 2 * MaxEl(temp));
 
         // salin kembali ke Q
-        while (!IsEmptyPrioqueue(temp)) {
+        while (!IsEmpty(temp)) {
             Dequeue(&temp, &tempinfo);
             Enqueue1(Q, tempinfo);
         }
@@ -142,16 +140,15 @@ void Enqueue (PrioQueue * Q, infotype X) {
 void Dequeue (PrioQueue * Q, infotype * X) {
 /* Proses: Menghapus X pada Q dengan aturan FIFO */
 /* I.S. Q tidak mungkin kosong */
-/* F.S. X = nilai elemen HEAD pd I.S., HEAD "maju",  Q mungkin kosong */
+/* F.S. X = nilai elemen HEAD pd I.S., HEAD "maju" dengan mekanisme circular buffer;
+        Q mungkin kosong */
 
     /* ALGORITMA */
-    if (NBElmtPrioqueue(*Q) == 1) {
+    if (NBElmt(*Q) == 1) {
         Info(*X) = Info(InfoHead(*Q));
         Time(*X) = Time(InfoHead(*Q));
-
-        
-        Head(*Q) = Nil;
-        Tail(*Q) = Nil;
+        Head(*Q) = 0;
+        Tail(*Q) = 0;
     } else {
         Info(*X) = Info(InfoHead(*Q));
         Time(*X) = Time(InfoHead(*Q));
@@ -173,7 +170,7 @@ void Delete (PrioQueue * Q, int id, infotype * X) {
     // ALGORITMA
     found = false;
 
-    CreateEmptyPrioqueue(&Q2, MaxElPrioqueue(*Q));
+    MakeEmpty(&Q2, MaxEl(*Q));
 
     while (!found) {
         Dequeue(Q, &temp);
@@ -188,16 +185,16 @@ void Delete (PrioQueue * Q, int id, infotype * X) {
     Time(*X) = Time(temp);
 
     // kondisi elemen dengan id X telah berada di luar Q
-    while (!IsEmptyPrioqueue(*Q)) {
+    while (!IsEmpty(*Q)) {
         Dequeue(Q, &temp);
         Enqueue(&Q2, temp);
     }
 
     DeAlokasi(Q);
-    CreateEmptyPrioqueue(Q, MaxElPrioqueue(Q2));
+    MakeEmpty(Q, MaxEl(Q2));
 
     // salin kembali dari Q2 ke Q
-    while (!IsEmptyPrioqueue(Q2)) {
+    while (!IsEmpty(Q2)) {
         Dequeue(&Q2, &temp);
         Enqueue(Q, temp);
     }
@@ -213,17 +210,17 @@ void CopyQueue (PrioQueue *Q1, PrioQueue * Q2) {
     PrioQueue Qtemp;
 
     // ALGORITMA
-    CreateEmptyPrioqueue(&Qtemp, MaxElPrioqueue(*Q1));
+    MakeEmpty(&Qtemp, MaxEl(*Q1));
 
     // menyalin elemen Q1 ke Q2
-    while (!IsEmptyPrioqueue(*Q1)) {
+    while (!IsEmpty(*Q1)) {
         Dequeue(Q1, &temp);
         Enqueue(&Qtemp, temp);
         Enqueue(Q2, temp);
     } 
 
     // menyalin kembali elemen dari Qtemp ke Q1
-    while (!IsEmptyPrioqueue(Qtemp)) {
+    while (!IsEmpty(Qtemp)) {
         Dequeue(&Qtemp, &temp);
         Enqueue(Q1, temp);
     }
@@ -243,21 +240,13 @@ void PrintPrioQueue (PrioQueue Q) {
 
     /* KAMUS */
     infotype temp;
-    int ctr;
 
     /* ALGORITMA */
     printf("List Makanan di Inventory\n");
     printf("(nama - waktu sisa kedaluwarsa)\n");
-
-    ctr = 1;
-    while (!IsEmptyPrioqueue(Q)) {
+    while (!IsEmpty(Q)) {
         Dequeue(&Q, &temp);
-        printf("%d. %s - %ld menit\n", ctr, NAME(Info(temp)), Time(temp)); // dijadiin nama makanan dulu
-        ctr++;
-    }
-
-    if (ctr == 1) {
-        printf("Inventorynya kosong.. :(\n");
+        printf("%s - %d menit\n", NAME(Info(temp)), Time(temp)); // dijadiin nama makanan dulu;
     }
 }
 
@@ -273,13 +262,13 @@ void PasstimeQueue(PrioQueue * Q, int x) {
     boolean kadaluarsa;
 
     // ALGORITMA 
-    CreateEmptyPrioqueue(&temp, MaxElPrioqueue(*Q));
+    MakeEmpty(&temp, MaxEl(*Q));
     kadaluarsa = false;
     ctr = 1;
-    printf("Notifikasi: ");
+
     // looping setiap menit
     for (i = 1; i <= x; i++) {
-        while (!IsEmptyPrioqueue(*Q)) {
+        while (!IsEmpty(*Q)) {
             Dequeue(Q, &tempvar);
             Time(tempvar)--;
             if (Time(tempvar) == 0) {
@@ -289,8 +278,8 @@ void PasstimeQueue(PrioQueue * Q, int x) {
                     printf("\n");
                 }
 
-                printf("%d. %s kedaluwarsa.. :(\n", ctr, NAME(Info(tempvar)));
                 ctr++;
+                printf("%d. %s kedaluwarsa.. :(\n", ctr, NAME(Info(tempvar)));
             } else {
                 Enqueue(&temp, tempvar);
             }
@@ -299,11 +288,10 @@ void PasstimeQueue(PrioQueue * Q, int x) {
         // salin kembali dari temp ke Q
         CopyQueue(&temp, Q);
         DeAlokasi(&temp);
-        CreateEmptyPrioqueue(&temp, MaxElPrioqueue(*Q));
+        MakeEmpty(&temp, MaxEl(*Q));
     }
 
     if (!kadaluarsa) {
-
-        printf("-\n");
+        printf("-");
     }
 }
