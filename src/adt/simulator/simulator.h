@@ -5,7 +5,7 @@
 #define ADTSIMULATOR_H
 
 #include <stdlib.h>
-#include "../queue/Prioqueue.h"
+#include "../queue/prioqueue.h"
 #include "../stack/stack.h"
 #include "../time/time.h"
 #include "../../include/boolean.h"

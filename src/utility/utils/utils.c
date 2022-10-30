@@ -39,9 +39,6 @@ void startMenu(){
 }
 
 int startInput(Word w) {
-    Word START = {"START", 5};
-    Word EXIT = {"EXIT", 4};
-
     if (isWordEq(w, START)) {
         return 1;
     } else if (isWordEq(w, EXIT)) {
@@ -81,19 +78,15 @@ void inputConfigFile(Game *g, Word PATH, int type) {
         switch (type) {
             case 1: /* Config Makanan */
                 int n = wordToInt(LFile.TabWords[0]); /* Jumlah Makanan */
-                /* INPUT JUMLAH MAKANAN DISNI
-                pake parameter g
-                */
 
                 ADVNewline();
                 int i, j, k;
                 for (i = 0; i < n; i++) {
                     Makanan M;
-                    int id;
+                    int id, day1, hour1, min1, day2, hour2, min2;
                     char *name;
-                    TIME exp;
+                    TIME exp, delivery;
                     char loc;
-                    TIME delivery;
                     for (j = 0; j < 5; j++) {
                         LFile = readLineFile();
                         switch (j) {
@@ -101,25 +94,44 @@ void inputConfigFile(Game *g, Word PATH, int type) {
                                 id = wordToInt(LFile.TabWords[0]);
                                 break;  /* Nama Makanan */
                             case 1:
-                                name = 
+                                name = ListWordToString(LFile);
                                 break;
                             case 2:     /* Waktu Expired */
-                                
+                                day1 = LFile.TabWords[0];
+                                hour1 = LFile.TabWords[1];
+                                min1 = LFile.TabWords[2];
+                                CreateTime (&exp, day1, hour1, min1);
                                 break;
                             case 3:     /* Waktu Delivery */
-
+                                day2 = LFile.TabWords[0];
+                                hour2 = LFile.TabWords[1];
+                                min2 = LFile.TabWords[2];
+                                CreateTime(&delivery, day2, hour2, min2);
                                 break;
                             case 4:     /* Lokasi Aksi */
-
+                                if (isWordEq(BUY, LFile.TabWords[0])) {
+                                    loc = 'T';
+                                } else if (isWordEq(FRY, LFile.TabWords[0])) {
+                                    loc = 'F';
+                                } else if (isWordEq(CHOP, LFile.TabWords[0])) {
+                                    loc = 'C';
+                                } else if (isWordEq(BOIL, LFile.TabWords[0])) {
+                                    loc = 'B';
+                                } else if (isWordEq(MIX, LFile.TabWords[0])) {
+                                    loc = 'M';
+                                }
                                 break;
+                            // case 5:     /* Ukuran Makanan (mxn) */
+                            //     m = wordToInt(LFile.TabWords[0]);
+                            //     n = wordToInt(LFile.TabWords[1]);
+                            //     break;
                             default:
                                 break;
                         }
-                        for (k = 0; k < LFile.Length; k++) {
-                            displayWord(LFile.TabWords[k]);
-                        }
                         ADVNewline();
                     }
+                    createMakanan(&M, id, name, exp, loc, delivery)
+                    insertFood(&g->listMakanan, Makanan food);
                 }
                 break;
             case 2: /* Config Resep */
