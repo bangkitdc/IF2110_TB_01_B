@@ -21,17 +21,19 @@ typedef enum {
 typedef struct {
     int id;             /* ID makanan */
     char *name;         /* Nama makanan */
-    TIME expiry;        /* Waktu kedaluwarsa */ /* temp */
-    char location;      /* Lokasi aksi makanan */ /* temp */
-    TIME delivery;      /* Lama pengiriman makanan */ /* temp */
+    TIME expiry;        /* Waktu kedaluwarsa */
+    TIME delivery;      /* Lama pengiriman makanan */
+    char location;      /* Lokasi aksi makanan */
+    // POINT size;         /* Size makanan (mxn) */
 } Makanan;
 
 /* Selektor */
 #define ID(M) (M).id
 #define NAME(M) (M).name
 #define EXP(M) (M).expiry
-#define LOC(M) (M).location
 #define DELIVERY(M) (M).delivery
+#define LOC(M) (M).location
+// #define SIZE(M) (M).size
 
 /* Konstruktor */
 void createMakanan(Makanan *M, int id, char *name, TIME exp, char loc, TIME delivery);

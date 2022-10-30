@@ -10,7 +10,7 @@
 #include "../simulator/simulator.h"
 #include "../makanan/makanan.h"
 #include "../point/point.h"
-#include "../queue/Prioqueue.h"
+#include "../queue/prioqueue.h"
 
 
 #define Nil -1

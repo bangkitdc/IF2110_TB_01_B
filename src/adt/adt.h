@@ -8,8 +8,10 @@
 #include "./makanan/makanan.h"
 #include "./matrix/matrix.h"
 #include "./point/point.h"
-#include "./queue/pr"
-
-#include ""
+#include "./queue/prioqueue.h"
+#include "./simulator/simulator.h"
+#include "./stack/stack.h"
+#include "./time/time.h"
+#include "./tree/tree.h"
 
 #endif

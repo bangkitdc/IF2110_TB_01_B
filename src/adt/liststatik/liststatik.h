@@ -7,13 +7,13 @@
 #include "../makanan/makanan.h"
 
 /*  Kamus Umum */
-#define CAPACITY 1000
+#define CAPACITY 100
 /* Kapasitas penyimpanan */
 #define IDX_MIN 0
 /* Indeks minimum list */
 #define IDX_UNDEF -1
 /* Indeks tak terdefinisi*/
-#define MARK -9999
+#define MARK -999
 /* Nilai elemen tak terdefinisi*/
 
 /* Definisi elemen dan koleksi objek */
