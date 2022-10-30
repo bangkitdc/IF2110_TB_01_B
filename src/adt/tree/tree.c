@@ -58,11 +58,12 @@ Address newTreeNode(ElType val)
     return p;
 }
 
-void addChild(Tree *p, Tree child)
+void addChild(Tree *p, ElType val)
 /* menambahkan child pada sebuah tree*/
 {
-    if(CHILD_EFF(*p) != MAX_CHIlD){
-        CHILDREN(*p)[CHILD_EFF(*p)] = child;
+    Address x = newTreeNode(val);
+    if(CHILD_EFF(*p) != MAX_CHIlD && x!=NULL){
+        CHILDREN(*p)[CHILD_EFF(*p)] = x;
         CHILD_EFF(*p)++;
     }
 }
@@ -118,4 +119,11 @@ void printPreorder(Tree p)
         }
     }
     printf(")");
+}
+
+void CreateListTree(ListTree *lt){
+    (*lt).elEff = 0;
+    for(int i=0;i<MAX_RESEP;i++){
+        (*lt).list[i] = NULL;
+    }
 }

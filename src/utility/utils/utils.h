@@ -3,8 +3,9 @@
 
 // #include "game.h"
 #include "../../include/boolean.h"
-#include "../../adt/machine/charmachine.h";
-#include "../../adt/machine/wordmachine.h";
+#include "../../adt/machine/charmachine.h"
+#include "../../adt/machine/wordmachine.h"
+#include "../../adt/tree/tree.h"
 #include "../color/color.h"
 
 void startMenu();

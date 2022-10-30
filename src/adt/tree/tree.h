@@ -12,6 +12,7 @@
 #define CHILDREN(p) (p)->children
 #define CHILD_EFF(p) (p)->childEff
 #define MAX_CHIlD 10
+#define MAX_RESEP 100
 
 typedef int ElType;
 typedef struct treeNode* Address;
@@ -21,10 +22,17 @@ typedef struct treeNode {
      int childEff;
 } TreeNode;
 
+
 /* Definisi Pohon */
-/* pohon Biner kosong p = NULL */
+/* pohon kosong p = NULL */
 
 typedef Address Tree;
+
+typedef struct
+{
+   Tree list[MAX_RESEP];
+   int elEff;
+} ListTree;
 
 Tree NewTree (ElType root, Tree children[]); 
 /* Menghasilkan sebuah pohon root, children, jika alokasi berhasil 
@@ -44,7 +52,7 @@ Address newTreeNode(ElType val);
    menghasilkan p, maka p↑.info=val, p↑.children=[NULL*10], p↑.childEff=0 
    Jika alokasi gagal, mengirimkan NULL */
 
-void addChild(Tree *p, Tree child);
+void addChild(Tree *p, ElType val);
 /* menambahkan child pada sebuah tree*/
 
 void deallocTreeNode (Address p);
@@ -68,5 +76,7 @@ void printPreorder(Tree p);
 /* Contoh: 
    (A()()) adalah pohon dengan 1 elemen dengan akar A
    (A(B()())(C()())) adalah pohon dengan akar A dan subpohon kiri (B()()) dan subpohon kanan (C()()) */
+
+void CreateListTree(ListTree *lt);
 
 #endif
