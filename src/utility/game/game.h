@@ -21,6 +21,4 @@ typedef struct {
 
 void startGame(Game *game);
 
-
-
 #endif

@@ -7,7 +7,9 @@ Word dirResep = {"resep", 5};
 Word dirPeta = {"peta", 4};
 
 void startGame(Game *game) {
+    createLSMakanan(&game->listMakanan);
+
     printf("Selamat datang di BNMO!\nMasukkan nama config file untuk makanan: ");
-    inputConfigFile(game, concatWord(dir, dirMakanan), MAKANAN);
+    inputConfigFile(&game, concatWord(dir, dirMakanan), MAKANAN);
 
 }

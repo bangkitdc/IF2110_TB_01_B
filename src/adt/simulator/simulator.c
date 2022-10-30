@@ -1,4 +1,4 @@
-#include "../queue/Prioqueue.h"
+#include "../queue/prioqueue.h"
 #include "../time/time.h"
 #include "../point/point.h"
 #include "simulator.h"
