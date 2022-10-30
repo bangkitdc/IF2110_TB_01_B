@@ -14,7 +14,7 @@
 
 
 #define Nil -1
-#define MaxStack 100
+#define MaxStack 1000
 /* Nil adalah stack dengan elemen kosong . */
 
 typedef struct
