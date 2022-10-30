@@ -8,7 +8,7 @@
 #include "../queue/Prioqueue.h"
 #include "../stack/stack.h"
 #include "../time/time.h"
-#include "../../utility/boolean.h"
+#include "../../include/boolean.h"
 #include "../point/point.h"
 #include "../matrix/matrix.h"
 

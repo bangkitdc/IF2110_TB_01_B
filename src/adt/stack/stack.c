@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "../../utility/boolean.h"
+#include "../../include/boolean.h"
 #include "stack.h"
 
 /* ************ Prototype ************ */
@@ -38,4 +38,22 @@ void Pop(Stack * S, state* X) {
 /* F.S. X adalah nilai elemen TOP yang lama, TOP berkurang 1 */
     *X = InfoTop(*S);
     Top(*S) = Top(*S) - 1;
+}
+
+void Undo(Stack * SMain, Stack * SSecondary) {
+/* Meng-undo aksi pada SMain */
+/* I.S. SMain tidak boleh kosong */
+/* F.S. Elemen TOP pada SMain telah di-pop, dan elemen tersebut dipush ke SSecondary */
+    state temp;
+    Pop(SMain, *temp);
+    Push(SSecondary, temp);    
+}
+
+void Redo(Stack * SMain, Stack * SSecondary) {
+/* Meng-redo aksi pada SMain */
+/* I.S. SSecondary tidak boleh kosong */
+/* F.S. Elemen TOP pada SSecondary telah di-pop, dan elemen tersebut dipush ke SMain */
+    state temp;
+    Pop(SSecondary, *temp);
+    Push(SMain, temp);
 }

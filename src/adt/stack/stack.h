@@ -5,8 +5,9 @@
 #ifndef stackt_H
 #define stackt_H
 
-#include "../../utility/boolean.h"
+#include "../../include/boolean.h"
 #include "../time/time.h"
+#include "../simulator/simulator.h"
 #include "../makanan/makanan.h"
 #include "../point/point.h"
 #include "../queue/Prioqueue.h"
@@ -69,6 +70,14 @@ void Pop(Stack * S, state* X);
 /* I.S. S  tidak mungkin kosong */
 /* F.S. X adalah nilai elemen TOP yang lama, TOP berkurang 1 */
 
+void Undo(Stack * SMain, Stack * SSecondary);
+/* Meng-undo aksi pada SMain */
+/* I.S. SMain tidak boleh kosong */
+/* F.S. Elemen TOP pada SMain telah di-pop, dan elemen tersebut dipush ke SSecondary */
 
+void Redo(Stack * SMain, Stack * SSecondary);
+/* Meng-redo aksi pada SMain */
+/* I.S. SSecondary tidak boleh kosong */
+/* F.S. Elemen TOP pada SSecondary telah di-pop, dan elemen tersebut dipush ke SMain */
 
 #endif
