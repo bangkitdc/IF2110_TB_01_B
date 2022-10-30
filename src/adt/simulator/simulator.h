@@ -35,12 +35,12 @@ void gantiLokasi(Simulator * s, POINT p);
 void gerakUser(Simulator* s, char x);
 /* Menggerakkan user */
 
-state simulatorToState(Simulator s, TIME currentTime);
-/* mengkonversi simulator s ke state*/
-/* digunakan saat mau menyimpan state ke stack */
+State simulatorToState(Simulator s, TIME currentTime);
+/* mengkonversi simulator s ke State*/
+/* digunakan saat mau menyimpan State ke stack */
 
-void loadState(Simulator * s, state st, TIME * currentTime, char * currentUsername);
-/* mengkonversi state dari stack ke simulator dan menyimpannya di simulator */
+void loadState(Simulator * s, State st, TIME * currentTime, char * currentUsername);
+/* mengkonversi State dari stack ke simulator dan menyimpannya di simulator */
 /* digunakan saat undo dan redo */
 
 void setInventory(Simulator * s, PrioQueue inventory);

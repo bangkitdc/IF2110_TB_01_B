@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include "../../include/boolean.h"
 #include "prioqueue.h"
-#include "../time/time.h"
 
 /* ********* Prototype ********* */
 boolean IsEmptyPrioqueue (PrioQueue Q) {

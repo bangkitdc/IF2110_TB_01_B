@@ -10,10 +10,10 @@
 #define COL_CAP 100
 
 typedef int IdxType; /* Index baris, kolom */
-typedef char ElType;
+typedef char ElTypeChar;
 typedef struct
 {
-   ElType mem[ROW_CAP][COL_CAP];
+   ElTypeChar mem[ROW_CAP][COL_CAP];
    int rowEff; /* banyaknya/ukuran baris yg terdefinisi */
    int colEff; /* banyaknya/ukuran kolom yg terdefinisi */
 } Matrix;
@@ -31,7 +31,7 @@ void createMatrix(int nRows, int nCols, Matrix *m);
 /* *** Selektor *** */
 #define ROW_EFF(M) (M).rowEff
 #define COL_EFF(M) (M).colEff
-#define ELMT(M, i, j) (M).mem[(i)][(j)]
+#define ELMT_MATRIX(M, i, j) (M).mem[(i)][(j)]
 
 /* *** Selektor "Dunia Matrix" *** */
 boolean isMatrixIdxValid(int i, int j);
@@ -42,7 +42,7 @@ IdxType getLastIdxRow(Matrix m);
 /* Mengirimkan Index baris terbesar m */
 IdxType getLastIdxCol(Matrix m);
 /* Mengirimkan Index kolom terbesar m */
-boolean isIdxEff(Matrix m, IdxType i, IdxType j);
+boolean isIdxEffMatrix(Matrix m, IdxType i, IdxType j);
 /* Mengirimkan true jika i, j adalah Index efektif bagi m */
 
 /* ********** Assignment  Matrix ********** */
@@ -62,7 +62,7 @@ void displayMatrix(Matrix m);
 */
 
 /* ********** Operasi lain ********** */
-int countElmt(Matrix m);
+int countElmtMatrix(Matrix m);
 /* Mengirimkan banyaknya elemen m */
 
 /* ********** KELOMPOK TEST TERHADAP Matrix ********** */

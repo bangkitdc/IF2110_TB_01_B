@@ -7,28 +7,26 @@
 
 #include "../../include/boolean.h"
 #include "../time/time.h"
-#include "../simulator/simulator.h"
 #include "../makanan/makanan.h"
 #include "../point/point.h"
 #include "../queue/prioqueue.h"
-
 
 #define Nil -1
 #define MaxStack 1000
 /* Nil adalah stack dengan elemen kosong . */
 
-typedef struct
-{
+typedef struct {
   TIME waktu;
   POINT koordinat;
   PrioQueue inventory; // Prioqueue berupa makanan dalam inventory yang disertai waktu expired
-} state; // State yang disimpan di dalam stack
+} State; // State yang disimpan di dalam stack
+
 typedef int address;   /* indeks tabel */
 
 /* Contoh deklarasi variabel bertype stack dengan ciri TOP : */
 /* Versi I : dengan menyimpan tabel dan alamat top secara eksplisit*/
 typedef struct { 
-  state T[MaxStack]; /* tabel penyimpan elemen */
+  State T[MaxStack]; /* tabel penyimpan elemen */
   address TOP;  /* alamat TOP: elemen puncak */
 } Stack;
 /* Definisi stack S kosong : S.TOP = Nil */
@@ -40,9 +38,9 @@ typedef struct {
 /* Definisi akses dengan Selektor : Set dan Get */
 #define Top(S) (S).TOP
 #define InfoTop(S) (S).T[(S).TOP]
-#define InfoWaktu(X) (X).waktu;
-#define InfoKoordinat(X) (X).koordinat;
-#define InfoInventory(X) (X).inventory;
+#define InfoWaktu(X) (X).waktu
+#define InfoKoordinat(X) (X).koordinat
+#define InfoInventory(X) (X).inventory
 
 /* ************ Prototype ************ */
 /* *** Konstruktor/Kreator *** */
@@ -59,13 +57,13 @@ boolean IsFull(Stack S);
 /* Mengirim true jika tabel penampung nilai elemen stack penuh */
 
 /* ************ Menambahkan sebuah elemen ke Stack ************ */
-void Push(Stack * S, state X);
+void Push(Stack * S, State X);
 /* Menambahkan X sebagai elemen Stack S. */
 /* I.S. S mungkin kosong, tabel penampung elemen stack TIDAK penuh */
 /* F.S. X menjadi TOP yang baru,TOP bertambah 1 */
 
 /* ************ Menghapus sebuah elemen Stack ************ */
-void Pop(Stack * S, state* X);
+void Pop(Stack * S, State* X);
 /* Menghapus X dari Stack S. */
 /* I.S. S  tidak mungkin kosong */
 /* F.S. X adalah nilai elemen TOP yang lama, TOP berkurang 1 */
