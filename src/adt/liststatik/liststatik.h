@@ -7,7 +7,7 @@
 #include "../makanan/makanan.h"
 
 /*  Kamus Umum */
-#define CAPACITY_LISTSTATIK 100
+#define CAPACITY_LISTSTATIK 1000
 /* Kapasitas penyimpanan */
 #define IDX_MIN 0
 /* Indeks minimum list */
