@@ -181,7 +181,6 @@ void inputConfigFile(Game *g, Word PATH, int type) {
                 }
                 break;
             case 2: /* Config Resep */
-                // sementara disimpan di ListTree karena butuh list statik dengan tipe elemen tree
                 /* Dicoba langsung akses ke game (BANGKIT) */
                 // ListStatikT listResep;
                 // CreateListTree(&listResep);
@@ -193,11 +192,13 @@ void inputConfigFile(Game *g, Word PATH, int type) {
                     Tree parent = newTreeNode(wordToInt(LFile.TabWords[0]));
                     int bykChild = wordToInt(LFile.TabWords[1]);
                     for(int j=0;j<bykChild;j++){
-                        addChild(&parent, wordToInt(LFile.TabWords[2+j]));
+                        addChild(&parent, newTreeNode(wordToInt(LFile.TabWords[2+j])));
                     }
                     (&g->listResep)->list[i] = parent;
-                    // printPreorder(parent);
-                    // printf("\n");
+                    for(int j=0;j<i;j++){
+                        tambahBahan(&parent, (&g->listResep)->list[j]);
+                        tambahBahan(&(&g->listResep)->list[j], parent);
+                    }
                 }
                 break;
             case 3: /* Config Peta */;

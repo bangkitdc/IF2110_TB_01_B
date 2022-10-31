@@ -50,18 +50,14 @@ Address newTreeNode(ElTypeInt val)
     p = (Address) malloc(sizeof(TreeNode));
     if (p != NULL) {
         ROOT(p) = val;
-        for(int i=0;i<MAX_CHIlD;i++){
-            CHILDREN(p)[i] = NULL;
-        }
         CHILD_EFF(p) = 0;
     }
     return p;
 }
 
-void addChild(Tree *p, ElTypeInt val)
+void addChild(Tree *p, Tree x)
 /* menambahkan child pada sebuah tree*/
 {
-    Address x = newTreeNode(val);
     if(CHILD_EFF(*p) != MAX_CHIlD && x!=NULL){
         CHILDREN(*p)[CHILD_EFF(*p)] = x;
         CHILD_EFF(*p)++;
