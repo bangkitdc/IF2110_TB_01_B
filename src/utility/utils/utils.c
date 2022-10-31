@@ -35,6 +35,7 @@ Word INVENTORY_COMMAND = {"INVENTORY", 9};
 Word DELIVERY_COMMAND = {"DELIVERY", 8};
 Word MOVE_COMMAND = {"MOVE", 4};
 Word CATALOG_COMMAND = {"CATALOG", 7};
+Word COOKBOOK_COMMAND = {"COOKBOOK", 8};
 
 Word BUY_FILE = {"Buy", 3};
 Word FRY_FILE = {"Fry", 3};
@@ -43,7 +44,7 @@ Word BOIL_FILE = {"Boil", 4};
 Word MIX_FILE = {"Mix", 3};
 
 void startMenu(){
-    int i
+    int i;
     for (i = 0; i < 18; i ++) {
         printf("%s%d%c%d%c%d%c%s%s\n",
         "\x1B[38;2;",
@@ -80,10 +81,11 @@ int MenuInput(Word w) {
         INVENTORY_COMMAND,
         DELIVERY_COMMAND,
         MOVE_COMMAND,
-        CATALOG_COMMAND},
-    11 };
+        CATALOG_COMMAND,
+        COOKBOOK_COMMAND},
+    12 };
 
-    for (int i = 0; i < 11; i ++) {
+    for (int i = 0; i < 12; i ++) {
         if (isWordEq(w, LCommand.TabWords[i])) {
             return i;
         }
@@ -91,9 +93,8 @@ int MenuInput(Word w) {
     return -1;
 }
 
-void inputConfigFile(Game *g, Word PATH, int type) {
+char *checkConfig(Word PATH) {
     Word config;
-    boolean flag = true;
 
     printf("> ");
     ListWord L; char *dir;
@@ -102,19 +103,28 @@ void inputConfigFile(Game *g, Word PATH, int type) {
     copyWord(L.TabWords[0], &config);
     dir = wordToString(concatWord(PATH, config));
 
-    while (!(isFileExist(dir) && L.Length == 1)) {
+    while (!isFileExist(dir)) {
         sprintRed("\nFile tidak ditemukan. Coba nama file lain! \n");
-        printf("Masukkan nama config file untuk makanan: \n");
+        printf("Masukkan nama config file untuk makanan (.txt): \n");
         printf("> ");
         L = readLine();
         copyWord(L.TabWords[0], &config);
         dir = wordToString(concatWord(PATH, config));
     }
-    
+    return dir;
+}
+
+void inputConfigFile(Game *g, Word PATH, int type) {
+    char *dir = checkConfig(PATH);
+
     STARTWORDFILE(dir);
-    if (EndWord) {
-        sprintRed("File yang dibaca kosong!");
-    } else {
+    while (EndWord) { /* File dijamin valid (tidak mungkin kosong) */
+        sprintRed("\nFile yang dibaca kosong! \n");
+        printf("Masukkan nama config file untuk makanan (.txt): \n");
+        dir = checkConfig(PATH);
+        STARTWORDFILE(dir);
+    }
+    if (!EndWord) { 
         ListWord LFile;
         createListWord(&LFile);
 
@@ -243,7 +253,8 @@ void inputConfigFile(Game *g, Word PATH, int type) {
                 CMap(MapGame) = CM;
                 BMap(MapGame) = BM;
                 XMap(MapGame) = XM;
-                (*g).map = MapGame;
+                // (&g->map) = {MapGame};
+                sprintBlue("HALO\n");
                 break;
             default:
                 break;

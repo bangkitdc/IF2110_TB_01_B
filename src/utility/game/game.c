@@ -11,9 +11,15 @@ void startGame(Game *game) {
     game->endGame = false;
 
     printf("\nSelamat datang di BNMO!\n\n");
-    
-    sprintBlue("Masukkan nama config file untuk makanan: \n");
-    inputConfigFile(game, concatWord(dir, dirMakanan), MAKANAN);
+
+    // sprintBlue("Masukkan nama config file untuk makanan (.txt): \n");
+    // inputConfigFile(game, concatWord(dir, dirMakanan), MAKANAN);
+
+    sprintBlue("\nMasukkan nama config file untuk resep: \n");
+    inputConfigFile(game, concatWord(dir, dirResep), RESEP);
+
+//     sprintBlue("\nMasukkan nama config file untuk peta: \n");
+//     inputConfigFile(game, concatWord(dir, dirPeta), PETA);
 }
 
 boolean isEndGame(Game g) {
