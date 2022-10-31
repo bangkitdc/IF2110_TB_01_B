@@ -86,4 +86,6 @@ Word concatWord(Word w1, Word w2);
 
 char *ListWordToString(ListWord L);
 
+char *wordToString(Word w);
+
 #endif

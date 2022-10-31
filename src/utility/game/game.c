@@ -10,7 +10,9 @@ void startGame(Game *game) {
     createLSMakanan(&game->listMakanan);
     game->endGame = false;
 
-    printf("Selamat datang di BNMO!\nMasukkan nama config file untuk makanan: ");
+    printf("\nSelamat datang di BNMO!\n\n");
+    
+    sprintBlue("Masukkan nama config file untuk makanan: \n");
     inputConfigFile(game, concatWord(dir, dirMakanan), MAKANAN);
 }
 

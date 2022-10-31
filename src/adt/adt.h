@@ -15,5 +15,6 @@
 #include "./stack/stack.h"
 #include "./time/time.h"
 #include "./tree/tree.h"
+#include "./map/map.h"
 
 #endif

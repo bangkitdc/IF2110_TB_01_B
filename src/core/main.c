@@ -28,91 +28,91 @@ int main() {
         case 1: /* START */
             startGame(&game);
             while(!game.endGame) {
-                sprintBlue("Enter Command: \n");
-                sprintBlue("> ");
+                sprintBlue("\nEnter Command: \n");
+                printf("> ");
                 L = readLine();
                 input = MenuInput(L.TabWords[0]);
 
                 switch (input) {
                     case 0: /* EXIT */
                         if (L.Length != 1) {
-                            sprintRed("Command EXIT tidak memiliki argumen. Coba Lagi!");
+                            sprintRed("Command EXIT tidak memiliki argumen. Coba Lagi!\n");
                         } else {
                             game.endGame = true;
                         }
                         break;
                     case 1: /* BUY */
                         if (L.Length != 1) {
-                            sprintRed("Command BUY tidak memiliki argumen. Coba Lagi!");
+                            sprintRed("Command BUY tidak memiliki argumen. Coba Lagi!\n");
                         } else {
                             /* code */
                         }
                         break;
                     case 2: /* FRY */
                         if (L.Length != 1) {
-                            sprintRed("Command FRY tidak memiliki argumen. Coba Lagi!");
+                            sprintRed("Command FRY tidak memiliki argumen. Coba Lagi!\n");
                         } else {
                             /* code */
                         }
                         break;
                     case 3: /* CHOP */
                         if (L.Length != 1) {
-                            sprintRed("Command CHOP tidak memiliki argumen. Coba Lagi!");
+                            sprintRed("Command CHOP tidak memiliki argumen. Coba Lagi!\n");
                         } else {
                             /* code */
                         }
                         break;
                     case 4: /* BOIL */
                         if (L.Length != 1) {
-                            sprintRed("Command BOIL tidak memiliki argumen. Coba Lagi!");
+                            sprintRed("Command BOIL tidak memiliki argumen. Coba Lagi!\n");
                         } else {
                             /* code */
                         }
                         break;
                     case 5: /* MIX */
                         if (L.Length != 1) {
-                            sprintRed("Command MIX tidak memiliki argumen. Coba Lagi!");
+                            sprintRed("Command MIX tidak memiliki argumen. Coba Lagi!\n");
                         } else {
                             /* code */
                         }
                         break;
                     case 6: /* HELP */
                         if (L.Length != 1) {
-                            sprintRed("Command HELP tidak memiliki argumen. Coba Lagi!");
+                            sprintRed("Command HELP tidak memiliki argumen. Coba Lagi!\n");
                         } else {
                             /* code */
                         }
                         break;
                     case 7: /* INVENTORY */
                         if (L.Length != 1) {
-                            sprintRed("Command INVENTORY tidak memiliki argumen. Coba Lagi!");
+                            sprintRed("Command INVENTORY tidak memiliki argumen. Coba Lagi!\n");
                         } else {
                             /* code */
                         }
                         break;
                     case 8: /* DELIVERY */
                         if (L.Length != 1) {
-                            sprintRed("Command DELIVERY tidak memiliki argumen. Coba Lagi!");
+                            sprintRed("Command DELIVERY tidak memiliki argumen. Coba Lagi!\n");
                         } else {
                             /* code */
                         }
                         break;
                     case 9: /* MOVE */
                         if (L.Length != 3) {
-                            sprintRed("Command WAIT memiliki 2 argumen, jam dan menit. Coba Lagi!");
+                            sprintRed("Command WAIT memiliki 2 argumen, jam dan menit. Coba Lagi!\n");
                         } else {
                             /* code */
                         }
                         break;
                     case 10: /* CATALOG */
                         if (L.Length != 1) {
-                            sprintRed("Command CATALOG tidak memiliki argumen. Coba Lagi!");
+                            sprintRed("Command CATALOG tidak memiliki argumen. Coba Lagi!\n");
                         } else {
                             printCatalog(game.listMakanan);
                         }
                         break;
                     default:
-                        sprintRed("Command Invalid. Ketik HELP untuk melihat list Command");
+                        sprintRed("Command Invalid. Ketik HELP untuk melihat list Command\n");
                         break;
                 }
             }
