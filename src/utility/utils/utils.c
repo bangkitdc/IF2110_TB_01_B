@@ -173,9 +173,35 @@ void inputConfigFile(Game *g, Word PATH, int type) {
                     LFile = readLineFile();
                     for (int j=0; j< COL_EFF(PETA(MapGame)); j++) {
                         ELMT_MATRIX(PETA(MapGame),i,j) = LFile.TabWords[0].TabWords[j];
+                        POINT M;
+                        ListStatikP TM, MM, FM, CM,BM;
+                        CreatePoint(&M, i, j);
+                        createLSPoint (&TM);
+                        createLSPoint (&MM);
+                        createLSPoint (&FM);
+                        createLSPoint (&CM);
+                        createLSPoint (&BM);
+                        if (ELMT_MATRIX(PETA(MapGame),i,j) == S) {
+                            SMap(MapGame) = M;
+                        } else if (ELMT_MATRIX(PETA(MapGame),i,j) == T) {
+                            insertPoint(&TM,M);
+                        } else if (ELMT_MATRIX(PETA(MapGame),i,j) == M) {
+                            insertPoint(&MM,M);
+                        } else if (ELMT_MATRIX(PETA(MapGame),i,j) == F) {
+                            insertPoint(&FM,M);
+                        } else if (ELMT_MATRIX(PETA(MapGame),i,j) == C) {
+                            insertPoint(&CM,M);
+                        } else if (ELMT_MATRIX(PETA(MapGame),i,j) == B) {
+                            insertPoint(&BM,M);
+                        }
                     }
-                    (*g).map = MapGame;
                 }
+                TMap(MapGame) = TM
+                MMap(MapGame) = MM
+                FMap(MapGame) = FM
+                CMap(MapGame) = CM
+                BMap(MapGame) = BM
+                (*g).map = MapGame;
                 break;
             default:
                 break;
