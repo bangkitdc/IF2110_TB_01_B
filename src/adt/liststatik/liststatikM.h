@@ -30,7 +30,7 @@ typedef struct {
 void createLSMakanan(ListStatikM *l);
 
 /* *** Banyaknya elemen *** */
-int listLengthStatik(ListStatikM l);
+int listLengthStatikM(ListStatikM l);
 
 /* *** Menambahkan elemen terakhir *** */
 void insertFood(ListStatikM *l, Makanan food);

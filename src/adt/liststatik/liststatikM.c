@@ -12,7 +12,7 @@ void createLSMakanan(ListStatikM *l){
 }
 
 /* *** Banyaknya elemen *** */
-int listLengthStatik(ListStatikM l){
+int listLengthStatikM(ListStatikM l){
     int i = 0;
     while (ID(ELMT_LISTSTATIK(l,i)) != MARKSTATIK && i < CAPACITY_LISTSTATIK){
         i+=1;
