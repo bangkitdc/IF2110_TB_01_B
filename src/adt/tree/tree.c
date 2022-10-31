@@ -58,7 +58,7 @@ Address newTreeNode(ElTypeInt val)
     return p;
 }
 
-void addChild(Tree *p, ElType val)
+void addChild(Tree *p, ElTypeInt val)
 /* menambahkan child pada sebuah tree*/
 {
     Address x = newTreeNode(val);
