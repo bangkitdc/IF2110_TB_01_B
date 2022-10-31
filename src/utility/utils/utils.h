@@ -9,6 +9,7 @@
 #include "../../adt/tree/tree.h"
 #include "../../adt/liststatik/liststatikT.h"
 #include "../color/color.h"
+#include "../../adt/map/map.h"
 
 void startMenu();
 

@@ -15,7 +15,7 @@ typedef enum {
 typedef struct {
     ListStatikM listMakanan;
     ListStatikT listResep;
-    Matrix map;
+    Map map;
     boolean endGame;
 } Game;
 

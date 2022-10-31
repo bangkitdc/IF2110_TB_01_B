@@ -168,39 +168,39 @@ void inputConfigFile(Game *g, Word PATH, int type) {
                 CreateMap(&MapGame);
                 ROW_EFF(PETA(MapGame)) = wordToInt(LFile.TabWords[0]);
                 COL_EFF(PETA(MapGame)) = wordToInt(LFile.TabWords[1]);
+                POINT M;
+                ListStatikP TM, MM, FM, CM,BM;
+                CreatePoint(&M, i, j);
+                createLSPoint (&TM);
+                createLSPoint (&MM);
+                createLSPoint (&FM);
+                createLSPoint (&CM);
+                createLSPoint (&BM);
                 for (int i=0; i< ROW_EFF(PETA(MapGame)); i++) {
                     ADVNewline();
                     LFile = readLineFile();
                     for (int j=0; j< COL_EFF(PETA(MapGame)); j++) {
-                        ELMT_MATRIX(PETA(MapGame),i,j) = LFile.TabWords[0].TabWords[j];
-                        POINT M;
-                        ListStatikP TM, MM, FM, CM,BM;
-                        CreatePoint(&M, i, j);
-                        createLSPoint (&TM);
-                        createLSPoint (&MM);
-                        createLSPoint (&FM);
-                        createLSPoint (&CM);
-                        createLSPoint (&BM);
-                        if (ELMT_MATRIX(PETA(MapGame),i,j) == S) {
+                        ELMT_MATRIX(PETA(MapGame),i,j) = LFile.TabWords[0].TabWord[j];
+                        if (ELMT_MATRIX(PETA(MapGame),i,j) == 'S') {
                             SMap(MapGame) = M;
-                        } else if (ELMT_MATRIX(PETA(MapGame),i,j) == T) {
+                        } else if (ELMT_MATRIX(PETA(MapGame),i,j) == 'T') {
                             insertPoint(&TM,M);
-                        } else if (ELMT_MATRIX(PETA(MapGame),i,j) == M) {
+                        } else if (ELMT_MATRIX(PETA(MapGame),i,j) == 'M') {
                             insertPoint(&MM,M);
-                        } else if (ELMT_MATRIX(PETA(MapGame),i,j) == F) {
+                        } else if (ELMT_MATRIX(PETA(MapGame),i,j) == 'F') {
                             insertPoint(&FM,M);
-                        } else if (ELMT_MATRIX(PETA(MapGame),i,j) == C) {
+                        } else if (ELMT_MATRIX(PETA(MapGame),i,j) == 'C') {
                             insertPoint(&CM,M);
-                        } else if (ELMT_MATRIX(PETA(MapGame),i,j) == B) {
+                        } else if (ELMT_MATRIX(PETA(MapGame),i,j) == 'B') {
                             insertPoint(&BM,M);
                         }
                     }
                 }
-                TMap(MapGame) = TM
-                MMap(MapGame) = MM
-                FMap(MapGame) = FM
-                CMap(MapGame) = CM
-                BMap(MapGame) = BM
+                TMap(MapGame) = TM;
+                MMap(MapGame) = MM;
+                FMap(MapGame) = FM;
+                CMap(MapGame) = CM;
+                BMap(MapGame) = BM;
                 (*g).map = MapGame;
                 break;
             default:
