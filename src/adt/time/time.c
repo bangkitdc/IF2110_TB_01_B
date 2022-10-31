@@ -39,6 +39,19 @@ void TulisTIME (TIME T)
    printf("%d:%d:%d", Day(T), Hour(T), Minute(T));
 }
 
+void TulisTIME2 (TIME T)
+{
+   if(T.DD > 0){
+      printf("%d hari ", T.DD);
+   }
+   if(T.HH > 0){
+      printf("%d jam ", T.HH);
+   }
+   if(T.MM > 0){
+      printf("%d menit", T.MM);
+   }
+}
+
 /* ***************************************************************** */
 /* KELOMPOK KONVERSI TERHADAP TYPE                                   */
 /* ***************************************************************** */
