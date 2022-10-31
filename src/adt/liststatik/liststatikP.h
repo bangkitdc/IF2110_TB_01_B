@@ -7,7 +7,7 @@
 #include "../point/point.h"
 
 /*  Kamus Umum */
-#define CAPACITY_LISTSTATIK 100
+#define CAPACITY_LISTSTATIKP 100
 /* Kapasitas penyimpanan */
 #define IDX_MIN 0
 /* Indeks minimum list */
@@ -19,11 +19,11 @@
 /* Definisi elemen dan koleksi objek */
 typedef int IdxType;
 typedef struct {
-   POINT contents[CAPACITY_LISTSTATIK]; /* memori tempat penyimpan elemen (container) */
+   POINT contents[CAPACITY_LISTSTATIKP]; /* memori tempat penyimpan elemen (container) */
 } ListStatikP;
 
 /* ********** SELEKTOR ********** */
-#define ELMT_LISTSTATIK(l, i) (l).contents[(i)]
+#define ELMT_LISTSTATIKP(l, i) (l).contents[(i)]
 
 /* ********** KONSTRUKTOR ********** */
 /* Konstruktor : create List kosong untuk list makanan */

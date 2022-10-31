@@ -43,8 +43,7 @@ Word BOIL_FILE = {"Boil", 4};
 Word MIX_FILE = {"Mix", 3};
 
 void startMenu(){
-    int i;
-    printf("\n");
+    int i
     for (i = 0; i < 18; i ++) {
         printf("%s%d%c%d%c%d%c%s%s\n",
         "\x1B[38;2;",
@@ -53,7 +52,10 @@ void startMenu(){
         "\x1B[0m"
         );
     }
-    printf("START/ EXIT: \n");
+    printf("\n");
+    sprintCyan("======= List Command =======\n");
+    sprintGreen("[#] START \n");
+    sprintRed("[#] EXIT \n");
 }
 
 int startInput(Word w) {
@@ -93,18 +95,20 @@ void inputConfigFile(Game *g, Word PATH, int type) {
     Word config;
     boolean flag = true;
 
-    ListWord L;
+    printf("> ");
+    ListWord L; char *dir;
     createListWord(&L);
     L = readLine();
     copyWord(L.TabWords[0], &config);
-    char *dir = concatWord(PATH, config).TabWord;
+    dir = wordToString(concatWord(PATH, config));
 
     while (!(isFileExist(dir) && L.Length == 1)) {
-        sprintRed("File tidak ditemukan. Coba nama file lain...\n");
-        printf("Masukkan nama file: ");
+        sprintRed("\nFile tidak ditemukan. Coba nama file lain! \n");
+        printf("Masukkan nama config file untuk makanan: \n");
+        printf("> ");
         L = readLine();
         copyWord(L.TabWords[0], &config);
-        dir = concatWord(PATH, config).TabWord;
+        dir = wordToString(concatWord(PATH, config));
     }
     
     STARTWORDFILE(dir);
@@ -178,10 +182,11 @@ void inputConfigFile(Game *g, Word PATH, int type) {
                 break;
             case 2: /* Config Resep */
                 // sementara disimpan di ListTree karena butuh list statik dengan tipe elemen tree
-                ListStatikT listResep;
-                CreateListTree(&listResep);
-                listResep.elEff = wordToInt(LFile.TabWords[0]);
-                for(int i=0;i<listResep.elEff;i++){
+                /* Dicoba langsung akses ke game (BANGKIT) */
+                // ListStatikT listResep;
+                // CreateListTree(&listResep);
+                (&g->listResep)->elEff = wordToInt(LFile.TabWords[0]);
+                for(int i=0;i<(&g->listResep)->elEff;i++){
                     ADVNewline();
                     LFile = readLineFile();
                     
@@ -190,13 +195,12 @@ void inputConfigFile(Game *g, Word PATH, int type) {
                     for(int j=0;j<bykChild;j++){
                         addChild(&parent, wordToInt(LFile.TabWords[2+j]));
                     }
-                    listResep.list[i] = parent;
+                    (&g->listResep)->list[i] = parent;
                     // printPreorder(parent);
                     // printf("\n");
                 }
-                (*g).listResep = listResep;
                 break;
-            case 3: /* Config Peta */
+            case 3: /* Config Peta */;
                 Map MapGame;
                 CreateMap(&MapGame, wordToInt(LFile.TabWords[0]), wordToInt(LFile.TabWords[1]));
                 //ROW_EFF(PETA(MapGame)) = wordToInt(LFile.TabWords[0]);
@@ -247,6 +251,6 @@ void inputConfigFile(Game *g, Word PATH, int type) {
 }
 
 void exitGame() {
-    sprintGreen("Terima kasih telah menggunakan BNMO\n");
+    sprintGreen("\nTerima kasih telah menggunakan BNMO\n\n");
     exit(0);
 }

@@ -189,6 +189,16 @@ Word concatWord(Word w1, Word w2) {
    return res;
 }
 
+char *wordToString(Word w) {
+   int i;
+   char *str = malloc(w.Length * sizeof(char));
+   for (i = 0; i < w.Length; i ++) {
+      str[i] = w.TabWord[i];
+   }
+   str[w.Length] = '\0';
+   return str;
+}
+
 char *ListWordToString(ListWord L) {
    int len = 0;
    int i, j;
