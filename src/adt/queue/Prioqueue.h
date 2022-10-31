@@ -89,6 +89,11 @@ void Delete (PrioQueue * Q, int id, infotype * X) ;
 /* I.S. Q tidak mungkin kosong, elemen dengan id harus ada di dalam Q */
 /* F.S. elemen X terhapus dari Q, elemen-elemen yang berada di kanan X akan digeser ke kiri */
 
+void DeleteAt (PrioQueue * Q, int idx, infotype * X);
+/* Menghapus elemen dengan index idx pada queue */
+/* I.S. Q pasti tidak kosong, dan idx adalah index yang valid dari Q */
+/* F.S. elemen dengan index idx terhapus dari Q dan disimpan di X */
+
 void CopyQueue (PrioQueue *Q1, PrioQueue * Q2);
 /* Proses: Menyalin elemen-elemen Q1 ke Q2 */
 /* I.S. Q1 mungkin kosong */
