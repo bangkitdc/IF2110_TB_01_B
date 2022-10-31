@@ -39,15 +39,6 @@ void Pop(Stack * S, State* X) {
     Top(*S) = Top(*S) - 1;
 }
 
-void Undo(Stack * SMain, Stack * SSecondary) {
-/* Meng-undo aksi pada SMain */
-/* I.S. SMain tidak boleh kosong */
-/* F.S. Elemen TOP pada SMain telah di-pop, dan elemen tersebut dipush ke SSecondary */
-    State temp;
-    Pop(SMain, &temp);
-    Push(SSecondary, temp);    
-}
-
 void EmptyStack(Stack * S) {
 /* Mengosongkan S sehingga stack S kosong */
 /* I.S. S tidak mungkin kosong */
