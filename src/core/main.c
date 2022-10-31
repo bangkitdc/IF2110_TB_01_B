@@ -111,6 +111,13 @@ int main() {
                             printCatalog(game.listMakanan);
                         }
                         break;
+                    case 11: /* COOKBOOK */
+                        if (L.Length != 1) {
+                            sprintRed("Command COOKBOK tidak memiliki argumen. Coba Lagi!\n");
+                        } else {
+                            printf("%d\n", game.listResep.elEff);
+                        }
+                        break;
                     default:
                         sprintRed("Command Invalid. Ketik HELP untuk melihat list Command\n");
                         break;
