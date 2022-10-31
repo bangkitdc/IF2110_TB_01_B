@@ -20,27 +20,27 @@
 typedef int IdxType;
 typedef struct {
    Makanan contents[CAPACITY_LISTSTATIK]; /* memori tempat penyimpan elemen (container) */
-} ListStatik;
+} ListStatikM;
 
 /* ********** SELEKTOR ********** */
 #define ELMT_LISTSTATIK(l, i) (l).contents[(i)]
 
 /* ********** KONSTRUKTOR ********** */
 /* Konstruktor : create List kosong untuk list makanan */
-void createLSMakanan(ListStatik *l);
+void createLSMakanan(ListStatikM *l);
 
 /* *** Banyaknya elemen *** */
-int listLengthStatik(ListStatik l);
+int listLengthStatik(ListStatikM l);
 
 /* *** Menambahkan elemen terakhir *** */
-void insertFood(ListStatik *l, Makanan food);
+void insertFood(ListStatikM *l, Makanan food);
 /* Proses: Menambahkan food ke dalam list */
 /* I.S. List l boleh kosong, tetapi tidak penuh */
 /* F.S. food adalah elemen terakhir l yang baru jika id nya tidak sama 
 dengan id makanan yang sudah ada dalam list sebelumnya. Jika Id nya sama dengan makanan sebelumnya,
 maka food akan menimpa makanan yang sudah didefinisikan sebelumnya. */
 
-void printCatalog(ListStatik l);
+void printCatalog(ListStatikM l);
 
 /* Konstruktor : create List kosong untuk list resep */
 
