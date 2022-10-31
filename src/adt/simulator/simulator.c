@@ -1,8 +1,5 @@
-#include "../queue/prioqueue.h"
-#include "../time/time.h"
-#include "../point/point.h"
-#include "simulator.h"
 #include <stdio.h>
+#include "simulator.h"
 
 /* PRIMITIF SIMULATOR*/
 void createSimulator(Simulator* s, char* Username, POINT lokasi, PrioQueue inventory) {
@@ -55,12 +52,12 @@ void gerakUser(Simulator * s, char x) {
     }
 }
 
-state simulatorToState(Simulator s, TIME currentTime) {
-/* mengkonversi simulator s ke state*/
-/* digunakan saat mau menyimpan state ke stack */
+State simulatorToState(Simulator s, TIME currentTime) {
+/* mengkonversi simulator s ke State*/
+/* digunakan saat mau menyimpan State ke stack */
 
     // KAMUS
-    state temp;
+    State temp;
 
     // ALGORITMA
     InfoWaktu(temp) = currentTime;
@@ -70,8 +67,8 @@ state simulatorToState(Simulator s, TIME currentTime) {
     return temp;
 }
 
-void loadState(Simulator * s, state st, TIME * currentTime, char * currentUsername) {
-/* mengkonversi state dari stack ke simulator dan menyimpannya di simulator */
+void loadState(Simulator * s, State st, TIME * currentTime, char * currentUsername) {
+/* mengkonversi State dari stack ke simulator dan menyimpannya di simulator */
 /* digunakan saat undo dan redo */
 
     // ALGORITMA

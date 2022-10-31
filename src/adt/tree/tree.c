@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-Tree NewTree (ElType root, Tree children[])
+Tree NewTree (ElTypeInt root, Tree children[])
 /* Menghasilkan sebuah pohon root, children, jika alokasi berhasil 
    Menghasilkan pohon kosong (NULL) jika alokasi gagal */
 {
@@ -23,7 +23,7 @@ Tree NewTree (ElType root, Tree children[])
     return p;
 }
 
-void CreateTree (ElType root, Tree children[], Tree *p)
+void CreateTree (ElTypeInt root, Tree children[], Tree *p)
 /* I.S. Sembarang
    F.S. Menghasilkan sebuah pohon p
    Menghasilkan sebuah pohon p dari akar, children, jika alokasi 
@@ -36,7 +36,7 @@ void CreateTree (ElType root, Tree children[], Tree *p)
     *p = NewTree(root, children);
 }
 
-Address newTreeNode(ElType val)
+Address newTreeNode(ElTypeInt val)
 /* Alokasi sebuah address p, bernilai tidak NULL jika berhasil */
 /* Mengirimkan address hasil alokasi sebuah elemen bernilai val
    Jika alokasi berhasil, maka address tidak NULL, dan misalnya 

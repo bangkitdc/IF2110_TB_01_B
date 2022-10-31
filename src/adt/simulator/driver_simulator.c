@@ -1,6 +1,6 @@
 #include <stdio.h>
-#include "simulator.c"
-#include "../makanan/makanan.c"
+// #include "simulator.c"
+// #include "../makanan/makanan.c"
 
 /*
 int main () {

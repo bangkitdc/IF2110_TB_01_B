@@ -341,3 +341,48 @@ void PassTimeDelivery(PrioQueue * deliList, PrioQueue * destination, int x) {
         CreateEmptyPrioqueue(&temp, MaxElPrioqueue(*deliList));
     }
 }
+
+/* Pengakses */
+int IndexOfPrioqueue(PrioQueue Q, infotype x) {
+/* Menghasilkan index dimana x pertama kali ditemukan di Q */
+/* I.S. Q mungkin kosong, dan x tidak ada di list */
+/* F.S. dihasilkan index elemen x di Q, indexnya = -1 jika tidak ditemukan di list */
+
+    // KAMUS
+    int idx;
+    PrioQueue temp;
+    boolean found;
+    infotype tempvar;
+
+    // ALGORITMA
+    CreateEmptyPrioqueue(&temp, MaxElPrioqueue(Q));
+    CopyQueue(&Q, &temp);
+
+    found = false;
+    idx = 0;
+    while (!found && !IsEmptyPrioqueue(temp)) {
+        if (Time(InfoHead(temp)) == Time(x) && ID(Info(InfoHead(temp))) == ID(Info(x))) {
+            found = true;
+        } else {
+            idx++;
+            Dequeue(&temp, &tempvar);
+        }
+    }
+
+    if (found) {
+        return idx;
+    } else {
+        return -1;
+    }
+}
+
+infotype GetElmtPrioqueue(PrioQueue Q, int idx) {
+/* Menghasilkan elemen dengan index idx di Q */
+/* I.S. Q mungkin kosong, elemen pasti ada di Q dan indexnya valid */
+/* F.S. elemen dengan index idx di Q */
+
+    // KAMUS
+
+    // ALGORITMA
+    return Elmt(Q, idx);
+}

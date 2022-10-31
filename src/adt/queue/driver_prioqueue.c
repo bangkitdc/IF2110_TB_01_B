@@ -62,6 +62,15 @@ int main() {
         printf("ceritanya juga di skip 1 menit\n");
         PassTimeDelivery(&Qcopy, &currentinventory, 1);
         PrintPrioQueue(currentinventory);
+        printf("\n");
+
+        printf("ini ceritanya mau nyari index ayam di queue\n");
+        printf("index : %d\n", IndexOfPrioqueue(currentinventory, temp));
+        printf("\n");
+
+        printf("ini ceritanya mau mengakses elemen dengan index idx di queue\n");
+        infotype tes;
+        printf("%d\n", ID(Info(GetElmtPrioqueue(currentinventory, 0))));
     }
 
     return 0;

@@ -1,17 +1,17 @@
 #include <stdio.h>
-#include "wordmachine.h"
+// #include "wordmachine.h"
 
 /* Driver input Console */
 
-int main() {
-    ListWord L;
-    createListWord(&L);
+// int main() {
+//     ListWord L;
+//     createListWord(&L);
 
-    L = readLine();
+//     L = readLine();
 
-    char *name;
-    name = ListWordToString(L);
+//     char *name;
+//     name = ListWordToString(L);
 
-    printf("%s\n", name);
-    return 0;
-}
+//     printf("%s\n", name);
+//     return 0;
+// }

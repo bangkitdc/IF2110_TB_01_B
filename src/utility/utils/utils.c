@@ -23,6 +23,15 @@ const char *bnmo[] = {
     "          **         **          ",
 };
 
+Word START_WORD = {"START", 5};
+Word EXIT_WORD = {"EXIT", 4};
+
+Word BUY_WORD = {"Buy", 3};
+Word FRY_WORD = {"Fry", 3};
+Word CHOP_WORD = {"Chop", 4};
+Word BOIL_WORD = {"Boil", 4};
+Word MIX_WORD = {"Mix", 3};
+
 void startMenu(){
     int i;
     printf("\n");
@@ -35,13 +44,12 @@ void startMenu(){
         );
     }
     printf("START/ EXIT: \n");
-    printf("> ");
 }
 
 int startInput(Word w) {
-    if (isWordEq(w, START)) {
+    if (isWordEq(w, START_WORD)) {
         return 1;
-    } else if (isWordEq(w, EXIT)) {
+    } else if (isWordEq(w, EXIT_WORD)) {
         return 2;
     } else {
         return -1;
@@ -76,8 +84,9 @@ void inputConfigFile(Game *g, Word PATH, int type) {
         LFile = readLineFile();
 
         switch (type) {
-            case 1: /* Config Makanan */
-                int n = wordToInt(LFile.TabWords[0]); /* Jumlah Makanan */
+            case 1: /* Config Makanan */;
+                int n;
+                n = wordToInt(LFile.TabWords[0]); /* Jumlah Makanan */
 
                 ADVNewline();
                 int i, j, k;
@@ -97,27 +106,27 @@ void inputConfigFile(Game *g, Word PATH, int type) {
                                 name = ListWordToString(LFile);
                                 break;
                             case 2:     /* Waktu Expired */
-                                day1 = LFile.TabWords[0];
-                                hour1 = LFile.TabWords[1];
-                                min1 = LFile.TabWords[2];
+                                day1 = wordToInt(LFile.TabWords[0]);
+                                hour1 = wordToInt(LFile.TabWords[1]);
+                                min1 = wordToInt(LFile.TabWords[2]);
                                 CreateTime (&exp, day1, hour1, min1);
                                 break;
                             case 3:     /* Waktu Delivery */
-                                day2 = LFile.TabWords[0];
-                                hour2 = LFile.TabWords[1];
-                                min2 = LFile.TabWords[2];
+                                day2 = wordToInt(LFile.TabWords[0]);
+                                hour2 = wordToInt(LFile.TabWords[1]);
+                                min2 = wordToInt(LFile.TabWords[2]);
                                 CreateTime(&delivery, day2, hour2, min2);
                                 break;
                             case 4:     /* Lokasi Aksi */
-                                if (isWordEq(BUY, LFile.TabWords[0])) {
+                                if (isWordEq(BUY_WORD, LFile.TabWords[0])) {
                                     loc = 'T';
-                                } else if (isWordEq(FRY, LFile.TabWords[0])) {
+                                } else if (isWordEq(FRY_WORD, LFile.TabWords[0])) {
                                     loc = 'F';
-                                } else if (isWordEq(CHOP, LFile.TabWords[0])) {
+                                } else if (isWordEq(CHOP_WORD, LFile.TabWords[0])) {
                                     loc = 'C';
-                                } else if (isWordEq(BOIL, LFile.TabWords[0])) {
+                                } else if (isWordEq(BOIL_WORD, LFile.TabWords[0])) {
                                     loc = 'B';
-                                } else if (isWordEq(MIX, LFile.TabWords[0])) {
+                                } else if (isWordEq(MIX_WORD, LFile.TabWords[0])) {
                                     loc = 'M';
                                 }
                                 break;
@@ -130,8 +139,8 @@ void inputConfigFile(Game *g, Word PATH, int type) {
                         }
                         ADVNewline();
                     }
-                    createMakanan(&M, id, name, exp, loc, delivery)
-                    insertFood(&g->listMakanan, Makanan food);
+                    createMakanan(&M, id, name, exp, loc, delivery);
+                    insertFood(&g->listMakanan, M);
                 }
                 break;
             case 2: /* Config Resep */
@@ -163,6 +172,6 @@ void inputConfigFile(Game *g, Word PATH, int type) {
 }
 
 void exitGame() {
-    printGreen("Terima kasih telah menggunakan BNMO\n");
+    sprintGreen("Terima kasih telah menggunakan BNMO\n");
     exit(0);
 }

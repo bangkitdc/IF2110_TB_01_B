@@ -36,7 +36,7 @@ IdxType getLastIdxCol(Matrix m)
 {
     return (IdxType) COL_EFF(m)-1;
 }
-boolean isIdxEff(Matrix m, IdxType i, IdxType j)
+boolean isIdxEffMatrix(Matrix m, IdxType i, IdxType j)
 /* Mengirimkan true jika i, j adalah Index efektif bagi m */
 {
     return (i>=0 && i<ROW_EFF(m) && j>=0 && j<COL_EFF(m));
@@ -49,7 +49,7 @@ void copyMatrix(Matrix mIn, Matrix *mOut)
     createMatrix(ROW_EFF(mIn), COL_EFF(mIn), mOut);
     for(int i=0;i<ROW_EFF(mIn);i++){
         for(int j=0;j<COL_EFF(mIn);j++){
-            ELMT(*mOut,i,j) = ELMT(mIn,i,j);
+            ELMT_MATRIX(*mOut,i,j) = ELMT_MATRIX(mIn,i,j);
         }
     }
 }
@@ -72,7 +72,7 @@ void displayMatrix(Matrix m)
             if(j>0){
                 printf(" ");
             }
-            printf("%d", ELMT(m,i,j));
+            printf("%d", ELMT_MATRIX(m,i,j));
         }
         printf("\n");
     }
@@ -80,7 +80,7 @@ void displayMatrix(Matrix m)
 
 
 /* ********** Operasi lain ********** */
-int countElmt(Matrix m)
+int countElmtMatrix(Matrix m)
 /* Mengirimkan banyaknya elemen m */
 {
     return (ROW_EFF(m)*COL_EFF(m));

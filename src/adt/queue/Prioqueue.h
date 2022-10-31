@@ -116,4 +116,15 @@ void PassTimeDelivery(PrioQueue * deliList, PrioQueue * destination, int x);
 /* I.S. Q mungkin kosong */
 /* F.S. setiap elemen di Q waktunya berkurang sesuai dengan jumlah waktu yang telah berlalu, jika waktunya menjadi 0 maka elemen tersebut akan dihapus dari delivery list dan dipindahkan ke inventory */
 
+/* Pengakses */
+int IndexOfPrioqueue(PrioQueue Q, infotype x);
+/* Menghasilkan index dimana x pertama kali ditemukan di Q */
+/* I.S. Q mungkin kosong, dan x tidak ada di list */
+/* F.S. dihasilkan index elemen x di Q, indexnya = -1 jika tidak ditemukan di list */
+
+infotype GetElmtPrioqueue(PrioQueue Q, int idx);
+/* Menghasilkan elemen dengan index idx di Q */
+/* I.S. Q mungkin kosong, elemen pasti ada di Q dan indexnya valid */
+/* F.S. elemen dengan index idx di Q */
+
 #endif
