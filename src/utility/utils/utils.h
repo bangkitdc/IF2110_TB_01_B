@@ -6,6 +6,8 @@
 #include "../game/game.h"
 #include "../../adt/machine/charmachine.h"
 #include "../../adt/machine/wordmachine.h"
+#include "../../adt/tree/tree.h"
+#include "../../adt/liststatik/liststatikT.h"
 #include "../color/color.h"
 
 void startMenu();
