@@ -1,7 +1,7 @@
 /* File: */
 
-#ifndef LISTDIN_H
-#define LISTDIN_H
+#ifndef LISTDINS_H
+#define LISTDINS_H
 
 #include "../../include/boolean.h"
 
