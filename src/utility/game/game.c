@@ -12,8 +12,8 @@ void startGame(Game *game) {
 
     printf("Selamat datang di BNMO!\nMasukkan nama config file untuk makanan: ");
     inputConfigFile(game, concatWord(dir, dirMakanan), MAKANAN);
+}
 
-    printCatalog(game->listMakanan);
-
-    game->endGame = true;
+boolean isEndGame(Game g) {
+    return (g.endGame);
 }

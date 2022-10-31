@@ -14,6 +14,8 @@ int startInput(Word w);
 
 void inputConfigFile(Game *g, Word PATH, int type);
 
+int MenuInput(Word w);
+
 void exitGame();
 
 #endif
