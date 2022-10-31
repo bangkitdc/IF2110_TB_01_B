@@ -202,13 +202,14 @@ void inputConfigFile(Game *g, Word PATH, int type) {
                 //ROW_EFF(PETA(MapGame)) = wordToInt(LFile.TabWords[0]);
                 //COL_EFF(PETA(MapGame)) = wordToInt(LFile.TabWords[1]);
                 POINT M;
-                ListStatikP TM, MM, FM, CM,BM;
+                ListStatikP TM, MM, FM, CM, BM, XM;
                 CreatePoint(&M, i, j);
                 createLSPoint (&TM);
                 createLSPoint (&MM);
                 createLSPoint (&FM);
                 createLSPoint (&CM);
                 createLSPoint (&BM);
+                createLSPoint (&XM);
                 for (int i=0; i< ROW_EFF(PETA(MapGame)); i++) {
                     ADVNewline();
                     LFile = readLineFile();
@@ -226,6 +227,8 @@ void inputConfigFile(Game *g, Word PATH, int type) {
                             insertPoint(&CM,M);
                         } else if (ELMT_MATRIX(PETA(MapGame),i,j) == 'B') {
                             insertPoint(&BM,M);
+                        } else if (ELMT_MATRIX(PETA(MapGame),i,j) == 'X') {
+                            insertPoint(&XM,M);
                         }
                     }
                 }
@@ -234,6 +237,7 @@ void inputConfigFile(Game *g, Word PATH, int type) {
                 FMap(MapGame) = FM;
                 CMap(MapGame) = CM;
                 BMap(MapGame) = BM;
+                XMap(MapGame) = XM;
                 (*g).map = MapGame;
                 break;
             default:

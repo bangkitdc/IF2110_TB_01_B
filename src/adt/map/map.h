@@ -18,6 +18,7 @@ typedef struct
     ListStatikP F_Map;
     ListStatikP C_Map;
     ListStatikP B_Map;
+    ListStatikP X_Map;
 } Map;
 
 #define PETA(M) (M).Peta
@@ -27,6 +28,7 @@ typedef struct
 #define FMap(O) (O).F_Map
 #define CMap(O) (O).C_Map
 #define BMap(O) (O).B_Map
+#define XMap(O) (O).X_Map
 
 /* Selektor */
 void CreateMap(Map *MGame, int X, int Y);

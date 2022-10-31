@@ -15,6 +15,7 @@ void CreateMap(Map *MGame, int X, int Y){
     createLSPoint(&MGame->F_Map);
     createLSPoint(&MGame->C_Map);
     createLSPoint(&MGame->B_Map);
+    createLSPoint(&MGame->X_Map);
 
     // PETA(*MGame) = Pet;
     // SMap(*MGame) = Sim; 
