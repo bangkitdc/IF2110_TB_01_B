@@ -22,7 +22,7 @@ typedef struct
   TIME waktu;
   POINT koordinat;
   PrioQueue inventory; // Prioqueue berupa makanan dalam inventory yang disertai waktu expired
-} state; // State yang disimpan di dalam stack
+} State; // State yang disimpan di dalam stack
 typedef int address;   /* indeks tabel */
 
 /* Contoh deklarasi variabel bertype stack dengan ciri TOP : */
