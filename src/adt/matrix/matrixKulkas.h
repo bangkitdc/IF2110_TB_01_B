@@ -1,7 +1,7 @@
 /* ********** Definisi TYPE Matrix dengan Index dan elemen integer ********** */
 
-#ifndef MATRIX_H
-#define MATRIX_H
+#ifndef MATRIXKULKAS_H
+#define MATRIXKULKAS_H
 
 #include "../../include/boolean.h"
 #include "../makanan/makanan.h"

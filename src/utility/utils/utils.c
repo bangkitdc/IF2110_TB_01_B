@@ -145,7 +145,7 @@ void inputConfigFile(Game *g, Word PATH, int type) {
                 break;
             case 2: /* Config Resep */
                 // sementara disimpan di ListTree karena butuh list statik dengan tipe elemen tree
-                ListTree listResep;
+                ListStatikT listResep;
                 CreateListTree(&listResep);
                 listResep.elEff = wordToInt(LFile.TabWords[0]);
                 for(int i=0;i<listResep.elEff;i++){
@@ -161,9 +161,9 @@ void inputConfigFile(Game *g, Word PATH, int type) {
                     // printPreorder(parent);
                     // printf("\n");
                 }
+                (*g).listResep = listResep;
                 break;
             case 3: /* Config Peta */
-
                 break;
             default:
                 break;

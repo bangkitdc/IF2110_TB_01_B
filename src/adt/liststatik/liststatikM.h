@@ -1,7 +1,7 @@
 /* File: */
 
-#ifndef LISTSTATIK_H
-#define LISTSTATIK_H
+#ifndef LISTSTATIKM_H
+#define LISTSTATIKM_H
 
 #include "../../include/boolean.h"
 #include "../makanan/makanan.h"

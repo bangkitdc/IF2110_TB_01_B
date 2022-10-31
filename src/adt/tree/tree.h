@@ -6,13 +6,13 @@
 #define POHON_H
 
 #include "../../include/boolean.h"
+#include "../liststatik/liststatikT.h"
 
 /* Selektor */
 #define ROOT(p) (p)->info
 #define CHILDREN(p) (p)->children
 #define CHILD_EFF(p) (p)->childEff
 #define MAX_CHIlD 10
-#define MAX_RESEP 100
 
 typedef int ElTypeInt;
 typedef struct treeNode* Address;
@@ -27,12 +27,6 @@ typedef struct treeNode {
 /* pohon kosong p = NULL */
 
 typedef Address Tree;
-
-typedef struct
-{
-   Tree list[MAX_RESEP];
-   int elEff;
-} ListTree;
 
 Tree NewTree (ElTypeInt root, Tree children[]); 
 /* Menghasilkan sebuah pohon root, children, jika alokasi berhasil 
@@ -76,7 +70,5 @@ void printPreorder(Tree p);
 /* Contoh: 
    (A()()) adalah pohon dengan 1 elemen dengan akar A
    (A(B()())(C()())) adalah pohon dengan akar A dan subpohon kiri (B()()) dan subpohon kanan (C()()) */
-
-void CreateListTree(ListTree *lt);
 
 #endif
