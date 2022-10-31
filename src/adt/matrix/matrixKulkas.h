@@ -4,14 +4,14 @@
 #define MATRIXKULKAS_H
 
 #include "../../include/boolean.h"
-#include "../makanan/makanan.h"
+#include "../queue/Prioqueue.h"
 
 /* Ukuran maksimum baris dan kolom */
 #define ROW_CAP 100
 #define COL_CAP 100
 
 typedef int IdxType; /* Index baris, kolom */
-typedef Makanan ElType;
+typedef infotype ElType;
 typedef struct
 {
    ElType mem[ROW_CAP][COL_CAP];
