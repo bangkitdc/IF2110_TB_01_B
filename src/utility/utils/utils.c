@@ -165,9 +165,9 @@ void inputConfigFile(Game *g, Word PATH, int type) {
                 break;
             case 3: /* Config Peta */
                 Map MapGame;
-                CreateMap(&MapGame);
-                ROW_EFF(PETA(MapGame)) = wordToInt(LFile.TabWords[0]);
-                COL_EFF(PETA(MapGame)) = wordToInt(LFile.TabWords[1]);
+                CreateMap(&MapGame, wordToInt(LFile.TabWords[0]), wordToInt(LFile.TabWords[1]));
+                //ROW_EFF(PETA(MapGame)) = wordToInt(LFile.TabWords[0]);
+                //COL_EFF(PETA(MapGame)) = wordToInt(LFile.TabWords[1]);
                 POINT M;
                 ListStatikP TM, MM, FM, CM,BM;
                 CreatePoint(&M, i, j);

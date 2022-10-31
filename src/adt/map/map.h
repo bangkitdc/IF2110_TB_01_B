@@ -29,7 +29,7 @@ typedef struct
 #define BMap(O) (O).B_Map
 
 /* Selektor */
-void CreateMap(Map *MGame);
+void CreateMap(Map *MGame, int X, int Y);
 
 
 
