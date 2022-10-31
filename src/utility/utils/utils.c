@@ -164,6 +164,18 @@ void inputConfigFile(Game *g, Word PATH, int type) {
                 (*g).listResep = listResep;
                 break;
             case 3: /* Config Peta */
+                Map MapGame;
+                CreateMap(&MapGame);
+                ROW_EFF(PETA(MapGame)) = wordToInt(LFile.TabWords[0]);
+                COL_EFF(PETA(MapGame)) = wordToInt(LFile.TabWords[1]);
+                for (int i=0; i< ROW_EFF(PETA(MapGame)); i++) {
+                    ADVNewline();
+                    LFile = readLineFile();
+                    for (int j=0; j< COL_EFF(PETA(MapGame)); j++) {
+                        ELMT_MATRIX(PETA(MapGame),i,j) = LFile.TabWords[0].TabWords[j];
+                    }
+                    (*g).map = MapGame;
+                }
                 break;
             default:
                 break;
