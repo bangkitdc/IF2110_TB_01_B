@@ -45,7 +45,7 @@ Address newTreeNode(ElTypeInt val);
    menghasilkan p, maka p↑.info=val, p↑.children=[NULL*10], p↑.childEff=0 
    Jika alokasi gagal, mengirimkan NULL */
 
-void addChild(Tree *p, ElTypeInt val);
+void addChild(Tree *p, Tree x);
 /* menambahkan child pada sebuah tree*/
 
 void deallocTreeNode (Address p);
