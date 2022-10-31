@@ -24,3 +24,23 @@ void CreateMap(Map *MGame, int X, int Y){
     // CMap(*MGame) = C_M;
     // BMap(*MGame) = B_M;
 }
+
+/* DISPLAY MAP */
+void DisplayMap(Map MGame){
+    int row = ROW_EFF(PETA(MGame));
+    int col = COL_EFF(PETA(MGame));
+    for (int i=0; i<row+2; i++) {
+        for (int j=0; j<col+2; j++) {
+            if (i == 0 || i == row+1 || j == 0 || j == col+1) {
+                printf("*");
+            } else {
+                if (ELMT_MATRIX(PETA(MGame),i,j) == '#') {
+                    printf(" ");
+                } else {
+                    printf("%c", ELMT_MATRIX(PETA(MGame),i,j));
+                }
+            }
+        }
+        printf("\n");
+    }
+}

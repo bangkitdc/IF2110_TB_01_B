@@ -31,7 +31,7 @@ typedef struct
 /* Selektor */
 void CreateMap(Map *MGame, int X, int Y);
 
-
-
+/* DISPLAY MAP */
+void DisplayMap(Map MGame);
 
 #endif
