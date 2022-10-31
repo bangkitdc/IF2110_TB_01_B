@@ -1,6 +1,6 @@
 #include <stdio.h>
-#include "prioqueue.c"
-#include "../makanan/makanan.c"
+// #include "prioqueue.c"
+// #include "../makanan/makanan.c"
 /*
 int main() {
     int max = 1; // walaupun max = 0, jika di enqueue nanti maxel = 2*0 + 1

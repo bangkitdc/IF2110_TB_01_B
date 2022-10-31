@@ -23,14 +23,24 @@ const char *bnmo[] = {
     "          **         **          ",
 };
 
-Word START_WORD = {"START", 5};
-Word EXIT_WORD = {"EXIT", 4};
+Word START_COMMAND = {"START", 5};
+Word EXIT_COMMAND = {"EXIT", 4};
+Word BUY_COMMAND = {"BUY", 3};
+Word FRY_COMMAND = {"FRY", 3};
+Word CHOP_COMMAND = {"CHOP", 4};
+Word BOIL_COMMAND = {"BOIL", 4};
+Word MIX_COMMAND = {"MIX", 3};
+Word HELP_COMMAND = {"HELP", 4};
+Word INVENTORY_COMMAND = {"INVENTORY", 9};
+Word DELIVERY_COMMAND = {"DELIVERY", 8};
+Word MOVE_COMMAND = {"MOVE", 4};
+Word CATALOG_COMMAND = {"CATALOG", 7};
 
-Word BUY_WORD = {"Buy", 3};
-Word FRY_WORD = {"Fry", 3};
-Word CHOP_WORD = {"Chop", 4};
-Word BOIL_WORD = {"Boil", 4};
-Word MIX_WORD = {"Mix", 3};
+Word BUY_FILE = {"Buy", 3};
+Word FRY_FILE = {"Fry", 3};
+Word CHOP_FILE = {"Chop", 4};
+Word BOIL_FILE = {"Boil", 4};
+Word MIX_FILE = {"Mix", 3};
 
 void startMenu(){
     int i;
@@ -47,13 +57,36 @@ void startMenu(){
 }
 
 int startInput(Word w) {
-    if (isWordEq(w, START_WORD)) {
+    if (isWordEq(w, START_COMMAND)) {
         return 1;
-    } else if (isWordEq(w, EXIT_WORD)) {
+    } else if (isWordEq(w, EXIT_COMMAND)) {
         return 2;
     } else {
         return -1;
     }
+}
+
+int MenuInput(Word w) {
+    ListWord LCommand = { 
+        {EXIT_COMMAND,
+        BUY_COMMAND,
+        FRY_COMMAND,
+        CHOP_COMMAND,
+        BOIL_COMMAND,
+        MIX_COMMAND,
+        HELP_COMMAND,
+        INVENTORY_COMMAND,
+        DELIVERY_COMMAND,
+        MOVE_COMMAND,
+        CATALOG_COMMAND},
+    11 };
+
+    for (int i = 0; i < 11; i ++) {
+        if (isWordEq(w, LCommand.TabWords[i])) {
+            return i;
+        }
+    }
+    return -1;
 }
 
 void inputConfigFile(Game *g, Word PATH, int type) {
@@ -118,15 +151,15 @@ void inputConfigFile(Game *g, Word PATH, int type) {
                                 CreateTime(&delivery, day2, hour2, min2);
                                 break;
                             case 4:     /* Lokasi Aksi */
-                                if (isWordEq(BUY_WORD, LFile.TabWords[0])) {
+                                if (isWordEq(BUY_FILE, LFile.TabWords[0])) {
                                     loc = 'T';
-                                } else if (isWordEq(FRY_WORD, LFile.TabWords[0])) {
+                                } else if (isWordEq(FRY_FILE, LFile.TabWords[0])) {
                                     loc = 'F';
-                                } else if (isWordEq(CHOP_WORD, LFile.TabWords[0])) {
+                                } else if (isWordEq(CHOP_FILE, LFile.TabWords[0])) {
                                     loc = 'C';
-                                } else if (isWordEq(BOIL_WORD, LFile.TabWords[0])) {
+                                } else if (isWordEq(BOIL_FILE, LFile.TabWords[0])) {
                                     loc = 'B';
-                                } else if (isWordEq(MIX_WORD, LFile.TabWords[0])) {
+                                } else if (isWordEq(MIX_FILE, LFile.TabWords[0])) {
                                     loc = 'M';
                                 }
                                 break;

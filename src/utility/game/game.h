@@ -4,8 +4,6 @@
 #include <stdio.h>
 #include "../../adt/adt.h"
 
-int currentTime;
-
 typedef enum {
     MAKANAN = 1,
     RESEP = 2,
@@ -13,6 +11,7 @@ typedef enum {
 } ConfigType;
 
 typedef struct {
+    int currentTime;
     ListStatikM listMakanan;
     ListStatikT listResep;
     Map map;
@@ -20,5 +19,7 @@ typedef struct {
 } Game;
 
 void startGame(Game *game);
+
+boolean isEndGame(Game g);
 
 #endif
