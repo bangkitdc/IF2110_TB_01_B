@@ -3,7 +3,9 @@
 
 #include "../include/boolean.h"
 #include "./listdin/listdin.h"
-#include "./liststatik/liststatik.h"
+#include "./liststatik/liststatikM.h"
+#include "./liststatik/liststatikT.h"
+#include "./liststatik/liststatikP.h"
 #include "./machine/wordmachine.h"
 #include "./makanan/makanan.h"
 #include "./matrix/matrix.h"

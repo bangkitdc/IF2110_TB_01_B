@@ -12,9 +12,9 @@ typedef enum {
 
 typedef struct {
     int currentTime;
-    ListStatik listMakanan;
-    ListStatik listResep;
-    Matrix map;
+    ListStatikM listMakanan;
+    ListStatikT listResep;
+    Map map;
     boolean endGame;
 } Game;
 

@@ -14,6 +14,8 @@ typedef struct {
 #define Absis(P) (P).X
 #define Ordinat(P) (P).Y
 
+#define MARKPOINT -999
+
 // Membentuk Point
 void CreatePoint(POINT *P, int X, int Y);
 

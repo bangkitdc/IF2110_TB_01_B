@@ -1,18 +1,18 @@
 /* File: */
 
 #include <stdio.h>
-#include "liststatik.h"
+#include "liststatikM.h"
 
 /* ********** KONSTRUKTOR ********** */
 /* Konstruktor : create List kosong untuk list makanan */
-void createLSMakanan(ListStatik *l){
+void createLSMakanan(ListStatikM *l){
     for (int i = 0; i < CAPACITY_LISTSTATIK; i++){
         ID(ELMT_LISTSTATIK(*l,i)) = MARKSTATIK;
     }
 }
 
 /* *** Banyaknya elemen *** */
-int listLengthStatik(ListStatik l){
+int listLengthStatikM(ListStatikM l){
     int i = 0;
     while (ID(ELMT_LISTSTATIK(l,i)) != MARKSTATIK && i < CAPACITY_LISTSTATIK){
         i+=1;
@@ -21,7 +21,7 @@ int listLengthStatik(ListStatik l){
 }
 
 /* *** Menambahkan elemen terakhir *** */
-void insertFood(ListStatik *l, Makanan food){
+void insertFood(ListStatikM *l, Makanan food){
 /* Proses: Menambahkan food ke dalam list */
 /* I.S. List l boleh kosong, tetapi tidak penuh */
 /* F.S. food adalah elemen terakhir l yang baru jika id nya tidak sama 
@@ -41,7 +41,7 @@ maka food akan menimpa makanan yang sudah didefinisikan sebelumnya. */
     }
 }
 
-void printCatalog(ListStatik l) {
+void printCatalog(ListStatikM l) {
     // KAMUS LOKAL
     int i;
 

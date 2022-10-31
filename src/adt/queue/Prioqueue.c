@@ -203,6 +203,36 @@ void Delete (PrioQueue * Q, int id, infotype * X) {
     }
 }
 
+void DeleteAt (PrioQueue * Q, int idx, infotype * X) {
+/* Menghapus elemen dengan index idx pada queue */
+/* I.S. Q pasti tidak kosong, dan idx adalah index yang valid dari Q */
+/* F.S. elemen dengan index idx terhapus dari Q dan disimpan di X */
+
+    // KAMUS
+    PrioQueue temp;
+    infotype tempvar;
+    int i;
+
+    // ALGORITMA
+    CreateEmptyPrioqueue(&temp, MaxElPrioqueue(*Q));
+    CopyQueue(Q, &temp);
+
+    DeAlokasi(Q);
+    CreateEmptyPrioqueue(Q, MaxElPrioqueue(temp));
+
+    i = 0;
+    while (!IsEmptyPrioqueue(temp)) {
+        if (i == idx) {
+            Dequeue(&temp, X);
+        } else {
+            Dequeue(&temp, &tempvar);
+            Enqueue(Q, tempvar);
+        }
+
+        i++;
+    }
+}
+
 void CopyQueue (PrioQueue *Q1, PrioQueue * Q2) {
 /* Proses: Menyalin elemen-elemen Q1 ke Q2 */
 /* I.S. Q1 mungkin kosong */

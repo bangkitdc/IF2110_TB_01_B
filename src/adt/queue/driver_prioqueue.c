@@ -71,6 +71,12 @@ int main() {
         printf("ini ceritanya mau mengakses elemen dengan index idx di queue\n");
         infotype tes;
         printf("%d\n", ID(Info(GetElmtPrioqueue(currentinventory, 0))));
+        printf("\n");
+
+        printf("ini ceritanya mau ngehapus di index 0 bwang\n");
+        infotype tes1;
+        DeleteAt(&currentinventory, 1, &tes1);
+        PrintPrioQueue(currentinventory);
     }
 
     return 0;
