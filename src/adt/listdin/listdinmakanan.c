@@ -49,14 +49,32 @@ IdxType getLastIdxS(ListDinMakanan l) {
 /* ********** BACA dan TULIS dengan INPUT/OUTPUT device ********** */
 /* *** Mendefinisikan isi list dari pembacaan *** */
 void printListMakanan(ListDinMakanan l) {
-/* Proses : Menuliskan isi list dengan traversal, list ditulis di antara kurung siku;
-   antara dua elemen dipisahkan dengan separator "koma", tanpa tambahan karakter di depan,
-   di tengah, atau di belakang, termasuk spasi dan enter */
 /* I.S. l boleh kosong */
-/* F.S. Jika l tidak kosong: [e1,e2,...,en] */
-/* Contoh : jika ada tiga elemen bernilai 1, 20, 30 akan dicetak: [1,20,30] */
-/* Jika list kosong : menulis [] */
+/* F.S. Jika l tidak kosong maka akan ditulis kelayar hasil-hasil dari list tersebut */
+/* Jika list kosong : menulis - */
+/* Jika tidak kosong, contoh :
+    - Ayam berhasil digoreng 
+    - Ayam goreng kadaluarsa
+    - Ayam tidak jadi digoreng
+    - Ayam berhasil masuk inventory */
 
+    // KAMUS
+    int i;
+
+    // ALGORITMA
+    if (IsEmptyListMakanan(l)) {
+        printf("-\n");
+    } else {
+        for (i = getFirstIdxS(l); i <= getLastIdxS(l); i++) {
+            if (TIMEToMenit(Time(ELMT_LISTDINAMIS_Makanan(l, i))) == 0) {
+                printf("- %s telah kadaluarsa :(\n", NAME(Info(ELMT_LISTDINAMIS_Makanan(l, i))));
+            } else {
+                if (LOC(Info(ELMT_LISTDINAMIS_Makanan(l, i))) == 'F') {
+                    
+                }
+            }
+        }
+    }
 }
 
 

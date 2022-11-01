@@ -12,7 +12,7 @@
 #include "../point/point.c"
 #include "../matrix/matrix.c"
 #include "../matrix/matrixKulkas.c"
-#include "../listdin/listdinstring.c"
+#include "../listdin/listdinmakanan.c"
 
 typedef struct {
     char* username;
@@ -37,11 +37,11 @@ void gantiLokasi(Simulator * s, POINT p);
 void gerakUser(Simulator* s, char x);
 /* Menggerakkan user */
 
-State simulatorToState(Simulator s, TIME currentTime, ListDinString currentNotif, MatrixKulkas currentKulkas);
+State simulatorToState(Simulator s, TIME currentTime, ListDinMakanan currentNotif, MatrixKulkas currentKulkas);
 /* mengkonversi simulator s ke State*/
 /* digunakan saat mau menyimpan State ke stack */
 
-void loadState(Simulator * s, State st, TIME * currentTime, char * currentUsername, ListDinString currentNotif, MatrixKulkas currentKulkas);
+void loadState(Simulator * s, State st, TIME * currentTime, char * currentUsername, ListDinMakanan currentNotif, MatrixKulkas currentKulkas);
 /* mengkonversi State dari stack ke simulator dan menyimpannya di simulator */
 /* digunakan saat undo dan redo */
 

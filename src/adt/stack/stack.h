@@ -46,7 +46,7 @@ typedef struct {
 #define InfoKoordinat(X) (X).koordinat
 #define InfoInventory(X) (X).inventory
 #define InfoKulkas(X) (X).kulkas
-#define InfoNotif(X) (X).notifikasi
+#define InfoNotif(X) (X).listmakanan
 
 /* ************ Prototype ************ */
 /* *** Konstruktor/Kreator *** */

@@ -52,7 +52,7 @@ void gerakUser(Simulator * s, char x) {
     }
 }
 
-State simulatorToState(Simulator s, TIME currentTime, ListDinString currentNotif, MatrixKulkas currentKulkas) {
+State simulatorToState(Simulator s, TIME currentTime, ListDinMakanan currentNotif, MatrixKulkas currentKulkas) {
 /* mengkonversi simulator s ke State*/
 /* digunakan saat mau menyimpan State ke stack */
 
@@ -69,7 +69,7 @@ State simulatorToState(Simulator s, TIME currentTime, ListDinString currentNotif
     return temp;
 }
 
-void loadState(Simulator * s, State st, TIME * currentTime, char * currentUsername, ListDinString currentNotif, MatrixKulkas currentKulkas) {
+void loadState(Simulator * s, State st, TIME * currentTime, char * currentUsername, ListDinMakanan currentNotif, MatrixKulkas currentKulkas) {
 /* mengkonversi State dari stack ke simulator dan menyimpannya di simulator */
 /* digunakan saat undo dan redo */
 

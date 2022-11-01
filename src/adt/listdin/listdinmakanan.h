@@ -5,6 +5,8 @@
 
 #include "../../include/boolean.h"
 #include "../makanan/makanan.h"
+#include "../time/time.h"
+#include "../queue/Prioqueue.h"
 
 /*  Kamus Umum */
 #define IDX_MIN 0
@@ -14,7 +16,7 @@
 
 /* Definisi elemen dan koleksi objek */
 typedef int IdxType;
-typedef Makanan ElTypeMakanan; /* type elemen list berupa Makanan */
+typedef infotype ElTypeMakanan; /* type elemen list berupa Makanan */
 typedef struct
 {
    ElTypeMakanan *buffer;
@@ -68,13 +70,14 @@ IdxType getLastIdxS(ListDinMakanan l);
 /* ********** BACA dan TULIS dengan INPUT/OUTPUT device ********** */
 /* *** Mendefinisikan isi list dari pembacaan *** */
 void printListMakanan(ListDinMakanan l);
-/* Proses : Menuliskan isi list dengan traversal, list ditulis di antara kurung siku;
-   antara dua elemen dipisahkan dengan separator "koma", tanpa tambahan karakter di depan,
-   di tengah, atau di belakang, termasuk spasi dan enter */
 /* I.S. l boleh kosong */
-/* F.S. Jika l tidak kosong: [e1,e2,...,en] */
-/* Contoh : jika ada tiga elemen bernilai 1, 20, 30 akan dicetak: [1,20,30] */
-/* Jika list kosong : menulis [] */
+/* F.S. Jika l tidak kosong maka akan ditulis kelayar hasil-hasil dari list tersebut */
+/* Jika list kosong : menulis - */
+/* Jika tidak kosong, contoh :
+    - Ayam berhasil digoreng 
+    - Ayam goreng kadaluarsa
+    - Ayam tidak jadi digoreng
+    - Ayam berhasil masuk inventory */
 
 /* ********** MENAMBAH DAN MENGHAPUS ELEMEN DI AKHIR ********** */
 /* *** Menambahkan elemen terakhir *** */
