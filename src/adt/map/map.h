@@ -5,6 +5,7 @@
 #include "../matrix/matrix.h"
 #include "../point/point.h"
 #include "../liststatik/liststatikP.h"
+#include "../machine/wordmachine.h"
 
 #ifndef MAP_H
 #define MAP_H

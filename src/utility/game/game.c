@@ -9,7 +9,7 @@ void startGame(Game *game) {
     createLSMakanan(&game->listMakanan);
     CreateListTree(&game->listResep);
 
-    printf("\nSelamat datang di BNMO!\n");
+    printf("\nSelamat datang di BNMO!\n\n");
 
     inputConfigFile(game, dirMakanan, MAKANAN);
     inputConfigFile(game, dirResep, RESEP);
