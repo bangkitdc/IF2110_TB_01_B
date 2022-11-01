@@ -25,22 +25,22 @@ void WritePoint(POINT P){
 // Operasi Point (IS : setiap perpindahan tidak akan menabrak)
 POINT MoveN(POINT P){ // North
     POINT tmp;
-    CreatePoint(&tmp, Absis(P), Ordinat(P)-1);
+    CreatePoint(&tmp, Absis(P)-1, Ordinat(P));
     return tmp;
 }
 POINT MoveE(POINT P){ // East
     POINT tmp;
-    CreatePoint(&tmp, Absis(P)+1, Ordinat(P));
+    CreatePoint(&tmp, Absis(P), Ordinat(P)+1);
     return tmp;
 }
 POINT MoveS(POINT P){ // South
     POINT tmp;
-    CreatePoint(&tmp, Absis(P), Ordinat(P)+1);
+    CreatePoint(&tmp, Absis(P)+1, Ordinat(P));
     return tmp; 
 }
 POINT MoveW(POINT P){ // West
     POINT tmp;
-    CreatePoint(&tmp, Absis(P)-1, Ordinat(P));
+    CreatePoint(&tmp, Absis(P), Ordinat(P)-1);
     return tmp;
 }
 
