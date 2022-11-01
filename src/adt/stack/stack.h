@@ -10,17 +10,20 @@
 #include "../makanan/makanan.h"
 #include "../point/point.h"
 #include "../queue/prioqueue.h"
+#include "../matrix/matrixKulkas.h"
+#include "../listdin/listdinstring.h"
 
 #define Nil -1
 #define MaxStack 1000
 /* Nil adalah stack dengan elemen kosong . */
 
 typedef struct {
-  TIME waktu;
-  POINT koordinat;
+  TIME waktu; // Waktu terkini
+  POINT koordinat; // Posisi simulator
   PrioQueue inventory; // Prioqueue berupa makanan dalam inventory yang disertai waktu expired
+  MatrixKulkas kulkas; // Isi kulkas terkini
+  ListDinString notifikasi; //Notifikasi yang diterima simulator
 } State; // State yang disimpan di dalam stack
-
 typedef int address;   /* indeks tabel */
 
 /* Contoh deklarasi variabel bertype stack dengan ciri TOP : */
@@ -67,6 +70,11 @@ void Pop(Stack * S, State* X);
 /* Menghapus X dari Stack S. */
 /* I.S. S  tidak mungkin kosong */
 /* F.S. X adalah nilai elemen TOP yang lama, TOP berkurang 1 */
+
+void EmptyStack(Stack * S);
+/* Mengosongkan S sehingga stack S kosong */
+/* I.S. S tidak mungkin kosong */
+/* F.S. S kosong */
 
 void Undo(Stack * SMain, Stack * SSecondary);
 /* Meng-undo aksi pada SMain */

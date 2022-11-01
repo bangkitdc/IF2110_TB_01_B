@@ -23,18 +23,28 @@ const char *bnmo[] = {
     "          **         **          ",
 };
 
-Word START_WORD = {"START", 5};
-Word EXIT_WORD = {"EXIT", 4};
+Word START_COMMAND = {"START", 5};
+Word EXIT_COMMAND = {"EXIT", 4};
+Word BUY_COMMAND = {"BUY", 3};
+Word FRY_COMMAND = {"FRY", 3};
+Word CHOP_COMMAND = {"CHOP", 4};
+Word BOIL_COMMAND = {"BOIL", 4};
+Word MIX_COMMAND = {"MIX", 3};
+Word HELP_COMMAND = {"HELP", 4};
+Word INVENTORY_COMMAND = {"INVENTORY", 9};
+Word DELIVERY_COMMAND = {"DELIVERY", 8};
+Word MOVE_COMMAND = {"MOVE", 4};
+Word CATALOG_COMMAND = {"CATALOG", 7};
+Word COOKBOOK_COMMAND = {"COOKBOOK", 8};
 
-Word BUY_WORD = {"Buy", 3};
-Word FRY_WORD = {"Fry", 3};
-Word CHOP_WORD = {"Chop", 4};
-Word BOIL_WORD = {"Boil", 4};
-Word MIX_WORD = {"Mix", 3};
+Word BUY_FILE = {"Buy", 3};
+Word FRY_FILE = {"Fry", 3};
+Word CHOP_FILE = {"Chop", 4};
+Word BOIL_FILE = {"Boil", 4};
+Word MIX_FILE = {"Mix", 3};
 
 void startMenu(){
     int i;
-    printf("\n");
     for (i = 0; i < 18; i ++) {
         printf("%s%d%c%d%c%d%c%s%s\n",
         "\x1B[38;2;",
@@ -43,41 +53,78 @@ void startMenu(){
         "\x1B[0m"
         );
     }
-    printf("START/ EXIT: \n");
+    printf("\n");
+    sprintCyan("======= List Command =======\n");
+    sprintGreen("[#] START \n");
+    sprintRed("[#] EXIT \n");
 }
 
 int startInput(Word w) {
-    if (isWordEq(w, START_WORD)) {
+    if (isWordEq(w, START_COMMAND)) {
         return 1;
-    } else if (isWordEq(w, EXIT_WORD)) {
+    } else if (isWordEq(w, EXIT_COMMAND)) {
         return 2;
     } else {
         return -1;
     }
 }
 
-void inputConfigFile(Game *g, Word PATH, int type) {
-    Word config;
-    boolean flag = true;
+int MenuInput(Word w) {
+    ListWord LCommand = { 
+        {EXIT_COMMAND,
+        BUY_COMMAND,
+        FRY_COMMAND,
+        CHOP_COMMAND,
+        BOIL_COMMAND,
+        MIX_COMMAND,
+        HELP_COMMAND,
+        INVENTORY_COMMAND,
+        DELIVERY_COMMAND,
+        MOVE_COMMAND,
+        CATALOG_COMMAND,
+        COOKBOOK_COMMAND},
+    12 };
 
-    ListWord L;
+    for (int i = 0; i < 12; i ++) {
+        if (isWordEq(w, LCommand.TabWords[i])) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+char *checkConfig(Word PATH) {
+    Word config;
+
+    printf("> ");
+    ListWord L; char *dir;
     createListWord(&L);
     L = readLine();
     copyWord(L.TabWords[0], &config);
-    char *dir = concatWord(PATH, config).TabWord;
+    dir = wordToString(concatWord(PATH, config));
 
-    while (!(isFileExist(dir) && L.Length == 1)) {
-        sprintRed("File tidak ditemukan. Coba nama file lain...\n");
-        printf("Masukkan nama file: ");
+    while (!isFileExist(dir)) {
+        sprintRed("\nFile tidak ditemukan. Coba nama file lain! \n");
+        printf("Masukkan nama config file untuk makanan (.txt): \n");
+        printf("> ");
         L = readLine();
         copyWord(L.TabWords[0], &config);
-        dir = concatWord(PATH, config).TabWord;
+        dir = wordToString(concatWord(PATH, config));
     }
-    
+    return dir;
+}
+
+void inputConfigFile(Game *g, Word PATH, int type) {
+    char *dir = checkConfig(PATH);
+
     STARTWORDFILE(dir);
-    if (EndWord) {
-        sprintRed("File yang dibaca kosong!");
-    } else {
+    while (EndWord) { /* File dijamin valid (tidak mungkin kosong) */
+        sprintRed("\nFile yang dibaca kosong! \n");
+        printf("Masukkan nama config file untuk makanan (.txt): \n");
+        dir = checkConfig(PATH);
+        STARTWORDFILE(dir);
+    }
+    if (!EndWord) { 
         ListWord LFile;
         createListWord(&LFile);
 
@@ -118,15 +165,15 @@ void inputConfigFile(Game *g, Word PATH, int type) {
                                 CreateTime(&delivery, day2, hour2, min2);
                                 break;
                             case 4:     /* Lokasi Aksi */
-                                if (isWordEq(BUY_WORD, LFile.TabWords[0])) {
+                                if (isWordEq(BUY_FILE, LFile.TabWords[0])) {
                                     loc = 'T';
-                                } else if (isWordEq(FRY_WORD, LFile.TabWords[0])) {
+                                } else if (isWordEq(FRY_FILE, LFile.TabWords[0])) {
                                     loc = 'F';
-                                } else if (isWordEq(CHOP_WORD, LFile.TabWords[0])) {
+                                } else if (isWordEq(CHOP_FILE, LFile.TabWords[0])) {
                                     loc = 'C';
-                                } else if (isWordEq(BOIL_WORD, LFile.TabWords[0])) {
+                                } else if (isWordEq(BOIL_FILE, LFile.TabWords[0])) {
                                     loc = 'B';
-                                } else if (isWordEq(MIX_WORD, LFile.TabWords[0])) {
+                                } else if (isWordEq(MIX_FILE, LFile.TabWords[0])) {
                                     loc = 'M';
                                 }
                                 break;
@@ -144,38 +191,40 @@ void inputConfigFile(Game *g, Word PATH, int type) {
                 }
                 break;
             case 2: /* Config Resep */
-                // sementara disimpan di ListTree karena butuh list statik dengan tipe elemen tree
-                ListStatikT listResep;
-                CreateListTree(&listResep);
-                listResep.elEff = wordToInt(LFile.TabWords[0]);
-                for(int i=0;i<listResep.elEff;i++){
+                /* Dicoba langsung akses ke game (BANGKIT) */
+                // ListStatikT listResep;
+                // CreateListTree(&listResep);
+                (&g->listResep)->elEff = wordToInt(LFile.TabWords[0]);
+                for(int i=0;i<(&g->listResep)->elEff;i++){
                     ADVNewline();
                     LFile = readLineFile();
                     
                     Tree parent = newTreeNode(wordToInt(LFile.TabWords[0]));
                     int bykChild = wordToInt(LFile.TabWords[1]);
                     for(int j=0;j<bykChild;j++){
-                        addChild(&parent, wordToInt(LFile.TabWords[2+j]));
+                        addChild(&parent, newTreeNode(wordToInt(LFile.TabWords[2+j])));
                     }
-                    listResep.list[i] = parent;
-                    // printPreorder(parent);
-                    // printf("\n");
+                    (&g->listResep)->list[i] = parent;
+                    for(int j=0;j<i;j++){
+                        tambahBahan(&parent, (&g->listResep)->list[j]);
+                        tambahBahan(&(&g->listResep)->list[j], parent);
+                    }
                 }
-                (*g).listResep = listResep;
                 break;
-            case 3: /* Config Peta */
+            case 3: /* Config Peta */;
                 Map MapGame;
                 CreateMap(&MapGame, wordToInt(LFile.TabWords[0]), wordToInt(LFile.TabWords[1]));
                 //ROW_EFF(PETA(MapGame)) = wordToInt(LFile.TabWords[0]);
                 //COL_EFF(PETA(MapGame)) = wordToInt(LFile.TabWords[1]);
                 POINT M;
-                ListStatikP TM, MM, FM, CM,BM;
+                ListStatikP TM, MM, FM, CM, BM, XM;
                 CreatePoint(&M, i, j);
                 createLSPoint (&TM);
                 createLSPoint (&MM);
                 createLSPoint (&FM);
                 createLSPoint (&CM);
                 createLSPoint (&BM);
+                createLSPoint (&XM);
                 for (int i=0; i< ROW_EFF(PETA(MapGame)); i++) {
                     ADVNewline();
                     LFile = readLineFile();
@@ -193,6 +242,8 @@ void inputConfigFile(Game *g, Word PATH, int type) {
                             insertPoint(&CM,M);
                         } else if (ELMT_MATRIX(PETA(MapGame),i,j) == 'B') {
                             insertPoint(&BM,M);
+                        } else if (ELMT_MATRIX(PETA(MapGame),i,j) == 'X') {
+                            insertPoint(&XM,M);
                         }
                     }
                 }
@@ -201,7 +252,9 @@ void inputConfigFile(Game *g, Word PATH, int type) {
                 FMap(MapGame) = FM;
                 CMap(MapGame) = CM;
                 BMap(MapGame) = BM;
-                (*g).map = MapGame;
+                XMap(MapGame) = XM;
+                // (&g->map) = {MapGame};
+                sprintBlue("HALO\n");
                 break;
             default:
                 break;
@@ -210,6 +263,6 @@ void inputConfigFile(Game *g, Word PATH, int type) {
 }
 
 void exitGame() {
-    sprintGreen("Terima kasih telah menggunakan BNMO\n");
+    sprintGreen("\nTerima kasih telah menggunakan BNMO\n\n");
     exit(0);
 }

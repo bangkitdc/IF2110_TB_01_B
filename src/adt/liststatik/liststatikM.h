@@ -7,7 +7,7 @@
 #include "../makanan/makanan.h"
 
 /*  Kamus Umum */
-#define CAPACITY_LISTSTATIK 1000
+#define CAPACITY_LISTSTATIKM 1000
 /* Kapasitas penyimpanan */
 #define IDX_MIN 0
 /* Indeks minimum list */
@@ -19,11 +19,11 @@
 /* Definisi elemen dan koleksi objek */
 typedef int IdxType;
 typedef struct {
-   Makanan contents[CAPACITY_LISTSTATIK]; /* memori tempat penyimpan elemen (container) */
+   Makanan contents[CAPACITY_LISTSTATIKM]; /* memori tempat penyimpan elemen (container) */
 } ListStatikM;
 
 /* ********** SELEKTOR ********** */
-#define ELMT_LISTSTATIK(l, i) (l).contents[(i)]
+#define ELMT_LISTSTATIKM(l, i) (l).contents[(i)]
 
 /* ********** KONSTRUKTOR ********** */
 /* Konstruktor : create List kosong untuk list makanan */

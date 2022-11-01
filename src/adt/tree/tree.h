@@ -6,7 +6,6 @@
 #define POHON_H
 
 #include "../../include/boolean.h"
-#include "../liststatik/liststatikT.h"
 
 /* Selektor */
 #define ROOT(p) (p)->info
@@ -46,7 +45,7 @@ Address newTreeNode(ElTypeInt val);
    menghasilkan p, maka p↑.info=val, p↑.children=[NULL*10], p↑.childEff=0 
    Jika alokasi gagal, mengirimkan NULL */
 
-void addChild(Tree *p, ElType val);
+void addChild(Tree *p, Tree x);
 /* menambahkan child pada sebuah tree*/
 
 void deallocTreeNode (Address p);

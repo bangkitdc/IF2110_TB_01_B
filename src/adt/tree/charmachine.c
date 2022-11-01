@@ -51,17 +51,9 @@ void STARTFILE(char *dir) {
 
 boolean isFileExist(char *dir) {
        /* Menghasilkan true jika file dengan path dir bisa dibuka*/
-       FILE *f;
        
        /* ALGORITMA */
-       if ((f = fopen(dir, "r")) == NULL) {
-              // close(f);
-              return false;       
-       } else {
-              fclose(f);
-              return true;
-       }
-       // return (fopen(dir, "r") != NULL);
+       return (fopen(dir, "r") != NULL);
 }
 
 void closeChar() {

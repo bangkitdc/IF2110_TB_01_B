@@ -10,10 +10,18 @@ void startGame(Game *game) {
     createLSMakanan(&game->listMakanan);
     game->endGame = false;
 
-    printf("Selamat datang di BNMO!\nMasukkan nama config file untuk makanan: ");
-    inputConfigFile(game, concatWord(dir, dirMakanan), MAKANAN);
+    printf("\nSelamat datang di BNMO!\n\n");
 
-    printCatalog(game->listMakanan);
+    // sprintBlue("Masukkan nama config file untuk makanan (.txt): \n");
+    // inputConfigFile(game, concatWord(dir, dirMakanan), MAKANAN);
 
-    game->endGame = true;
+    sprintBlue("\nMasukkan nama config file untuk resep: \n");
+    inputConfigFile(game, concatWord(dir, dirResep), RESEP);
+
+//     sprintBlue("\nMasukkan nama config file untuk peta: \n");
+//     inputConfigFile(game, concatWord(dir, dirPeta), PETA);
+}
+
+boolean isEndGame(Game g) {
+    return (g.endGame);
 }

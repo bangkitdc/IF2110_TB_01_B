@@ -15,7 +15,11 @@ void startMenu();
 
 int startInput(Word w);
 
+char *checkConfig(Word PATH);
+
 void inputConfigFile(Game *g, Word PATH, int type);
+
+int MenuInput(Word w);
 
 void exitGame();
 

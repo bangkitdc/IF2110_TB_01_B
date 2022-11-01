@@ -6,16 +6,16 @@
 /* ********** KONSTRUKTOR ********** */
 /* Konstruktor : create List kosong untuk list makanan */
 void createLSPoint(ListStatikP *l){
-    for (int i=0; i<CAPACITY_LISTSTATIK; i++){
-        Absis(ELMT_LISTSTATIK(*l,i)) = MARKSTATIK;
-        Ordinat(ELMT_LISTSTATIK(*l,i)) = MARKSTATIK;
+    for (int i=0; i<CAPACITY_LISTSTATIKP; i++){
+        Absis(ELMT_LISTSTATIKP(*l,i)) = MARKSTATIK;
+        Ordinat(ELMT_LISTSTATIKP(*l,i)) = MARKSTATIK;
     }
 }
 
 /* *** Banyaknya elemen *** */
 int listLengthStatikP(ListStatikP l){
     int i = 0;
-    while (Absis(ELMT_LISTSTATIK(l,i)) == MARKSTATIK || Ordinat(ELMT_LISTSTATIK(l,i)) == MARKSTATIK) {
+    while (Absis(ELMT_LISTSTATIKP(l,i)) == MARKSTATIK || Ordinat(ELMT_LISTSTATIKP(l,i)) == MARKSTATIK) {
         i += 1;
     }
     return i;
@@ -28,6 +28,6 @@ void insertPoint(ListStatikP *l, POINT p){
 /* F.S. food adalah elemen terakhir l yang baru jika id nya tidak sama 
 dengan id makanan yang sudah ada dalam list sebelumnya. Jika Id nya sama dengan makanan sebelumnya,
 maka food akan menimpa makanan yang sudah didefinisikan sebelumnya. */
-    Absis(ELMT_LISTSTATIK(*l, listLengthP(*l))) = Absis(p);
-    Ordinat(ELMT_LISTSTATIK(*l, listLengthP(*l))) = Ordinat(p);
+    Absis(ELMT_LISTSTATIKP(*l, listLengthStatikP(*l))) = Absis(p);
+    Ordinat(ELMT_LISTSTATIKP(*l, listLengthStatikP(*l))) = Ordinat(p);
 }
