@@ -28,20 +28,94 @@ void CreateMap(Map *MGame, int X, int Y){
 
 /* DISPLAY MAP */
 void DisplayMap(Map MGame){
-    int row = ROW_EFF(PETA(MGame));
-    int col = COL_EFF(PETA(MGame));
+    int row = (MGame).Peta.rowEff;
+    int col = (MGame).Peta.colEff;
     for (int i=0; i<row+2; i++) {
         for (int j=0; j<col+2; j++) {
             if (i == 0 || i == row+1 || j == 0 || j == col+1) {
                 printf("*");
             } else {
-                if (ELMT_MATRIX(PETA(MGame),i,j) == '#') {
+                if (((MGame).Peta.mem[i][j]) == '#') {
                     printf(" ");
                 } else {
-                    printf("%c", ELMT_MATRIX(PETA(MGame),i,j));
+                    printf("%c", ((MGame).Peta.mem[i][j]));
                 }
             }
         }
         printf("\n");
+    }
+}
+
+/* Move Simulator */
+void MNorth(Map *MGame, boolean *stuck){
+    if ((*MGame).S_Map.X -1 >= 0 && (*MGame).S_Map.X-1 < (*MGame).Peta.rowEff) {
+        if ((*MGame).S_Map.Y >= 0 && (*MGame).S_Map.Y < (*MGame).Peta.colEff) {
+            if ((((*MGame).Peta.mem[(*MGame).S_Map.X -1][(*MGame).S_Map.Y])) == '#' ) {
+                *stuck = false;
+                (((*MGame).Peta.mem[(*MGame).S_Map.X -1][(*MGame).S_Map.Y])) = 'S'; //Update lokasi simulator di matriks
+                (((*MGame).Peta.mem[(*MGame).S_Map.X][(*MGame).S_Map.Y])) = '#'; // update lokasi simulator di matriks
+                (*MGame).S_Map.X = (*MGame).S_Map.X - 1; // Update lokasi simulator
+            } else {
+                *stuck = true;
+            }
+        } else {
+            *stuck = true;
+        }
+    } else {
+        *stuck = true;
+    }
+}
+void MEast(Map *MGame, boolean *stuck){
+    if ((*MGame).S_Map.X >= 0 && (*MGame).S_Map.X < (*MGame).Peta.rowEff) {
+        if ((*MGame).S_Map.Y+1 >= 0 && (*MGame).S_Map.Y+1 < (*MGame).Peta.colEff) {
+            if ((((*MGame).Peta.mem[(*MGame).S_Map.X][(*MGame).S_Map.Y +1])) == '#' ) {
+                *stuck = false;
+                (((*MGame).Peta.mem[(*MGame).S_Map.X][(*MGame).S_Map.Y+1])) = 'S'; //Update lokasi simulator di matriks
+                (((*MGame).Peta.mem[(*MGame).S_Map.X][(*MGame).S_Map.Y])) = '#'; // update lokasi simulator di matriks
+                (*MGame).S_Map.Y = (*MGame).S_Map.Y + 1; // Update lokasi simulator
+            } else {
+                *stuck = true;
+            }
+        } else {
+            *stuck = true;
+        }
+    } else {
+        *stuck = true;
+    }
+}
+void MSouth(Map *MGame, boolean *stuck){
+    if ((*MGame).S_Map.X +1 >= 0 && (*MGame).S_Map.X+1 < (*MGame).Peta.rowEff) {
+        if ((*MGame).S_Map.Y >= 0 && (*MGame).S_Map.Y < (*MGame).Peta.colEff) {
+            if ((((*MGame).Peta.mem[(*MGame).S_Map.X +1][(*MGame).S_Map.Y])) == '#' ) {
+                *stuck = false;
+                (((*MGame).Peta.mem[(*MGame).S_Map.X +1][(*MGame).S_Map.Y])) = 'S'; //Update lokasi simulator di matriks
+                (((*MGame).Peta.mem[(*MGame).S_Map.X][(*MGame).S_Map.Y])) = '#'; // update lokasi simulator di matriks
+                (*MGame).S_Map.X = (*MGame).S_Map.X + 1; // Update lokasi simulator
+            } else {
+                *stuck = true;
+            }
+        } else {
+            *stuck = true;
+        }
+    } else {
+        *stuck = true;
+    }
+}
+void MWest(Map *MGame, boolean *stuck){
+    if ((*MGame).S_Map.X >= 0 && (*MGame).S_Map.X < (*MGame).Peta.rowEff) {
+        if ((*MGame).S_Map.Y -1 >= 0 && (*MGame).S_Map.Y -1 < (*MGame).Peta.colEff) {
+            if ((((*MGame).Peta.mem[(*MGame).S_Map.X][(*MGame).S_Map.Y -1])) == '#' ) {
+                *stuck = false;
+                (((*MGame).Peta.mem[(*MGame).S_Map.X][(*MGame).S_Map.Y-1])) = 'S'; //Update lokasi simulator di matriks
+                (((*MGame).Peta.mem[(*MGame).S_Map.X][(*MGame).S_Map.Y])) = '#'; // update lokasi simulator di matriks
+                (*MGame).S_Map.Y = (*MGame).S_Map.Y - 1; // Update lokasi simulator
+            } else {
+                *stuck = true;
+            }
+        } else {
+            *stuck = true;
+        }
+    } else {
+        *stuck = true;
     }
 }
