@@ -217,19 +217,19 @@ void inputConfigFile(Game *g, Word PATH, int type) {
                 }
                 break;
             case 3: /* Config Peta */;
-                Map MapGame;
-                CreateMap(&MapGame, wordToInt(LFile.TabWords[0]), wordToInt(LFile.TabWords[1]));
+                //Map MapGame;
+                CreateMap((&g->map), wordToInt(LFile.TabWords[0]), wordToInt(LFile.TabWords[1]));
                 //ROW_EFF(PETA(MapGame)) = wordToInt(LFile.TabWords[0]);
                 //COL_EFF(PETA(MapGame)) = wordToInt(LFile.TabWords[1]);
-                POINT M;
-                ListStatikP TM, MM, FM, CM, BM, XM;
-                CreatePoint(&M, i, j);
-                createLSPoint (&TM);
-                createLSPoint (&MM);
-                createLSPoint (&FM);
-                createLSPoint (&CM);
-                createLSPoint (&BM);
-                createLSPoint (&XM);
+                //POINT M;
+                //ListStatikP TM, MM, FM, CM, BM, XM;
+                //CreatePoint(&M, i, j);
+                //createLSPoint (&TM);
+                //createLSPoint (&MM);
+                //createLSPoint (&FM);
+                //createLSPoint (&CM);
+                //createLSPoint (&BM);
+                //createLSPoint (&XM);
                 for (int i=0; i< ROW_EFF(PETA(MapGame)); i++) {
                     ADVNewline();
                     LFile = readLineFile();
