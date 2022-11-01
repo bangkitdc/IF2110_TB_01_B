@@ -57,7 +57,7 @@ void Undo(Stack * SMain, Stack * SSecondary, State * currentState) {
     State temp;
     Pop(SMain, &temp);
     Push(SSecondary, temp);
-    currentState = temp;    
+    *currentState = temp;    
 }
 
 void Redo(Stack * SMain, Stack * SSecondary, State * currentState) {
@@ -68,6 +68,6 @@ void Redo(Stack * SMain, Stack * SSecondary, State * currentState) {
     State temp;
     Pop(SSecondary, &temp);
     Push(SMain, temp);
-    currentState = temp;
+    *currentState = temp;
     EmptyStack(SSecondary);
 }

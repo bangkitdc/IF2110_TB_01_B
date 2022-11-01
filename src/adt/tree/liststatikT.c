@@ -1,6 +1,6 @@
-#include "stdio.h"
-#include "liststatikT.h"
+// #include "stdio.h"
+// #include "liststatikT.h"
 
-void CreateListTree(ListStatikT *lt){
-    (*lt).elEff = 0;
-}
+// void CreateListTree(ListStatikT *lt){
+//     (*lt).elEff = 0;
+// }

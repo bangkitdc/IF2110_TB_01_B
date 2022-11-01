@@ -129,8 +129,8 @@ void copyListString(ListDinString lIn, ListDinString *lOut) {
 /* F.S. lOut berisi salinan dari lIn (identik, nEff dan capacity sama) */
 /* Proses : Menyalin isi lIn ke lOut */ 
     int i;
-    CreateListDin(lOut, CAPACITY_LISTDINAMIS_String(lIn));
-    NEFF(*lOut) = NEFF(lIn);
+    CreateListStringDin(lOut, CAPACITY_LISTDINAMIS_String(lIn));
+    NEFF_String(*lOut) = NEFF_String(lIn);
     for (i = 0; i < listStringLengthDinamis(lIn); i++){
         ELMT_LISTDINAMIS_String(*lOut,i) = ELMT_LISTDINAMIS_String(lIn,i);
     }

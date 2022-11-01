@@ -80,7 +80,7 @@ int main() {
                         if (L.Length != 1) {
                             sprintRed("Command HELP tidak memiliki argumen. Coba Lagi!\n");
                         } else {
-                            /* code */
+                            help();
                         }
                         break;
                     case 7: /* INVENTORY */
@@ -98,8 +98,8 @@ int main() {
                         }
                         break;
                     case 9: /* MOVE */
-                        if (L.Length != 3) {
-                            sprintRed("Command WAIT memiliki 2 argumen, jam dan menit. Coba Lagi!\n");
+                        if (L.Length != 2) {
+                            sprintRed("Command MOVE memiliki 1 argumen, arah. Coba Lagi!\n");
                         } else {
                             /* code */
                         }
@@ -115,7 +115,14 @@ int main() {
                         if (L.Length != 1) {
                             sprintRed("Command COOKBOK tidak memiliki argumen. Coba Lagi!\n");
                         } else {
-                            printf("%d\n", game.listResep.elEff);
+                            /* code */
+                        }
+                        break;
+                    case 12: /* WAIT X Y */
+                        if (L.Length != 3) {
+                            sprintRed("Command WAIT memiliki 2 argumen. Coba Lagi!\n");
+                        } else {
+                            /* code */
                         }
                         break;
                     default:
