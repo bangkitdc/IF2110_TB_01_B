@@ -227,7 +227,7 @@ void mengolahMakanan(Makanan makananOlah, PrioQueue *inventory, ListStatikT list
     }else{                                           // jika tidak bisa dibuat
         printf("Gagal membuat %s karena kamu tidak memiliki bahan berikut:\n", makananOlah.name);
         for(int i=0;i<treeMakananOlah->childEff;i++){
-            if(idBahan!=-1){
+            if(idBahan[i]!=-1){
                 int j;
                 while (listMakanan.contents[j].id != MARKSTATIK){
                     if(id == listMakanan.contents[j].id){

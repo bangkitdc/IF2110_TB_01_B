@@ -96,39 +96,9 @@ int MenuInput(Word w) {
     return -1;
 }
 
-#include <string.h>
+void inputConfigFile(Game *g, char *PATH, int type) {
+    STARTWORDFILE(PATH);
 
-char *checkConfig(Word PATH) {
-    Word config;
-
-    printf("> ");
-    ListWord L; char *tempDir;
-    createListWord(&L);
-    L = readLine();
-    copyWord(L.TabWords[0], &config);
-    tempDir = wordToString(concatWord(PATH, config));
-
-    while (!isFileExist(tempDir) || L.Length != 1) {
-        sprintRed("\nFile tidak ditemukan. Coba nama file lain! \n");
-        sprintBlue("Masukkan nama config file untuk makanan (.txt): \n");
-        printf("> ");
-        L = readLine();
-        copyWord(L.TabWords[0], &config);
-        tempDir = wordToString(concatWord(PATH, config));
-    }
-    return tempDir;
-}
-
-void inputConfigFile(Game *g, Word PATH, int type) {
-    char *dir = checkConfig(PATH);
-    
-    STARTWORDFILE(dir);
-    while (EndWord) { /* File dijamin valid (tidak mungkin kosong) */
-        sprintRed("\nFile yang dibaca kosong! \n");
-        sprintBlue("Masukkan nama config file untuk makanan (.txt): \n");
-        dir = checkConfig(PATH);
-        STARTWORDFILE(dir);
-    }
     if (!EndWord) { 
         ListWord LFile;
         createListWord(&LFile);
@@ -230,10 +200,10 @@ void inputConfigFile(Game *g, Word PATH, int type) {
                 //createLSPoint (&CM);
                 //createLSPoint (&BM);
                 //createLSPoint (&XM);
-                for (int i=0; i< &(&(&g->map)->Peta)->rowEff; i++) {
+                for (int i=0; i< (&(&g->map)->Peta)->rowEff; i++) {
                     ADVNewline();
                     LFile = readLineFile();
-                    for (int j=0; j< &(&(&g->map)->Peta)->colEff; j++) {
+                    for (int j=0; j< (&(&g->map)->Peta)->colEff; j++) {
                         CreatePoint(&M, i, j);
                         (&(&g->map)->Peta)->mem[(i)][(j)]  = LFile.TabWords[0].TabWord[j];
                         //ELMT_MATRIX(PETA(MapGame),i,j)  = LFile.TabWords[0].TabWord[j];
