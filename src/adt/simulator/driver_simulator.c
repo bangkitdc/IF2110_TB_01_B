@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "simulator.c"
 #include "../makanan/makanan.c"
-/*
+
 int main () {
     Simulator s;
     State st;
@@ -52,20 +52,10 @@ int main () {
     printf("lokasi : ");
     WritePoint(Lokasi(s));
     printf("\n\n");
-    */
     
     MatrixKulkas kulkas;
     createMatrixKulkas(2, 2, &kulkas);
     displayMatrixKulkas(kulkas);
-
-    Simulator s;
-    State st;
-    char username[20];
-    POINT posisi;
-    PrioQueue Q;
-    infotype temp, tempdel;
-    Makanan tempmakanan;
-    TIME temptime;
 
     // siapkan simulator
     CreatePoint(&posisi, 1, 1);
@@ -121,4 +111,3 @@ int main () {
 
     return 0;
 }
-*/

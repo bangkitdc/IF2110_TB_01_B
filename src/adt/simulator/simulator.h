@@ -5,13 +5,14 @@
 #define ADTSIMULATOR_H
 
 #include <stdlib.h>
-#include "../queue/prioqueue.h"
-#include "../stack/stack.h"
-#include "../time/time.h"
+#include "../queue/prioqueue.c"
+#include "../stack/stack.c"
+#include "../time/time.c"
 #include "../../include/boolean.h"
-#include "../point/point.h"
-#include "../matrix/matrix.h"
-#include "../matrix/matrixKulkas.h"
+#include "../point/point.c"
+#include "../matrix/matrix.c"
+#include "../matrix/matrixKulkas.c"
+#include "../listdin/listdinstring.c"
 
 typedef struct {
     char* username;
@@ -36,11 +37,11 @@ void gantiLokasi(Simulator * s, POINT p);
 void gerakUser(Simulator* s, char x);
 /* Menggerakkan user */
 
-State simulatorToState(Simulator s, TIME currentTime);
+State simulatorToState(Simulator s, TIME currentTime, ListDinString currentNotif, MatrixKulkas currentKulkas);
 /* mengkonversi simulator s ke State*/
 /* digunakan saat mau menyimpan State ke stack */
 
-void loadState(Simulator * s, State st, TIME * currentTime, char * currentUsername);
+void loadState(Simulator * s, State st, TIME * currentTime, char * currentUsername, ListDinString currentNotif, MatrixKulkas currentKulkas);
 /* mengkonversi State dari stack ke simulator dan menyimpannya di simulator */
 /* digunakan saat undo dan redo */
 

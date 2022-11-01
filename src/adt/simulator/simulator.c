@@ -52,7 +52,7 @@ void gerakUser(Simulator * s, char x) {
     }
 }
 
-State simulatorToState(Simulator s, TIME currentTime) {
+State simulatorToState(Simulator s, TIME currentTime, ListDinString currentNotif, MatrixKulkas currentKulkas) {
 /* mengkonversi simulator s ke State*/
 /* digunakan saat mau menyimpan State ke stack */
 
@@ -63,17 +63,21 @@ State simulatorToState(Simulator s, TIME currentTime) {
     InfoWaktu(temp) = currentTime;
     InfoKoordinat(temp) = Lokasi(s);
     InfoInventory(temp) = Inventory(s);
+    InfoNotif(temp) = currentNotif;
+    InfoKulkas(temp) = currentKulkas;
 
     return temp;
 }
 
-void loadState(Simulator * s, State st, TIME * currentTime, char * currentUsername) {
+void loadState(Simulator * s, State st, TIME * currentTime, char * currentUsername, ListDinString currentNotif, MatrixKulkas currentKulkas) {
 /* mengkonversi State dari stack ke simulator dan menyimpannya di simulator */
 /* digunakan saat undo dan redo */
 
     // ALGORITMA
     createSimulator(s, currentUsername, InfoKoordinat(st), InfoInventory(st));
     *currentTime = InfoWaktu(st);
+    *currentNotif = InfoNotif(st);
+    *currentKulkas = InfoKulkas(st);
 }
 
 void setInventory(Simulator * s, PrioQueue inventory) {
