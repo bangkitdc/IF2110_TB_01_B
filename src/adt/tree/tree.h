@@ -6,6 +6,10 @@
 #define POHON_H
 
 #include "../../include/boolean.h"
+#include "../queue/Prioqueue.h"
+#include "../makanan/makanan.h"
+#include "../liststatik/liststatikM.h"
+
 
 /* Selektor */
 #define ROOT(p) (p)->info
@@ -68,6 +72,6 @@ void printPreorder(Tree p);
    Tidak ada tambahan karakter apa pun di depan, tengah, atau akhir. */
 /* Contoh: 
    (A()()) adalah pohon dengan 1 elemen dengan akar A
-   (A(B()())(C()())) adalah pohon dengan akar A dan subpohon kiri (B()()) dan subpohon kanan (C()()) */
+   (A(B()())(C()())) adal ah pohon dengan akar A dan subpohon kiri (B()()) dan subpohon kanan (C()()) */
 
 #endif
