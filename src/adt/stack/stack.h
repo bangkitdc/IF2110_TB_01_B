@@ -11,7 +11,8 @@
 #include "../point/point.h"
 #include "../queue/prioqueue.h"
 #include "../matrix/matrixKulkas.h"
-#include "../listdin/listdinstring.h"
+#include "../listdin/listdinmakanan.h"
+#include "../liststatik/liststatikM.h"
 
 #define Nil -1
 #define MaxStack 1000
@@ -22,7 +23,7 @@ typedef struct {
   POINT koordinat; // Posisi simulator
   PrioQueue inventory; // Prioqueue berupa makanan dalam inventory yang disertai waktu expired
   MatrixKulkas kulkas; // Isi kulkas terkini
-  ListDinString notifikasi; //Notifikasi yang diterima simulator
+  ListDinMakanan listMakanan; // List makanan yang berubah (misal abis di-FRY/di-BOIL/kedaluarsa)
 } State; // State yang disimpan di dalam stack
 typedef int address;   /* indeks tabel */
 
