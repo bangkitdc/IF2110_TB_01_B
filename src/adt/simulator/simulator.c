@@ -105,7 +105,7 @@ boolean cekSpotKosongKulkas(MatrixKulkas kulkas, int idxX, int idxY) {
     }
 }
 
-void pindahKeKulkas(Simulator * s, int idx, MatrixKulkas * kulkas) {
+void pindahKeKulkas(Simulator * s, int idx, MatrixKulkas * kulkas, ListDinMakanan * currentNotif) {
 /* Memindahkan makanan di inventori dengan index idx ke kulkas */
 
     // KAMUS
@@ -135,10 +135,12 @@ void pindahKeKulkas(Simulator * s, int idx, MatrixKulkas * kulkas) {
         printf("kulkas sudah penuh :(\n");
     } else {
         ELMTK(*kulkas, i, j) = temp;
+        LOC(Info(temp)) = 'K';
+        insertLastMakanan(currentNotif, temp);
     }
 }
 
-void ambilDariKulkas(Simulator * s, MatrixKulkas * kulkas, int idxX, int idxY) {
+void ambilDariKulkas(Simulator * s, MatrixKulkas * kulkas, int idxX, int idxY, ListDinMakanan * currentNotif) {
 /* Mengambil makanan dari kulkas dan memasukkannya ke inventory */
 
     // KAMUS
@@ -152,6 +154,8 @@ void ambilDariKulkas(Simulator * s, MatrixKulkas * kulkas, int idxX, int idxY) {
         temp = ELMTK(*kulkas, idxX, idxY);
         ELMTK(*kulkas, idxX, idxY) = dummy;
         Enqueue(&Inventory(*s), temp);
+        LOC(Info(temp)) = 'k';
+        insertLastMakanan(currentNotif, temp);
     }
 
 }
