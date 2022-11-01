@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "utils.h"
 #include "../../include/boolean.h"
 
@@ -36,6 +37,7 @@ Word DELIVERY_COMMAND = {"DELIVERY", 8};
 Word MOVE_COMMAND = {"MOVE", 4};
 Word CATALOG_COMMAND = {"CATALOG", 7};
 Word COOKBOOK_COMMAND = {"COOKBOOK", 8};
+Word WAIT_COMMAND = {"WAIT", 4};
 
 Word BUY_FILE = {"Buy", 3};
 Word FRY_FILE = {"Fry", 3};
@@ -55,8 +57,8 @@ void startMenu(){
     }
     printf("\n");
     sprintCyan("======= List Command =======\n");
-    sprintGreen("[#] START \n");
-    sprintRed("[#] EXIT \n");
+    sprintGreen("[1] START \n");
+    sprintRed("[2] EXIT \n");
 }
 
 int startInput(Word w) {
@@ -82,10 +84,11 @@ int MenuInput(Word w) {
         DELIVERY_COMMAND,
         MOVE_COMMAND,
         CATALOG_COMMAND,
-        COOKBOOK_COMMAND},
-    12 };
+        COOKBOOK_COMMAND,
+        WAIT_COMMAND},
+    13 };
 
-    for (int i = 0; i < 12; i ++) {
+    for (int i = 0; i < 13; i ++) {
         if (isWordEq(w, LCommand.TabWords[i])) {
             return i;
         }
@@ -93,37 +96,9 @@ int MenuInput(Word w) {
     return -1;
 }
 
-char *checkConfig(Word PATH) {
-    Word config;
+void inputConfigFile(Game *g, char *PATH, int type) {
+    STARTWORDFILE(PATH);
 
-    printf("> ");
-    ListWord L; char *dir;
-    createListWord(&L);
-    L = readLine();
-    copyWord(L.TabWords[0], &config);
-    dir = wordToString(concatWord(PATH, config));
-
-    while (!isFileExist(dir)) {
-        sprintRed("\nFile tidak ditemukan. Coba nama file lain! \n");
-        printf("Masukkan nama config file untuk makanan (.txt): \n");
-        printf("> ");
-        L = readLine();
-        copyWord(L.TabWords[0], &config);
-        dir = wordToString(concatWord(PATH, config));
-    }
-    return dir;
-}
-
-void inputConfigFile(Game *g, Word PATH, int type) {
-    char *dir = checkConfig(PATH);
-
-    STARTWORDFILE(dir);
-    while (EndWord) { /* File dijamin valid (tidak mungkin kosong) */
-        sprintRed("\nFile yang dibaca kosong! \n");
-        printf("Masukkan nama config file untuk makanan (.txt): \n");
-        dir = checkConfig(PATH);
-        STARTWORDFILE(dir);
-    }
     if (!EndWord) { 
         ListWord LFile;
         createListWord(&LFile);
@@ -205,10 +180,10 @@ void inputConfigFile(Game *g, Word PATH, int type) {
                         addChild(&parent, newTreeNode(wordToInt(LFile.TabWords[2+j])));
                     }
                     (&g->listResep)->list[i] = parent;
-                    for(int j=0;j<i;j++){
-                        tambahBahan(&parent, (&g->listResep)->list[j]);
-                        tambahBahan(&(&g->listResep)->list[j], parent);
-                    }
+                    // for(int j=0;j<i;j++){
+                    //     tambahBahan(&parent, (&g->listResep)->list[j]);
+                    //     tambahBahan(&(&g->listResep)->list[j], parent);
+                    // }
                 }
                 break;
             case 3: /* Config Peta */;
@@ -225,10 +200,10 @@ void inputConfigFile(Game *g, Word PATH, int type) {
                 //createLSPoint (&CM);
                 //createLSPoint (&BM);
                 //createLSPoint (&XM);
-                for (int i=0; i< &(&(&g->map)->Peta)->rowEff; i++) {
+                for (int i=0; i< (&(&g->map)->Peta)->rowEff; i++) {
                     ADVNewline();
                     LFile = readLineFile();
-                    for (int j=0; j< &(&(&g->map)->Peta)->colEff; j++) {
+                    for (int j=0; j< (&(&g->map)->Peta)->colEff; j++) {
                         CreatePoint(&M, i, j);
                         (&(&g->map)->Peta)->mem[(i)][(j)]  = LFile.TabWords[0].TabWord[j];
                         //ELMT_MATRIX(PETA(MapGame),i,j)  = LFile.TabWords[0].TabWord[j];
@@ -262,6 +237,23 @@ void inputConfigFile(Game *g, Word PATH, int type) {
                 break;
         }
     }
+}
+
+void help() {
+    sprintCyan("============== List Command ==============\n");
+    printf("[1] MOVE X (X: NORTH/ EAST/ WEST/ SOUTH)\n");
+    printf("[2] BUY\n");
+    printf("[3] FRY\n");
+    printf("[4] CHOP\n");
+    printf("[5] BOIL\n");
+    printf("[6] MIX\n");
+    printf("[7] WAIT X Y (X: jam, Y: menit,)\n");
+    printf("[8] INVENTORY\n");
+    printf("[9] INVENTORY\n");
+    printf("[10] CATALOG\n");
+    printf("[11] COOKBOOK\n");
+    printf("[12] HELP\n");
+    printf("[13] EXIT\n");
 }
 
 void exitGame() {

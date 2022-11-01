@@ -77,12 +77,12 @@ void EmptyStack(Stack * S);
 /* I.S. S tidak mungkin kosong */
 /* F.S. S kosong */
 
-void Undo(Stack * SMain, Stack * SSecondary);
+void Undo(Stack * SMain, Stack * SSecondary, State * currentState);
 /* Meng-undo aksi pada SMain */
 /* I.S. SMain tidak boleh kosong */
 /* F.S. Elemen TOP pada SMain telah di-pop, dan elemen tersebut dipush ke SSecondary */
 
-void Redo(Stack * SMain, Stack * SSecondary);
+void Redo(Stack *SMain, Stack *SSecondary, State *currentState);
 /* Meng-redo aksi pada SMain */
 /* I.S. SSecondary tidak boleh kosong */
 /* F.S. Elemen TOP pada SSecondary telah di-pop, dan elemen tersebut dipush ke SMain */
