@@ -205,7 +205,7 @@ void inputConfigFile(Game *g, char *PATH, int type) {
                     LFile = readLineFile();
                     for (int j=0; j< (&(&g->map)->Peta)->colEff; j++) {
                         CreatePoint(&M, i, j);
-                        (&(&g->map)->Peta)->mem[(i)][(j)]  = LFile.TabWords[0].TabWord[j];
+                        (&(&g->map)->Peta)->mem[(i)][(j)] = LFile.TabWords[0].TabWord[j];
                         //ELMT_MATRIX(PETA(MapGame),i,j)  = LFile.TabWords[0].TabWord[j];
                         if ((&(&g->map)->Peta)->mem[(i)][(j)] == 'S') {
                             (&g->map)->S_Map = M;
@@ -241,7 +241,7 @@ void inputConfigFile(Game *g, char *PATH, int type) {
 
 void help() {
     sprintCyan("============== List Command ==============\n");
-    printf("[1] MOVE X (X: NORTH/ EAST/ WEST/ SOUTH)\n");
+    printf("[1] MOVE X (X: NORTH/ SOUTH/ WEST/ EAST)\n");
     printf("[2] BUY\n");
     printf("[3] FRY\n");
     printf("[4] CHOP\n");

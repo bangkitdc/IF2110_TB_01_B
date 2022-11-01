@@ -2,6 +2,8 @@
 
 #include <stdio.h>
 #include "map.h"
+#include "../../utility/color/color.h"
+#include "../machine/wordmachine.h"
 
 /* Selektor */
 void CreateMap(Map *MGame, int X, int Y){
@@ -35,10 +37,34 @@ void DisplayMap(Map MGame){
             if (i == 0 || i == row+1 || j == 0 || j == col+1) {
                 printf("*");
             } else {
-                if (((MGame).Peta.mem[i][j]) == '#') {
+                if (((MGame).Peta.mem[i-1][j-1]) == '#') {
                     printf(" ");
                 } else {
-                    printf("%c", ((MGame).Peta.mem[i][j]));
+                    switch (((MGame).Peta.mem[i-1][j-1])) {
+                    case 'S':
+                        printYellow('S');
+                        break;
+                    case 'T':
+                        printGreen('T');
+                        break;
+                    case 'M':
+                        printBlue('M');
+                        break;
+                    case 'X':
+                        printf("X");
+                        break;
+                    case 'F':
+                        printMagenta('F');
+                        break;
+                    case 'C':
+                        printCyan('C');
+                        break;
+                    case 'B':
+                        printRed('B');
+                        break;
+                    default:
+                        break;
+                    }
                 }
             }
         }
