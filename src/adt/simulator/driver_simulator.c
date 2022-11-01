@@ -1,9 +1,8 @@
 #include <stdio.h>
 #include "simulator.c"
 #include "../makanan/makanan.c"
-
+/*
 int main () {
-    /*
     Simulator s;
     State st;
     char* username;
@@ -120,7 +119,6 @@ int main () {
     PrintPrioQueue(Inventory(s));
     printf("\n");
 
-
-
     return 0;
 }
+*/
