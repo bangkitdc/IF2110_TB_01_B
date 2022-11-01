@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include "../../include/boolean.h"
 #include "prioqueue.h"
-#include "../time/time.h"
 
 /* ********* Prototype ********* */
 boolean IsEmptyPrioqueue (PrioQueue Q) {
@@ -49,42 +48,6 @@ void CreateEmptyPrioqueue (PrioQueue * Q, int Max) {
         Head(*Q) = Nil;
         Tail(*Q) = Nil;
     }
-}
-
-void MakeinfoType (infotype * x, Makanan m) {
-/* Membuat makanan m agar bisa dimasukkan kedalam prioqueue */
-/* I.S. sembarang */
-/* F.S. terbuat infotype x yang berisikan data makanan m */
-
-    // KAMUS
-
-    // ALGORITMA
-    Time(*x) = TIMEToMenit(EXP(m));
-    Info(*x) = m;
-}
-
-void makeDummyInfoType(infotype * dummy) {
-/* membuat infotype dummy */
-/* I.S. belum terbuat infotype */
-/* F.S. infotype dummy telah terbuat */
-
-    // KAMUS
-    int tempid;
-    char* tempnama;
-    TIME tempexp;
-    TIME tempdeli;
-    char temploc;
-    Makanan temp;
-
-    // ALGORITMA
-    tempid = 0;
-    tempnama = "dummy";
-    CreateTime(&tempexp, 0, 0, 0);
-    CreateTime(&tempdeli, 0, 0, 0);
-    temploc = 'x';
-
-    createMakanan(&temp, tempid, tempnama, tempexp, temploc, tempdeli);
-    MakeinfoType(dummy, temp);
 }
 
 /* *** Destruktor *** */
@@ -316,36 +279,25 @@ void PrintPrioQueue (PrioQueue Q) {
 }
 
 /* Operasi untuk mengurus inventory dan delivery list */
-void PasstimeQueue(PrioQueue * Q, int x) {
+void PasstimeQueue(PrioQueue * Q, int x, ListDinMakanan * notif) {
 /* Mengurangi waktu tiap elemen di queue */
 /* I.S. Q mungkin kosong */
 /* F.S. setiap elemen di Q waktunya berkurang sesuai dengan jumlah waktu yang telah berlalu, jika waktunya menjadi 0 maka elemen tersebut akan dihapus dari queue */
 
     // KAMUS
-    int i, ctr;
+    int i;
     PrioQueue temp;
     infotype tempvar;
-    boolean kadaluarsa;
 
     // ALGORITMA 
     CreateEmptyPrioqueue(&temp, MaxElPrioqueue(*Q));
-    kadaluarsa = false;
-    ctr = 1;
-    printf("Notifikasi: ");
     // looping setiap menit
     for (i = 1; i <= x; i++) {
         while (!IsEmptyPrioqueue(*Q)) {
             Dequeue(Q, &tempvar);
             Time(tempvar)--;
             if (Time(tempvar) == 0) {
-                kadaluarsa = true;
-
-                if (ctr == 1) {
-                    printf("\n");
-                }
-
-                printf("%d. %s kedaluwarsa.. :(\n", ctr, NAME(Info(tempvar)));
-                ctr++;
+                insertLastMakanan(notif, tempvar);
             } else {
                 Enqueue(&temp, tempvar);
             }
@@ -356,14 +308,9 @@ void PasstimeQueue(PrioQueue * Q, int x) {
         DeAlokasi(&temp);
         CreateEmptyPrioqueue(&temp, MaxElPrioqueue(*Q));
     }
-
-    if (!kadaluarsa) {
-
-        printf("-\n");
-    }
 }
 
-void PassTimeDelivery(PrioQueue * deliList, PrioQueue * destination, int x) {
+void PassTimeDelivery(PrioQueue * deliList, PrioQueue * destination, int x, ListDinMakanan * notif) {
 /* Mengurangi waktu tiap elemen di queue */
 /* I.S. Q mungkin kosong */
 /* F.S. setiap elemen di Q waktunya berkurang sesuai dengan jumlah waktu yang telah berlalu, jika waktunya menjadi 0 maka elemen tersebut akan dihapus dari delivery list dan dipindahkan ke inventory */
@@ -372,9 +319,11 @@ void PassTimeDelivery(PrioQueue * deliList, PrioQueue * destination, int x) {
     int i;
     PrioQueue temp;
     infotype tempvar;
+    TIME temptime;
 
     // ALGORITMA 
     CreateEmptyPrioqueue(&temp, MaxElPrioqueue(*deliList));
+    CreateTime(&temptime, 0, 0, 0);
 
     // looping setiap menit
     for (i = 1; i <= x; i++) {
@@ -383,7 +332,10 @@ void PassTimeDelivery(PrioQueue * deliList, PrioQueue * destination, int x) {
             Time(tempvar)--;
             if (Time(tempvar) == 0) {
                 Time(tempvar) = TIMEToMenit(EXP(Info(tempvar)));
+
+                DELIVERY(Info(tempvar)) = temptime;
                 Enqueue(destination, tempvar);
+                insertLastMakanan(notif, tempvar);
             } else {
                 Enqueue(&temp, tempvar);
             }

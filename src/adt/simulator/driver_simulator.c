@@ -2,6 +2,7 @@
 #include "simulator.c"
 #include "../makanan/makanan.c"
 
+/*
 int main () {
     Simulator s;
     State st;
@@ -111,3 +112,4 @@ int main () {
 
     return 0;
 }
+*/

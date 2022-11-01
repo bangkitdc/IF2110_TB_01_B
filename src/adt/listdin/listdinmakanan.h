@@ -4,9 +4,9 @@
 #define LISTDINM_H
 
 #include "../../include/boolean.h"
+#include "../infotype/infotype.h"
 #include "../makanan/makanan.h"
 #include "../time/time.h"
-#include "../queue/Prioqueue.h"
 
 /*  Kamus Umum */
 #define IDX_MIN 0
@@ -16,10 +16,9 @@
 
 /* Definisi elemen dan koleksi objek */
 typedef int IdxType;
-typedef infotype ElTypeMakanan; /* type elemen list berupa Makanan */
 typedef struct
 {
-   ElTypeMakanan *buffer;
+   infotype *buffer;
    int nEff_Makanan;
    int capacity_Makanan;
 } ListDinMakanan;
@@ -37,10 +36,10 @@ typedef struct
   Definisi elemen terakhir yang terdefinisi: l.buffer[i] dengan i=l.capacity */
 
 /* ********** SELEKTOR ********** */
-#define NEFF_Makanan(l) (l).nEff
+#define NEFF_Makanan(l) (l).nEff_Makanan
 #define BUFFER_Makanan(l) (l).buffer
 #define ELMT_LISTDINAMIS_Makanan(l, i) (l).buffer[i]
-#define CAPACITY_LISTDINAMIS_Makanan(l) (l).capacity
+#define CAPACITY_LISTDINAMIS_Makanan(l) (l).capacity_Makanan
 
 /* ********** KONSTRUKTOR ********** */
 /* Konstruktor : create list kosong  */
@@ -57,7 +56,12 @@ void dealocateListMakanan(ListDinMakanan *l);
 int listMakananLengthDinamis(ListDinMakanan l);
 /* Mengirimkan banyaknya elemen efektif list */
 /* Mengirimkan nol jika list l kosong */
-/* *** Daya tampung container *** */
+
+
+/* ********** TEST KOSONG ********** */
+/* *** Test list kosong *** */
+boolean isEmptyListMakanan(ListDinMakanan l);
+/* Mengirimkan true jika list l kosong, mengirimkan false jika tidak */
 
 /* *** Selektor INDEKS *** */
 IdxType getFirstIdxS(ListDinMakanan l);
@@ -74,19 +78,26 @@ void printListMakanan(ListDinMakanan l);
 /* F.S. Jika l tidak kosong maka akan ditulis kelayar hasil-hasil dari list tersebut */
 /* Jika list kosong : menulis - */
 /* Jika tidak kosong, contoh :
-    - Ayam berhasil digoreng 
+    - Ayam goreng berhasil digoreng 
     - Ayam goreng kadaluarsa
-    - Ayam tidak jadi digoreng
     - Ayam berhasil masuk inventory */
+
+void printListMakananUndo(ListDinMakanan l);
+/* I.S. l boleh kosong */
+/* F.S. Jika l tidak kosong maka akan ditulis kelayar hasil-hasil dari list tersebut */
+/* Jika list kosong : menulis - */
+/* Jika tidak kosong, contoh :
+    - Ayam goreng tidak jadi digoreng
+    - Ayam masuk kembali ke delivery list */
 
 /* ********** MENAMBAH DAN MENGHAPUS ELEMEN DI AKHIR ********** */
 /* *** Menambahkan elemen terakhir *** */
-void insertLastMakanan(ListDinMakanan *l, ElTypeMakanan val);
+void insertLastMakanan(ListDinMakanan *l, infotype val);
 /* Proses: Menambahkan val sebagai elemen terakhir list */
 /* I.S. List l boleh kosong, tetapi tidak penuh */
 /* F.S. val adalah elemen terakhir l yang baru */
 /* ********** MENGHAPUS ELEMEN ********** */
-void deleteLastMakanan(ListDinMakanan *l, ElTypeMakanan *val);
+void deleteLastMakanan(ListDinMakanan *l, infotype *val);
 /* Proses : Menghapus elemen terakhir list */
 /* I.S. List tidak kosong */
 /* F.S. val adalah nilai elemen terakhir l sebelum penghapusan, */
