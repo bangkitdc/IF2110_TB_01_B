@@ -16,6 +16,15 @@ void createMatrixKulkas(int nRows, int nCols, MatrixKulkas *m)
 {
     ROW_EFFK(*m) = nRows;
     COL_EFFK(*m) = nCols;
+
+    infotype dummy;
+    makeDummyInfoType(&dummy);
+
+    for(int i=0;i<ROW_EFFK(*m);i++){
+        for(int j=0;j<COL_EFFK(*m);j++){
+            ELMTK(*m, i, j) = dummy;
+        }
+    }
 }
 
 /* *** Selektor "Dunia MatrixKulkas" *** */
@@ -72,7 +81,7 @@ void displayMatrixKulkas(MatrixKulkas m)
             if(j>0){
                 printf(" ");
             }
-            printf("%d", ELMTK(m,i,j));
+            printf("%d", ID(Info(ELMTK(m,i,j))));
         }
         printf("\n");
     }
@@ -84,6 +93,30 @@ int countElmtKulkas(MatrixKulkas m)
 /* Mengirimkan banyaknya elemen m */
 {
     return (ROW_EFFK(m)*COL_EFFK(m));
+}
+
+boolean isFullKulkas(MatrixKulkas m) {
+/* Mengirim true jika kulkas penuh, false jika tidak */
+
+    int total = countElmtKulkas(m);
+    int ctr = 0;
+    infotype var;
+
+    makeDummyInfoType(&var);
+    for(int i=0;i<ROW_EFFK(m);i++){
+        for(int j=0;j<COL_EFFK(m);j++){
+            infotype temp = ELMTK(m, i, j);
+            if ((ID(Info(temp)) == ID(Info(var))) && (NAME(Info(temp)) == NAME(Info(var))) && (LOC(Info(temp)) == LOC(Info(var))) && (TIMEToMenit(EXP(Info(temp))) == TIMEToMenit(EXP(Info(var)))) && (TIMEToMenit(DELIVERY(Info(temp))) == TIMEToMenit(DELIVERY(Info(var))))) {
+                ctr++;
+            }
+        }
+    }
+
+    if (total == ctr) {
+        return false;
+    } else {
+        return true;
+    }
 }
 
 /* ********** KELOMPOK TEST TERHADAP MatrixKulkas ********** */

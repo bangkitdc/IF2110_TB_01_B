@@ -83,13 +83,73 @@ void setInventory(Simulator * s, PrioQueue inventory) {
     Inventory(*s) = inventory;
 }
 
-void pindahKeKulkas(Simulator * s, int id) {
-/* Memindahkan makanan di inventori ke kulkas */
+boolean cekSpotKosongKulkas(MatrixKulkas kulkas, int idxX, int idxY) {
+/* mengecek apakah di kulkas pada index i, j kosong */
 
     // KAMUS
+    infotype temp;
+    infotype var; // ceritanya ini dummy
 
     // ALGORITMA
-    
+    temp = ELMTK(kulkas, idxX, idxY);
+    makeDummyInfoType(&var);
+
+    if ((ID(Info(temp)) == ID(Info(var))) && (NAME(Info(temp)) == NAME(Info(var))) && (LOC(Info(temp)) == LOC(Info(var))) && (TIMEToMenit(EXP(Info(temp))) == TIMEToMenit(EXP(Info(var)))) && (TIMEToMenit(DELIVERY(Info(temp))) == TIMEToMenit(DELIVERY(Info(var))))) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+void pindahKeKulkas(Simulator * s, int idx, MatrixKulkas * kulkas) {
+/* Memindahkan makanan di inventori dengan index idx ke kulkas */
+
+    // KAMUS
+    infotype temp;
+    int i, j;
+    boolean moved;
+
+    // ALGORITMA
+    DeleteAt(&Inventory(*s), idx, &temp);
+
+    moved = false;
+    for (i = 0; i <= getLastIdxRowKulkas(*kulkas); i++) {
+        for (j = 0; j <= getLastIdxColKulkas(*kulkas); j++) {
+            if (cekSpotKosongKulkas(*kulkas, i, j)) {
+                moved = true;
+                break;
+            }
+        }
+
+        if (moved) {
+            break;
+        }
+    }
+
+    if (!moved) {
+        Enqueue(&Inventory(*s), temp);
+        printf("kulkas sudah penuh :(\n");
+    } else {
+        ELMTK(*kulkas, i, j) = temp;
+    }
+}
+
+void ambilDariKulkas(Simulator * s, MatrixKulkas * kulkas, int idxX, int idxY) {
+/* Mengambil makanan dari kulkas dan memasukkannya ke inventory */
+
+    // KAMUS
+    infotype dummy, temp;
+
+    // ALGORITMA
+    makeDummyInfoType(&dummy);
+    if (cekSpotKosongKulkas(*kulkas, idxX, idxY)) {
+        printf("Tidak ada makanan di slot itu.. :(\n");
+    } else {
+        temp = ELMTK(*kulkas, idxX, idxY);
+        ELMTK(*kulkas, idxX, idxY) = dummy;
+        Enqueue(&Inventory(*s), temp);
+    }
+
 }
 
 boolean adjacent(Simulator s, Matrix m, char x) {
