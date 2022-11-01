@@ -6,11 +6,11 @@
 #define prioqueue_H
 
 #include "../../include/boolean.h"
-#include "../time/time.c"
+#include "../time/time.h"
 #include "../makanan/makanan.h"
 #include "../machine/wordmachine.h"
-#include "../infotype/infotype.c"
-#include "../listdin/listdinmakanan.c"
+#include "../infotype/infotype.h"
+#include "../listdin/listdinmakanan.h"
 
 #define Nil -1
 /* Konstanta untuk mendefinisikan address tak terdefinisi */
