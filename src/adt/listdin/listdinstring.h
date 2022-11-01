@@ -47,7 +47,7 @@ void CreateListStringDin(ListDinString *l, int capacity);
 
 void dealocateListString(ListDinString *l);
 /* I.S. l terdefinisi; */
-/* F.S. (l) dikembalikan ke system, CAPACITY(l)=0; NEFF(l)=0 */
+/* F.S. (l) dikembalikan ke system, CAPACITY_LISTDINAMIS_String(l)=0; NEFF_String(l)=0 */
 
 /* ********** SELEKTOR (TAMBAHAN) ********** */
 /* *** Banyaknya elemen *** */
@@ -70,7 +70,7 @@ boolean isIdxValidListStringDinamis(ListDinString l, IdxType i);
 /* yaitu antara indeks yang terdefinisi utk container*/
 boolean isIdxEffListStringDinamis(ListDinString l, IdxType i);
 /* Mengirimkan true jika i adalah indeks yang terdefinisi utk list */
-/* yaitu antara 0..NEFF(l) */
+/* yaitu antara 0..NEFF_String(l) */
 
 /* ********** TEST KOSONG/PENUH ********** */
 /* *** Test list kosong *** */
@@ -110,18 +110,18 @@ void copyListString(ListDinString lIn, ListDinString *lOut);
 /* I.S. lIn terdefinisi tidak kosong, lOut sembarang */
 /* F.S. lOut berisi salinan dari lIn (identik, nEff dan capacity sama) */
 /* Proses : Menyalin isi lIn ke lOut */ 
-int countValString(ListDin l, ElTypeInt val);
+int countValString(ListDinString l, ElTypeString val);
 /* Menghasilkan berapa banyak kemunculan val di l */
 /* Jika l kosong menghasilkan 0 */
 
 /* ********** MENAMBAH DAN MENGHAPUS ELEMEN DI AKHIR ********** */
 /* *** Menambahkan elemen terakhir *** */
-void insertLastString(ListDinString *l, ElTypeInt val);
+void insertLastString(ListDinString *l, ElTypeString val);
 /* Proses: Menambahkan val sebagai elemen terakhir list */
 /* I.S. List l boleh kosong, tetapi tidak penuh */
 /* F.S. val adalah elemen terakhir l yang baru */
 /* ********** MENGHAPUS ELEMEN ********** */
-void deleteLastString(ListDinString *l, ElTypeInt *val);
+void deleteLastString(ListDinString *l, ElTypeString *val);
 /* Proses : Menghapus elemen terakhir list */
 /* I.S. List tidak kosong */
 /* F.S. val adalah nilai elemen terakhir l sebelum penghapusan, */
@@ -142,5 +142,5 @@ void shrinkListString(ListDinString *l, int num);
 void compressListString(ListDinString *l);
 /* Proses : Mengubah capacity sehingga nEff = capacity */
 /* I.S. List tidak kosong */
-/* F.S. Ukuran nEff = capacity */
+/* F.S. Ukuran nEff_String = capacity */
 #endif
