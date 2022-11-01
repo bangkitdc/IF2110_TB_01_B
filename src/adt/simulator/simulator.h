@@ -12,6 +12,9 @@
 #include "../point/point.h"
 #include "../matrix/matrix.h"
 #include "../matrix/matrixKulkas.h"
+#include "../liststatik/liststatikM.h"
+#include "../liststatik/liststatikT.h"
+
 
 typedef struct {
     char* username;
@@ -58,5 +61,11 @@ void ambilDariKulkas(Simulator * s, MatrixKulkas * kulkas, int idxX, int idxY);
 
 boolean adjacent(Simulator s, Matrix m, char x);
 /* Mengecek apakah simulator bersebelahan dengan tempat tertentu */
+
+void displayListMakananAksi(ListStatikM listMakanan, ListStatikM *hasil, char aksi);
+
+Tree getTreeFromMakanan(Makanan makanan, ListStatikT listResep);
+
+void mengolahMakanan(Makanan makananOlah, PrioQueue *inventory, ListStatikT listResep, ListStatikM listMakanan, char lokasiAksi);
 
 #endif
