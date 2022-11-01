@@ -84,7 +84,7 @@ void Undo(Stack * SMain, Stack * SSecondary, State * currentState);
 /* I.S. SMain tidak boleh kosong */
 /* F.S. Elemen TOP pada SMain telah di-pop, dan elemen tersebut dipush ke SSecondary */
 
-void Redo(Stack * SMain, Stack * SSecondary, State * currentState);
+void Redo(Stack * SMain, Stack *SSecondary, State *currentState);
 /* Meng-redo aksi pada SMain */
 /* I.S. SSecondary tidak boleh kosong */
 /* F.S. Elemen TOP pada SSecondary telah di-pop, dan elemen tersebut dipush ke SMain */
