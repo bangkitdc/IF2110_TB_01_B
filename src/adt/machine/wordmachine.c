@@ -190,13 +190,13 @@ Word concatWord(Word w1, Word w2) {
 }
 
 char *wordToString(Word w) {
+   char *buffer = (char *)malloc(w.Length * sizeof(char));
    int i;
-   char *str = malloc(w.Length * sizeof(char));
    for (i = 0; i < w.Length; i ++) {
-      str[i] = w.TabWord[i];
+      buffer[i] = (char)w.TabWord[i];
    }
-   str[w.Length] = '\0';
-   return str;
+   buffer[w.Length] = '\0';
+   return buffer;
 }
 
 char *ListWordToString(ListWord L) {
@@ -208,7 +208,7 @@ char *ListWordToString(ListWord L) {
       }
    }
    len += L.Length - 1;
-   char *res = malloc(len * sizeof(char));
+   char *res = (char *) malloc(len * sizeof(char));
    int counter = 0;
    for (i = 0; i < L.Length; i ++) {
       for (j = 0; j < L.TabWords[i].Length; j ++) {

@@ -1,6 +1,11 @@
 #include <stdio.h>
 #include "../utility/utils/utils.h"
 
+Word NORTH = {"NORTH", 5};
+Word SOUTH = {"SOUTH", 5};
+Word WEST = {"WEST", 4};
+Word EAST = {"EAST", 4};
+
 int main() {
     Game game;
     startMenu();
@@ -80,7 +85,7 @@ int main() {
                         if (L.Length != 1) {
                             sprintRed("Command HELP tidak memiliki argumen. Coba Lagi!\n");
                         } else {
-                            /* code */
+                            help();
                         }
                         break;
                     case 7: /* INVENTORY */
@@ -98,10 +103,28 @@ int main() {
                         }
                         break;
                     case 9: /* MOVE */
-                        if (L.Length != 3) {
-                            sprintRed("Command WAIT memiliki 2 argumen, jam dan menit. Coba Lagi!\n");
+                        if (L.Length != 2) {
+                            sprintRed("Command MOVE memiliki 1 argumen, arah. Coba Lagi!\n");
                         } else {
-                            /* code */
+                            boolean stuck, flag = true;
+                            if (isWordEq(NORTH, L.TabWords[1])) {
+                                MNorth(&game.map, &stuck);
+                            } else if (isWordEq(SOUTH, L.TabWords[1])) {
+                                MSouth(&game.map, &stuck);
+                            } else if (isWordEq(WEST, L.TabWords[1])) {
+                                MWest(&game.map, &stuck);
+                            } else if (isWordEq(EAST, L.TabWords[1])) {
+                                MEast(&game.map, &stuck);
+                            } else {
+                                sprintRed("Argumen tidak tersedia. Pilih NORTH/ SOUTH/ WEST/ EAST !\n");
+                                break;
+                            }
+                            if (stuck) {
+                                sprintRed("Menabrak, Silahkan liat peta!\n");
+                            } else {
+                                DisplayMap(game.map);
+                            }
+                            
                         }
                         break;
                     case 10: /* CATALOG */
@@ -115,7 +138,14 @@ int main() {
                         if (L.Length != 1) {
                             sprintRed("Command COOKBOK tidak memiliki argumen. Coba Lagi!\n");
                         } else {
-                            printf("%d\n", game.listResep.elEff);
+                            /* code */
+                        }
+                        break;
+                    case 12: /* WAIT X Y */
+                        if (L.Length != 3) {
+                            sprintRed("Command WAIT memiliki 2 argumen. Coba Lagi!\n");
+                        } else {
+                            /* code */
                         }
                         break;
                     default:
