@@ -36,4 +36,10 @@ void CreateMap(Map *MGame, int X, int Y);
 /* DISPLAY MAP */
 void DisplayMap(Map MGame);
 
+/* Move Simulator */
+void MNorth(Map *MGame, boolean *stuck);
+void MEast(Map *MGame, boolean *stuck);
+void MSouth(Map *MGame, boolean *stuck);
+void MWest(Map *MGame, boolean *stuck);
+
 #endif
