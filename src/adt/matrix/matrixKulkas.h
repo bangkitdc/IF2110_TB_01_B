@@ -66,6 +66,9 @@ void displayMatrixKulkas(MatrixKulkas m);
 int countElmtKulkas(MatrixKulkas m);
 /* Mengirimkan banyaknya elemen m */
 
+boolean isFullKulkas(MatrixKulkas m);
+/* Mengirim true jika kulkas penuh, false jika tidak */
+
 /* ********** KELOMPOK TEST TERHADAP MatrixKulkas ********** */
 boolean isSquareKulkas(MatrixKulkas m);
 /* Mengirimkan true jika m adalah matriks dg ukuran baris dan kolom sama */

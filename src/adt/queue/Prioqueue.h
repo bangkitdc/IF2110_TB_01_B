@@ -62,6 +62,11 @@ void MakeinfoType (infotype * x, Makanan m);
 /* I.S. sembarang */
 /* F.S. terbuat infotype x yang berisikan data makanan m */
 
+void makeDummyInfoType(infotype * dummy);
+/* membuat infotype dummy */
+/* I.S. belum terbuat infotype */
+/* F.S. infotype dummy telah terbuat */
+
 /* *** Destruktor *** */
 void DeAlokasi(PrioQueue * Q);
 /* Proses: Mengembalikan memori Q */

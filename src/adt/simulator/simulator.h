@@ -5,12 +5,13 @@
 #define ADTSIMULATOR_H
 
 #include <stdlib.h>
-#include "../queue/prioqueue.h"
-#include "../stack/stack.h"
-#include "../time/time.h"
+#include "../queue/prioqueue.c"
+#include "../stack/stack.c"
+#include "../time/time.c"
 #include "../../include/boolean.h"
-#include "../point/point.h"
-#include "../matrix/matrix.h"
+#include "../point/point.c"
+#include "../matrix/matrix.c"
+#include "../matrix/matrixKulkas.c"
 
 typedef struct {
     char* username;
@@ -46,8 +47,14 @@ void loadState(Simulator * s, State st, TIME * currentTime, char * currentUserna
 void setInventory(Simulator * s, PrioQueue inventory);
 /* mengassign inventory di awal */
 
-void pindahKeKulkas(Simulator* s, int id);
-/* Memindahkan makanan di inventori ke kulkas */
+boolean cekSpotKosongKulkas(MatrixKulkas kulkas, int idxX, int idxY);
+/* mengecek apakah di kulkas pada index i, j kosong */
+
+void pindahKeKulkas(Simulator * s, int idx, MatrixKulkas * kulkas);
+/* Memindahkan makanan di inventori dengan index idx ke kulkas */
+
+void ambilDariKulkas(Simulator * s, MatrixKulkas * kulkas, int idxX, int idxY);
+/* Mengambil makanan dari kulkas dan memasukkannya ke inventory */
 
 boolean adjacent(Simulator s, Matrix m, char x);
 /* Mengecek apakah simulator bersebelahan dengan tempat tertentu */
