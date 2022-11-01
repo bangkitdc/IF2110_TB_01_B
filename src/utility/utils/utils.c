@@ -258,8 +258,7 @@ void inputConfigFile(Game *g, Word PATH, int type) {
                 CMap(MapGame) = CM;
                 BMap(MapGame) = BM;
                 XMap(MapGame) = XM;
-                (*g).map = MapGame;
-                sprintBlue("HALO\n");
+                // (*g).map = MapGame;
                 break;
             default:
                 break;

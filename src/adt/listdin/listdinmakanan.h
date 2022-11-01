@@ -35,10 +35,10 @@ typedef struct
   Definisi elemen terakhir yang terdefinisi: l.buffer[i] dengan i=l.capacity */
 
 /* ********** SELEKTOR ********** */
-#define NEFF_Makanan(l) (l).nEff
+#define NEFF_Makanan(l) (l).nEff_Makanan
 #define BUFFER_Makanan(l) (l).buffer
 #define ELMT_LISTDINAMIS_Makanan(l, i) (l).buffer[i]
-#define CAPACITY_LISTDINAMIS_Makanan(l) (l).capacity
+#define CAPACITY_LISTDINAMIS_Makanan(l) (l).capacity_Makanan
 
 /* ********** KONSTRUKTOR ********** */
 /* Konstruktor : create list kosong  */
