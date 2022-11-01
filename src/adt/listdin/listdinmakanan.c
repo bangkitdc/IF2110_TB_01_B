@@ -1,4 +1,4 @@
-/* File: */
+/* File: listdinmakanan.c */
 
 #include <stdio.h>
 #include "listdinmakanan.h"
@@ -11,7 +11,7 @@ void CreateListMakananDin(ListDinMakanan *l, int capacity) {
 /* F.S. Terbentuk list dinamis l kosong dengan kapasitas capacity */
     CAPACITY_LISTDINAMIS_Makanan(*l) = capacity;
     NEFF_Makanan(*l) = 0;
-    BUFFER_Makanan(*l) = malloc (capacity*sizeof(ElTypeMakanan));
+    BUFFER_Makanan(*l) = malloc (capacity*sizeof(infotype));
 }
 
 void dealocateListMakanan(ListDinMakanan *l) {
@@ -30,7 +30,13 @@ int listMakananLengthDinamis(ListDinMakanan l) {
     return NEFF_Makanan(l);
 }
 
-/* *** Daya tampung container *** */
+/* ********** TEST KOSONG ********** */
+/* *** Test list kosong *** */
+boolean isEmptyListMakanan(ListDinMakanan l) {
+/* Mengirimkan true jika list l kosong, mengirimkan false jika tidak */
+
+    return (NEFF_Makanan(l) == 0);
+}
 
 /* *** Selektor INDEKS *** */
 IdxType getFirstIdxS(ListDinMakanan l) {
@@ -49,21 +55,83 @@ IdxType getLastIdxS(ListDinMakanan l) {
 /* ********** BACA dan TULIS dengan INPUT/OUTPUT device ********** */
 /* *** Mendefinisikan isi list dari pembacaan *** */
 void printListMakanan(ListDinMakanan l) {
-/* Proses : Menuliskan isi list dengan traversal, list ditulis di antara kurung siku;
-   antara dua elemen dipisahkan dengan separator "koma", tanpa tambahan karakter di depan,
-   di tengah, atau di belakang, termasuk spasi dan enter */
 /* I.S. l boleh kosong */
-/* F.S. Jika l tidak kosong: [e1,e2,...,en] */
-/* Contoh : jika ada tiga elemen bernilai 1, 20, 30 akan dicetak: [1,20,30] */
-/* Jika list kosong : menulis [] */
+/* F.S. Jika l tidak kosong maka akan ditulis kelayar hasil-hasil dari list tersebut */
+/* Jika list kosong : menulis - */
+/* Jika tidak kosong, contoh :
+    - Ayam berhasil digoreng 
+    - Ayam goreng kadaluarsa
+    - Ayam berhasil masuk inventory */
 
+    // KAMUS
+    int i;
+
+    // ALGORITMA
+    printf("Notifikasi: ");
+    if (isEmptyListMakanan(l)) {
+        printf("-\n");
+    } else {
+        printf("\n");
+        for (i = getFirstIdxS(l); i <= getLastIdxS(l); i++) {
+            if (Time(ELMT_LISTDINAMIS_Makanan(l, i)) == 0) {
+                printf("- %s telah kadaluarsa :(\n", NAME(Info(ELMT_LISTDINAMIS_Makanan(l, i))));
+            } else {
+                if (LOC(Info(ELMT_LISTDINAMIS_Makanan(l, i))) == 'F') {
+                    printf("- %s telah digoreng\n", NAME(Info(ELMT_LISTDINAMIS_Makanan(l, i))));
+                } else if (LOC(Info(ELMT_LISTDINAMIS_Makanan(l, i))) == 'T') {
+                    printf("- %s telah masuk ke inventory\n", NAME(Info(ELMT_LISTDINAMIS_Makanan(l, i))));
+                } else if (LOC(Info(ELMT_LISTDINAMIS_Makanan(l, i))) == 'C') {
+                    printf("- %s telah terpotong\n", NAME(Info(ELMT_LISTDINAMIS_Makanan(l, i))));
+                } else if (LOC(Info(ELMT_LISTDINAMIS_Makanan(l, i))) == 'B') {
+                    printf("- %s telah direbus\n", NAME(Info(ELMT_LISTDINAMIS_Makanan(l, i))));
+                } else if (LOC(Info(ELMT_LISTDINAMIS_Makanan(l, i))) == 'M') {
+                    printf("- %s telah dicampur\n", NAME(Info(ELMT_LISTDINAMIS_Makanan(l, i))));
+                }
+            }
+        }
+    }
 }
 
+void printListMakananUndo(ListDinMakanan l) {
+/* I.S. l boleh kosong */
+/* F.S. Jika l tidak kosong maka akan ditulis kelayar hasil-hasil dari list tersebut */
+/* Jika list kosong : menulis - */
+/* Jika tidak kosong, contoh :
+    - Ayam goreng tidak jadi digoreng
+    - Ayam masuk kembali ke delivery list */
 
+    // KAMUS
+    int i;
+
+    // ALGORITMA
+    printf("Notifikasi: ");
+    if (isEmptyListMakanan(l)) {
+        printf("-\n");
+    } else {
+        printf("\n");
+        for (i = getFirstIdxS(l); i <= getLastIdxS(l); i++) {
+            if (Time(ELMT_LISTDINAMIS_Makanan(l, i)) == 0) {
+                printf("- %s dikembalikan ke inventory\n", NAME(Info(ELMT_LISTDINAMIS_Makanan(l, i))));
+            } else {
+                if (LOC(Info(ELMT_LISTDINAMIS_Makanan(l, i))) == 'F') {
+                    printf("- %s tidak jadi digoreng\n", NAME(Info(ELMT_LISTDINAMIS_Makanan(l, i))));
+                } else if (LOC(Info(ELMT_LISTDINAMIS_Makanan(l, i))) == 'T') {
+                    printf("- %s masuk kembali ke delivery list\n", NAME(Info(ELMT_LISTDINAMIS_Makanan(l, i))));
+                } else if (LOC(Info(ELMT_LISTDINAMIS_Makanan(l, i))) == 'C') {
+                    printf("- %s tidak jadi dipotong\n", NAME(Info(ELMT_LISTDINAMIS_Makanan(l, i))));
+                } else if (LOC(Info(ELMT_LISTDINAMIS_Makanan(l, i))) == 'B') {
+                    printf("- %s tidak jadi direbus\n", NAME(Info(ELMT_LISTDINAMIS_Makanan(l, i))));
+                } else if (LOC(Info(ELMT_LISTDINAMIS_Makanan(l, i))) == 'M') {
+                    printf("- %s tidak jadi dicampur\n", NAME(Info(ELMT_LISTDINAMIS_Makanan(l, i))));
+                }
+            }
+        }
+    }
+}
 
 /* ********** MENAMBAH DAN MENGHAPUS ELEMEN DI AKHIR ********** */
 /* *** Menambahkan elemen terakhir *** */
-void insertLastMakanan(ListDinMakanan *l, ElTypeMakanan val) {
+void insertLastMakanan(ListDinMakanan *l, infotype val) {
 /* Proses: Menambahkan val sebagai elemen terakhir list */
 /* I.S. List l boleh kosong, tetapi tidak penuh */
 /* F.S. val adalah elemen terakhir l yang baru */
@@ -72,7 +140,7 @@ void insertLastMakanan(ListDinMakanan *l, ElTypeMakanan val) {
 }
 
 /* ********** MENGHAPUS ELEMEN ********** */
-void deleteLastMakanan(ListDinMakanan *l, ElTypeMakanan *val) {
+void deleteLastMakanan(ListDinMakanan *l, infotype *val) {
 /* Proses : Menghapus elemen terakhir list */
 /* I.S. List tidak kosong */
 /* F.S. val adalah nilai elemen terakhir l sebelum penghapusan, */
@@ -88,5 +156,5 @@ void expandListMakanan(ListDinMakanan *l, int num) {
 /* I.S. List sudah terdefinisi */
 /* F.S. Ukuran list bertambah sebanyak num */
     CAPACITY_LISTDINAMIS_Makanan(*l) += num;
-    BUFFER_Makanan(*l) = realloc (BUFFER_Makanan(*l), CAPACITY_LISTDINAMIS_Makanan(*l) * sizeof(ElTypeMakanan));
+    BUFFER_Makanan(*l) = realloc (BUFFER_Makanan(*l), CAPACITY_LISTDINAMIS_Makanan(*l) * sizeof(infotype));
 }

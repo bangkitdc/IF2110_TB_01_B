@@ -1,6 +1,6 @@
 #include <stdio.h>
-// #include "prioqueue.c"
-// #include "../makanan/makanan.c"
+#include "prioqueue.c"
+#include "../makanan/makanan.c"
 /*
 int main() {
     int max = 1; // walaupun max = 0, jika di enqueue nanti maxel = 2*0 + 1
@@ -8,10 +8,12 @@ int main() {
     infotype temp, temp2, tempdel;
     Makanan tempmakanan, tempmakanan2;
     TIME temptime, temptime2;
+    ListDinMakanan notif;
 
     CreateEmptyPrioqueue(&Q, max);
     CreateEmptyPrioqueue(&Qcopy, max);
     CreateEmptyPrioqueue(&currentinventory, max);
+    CreateListMakananDin(&notif, 100);
 
     CreateTime(&temptime, 0, 0, 2);
     createMakanan(&tempmakanan, 12, "ayam", temptime, 'R', temptime);
@@ -54,10 +56,22 @@ int main() {
         printf("\n");
 
         printf("kalo misal yang dicopy di wait 1 menit begini bang\n");
-        PasstimeQueue(&Qcopy, 1); // ceritanya bakal dipake di setiap operasi, bakal mendahului segala command, dan menampilkan barang-barang yang kedaluwarsa
+        PasstimeQueue(&Qcopy, 1, &notif); // ceritanya bakal dipake di setiap operasi, bakal mendahului segala command, dan menampilkan barang-barang yang kedaluwarsa
         PrintPrioQueue(Qcopy);
+        printListMakanan(notif);
         printf("\n");
 
+        printf("kalo misal yang dicopy di wait 1 menit lagi begini bang\n");
+        PasstimeQueue(&Qcopy, 1, &notif); // ceritanya bakal dipake di setiap operasi, bakal mendahului segala command, dan menampilkan barang-barang yang kedaluwarsa
+        PrintPrioQueue(Qcopy);
+        printListMakanan(notif);
+        printf("\n");
+
+        printf("kalo misal notif itu mau di undo\n");
+        printListMakananUndo(notif);
+        printf("\n");
+
+        
         printf("ini ceritanya kalo misal Qcopy itu delivery list sama currentinventory itu inventory di simulator\n");
         printf("ceritanya juga di skip 1 menit\n");
         PassTimeDelivery(&Qcopy, &currentinventory, 1);

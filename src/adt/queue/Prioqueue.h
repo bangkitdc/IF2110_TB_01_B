@@ -8,15 +8,13 @@
 #include "../../include/boolean.h"
 #include "../time/time.h"
 #include "../makanan/makanan.h"
+#include "../machine/wordmachine.h"
+#include "../infotype/infotype.h"
+#include "../listdin/listdinmakanan.h"
 
 #define Nil -1
 /* Konstanta untuk mendefinisikan address tak terdefinisi */
 
-/* Definisi elemen dan address */
-typedef struct {
-    long time;              /* berisi waktu dalam menit */
-    Makanan info;           /* makanan */
-} infotype;
 typedef int address;        /* indeks tabel */
 /* Contoh deklarasi variabel bertype PrioQueue : */
 /* Versi I : tabel dinamik, Head dan Tail eksplisit, ukuran disimpan */
@@ -31,8 +29,6 @@ typedef struct {
 
 /* ********* AKSES (Selektor) ********* */
 /* Jika e adalah infotype dan Q adalah PrioQueue, maka akses elemen : */
-#define Time(e)             (e).time
-#define Info(e)             (e).info
 #define Head(Q)             (Q).HEAD
 #define Tail(Q)             (Q).TAIL
 #define InfoHead(Q)         (Q).T[(Q).HEAD]
@@ -56,16 +52,6 @@ void CreateEmptyPrioqueue (PrioQueue * Q, int Max);
 /* Jika alokasi berhasil, Tabel memori dialokasi berukuran Max+1 */
 /* atau : jika alokasi gagal, Q kosong dg MaxElPrioqueue=0 */
 /* Proses : Melakukan alokasi, membuat sebuah Q kosong */
-
-void MakeinfoType (infotype * x, Makanan m);
-/* Membuat makanan m agar bisa dimasukkan kedalam priqueue */
-/* I.S. sembarang */
-/* F.S. terbuat infotype x yang berisikan data makanan m */
-
-void makeDummyInfoType(infotype * dummy);
-/* membuat infotype dummy */
-/* I.S. belum terbuat infotype */
-/* F.S. infotype dummy telah terbuat */
 
 /* *** Destruktor *** */
 void DeAlokasi(PrioQueue * Q);
@@ -116,12 +102,12 @@ void PrintPrioQueue (PrioQueue Q);
 */
 
 /* Operasi untuk mengurus inventory dan delivery list */
-void PasstimeQueue(PrioQueue * Q, int x);
+void PasstimeQueue(PrioQueue * Q, int x, ListDinMakanan * notif);
 /* Mengurangi waktu tiap elemen di queue */
 /* I.S. Q mungkin kosong */
 /* F.S. setiap elemen di Q waktunya berkurang sesuai dengan jumlah waktu yang telah berlalu, jika waktunya menjadi 0 maka elemen tersebut akan dihapus dari queue */
 
-void PassTimeDelivery(PrioQueue * deliList, PrioQueue * destination, int x);
+void PassTimeDelivery(PrioQueue * deliList, PrioQueue * destination, int x, ListDinMakanan * notif);
 /* Mengurangi waktu tiap elemen di queue */
 /* I.S. Q mungkin kosong */
 /* F.S. setiap elemen di Q waktunya berkurang sesuai dengan jumlah waktu yang telah berlalu, jika waktunya menjadi 0 maka elemen tersebut akan dihapus dari delivery list dan dipindahkan ke inventory */

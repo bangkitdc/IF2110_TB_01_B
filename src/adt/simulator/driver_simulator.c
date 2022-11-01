@@ -52,7 +52,6 @@ int main () {
     printf("lokasi : ");
     WritePoint(Lokasi(s));
     printf("\n\n");
-    */
     
 //     MatrixKulkas kulkas;
 //     createMatrixKulkas(2, 2, &kulkas);
