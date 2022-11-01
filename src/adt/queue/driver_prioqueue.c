@@ -77,6 +77,22 @@ int main() {
         infotype tes1;
         DeleteAt(&currentinventory, 1, &tes1);
         PrintPrioQueue(currentinventory);
+        printf("\n");
+
+        printf("ini ceritanya buat dummy\n");
+        infotype dummy;
+        makeDummyInfoType(&dummy);
+        printf("keterangan dummy:\n");
+        printf("ID : %d\n", ID(Info(dummy)));
+        printf("nama : %s\n", NAME(Info(dummy)));
+        printf("EXP : ");
+        TulisTIME(EXP(Info(dummy)));
+        printf("\n");
+        printf("Delivery : ");
+        TulisTIME(DELIVERY(Info(dummy)));
+        printf("\n");
+        printf("location : %c\n", LOC(Info(dummy)));
+
     }
 
     return 0;

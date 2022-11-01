@@ -12,7 +12,7 @@
 /* Indeks tak terdefinisi*/
 
 /* Definisi elemen dan koleksi objek */
-typedef int ElTypeInt; /* type elemen list */
+typedef int ElTypeInt; /* type elemen list berupa integer */
 typedef int IdxType;
 typedef struct
 {
@@ -20,6 +20,7 @@ typedef struct
     int nEff;       /* >=0, banyaknya elemen efektif */
     int capacity;   /* ukuran elemen */
 } ListDin;
+
 /* Indeks yang digunakan [0..capacity-1] */
 /* Jika l adalah : ListDin, cara deklarasi dan akses: */
 /* Deklarasi : l : ListDin */

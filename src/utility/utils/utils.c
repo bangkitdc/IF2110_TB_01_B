@@ -212,50 +212,51 @@ void inputConfigFile(Game *g, Word PATH, int type) {
                 }
                 break;
             case 3: /* Config Peta */;
-                Map MapGame; 
-                CreateMap(&((&g->map)->Peta), 10, 10);
-                CreateMap(&MapGame, wordToInt(LFile.TabWords[0]), wordToInt(LFile.TabWords[1]));
+                //Map MapGame;
+                CreateMap((&g->map), wordToInt(LFile.TabWords[0]), wordToInt(LFile.TabWords[1]));
                 //ROW_EFF(PETA(MapGame)) = wordToInt(LFile.TabWords[0]);
                 //COL_EFF(PETA(MapGame)) = wordToInt(LFile.TabWords[1]);
                 POINT M;
-                ListStatikP TM, MM, FM, CM, BM, XM;
-                CreatePoint(&M, i, j);
-                createLSPoint (&TM);
-                createLSPoint (&MM);
-                createLSPoint (&FM);
-                createLSPoint (&CM);
-                createLSPoint (&BM);
-                createLSPoint (&XM);
-                for (int i=0; i< ROW_EFF(PETA(MapGame)); i++) {
+                //ListStatikP TM, MM, FM, CM, BM, XM;
+                //CreatePoint(&M, i, j);
+                //createLSPoint (&TM);
+                //createLSPoint (&MM);
+                //createLSPoint (&FM);
+                //createLSPoint (&CM);
+                //createLSPoint (&BM);
+                //createLSPoint (&XM);
+                for (int i=0; i< &(&(&g->map)->Peta)->rowEff; i++) {
                     ADVNewline();
                     LFile = readLineFile();
-                    for (int j=0; j< COL_EFF(PETA(MapGame)); j++) {
-                        ELMT_MATRIX(PETA(MapGame),i,j) = LFile.TabWords[0].TabWord[j];
-                        if (ELMT_MATRIX(PETA(MapGame),i,j) == 'S') {
-                            SMap(MapGame) = M;
-                        } else if (ELMT_MATRIX(PETA(MapGame),i,j) == 'T') {
-                            insertPoint(&TM,M);
-                        } else if (ELMT_MATRIX(PETA(MapGame),i,j) == 'M') {
-                            insertPoint(&MM,M);
-                        } else if (ELMT_MATRIX(PETA(MapGame),i,j) == 'F') {
-                            insertPoint(&FM,M);
-                        } else if (ELMT_MATRIX(PETA(MapGame),i,j) == 'C') {
-                            insertPoint(&CM,M);
-                        } else if (ELMT_MATRIX(PETA(MapGame),i,j) == 'B') {
-                            insertPoint(&BM,M);
-                        } else if (ELMT_MATRIX(PETA(MapGame),i,j) == 'X') {
-                            insertPoint(&XM,M);
+                    for (int j=0; j< &(&(&g->map)->Peta)->colEff; j++) {
+                        CreatePoint(&M, i, j);
+                        (&(&g->map)->Peta)->mem[(i)][(j)]  = LFile.TabWords[0].TabWord[j];
+                        //ELMT_MATRIX(PETA(MapGame),i,j)  = LFile.TabWords[0].TabWord[j];
+                        if ((&(&g->map)->Peta)->mem[(i)][(j)] == 'S') {
+                            (&g->map)->S_Map = M;
+                        } else if ((&(&g->map)->Peta)->mem[(i)][(j)] == 'T') {
+                            insertPoint(&(&g->map)->T_Map,M);
+                        } else if ((&(&g->map)->Peta)->mem[(i)][(j)] == 'M') {
+                            insertPoint(&(&g->map)->M_Map,M);
+                        } else if ((&(&g->map)->Peta)->mem[(i)][(j)] == 'F') {
+                            insertPoint(&(&g->map)->F_Map,M);
+                        } else if ((&(&g->map)->Peta)->mem[(i)][(j)] == 'C') {
+                            insertPoint(&(&g->map)->C_Map,M);
+                        } else if ((&(&g->map)->Peta)->mem[(i)][(j)] == 'B') {
+                            insertPoint(&(&g->map)->B_Map,M);
+                        } else if ((&(&g->map)->Peta)->mem[(i)][(j)] == 'X') {
+                            insertPoint(&(&g->map)->X_Map,M);
                         }
                     }
                 }
-                TMap(MapGame) = TM;
-                MMap(MapGame) = MM;
-                FMap(MapGame) = FM;
-                CMap(MapGame) = CM;
-                BMap(MapGame) = BM;
-                XMap(MapGame) = XM;
+                //TMap(MapGame) = TM;
+                //MMap(MapGame) = MM;
+                //FMap(MapGame) = FM;
+                //CMap(MapGame) = CM;
+                //BMap(MapGame) = BM;
+                //XMap(MapGame) = XM;
                 // (&g->map) = {MapGame};
-                sprintBlue("HALO\n");
+                //sprintBlue("HALO\n");
                 break;
             default:
                 break;
