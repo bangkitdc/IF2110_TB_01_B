@@ -29,7 +29,7 @@ void CreateMap(Map *MGame, int X, int Y){
 }
 
 /* DISPLAY MAP */
-void DisplayMap(Map MGame, Simulator sim){
+void DisplayMap(Map MGame, POINT sim){
     int row = (MGame).Peta.rowEff;
     int col = (MGame).Peta.colEff;
     for (int i=0; i<row+2; i++) {
@@ -37,7 +37,7 @@ void DisplayMap(Map MGame, Simulator sim){
             if (i == 0 || i == row+1 || j == 0 || j == col+1) {
                 printf("*");
             } else {
-                if (i == Absis(Lokasi(sim)) && j == Ordinat(Lokasi(sim))) {
+                if (i == Absis(sim) && j == Ordinat(sim)) {
                     printf(" ");
                 } else {
                     if (((MGame).Peta.mem[i-1][j-1]) == '#') {

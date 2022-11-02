@@ -35,6 +35,6 @@ typedef struct
 void CreateMap(Map *MGame, int X, int Y);
 
 /* DISPLAY MAP */
-void DisplayMap(Map MGame);
+void DisplayMap(Map MGame, POINT sim);
 
 #endif
