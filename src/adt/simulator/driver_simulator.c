@@ -1,59 +1,52 @@
 #include <stdio.h>
 #include "simulator.h"
-
+/*
 int main () {
-    Simulator s;
+    Simulator s, s1;
+    char username[20] = "username123";
+    POINT point;
+    PrioQueue Inventory;
     State st;
-    char *username;
-    POINT posisi;
-    PrioQueue Q, Q2;
-    infotype temp, tempdel;
-    Makanan tempmakanan;
-    TIME temptime;
-    ListDinMakanan notif;
+    TIME currentTime;
+    ListDinMakanan currentNotif;
     MatrixKulkas kulkas;
+
+    CreatePoint(&point, 1, 1);
+    CreateTime(&currentTime, 0, 0, 1);
+    CreateListMakananDin(&currentNotif, 10);
+    createMatrixKulkas(10, 10, &kulkas);
+    CreateEmptyPrioqueue(&Inventory, 10);
+    createSimulator(&s, username, point, Inventory);
     
-    CreateListMakananDin(&notif, 20);
-    username = "username123";
-    CreatePoint(&posisi, 1, 1);
-    CreateEmptyPrioqueue(&Q, 10);
-    CreateEmptyPrioqueue(&Q2, 10);
 
-    createSimulator(&s, username, posisi, Q);
+    printf("Data simulator:\n");
+    printf("Username : %s\n", Username(s));
+    printf("Lokasi: ");
+    WritePoint(Lokasi(s));
+    printf("\n");
+    PrintPrioQueue(Inventory(s));
+    printf("\n");
+    printf("\n");
+
+    simulatorToState(s, currentTime, currentNotif, kulkas, &st);
+    printf("Data dari state:\n");
+    printf("Lokasi : ");
+    WritePoint(InfoKoordinat(st));
+    printf("\n");
+    PrintPrioQueue(InfoInventory(st));
+    printf("\n");
     
-    // kalau di enqueue
-    CreateTime(&temptime, 0, 0, 2);
-    createMakanan(&tempmakanan, 12, "ayam", temptime, 'R', temptime);
-    MakeinfoType(&temp, tempmakanan);
+    printf("Load data dari state:\n");
+    loadState(&s1, &st, username, &currentNotif, &kulkas, &currentTime);
 
-    Enqueue(&Inventory(s), temp);
-    if (IsEmptyPrioqueue(Inventory(s))) {
-        printf("kosong bwang\n");
-    } else {
-        printf("ada isinya bwang\n");
-    }
-
-    printf("username : %s\n", Username(s));
-    printf("lokasi : ");
-    WritePoint(Lokasi(s));
-
-    printf("\n\n");
-
-    printf("ceritanya ini buat ngeload state\n");
-    st = simulatorToState(s, temptime, notif, kulkas);
-    loadState(&s, st, &temptime, username, &notif, &kulkas);
-
-    if (IsEmptyPrioqueue(Inventory(s))) {
-        printf("kosong bwang\n");
-    } else {
-        printf("ada isinya bwang\n");
-    }
-
-    printf("username : %s\n", Username(s));
-    printf("lokasi : ");
-    WritePoint(Lokasi(s));
-    printf("\n\n");
+    printf("Username : %s\n", Username(s1));
+    printf("Lokasi: ");
+    WritePoint(Lokasi(s1));
+    printf("\n");
+    PrintPrioQueue(Inventory(s1));
+    printf("\n");
 
 
     return 0;
 }
+*/

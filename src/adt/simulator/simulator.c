@@ -46,32 +46,29 @@ void gerakUser(Simulator * s, Map * peta, boolean * stuck, char x) {
     }
 }
 
-State simulatorToState(Simulator s, TIME currentTime, ListDinMakanan currentNotif, MatrixKulkas currentKulkas) {
+void simulatorToState(Simulator s, TIME currentTime, ListDinMakanan currentNotif, MatrixKulkas currentKulkas, State* temp) {
 /* mengkonversi simulator s ke State*/
 /* digunakan saat mau menyimpan State ke stack */
 
-    // KAMUS
-    State temp;
-
     // ALGORITMA
-    InfoWaktu(temp) = currentTime;
-    InfoKoordinat(temp) = Lokasi(s);
-    InfoInventory(temp) = Inventory(s);
-    InfoNotif(temp) = currentNotif;
-    InfoKulkas(temp) = currentKulkas;
-
-    return temp;
+    InfoWaktu(*temp) = currentTime;
+    InfoKoordinat(*temp) = Lokasi(s);
+    InfoInventory(*temp) = Inventory(s);
+    InfoNotif(*temp) = currentNotif;
+    InfoKulkas(*temp) = currentKulkas;
 }
 
-void loadState(Simulator * s, State st, TIME * currentTime, char * currentUsername, ListDinMakanan * currentNotif, MatrixKulkas * currentKulkas) {
+void loadState(Simulator * s, State * st, char * currentUsername, ListDinMakanan * currentNotif, MatrixKulkas * currentKulkas, TIME * currentTime) {
 /* mengkonversi State dari stack ke simulator dan menyimpannya di simulator */
 /* digunakan saat undo dan redo */
 
+    // KAMUS
+
     // ALGORITMA
-    createSimulator(s, currentUsername, InfoKoordinat(st), InfoInventory(st));
-    *currentTime = InfoWaktu(st);
-    *currentNotif = InfoNotif(st);
-    *currentKulkas = InfoKulkas(st);
+    createSimulator(s, currentUsername, InfoKoordinat(*st), InfoInventory(*st));
+    *currentTime = InfoWaktu(*st);
+    *currentNotif = InfoNotif(*st);
+    *currentKulkas = InfoKulkas(*st);
 }
 
 void setInventory(Simulator * s, PrioQueue inventory) {
@@ -219,11 +216,64 @@ void ambilDariKulkas(Simulator * s, MatrixKulkas * kulkas, int idxX, int idxY, L
 
 }
 
-boolean adjacent(Simulator s, Matrix m, char x) {
+boolean adjacent(Simulator s, Map peta, char x) {
 /* Mengecek apakah simulator bersebelahan dengan tempat tertentu */
 
-    // ALGORITMA
+    // KAMUS
+    int i, length;
+    boolean bersebelahan;
+    POINT lokasiSimulator;
 
+    // ALGORITMA
+    bersebelahan = false;
+    lokasiSimulator = Lokasi(s);
+
+    if (x == 'T') {
+        length = listLengthStatikP(TMap(peta)) - 1;
+        for (i = 0; i <= length; i++) {
+            if (SideBy(lokasiSimulator, ELMT_LISTSTATIKP(TMap(peta), i))) {
+                bersebelahan = true;
+                break;
+            }
+        }
+        return bersebelahan;
+    } else if (x == 'F') {
+        length = listLengthStatikP(FMap(peta)) - 1;
+        for (i = 0; i <= length; i++) {
+            if (SideBy(lokasiSimulator, ELMT_LISTSTATIKP(FMap(peta), i))) {
+                bersebelahan = true;
+                break;
+            }
+        }
+        return bersebelahan;
+    } else if (x == 'M') {
+        length = listLengthStatikP(MMap(peta)) - 1;
+        for (i = 0; i <= length; i++) {
+            if (SideBy(lokasiSimulator, ELMT_LISTSTATIKP(MMap(peta), i))) {
+                bersebelahan = true;
+                break;
+            }
+        }
+        return bersebelahan;
+    } else if (x == 'C') {
+        length = listLengthStatikP(CMap(peta)) - 1;
+        for (i = 0; i <= length; i++) {
+            if (SideBy(lokasiSimulator, ELMT_LISTSTATIKP(CMap(peta), i))) {
+                bersebelahan = true;
+                break;
+            }
+        }
+        return bersebelahan;
+    } else if (x == 'B') {
+        length = listLengthStatikP(BMap(peta)) - 1;
+        for (i = 0; i <= length; i++) {
+            if (SideBy(lokasiSimulator, ELMT_LISTSTATIKP(BMap(peta), i))) {
+                bersebelahan = true;
+                break;
+            }
+        }
+        return bersebelahan;
+    }
 }
 
 void displayListMakananAksi(ListStatikM listMakanan, ListStatikM *hasil, char aksi){
