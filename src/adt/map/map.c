@@ -4,6 +4,7 @@
 #include "map.h"
 #include "../../utility/color/color.h"
 #include "../machine/wordmachine.h"
+#include "../adt/simulator/simulator.h"
 
 /* Selektor */
 void CreateMap(Map *MGame, int X, int Y){
@@ -29,7 +30,7 @@ void CreateMap(Map *MGame, int X, int Y){
 }
 
 /* DISPLAY MAP */
-void DisplayMap(Map MGame){
+void DisplayMap(Map MGame, Simulator sim){
     int row = (MGame).Peta.rowEff;
     int col = (MGame).Peta.colEff;
     for (int i=0; i<row+2; i++) {
@@ -37,33 +38,37 @@ void DisplayMap(Map MGame){
             if (i == 0 || i == row+1 || j == 0 || j == col+1) {
                 printf("*");
             } else {
-                if (((MGame).Peta.mem[i-1][j-1]) == '#') {
+                if (i == Absis(Lokasi(sim)) && j == Ordinat(Lokasi(sim))) {
                     printf(" ");
                 } else {
-                    switch (((MGame).Peta.mem[i-1][j-1])) {
-                    case 'S':
-                        printYellow('S');
-                        break;
-                    case 'T':
-                        printGreen('T');
-                        break;
-                    case 'M':
-                        printBlue('M');
-                        break;
-                    case 'X':
-                        printf("X");
-                        break;
-                    case 'F':
-                        printMagenta('F');
-                        break;
-                    case 'C':
-                        printCyan('C');
-                        break;
-                    case 'B':
-                        printRed('B');
-                        break;
-                    default:
-                        break;
+                    if (((MGame).Peta.mem[i-1][j-1]) == '#') {
+                        printf(" ");
+                    } else {
+                        switch (((MGame).Peta.mem[i-1][j-1])) {
+                        case 'S':
+                            printYellow('S');
+                            break;
+                        case 'T':
+                            printGreen('T');
+                            break;
+                        case 'M':
+                            printBlue('M');
+                            break;
+                        case 'X':
+                            printf("X");
+                            break;
+                        case 'F':
+                            printMagenta('F');
+                            break;
+                        case 'C':
+                            printCyan('C');
+                            break;
+                        case 'B':
+                            printRed('B');
+                            break;
+                        default:
+                            break;
+                        }
                     }
                 }
             }
