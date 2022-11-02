@@ -86,6 +86,10 @@ void printListMakanan(ListDinMakanan l) {
                     printf("- %s telah direbus\n", NAME(Info(ELMT_LISTDINAMIS_Makanan(l, i))));
                 } else if (LOC(Info(ELMT_LISTDINAMIS_Makanan(l, i))) == 'M') {
                     printf("- %s telah dicampur\n", NAME(Info(ELMT_LISTDINAMIS_Makanan(l, i))));
+                } else if (LOC(Info(ELMT_LISTDINAMIS_Makanan(l, i))) == 'K') {
+                    printf("- %s telah masuk kulkas\n", NAME(Info(ELMT_LISTDINAMIS_Makanan(l, i))));
+                } else if (LOC(Info(ELMT_LISTDINAMIS_Makanan(l, i))) == 'k') {
+                    printf("- %s dikeluarkan dari kulkas\n", NAME(Info(ELMT_LISTDINAMIS_Makanan(l, i))));
                 }
             }
         }
@@ -123,6 +127,10 @@ void printListMakananUndo(ListDinMakanan l) {
                     printf("- %s tidak jadi direbus\n", NAME(Info(ELMT_LISTDINAMIS_Makanan(l, i))));
                 } else if (LOC(Info(ELMT_LISTDINAMIS_Makanan(l, i))) == 'M') {
                     printf("- %s tidak jadi dicampur\n", NAME(Info(ELMT_LISTDINAMIS_Makanan(l, i))));
+                } else if (LOC(Info(ELMT_LISTDINAMIS_Makanan(l, i))) == 'K') {
+                    printf("- %s dikeluarkan dari kulkas\n", NAME(Info(ELMT_LISTDINAMIS_Makanan(l, i))));
+                } else if (LOC(Info(ELMT_LISTDINAMIS_Makanan(l, i))) == 'k') {
+                    printf("- %s dimasukkan ke kulkas\n", NAME(Info(ELMT_LISTDINAMIS_Makanan(l, i))));
                 }
             }
         }
