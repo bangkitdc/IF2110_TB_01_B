@@ -84,6 +84,7 @@ void MNorth(Map *MGame, boolean *stuck, Simulator *s){
         if (Ordinat(Lokasi(*s)) >= 0 && Ordinat(Lokasi(*s)) < (*MGame).Peta.colEff) {
             if ((((*MGame).Peta.mem[Absis(Lokasi(*s)) -1][Ordinat(Lokasi(*s))])) == '#' ) {
                 *stuck = false;
+                Absis(Lokasi(*s))--;
             } else {
                 *stuck = true;
             }
@@ -100,6 +101,7 @@ void MEast(Map *MGame, boolean *stuck, Simulator *s){
         if (Ordinat(Lokasi(*s))+1 >= 0 && Ordinat(Lokasi(*s))+1 < (*MGame).Peta.colEff) {
             if ((((*MGame).Peta.mem[Absis(Lokasi(*s))][Ordinat(Lokasi(*s)) +1])) == '#' ) {
                 *stuck = false;
+                Ordinat(Lokasi(*s))++;
             } else {
                 *stuck = true;
             }
@@ -116,6 +118,7 @@ void MSouth(Map *MGame, boolean *stuck, Simulator *s){
         if (Ordinat(Lokasi(*s)) >= 0 && Ordinat(Lokasi(*s)) < (*MGame).Peta.colEff) {
             if ((((*MGame).Peta.mem[Absis(Lokasi(*s)) +1][Ordinat(Lokasi(*s))])) == '#' ) {
                 *stuck = false;
+                Absis(Lokasi(*s))++;
             } else {
                 *stuck = true;
             }
@@ -132,6 +135,7 @@ void MWest(Map *MGame, boolean *stuck, Simulator *s){
         if (Ordinat(Lokasi(*s)) -1 >= 0 && Ordinat(Lokasi(*s)) -1 < (*MGame).Peta.colEff) {
             if ((((*MGame).Peta.mem[Absis(Lokasi(*s))][Ordinat(Lokasi(*s)) -1])) == '#' ) {
                 *stuck = false;
+                Ordinat(Lokasi(*s))--;
             } else {
                 *stuck = true;
             }
