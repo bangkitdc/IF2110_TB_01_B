@@ -39,7 +39,11 @@ void TulisTIME (TIME T);
 /* I.S. : T sembarang */
 /* F.S. : Nilai T ditulis dg format HH:MM:SS */
 /* Proses : menulis nilai setiap komponen T ke layar dalam format DD:MM:SS
-   tanpa karakter apa pun di depan atau belakangnya, termasuk spasi, enter, dll.*/ 
+   tanpa karakter apa pun di depan atau belakangnya, termasuk spasi, enter, dll.*/
+
+void TulisTIME2 (TIME T);
+
+void TulisTIME3 (TIME T);
 
 /* ***************************************************************** */
 /* KELOMPOK KONVERSI TERHADAP TYPE                                   */

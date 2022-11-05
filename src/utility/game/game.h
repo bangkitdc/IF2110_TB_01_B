@@ -11,7 +11,7 @@ typedef enum {
 } ConfigType;
 
 typedef struct {
-    int currentTime;
+    TIME currentTime;
     ListStatikM listMakanan;
     ListStatikT listResep;
     Map map;

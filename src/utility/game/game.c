@@ -6,6 +6,7 @@ char *dirResep = "../../config/resep/configresep.txt";
 char *dirPeta = "../../config/peta/configpeta.txt";
 
 void startGame(Game *game) {
+    CreateTime (&game->currentTime, 0, 1, 23);
     createLSMakanan(&game->listMakanan);
     CreateListTree(&game->listResep);
 
@@ -14,6 +15,8 @@ void startGame(Game *game) {
     inputConfigFile(game, dirMakanan, MAKANAN);
     inputConfigFile(game, dirResep, RESEP);
     inputConfigFile(game, dirPeta, PETA);
+
+    TulisTIME3(game->currentTime);
     DisplayMap(game->map);
 
     game->endGame = false;

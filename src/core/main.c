@@ -16,7 +16,7 @@ int main() {
 
     do {
         /* Baca Command START/ EXIT */
-        printf("> ");
+        printf("\n> ");
         L = readLine();
 
         if (L.Length == 1) {
@@ -122,6 +122,8 @@ int main() {
                             if (stuck) {
                                 sprintRed("Menabrak, Silahkan liat peta!\n");
                             } else {
+                                game.currentTime = NextMenit(game.currentTime);
+                                TulisTIME3(game.currentTime);
                                 DisplayMap(game.map);
                             }
                             
