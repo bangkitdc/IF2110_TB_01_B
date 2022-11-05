@@ -14,7 +14,10 @@
 #include "../matrix/matrixKulkas.h"
 #include "../liststatik/liststatikM.h"
 #include "../liststatik/liststatikT.h"
-
+#include "../listdin/listdinmakanan.h"
+#include "../infotype/infotype.h"
+#include "../map/map.h"
+#include "../makanan/makanan.h"
 
 typedef struct {
     char* username;
@@ -36,30 +39,39 @@ void gantiUser(Simulator * s, char* username);
 void gantiLokasi(Simulator * s, POINT p);
 /* Mengganti lokasi simulator */
 
-void gerakUser(Simulator* s, char x);
+void gerakUser(Simulator * s, Map * peta, boolean * stuck, char x);
 /* Menggerakkan user */
 
-State simulatorToState(Simulator s, TIME currentTime);
+void simulatorToState(Simulator s, TIME currentTime, ListDinMakanan currentNotif, MatrixKulkas currentKulkas, State* temp);
 /* mengkonversi simulator s ke State*/
 /* digunakan saat mau menyimpan State ke stack */
 
-void loadState(Simulator * s, State st, TIME * currentTime, char * currentUsername);
+void loadState(Simulator * s, State * st, char * currentUsername, ListDinMakanan * currentNotif, MatrixKulkas * currentKulkas, TIME * currentTime);
 /* mengkonversi State dari stack ke simulator dan menyimpannya di simulator */
 /* digunakan saat undo dan redo */
 
 void setInventory(Simulator * s, PrioQueue inventory);
 /* mengassign inventory di awal */
 
+/* Move Simulator */
+void MNorth(Map *MGame, boolean *stuck, Simulator *s);
+
+void MEast(Map *MGame, boolean *stuck, Simulator *s);
+
+void MSouth(Map *MGame, boolean *stuck, Simulator *s);
+
+void MWest(Map *MGame, boolean *stuck, Simulator *s);
+
 boolean cekSpotKosongKulkas(MatrixKulkas kulkas, int idxX, int idxY);
 /* mengecek apakah di kulkas pada index i, j kosong */
 
-void pindahKeKulkas(Simulator * s, int idx, MatrixKulkas * kulkas);
+void pindahKeKulkas(Simulator * s, int idx, MatrixKulkas * kulkas, ListDinMakanan * currentNotif);
 /* Memindahkan makanan di inventori dengan index idx ke kulkas */
 
-void ambilDariKulkas(Simulator * s, MatrixKulkas * kulkas, int idxX, int idxY);
+void ambilDariKulkas(Simulator * s, MatrixKulkas * kulkas, int idxX, int idxY, ListDinMakanan * currentNotif);
 /* Mengambil makanan dari kulkas dan memasukkannya ke inventory */
 
-boolean adjacent(Simulator s, Matrix m, char x);
+boolean adjacent(Simulator s, Map peta, char x);
 /* Mengecek apakah simulator bersebelahan dengan tempat tertentu */
 
 void displayListMakananAksi(ListStatikM listMakanan, ListStatikM *hasil, char aksi);

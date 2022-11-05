@@ -10,7 +10,7 @@
 #include "../../adt/liststatik/liststatikT.h"
 #include "../color/color.h"
 #include "../../adt/map/map.h"
-#include "../../adt/time/time.h"
+#include "../../adt/simulator/simulator.h"
 
 void startMenu();
 

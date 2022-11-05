@@ -13,7 +13,7 @@
 typedef struct
 {
     Matrix Peta;
-    POINT S_Map;
+    //POINT S_Map;
     ListStatikP T_Map;
     ListStatikP M_Map;
     ListStatikP F_Map;
@@ -23,7 +23,7 @@ typedef struct
 } Map;
 
 #define PETA(M) (M).Peta
-#define SMap(N) (N).S_Map
+//#define SMap(N) (N).S_Map
 #define TMap(O) (O).T_Map
 #define MMap(O) (O).M_Map
 #define FMap(O) (O).F_Map
@@ -35,12 +35,6 @@ typedef struct
 void CreateMap(Map *MGame, int X, int Y);
 
 /* DISPLAY MAP */
-void DisplayMap(Map MGame);
-
-/* Move Simulator */
-void MNorth(Map *MGame, boolean *stuck);
-void MEast(Map *MGame, boolean *stuck);
-void MSouth(Map *MGame, boolean *stuck);
-void MWest(Map *MGame, boolean *stuck);
+void DisplayMap(Map MGame, POINT sim);
 
 #endif

@@ -29,51 +29,46 @@ void gantiLokasi(Simulator * s, POINT p) {
     Ordinat(Lokasi(*s)) = Ordinat(p);
 }
 
-void gerakUser(Simulator * s, char x) {
+void gerakUser(Simulator * s, Map * peta, boolean * stuck, char x) {
 /* Menggerakkan user */
 
     // KAMUS
-    POINT temp;
 
     // ALGORITMA
-    // pakai wasd
     if (x == 'w') {
-        temp = MoveN(Lokasi(*s));
-        gantiLokasi(s, temp);
+        MNorth(peta, stuck, s);
     } else if (x == 'a') {
-        temp = MoveW(Lokasi(*s));
-        gantiLokasi(s, temp);
+        MWest(peta, stuck, s);
     } else if (x == 'd') {
-        temp = MoveE(Lokasi(*s));
-        gantiLokasi(s, temp);
+        MEast(peta, stuck, s);
     } else if (x == 's') {
-        temp = MoveS(Lokasi(*s));
-        gantiLokasi(s, temp);
+        MSouth(peta, stuck, s);
     }
 }
 
-State simulatorToState(Simulator s, TIME currentTime) {
+void simulatorToState(Simulator s, TIME currentTime, ListDinMakanan currentNotif, MatrixKulkas currentKulkas, State* temp) {
 /* mengkonversi simulator s ke State*/
 /* digunakan saat mau menyimpan State ke stack */
 
-    // KAMUS
-    State temp;
-
     // ALGORITMA
-    InfoWaktu(temp) = currentTime;
-    InfoKoordinat(temp) = Lokasi(s);
-    InfoInventory(temp) = Inventory(s);
-
-    return temp;
+    InfoWaktu(*temp) = currentTime;
+    InfoKoordinat(*temp) = Lokasi(s);
+    InfoInventory(*temp) = Inventory(s);
+    InfoNotif(*temp) = currentNotif;
+    InfoKulkas(*temp) = currentKulkas;
 }
 
-void loadState(Simulator * s, State st, TIME * currentTime, char * currentUsername) {
+void loadState(Simulator * s, State * st, char * currentUsername, ListDinMakanan * currentNotif, MatrixKulkas * currentKulkas, TIME * currentTime) {
 /* mengkonversi State dari stack ke simulator dan menyimpannya di simulator */
 /* digunakan saat undo dan redo */
 
+    // KAMUS
+
     // ALGORITMA
-    createSimulator(s, currentUsername, InfoKoordinat(st), InfoInventory(st));
-    *currentTime = InfoWaktu(st);
+    createSimulator(s, currentUsername, InfoKoordinat(*st), InfoInventory(*st));
+    *currentTime = InfoWaktu(*st);
+    *currentNotif = InfoNotif(*st);
+    *currentKulkas = InfoKulkas(*st);
 }
 
 void setInventory(Simulator * s, PrioQueue inventory) {
@@ -81,6 +76,75 @@ void setInventory(Simulator * s, PrioQueue inventory) {
 
     // ALGORITMA
     Inventory(*s) = inventory;
+}
+
+/* Move Simulator */
+void MNorth(Map *MGame, boolean *stuck, Simulator *s){
+    if (Absis(Lokasi(*s)) -1 >= 0 && Absis(Lokasi(*s))-1 < (*MGame).Peta.rowEff) {
+        if (Ordinat(Lokasi(*s)) >= 0 && Ordinat(Lokasi(*s)) < (*MGame).Peta.colEff) {
+            if ((((*MGame).Peta.mem[Absis(Lokasi(*s)) -1][Ordinat(Lokasi(*s))])) == '#' ) {
+                *stuck = false;
+                Absis(Lokasi(*s))--;
+            } else {
+                *stuck = true;
+            }
+        } else {
+            *stuck = true;
+        }
+    } else {
+        *stuck = true;
+    }
+}
+
+void MEast(Map *MGame, boolean *stuck, Simulator *s){
+    if (Absis(Lokasi(*s)) >= 0 && Absis(Lokasi(*s)) < (*MGame).Peta.rowEff) {
+        if (Ordinat(Lokasi(*s))+1 >= 0 && Ordinat(Lokasi(*s))+1 < (*MGame).Peta.colEff) {
+            if ((((*MGame).Peta.mem[Absis(Lokasi(*s))][Ordinat(Lokasi(*s)) +1])) == '#' ) {
+                *stuck = false;
+                Ordinat(Lokasi(*s))++;
+            } else {
+                *stuck = true;
+            }
+        } else {
+            *stuck = true;
+        }
+    } else {
+        *stuck = true;
+    }
+}
+
+void MSouth(Map *MGame, boolean *stuck, Simulator *s){
+    if (Absis(Lokasi(*s)) +1 >= 0 && Absis(Lokasi(*s))+1 < (*MGame).Peta.rowEff) {
+        if (Ordinat(Lokasi(*s)) >= 0 && Ordinat(Lokasi(*s)) < (*MGame).Peta.colEff) {
+            if ((((*MGame).Peta.mem[Absis(Lokasi(*s)) +1][Ordinat(Lokasi(*s))])) == '#' ) {
+                *stuck = false;
+                Absis(Lokasi(*s))++;
+            } else {
+                *stuck = true;
+            }
+        } else {
+            *stuck = true;
+        }
+    } else {
+        *stuck = true;
+    }
+}
+
+void MWest(Map *MGame, boolean *stuck, Simulator *s){
+    if (Absis(Lokasi(*s)) >= 0 && Absis(Lokasi(*s)) < (*MGame).Peta.rowEff) {
+        if (Ordinat(Lokasi(*s)) -1 >= 0 && Ordinat(Lokasi(*s)) -1 < (*MGame).Peta.colEff) {
+            if ((((*MGame).Peta.mem[Absis(Lokasi(*s))][Ordinat(Lokasi(*s)) -1])) == '#' ) {
+                *stuck = false;
+                Ordinat(Lokasi(*s))--;
+            } else {
+                *stuck = true;
+            }
+        } else {
+            *stuck = true;
+        }
+    } else {
+        *stuck = true;
+    }
 }
 
 boolean cekSpotKosongKulkas(MatrixKulkas kulkas, int idxX, int idxY) {
@@ -101,7 +165,7 @@ boolean cekSpotKosongKulkas(MatrixKulkas kulkas, int idxX, int idxY) {
     }
 }
 
-void pindahKeKulkas(Simulator * s, int idx, MatrixKulkas * kulkas) {
+void pindahKeKulkas(Simulator * s, int idx, MatrixKulkas * kulkas, ListDinMakanan * currentNotif) {
 /* Memindahkan makanan di inventori dengan index idx ke kulkas */
 
     // KAMUS
@@ -131,10 +195,12 @@ void pindahKeKulkas(Simulator * s, int idx, MatrixKulkas * kulkas) {
         printf("kulkas sudah penuh :(\n");
     } else {
         ELMTK(*kulkas, i, j) = temp;
+        LOC(Info(temp)) = 'K';
+        insertLastMakanan(currentNotif, temp);
     }
 }
 
-void ambilDariKulkas(Simulator * s, MatrixKulkas * kulkas, int idxX, int idxY) {
+void ambilDariKulkas(Simulator * s, MatrixKulkas * kulkas, int idxX, int idxY, ListDinMakanan * currentNotif) {
 /* Mengambil makanan dari kulkas dan memasukkannya ke inventory */
 
     // KAMUS
@@ -148,15 +214,70 @@ void ambilDariKulkas(Simulator * s, MatrixKulkas * kulkas, int idxX, int idxY) {
         temp = ELMTK(*kulkas, idxX, idxY);
         ELMTK(*kulkas, idxX, idxY) = dummy;
         Enqueue(&Inventory(*s), temp);
+        LOC(Info(temp)) = 'k';
+        insertLastMakanan(currentNotif, temp);
     }
 
 }
 
-boolean adjacent(Simulator s, Matrix m, char x) {
+boolean adjacent(Simulator s, Map peta, char x) {
 /* Mengecek apakah simulator bersebelahan dengan tempat tertentu */
 
-    // ALGORITMA
+    // KAMUS
+    int i, length;
+    boolean bersebelahan;
+    POINT lokasiSimulator;
 
+    // ALGORITMA
+    bersebelahan = false;
+    lokasiSimulator = Lokasi(s);
+
+    if (x == 'T') {
+        length = listLengthStatikP(TMap(peta)) - 1;
+        for (i = 0; i <= length; i++) {
+            if (SideBy(lokasiSimulator, ELMT_LISTSTATIKP(TMap(peta), i))) {
+                bersebelahan = true;
+                break;
+            }
+        }
+        return bersebelahan;
+    } else if (x == 'F') {
+        length = listLengthStatikP(FMap(peta)) - 1;
+        for (i = 0; i <= length; i++) {
+            if (SideBy(lokasiSimulator, ELMT_LISTSTATIKP(FMap(peta), i))) {
+                bersebelahan = true;
+                break;
+            }
+        }
+        return bersebelahan;
+    } else if (x == 'M') {
+        length = listLengthStatikP(MMap(peta)) - 1;
+        for (i = 0; i <= length; i++) {
+            if (SideBy(lokasiSimulator, ELMT_LISTSTATIKP(MMap(peta), i))) {
+                bersebelahan = true;
+                break;
+            }
+        }
+        return bersebelahan;
+    } else if (x == 'C') {
+        length = listLengthStatikP(CMap(peta)) - 1;
+        for (i = 0; i <= length; i++) {
+            if (SideBy(lokasiSimulator, ELMT_LISTSTATIKP(CMap(peta), i))) {
+                bersebelahan = true;
+                break;
+            }
+        }
+        return bersebelahan;
+    } else if (x == 'B') {
+        length = listLengthStatikP(BMap(peta)) - 1;
+        for (i = 0; i <= length; i++) {
+            if (SideBy(lokasiSimulator, ELMT_LISTSTATIKP(BMap(peta), i))) {
+                bersebelahan = true;
+                break;
+            }
+        }
+        return bersebelahan;
+    }
 }
 
 void displayListMakananAksi(ListStatikM listMakanan, ListStatikM *hasil, char aksi){

@@ -96,7 +96,7 @@ int MenuInput(Word w) {
     return -1;
 }
 
-void inputConfigFile(Game *g, char *PATH, int type) {
+void inputConfigFile(Game *g,Simulator *sim, char *PATH, int type) {
     STARTWORDFILE(PATH);
 
     if (!EndWord) { 
@@ -208,7 +208,9 @@ void inputConfigFile(Game *g, char *PATH, int type) {
                         (&(&g->map)->Peta)->mem[(i)][(j)] = LFile.TabWords[0].TabWord[j];
                         //ELMT_MATRIX(PETA(MapGame),i,j)  = LFile.TabWords[0].TabWord[j];
                         if ((&(&g->map)->Peta)->mem[(i)][(j)] == 'S') {
-                            (&g->map)->S_Map = M;
+                            //(&g->map)->S_Map = M;
+                            gantiLokasi(sim,M);
+                            (&(&g->map)->Peta)->mem[(i)][(j)] = ' ';
                         } else if ((&(&g->map)->Peta)->mem[(i)][(j)] == 'T') {
                             insertPoint(&(&g->map)->T_Map,M);
                         } else if ((&(&g->map)->Peta)->mem[(i)][(j)] == 'M') {
