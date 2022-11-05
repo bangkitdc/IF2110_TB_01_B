@@ -22,7 +22,7 @@ void CreatePoint(POINT *P, int X, int Y);
 // I/O device
 void ReadPoint(POINT *P);
 void WritePoint(POINT P);
-
+void WriteLokasi(POINT P);
 // Menentukan dimana letak P (ngecek dia masih didalam ruangan apa engga)
 
 

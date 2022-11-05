@@ -16,7 +16,7 @@ void startMenu();
 
 int startInput(Word w);
 
-void inputConfigFile(Game *g, char *PATH, int type);
+void inputConfigFile(Game *g,Simulator *sim, char *PATH, int type);
 
 int MenuInput(Word w);
 

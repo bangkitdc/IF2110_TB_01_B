@@ -8,6 +8,7 @@ Word EAST = {"EAST", 4};
 
 int main() {
     Game game;
+    Simulator simulator;
     startMenu();
     int input;
 
@@ -31,7 +32,7 @@ int main() {
 
     switch (input) {
         case 1: /* START */
-            startGame(&game);
+            startGame(&game, &simulator);
             while(!game.endGame) {
                 sprintBlue("\nEnter Command: \n");
                 printf("> ");
@@ -108,13 +109,13 @@ int main() {
                         } else {
                             boolean stuck, flag = true;
                             if (isWordEq(NORTH, L.TabWords[1])) {
-                                MNorth(&game.map, &stuck);
+                                gerakUser(&simulator, &game.map, &stuck, 'w');
                             } else if (isWordEq(SOUTH, L.TabWords[1])) {
-                                MSouth(&game.map, &stuck);
+                                gerakUser(&simulator, &game.map, &stuck, 's');
                             } else if (isWordEq(WEST, L.TabWords[1])) {
-                                MWest(&game.map, &stuck);
+                                gerakUser(&simulator, &game.map, &stuck, 'a');
                             } else if (isWordEq(EAST, L.TabWords[1])) {
-                                MEast(&game.map, &stuck);
+                                gerakUser(&simulator, &game.map, &stuck, 'd');
                             } else {
                                 sprintRed("Argumen tidak tersedia. Pilih NORTH/ SOUTH/ WEST/ EAST !\n");
                                 break;
@@ -122,9 +123,10 @@ int main() {
                             if (stuck) {
                                 sprintRed("Menabrak, Silahkan liat peta!\n");
                             } else {
+                                WriteLokasi(simulator.lokasi);
                                 game.currentTime = NextMenit(game.currentTime);
                                 TulisTIME3(game.currentTime);
-                                DisplayMap(game.map);
+                                printf("\n"); DisplayMap(game.map, simulator.lokasi);
                             }
                             
                         }

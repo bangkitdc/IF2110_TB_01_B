@@ -18,7 +18,7 @@ typedef struct {
     boolean endGame;
 } Game;
 
-void startGame(Game *game);
+void startGame(Game *game, Simulator *s);
 
 boolean isEndGame(Game g);
 
