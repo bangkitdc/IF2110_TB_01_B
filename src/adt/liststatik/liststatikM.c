@@ -52,7 +52,33 @@ void printCatalog(ListStatikM l) {
     if (listLengthStatikM(l) > 0) {
         for (i = 0; i < listLengthStatikM(l); i ++) {
             Makanan temp = ELMT_LISTSTATIKM(l, i);
-            printf("  %d. %s - %d:%d:%d - %c - %d:%d:%d\n", i + 1,NAME(temp), EXP(temp).DD, EXP(temp).HH, EXP(temp).MM, LOC(temp), DELIVERY(temp).DD, DELIVERY(temp).HH, DELIVERY(temp).MM);
+            printf("  [%d] %s - ", i + 1, NAME(temp));
+            TulisTIME2(EXP(temp));
+            switch (LOC(temp)) {
+                case 'T':
+                    printf(" - BUY - ");
+                    break;
+                case 'F':
+                    printf(" - FRY - ");
+                    break;
+                case 'M':
+                    printf(" - MIX - ");
+                    break;
+                case 'C':
+                    printf(" - CHOP - ");
+                    break;
+                case 'B':
+                    printf(" - BOIL - ");
+                    break;
+                default:
+                    break;
+            }
+            if (TIMEToMenit(DELIVERY(temp)) == 0) {
+                printf("0");
+            } else {
+                TulisTIME2(DELIVERY(temp));
+            }
+            printf("\n");
         }
     }
 }

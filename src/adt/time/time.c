@@ -52,6 +52,10 @@ void TulisTIME2 (TIME T)
    }
 }
 
+void TulisTIME3 (TIME T) {
+   printf("Waktu: %d.%d\n", Hour(T), Minute(T));
+}
+
 /* ***************************************************************** */
 /* KELOMPOK KONVERSI TERHADAP TYPE                                   */
 /* ***************************************************************** */

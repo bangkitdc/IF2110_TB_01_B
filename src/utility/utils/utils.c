@@ -167,8 +167,6 @@ void inputConfigFile(Game *g,Simulator *sim, char *PATH, int type) {
                 break;
             case 2: /* Config Resep */
                 /* Dicoba langsung akses ke game (BANGKIT) */
-                // ListStatikT listResep;
-                // CreateListTree(&listResep);
                 (&g->listResep)->elEff = wordToInt(LFile.TabWords[0]);
                 for(int i=0;i<(&g->listResep)->elEff;i++){
                     ADVNewline();
@@ -189,28 +187,18 @@ void inputConfigFile(Game *g,Simulator *sim, char *PATH, int type) {
             case 3: /* Config Peta */;
                 //Map MapGame;
                 CreateMap((&g->map), wordToInt(LFile.TabWords[0]), wordToInt(LFile.TabWords[1]));
-                //ROW_EFF(PETA(MapGame)) = wordToInt(LFile.TabWords[0]);
-                //COL_EFF(PETA(MapGame)) = wordToInt(LFile.TabWords[1]);
                 POINT M;
-                //ListStatikP TM, MM, FM, CM, BM, XM;
-                //CreatePoint(&M, i, j);
-                //createLSPoint (&TM);
-                //createLSPoint (&MM);
-                //createLSPoint (&FM);
-                //createLSPoint (&CM);
-                //createLSPoint (&BM);
-                //createLSPoint (&XM);
+
                 for (int i=0; i< (&(&g->map)->Peta)->rowEff; i++) {
                     ADVNewline();
                     LFile = readLineFile();
                     for (int j=0; j< (&(&g->map)->Peta)->colEff; j++) {
                         CreatePoint(&M, i, j);
                         (&(&g->map)->Peta)->mem[(i)][(j)] = LFile.TabWords[0].TabWord[j];
-                        //ELMT_MATRIX(PETA(MapGame),i,j)  = LFile.TabWords[0].TabWord[j];
+
                         if ((&(&g->map)->Peta)->mem[(i)][(j)] == 'S') {
-                            //(&g->map)->S_Map = M;
                             gantiLokasi(sim,M);
-                            (&(&g->map)->Peta)->mem[(i)][(j)] = ' ';
+                            (&(&g->map)->Peta)->mem[(i)][(j)] = '#';
                         } else if ((&(&g->map)->Peta)->mem[(i)][(j)] == 'T') {
                             insertPoint(&(&g->map)->T_Map,M);
                         } else if ((&(&g->map)->Peta)->mem[(i)][(j)] == 'M') {
@@ -226,14 +214,6 @@ void inputConfigFile(Game *g,Simulator *sim, char *PATH, int type) {
                         }
                     }
                 }
-                //TMap(MapGame) = TM;
-                //MMap(MapGame) = MM;
-                //FMap(MapGame) = FM;
-                //CMap(MapGame) = CM;
-                //BMap(MapGame) = BM;
-                //XMap(MapGame) = XM;
-                // (&g->map) = {MapGame};
-                //sprintBlue("HALO\n");
                 break;
             default:
                 break;

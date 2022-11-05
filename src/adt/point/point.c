@@ -19,8 +19,9 @@ void WritePoint(POINT P){
     printf("(%i,%i)", Absis(P), Ordinat(P));
 }
 
-// Menentukan dimana letak P (ngecek dia masih didalam ruangan apa engga)
-
+void WriteLokasi(POINT P){
+    printf("BNMO di posisi: (%i,%i)\n", Absis(P), Ordinat(P));
+}
 
 // Operasi Point (IS : setiap perpindahan tidak akan menabrak)
 POINT MoveN(POINT P){ // North

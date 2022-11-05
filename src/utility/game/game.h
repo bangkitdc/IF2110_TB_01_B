@@ -11,14 +11,14 @@ typedef enum {
 } ConfigType;
 
 typedef struct {
-    int currentTime;
+    TIME currentTime;
     ListStatikM listMakanan;
     ListStatikT listResep;
     Map map;
     boolean endGame;
 } Game;
 
-void startGame(Game *game);
+void startGame(Game *game, Simulator *s);
 
 boolean isEndGame(Game g);
 
