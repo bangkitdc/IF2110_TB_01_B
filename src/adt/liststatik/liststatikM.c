@@ -47,7 +47,7 @@ void printCatalog(ListStatikM l) {
 
     // ALGORITMA
     printf("List Makanan\n");
-    printf("(nama - durasi kedaluwarsa - aksi yang diperlukan - delivery time)\n");
+    printf("(nama - durasi kedaluwarsa - aksi yang diperlukan - delivery time - size)\n");
 
     if (listLengthStatikM(l) > 0) {
         for (i = 0; i < listLengthStatikM(l); i ++) {
@@ -78,6 +78,7 @@ void printCatalog(ListStatikM l) {
             } else {
                 TulisTIME2(DELIVERY(temp));
             }
+            printf(" - (%d x %d)", Absis(SIZE(temp)), Ordinat(SIZE(temp)));
             printf("\n");
         }
     }

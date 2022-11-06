@@ -24,7 +24,7 @@ typedef struct {
     TIME expiry;        /* Waktu kedaluwarsa */
     TIME delivery;      /* Lama pengiriman makanan */
     char location;      /* Lokasi aksi makanan */
-    // POINT size;         /* Size makanan (mxn) */
+    POINT size;         /* Size makanan (mxn) */
 } Makanan;
 
 /* Selektor */
@@ -33,10 +33,10 @@ typedef struct {
 #define EXP(M) (M).expiry
 #define DELIVERY(M) (M).delivery
 #define LOC(M) (M).location
-// #define SIZE(M) (M).size
+#define SIZE(M) (M).size
 
 /* Konstruktor */
-void createMakanan(Makanan *M, int id, char *name, TIME exp, char loc, TIME delivery);
+void createMakanan(Makanan *M, int id, char *name, TIME exp, char loc, TIME delivery, POINT size);
 /* I.S. Makanan sembarang dan input sesuai batasan */
 /* F.S. Makanan terdefinisi sesuai input */
 
