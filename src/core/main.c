@@ -9,11 +9,20 @@ Word EAST = {"EAST", 4};
 int main() {
     Game game;
     Simulator simulator;
+    Stack stack_undo, stack_redo;
+    State latest_state;
+    ListDinMakanan latest_notification;
+    MatrixKulkas kulkas;
+
     startMenu();
     int input;
 
     ListWord L;
     createListWord(&L);
+    CreateEmpty(&stack_undo);
+    CreateEmpty(&stack_redo);
+    CreateListMakananDin(&latest_notification, 1000);
+    createMatrixKulkas(10, 20, &kulkas);
 
     do {
         /* Baca Command START/ EXIT */
@@ -127,6 +136,8 @@ int main() {
                                 WriteLokasi(simulator.lokasi);
                                 TulisTIME3(game.currentTime);
                                 printf("\n"); DisplayMap(game.map, simulator.lokasi);
+                                simulatorToState(simulator, game.currentTime, latest_notification, kulkas, &latest_state);
+                                Push(&stack_undo,latest_state);
                             }   
                         }
                         break;
@@ -156,9 +167,27 @@ int main() {
                                 WriteLokasi(simulator.lokasi);
                                 TulisTIME3(game.currentTime);
                                 printf("\n"); DisplayMap(game.map, simulator.lokasi);
+                                simulatorToState(simulator, game.currentTime, latest_notification, kulkas, &latest_state);
+                                Push(&stack_undo,latest_state);
                             } else {
                                 sprintRed("2 Argumen harus integer >= 0. Coba Lagi!\n");
                             }
+                        }
+                        break;
+                    case 13: /* UNDO */
+                        if (L.Length != 1) {
+                            sprintRed("Command UNDO tidak memiliki argumen. Coba Lagi!\n");
+                        } else {
+                            Undo(&stack_undo, &stack_redo, &latest_state);
+                            loadState(&simulator, &latest_state, "ADMIN", &latest_notification, &kulkas, game.currentTime);
+                        }
+                        break;
+                    case 14: /* REDO */
+                        if (L.Length != 1) {
+                            sprintRed("Command REDO tidak memiliki argumen. Coba Lagi!\n");
+                        } else {
+                            Redo(&stack_undo, &stack_redo, &latest_state);
+                            loadState(&simulator, &latest_state, "ADMIN", &latest_notification, &kulkas, game.currentTime);
                         }
                         break;
                     default:
