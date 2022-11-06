@@ -123,12 +123,11 @@ int main() {
                             if (stuck) {
                                 sprintRed("Menabrak, Silahkan liat peta!\n");
                             } else {
-                                WriteLokasi(simulator.lokasi);
                                 game.currentTime = NextMenit(game.currentTime);
+                                WriteLokasi(simulator.lokasi);
                                 TulisTIME3(game.currentTime);
                                 printf("\n"); DisplayMap(game.map, simulator.lokasi);
-                            }
-                            
+                            }   
                         }
                         break;
                     case 10: /* CATALOG */
@@ -149,7 +148,17 @@ int main() {
                         if (L.Length != 3) {
                             sprintRed("Command WAIT memiliki 2 argumen. Coba Lagi!\n");
                         } else {
-                            /* code */
+                            int jam, menit;
+                            jam = wordToInt(L.TabWords[1]);
+                            menit = wordToInt(L.TabWords[2]);
+                            if (jam != -999 && menit != -999) {
+                                game.currentTime = NextNMenit(game.currentTime, jam * 60 + menit);
+                                WriteLokasi(simulator.lokasi);
+                                TulisTIME3(game.currentTime);
+                                printf("\n"); DisplayMap(game.map, simulator.lokasi);
+                            } else {
+                                sprintRed("2 Argumen harus integer >= 0. Coba Lagi!\n");
+                            }
                         }
                         break;
                     default:

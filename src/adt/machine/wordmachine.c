@@ -117,7 +117,11 @@ int wordToInt(Word currentWord) {
    int i;
    int val = 0;
    for (i = 0; i < currentWord.Length; i++) {
-      val = val * 10 + (currentWord.TabWord[i] - '0');
+      if (currentWord.TabWord[i] >= '0' && currentWord.TabWord[i] <= '9') {
+         val = val * 10 + (currentWord.TabWord[i] - '0');
+      } else {
+         return -999;
+      }
    }
    return val;
 }
