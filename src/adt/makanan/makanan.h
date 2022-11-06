@@ -25,6 +25,7 @@ typedef struct {
     TIME delivery;      /* Lama pengiriman makanan */
     char location;      /* Lokasi aksi makanan */
     POINT size;         /* Size makanan (mxn) */
+    TIME pengolahan;    /* Waktu pengolahan makanan*/
 } Makanan;
 
 /* Selektor */
@@ -34,9 +35,10 @@ typedef struct {
 #define DELIVERY(M) (M).delivery
 #define LOC(M) (M).location
 #define SIZE(M) (M).size
+#define PENGOLAHAN(M) (M).pengolahan
 
 /* Konstruktor */
-void createMakanan(Makanan *M, int id, char *name, TIME exp, char loc, TIME delivery, POINT size);
+void createMakanan(Makanan *M, int id, char *name, TIME exp, char loc, TIME delivery, POINT size, TIME pengolahan);
 /* I.S. Makanan sembarang dan input sesuai batasan */
 /* F.S. Makanan terdefinisi sesuai input */
 
