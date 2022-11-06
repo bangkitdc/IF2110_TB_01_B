@@ -118,7 +118,8 @@ void inputConfigFile(Game *g,Simulator *sim, char *PATH, int type) {
                     char *name;
                     TIME exp, delivery;
                     char loc;
-                    for (j = 0; j < 5; j++) {
+                    POINT size;
+                    for (j = 0; j < 6; j++) {
                         LFile = readLineFile();
                         switch (j) {
                             case 0:     /* ID */
@@ -152,16 +153,16 @@ void inputConfigFile(Game *g,Simulator *sim, char *PATH, int type) {
                                     loc = 'M';
                                 }
                                 break;
-                            // case 5:     /* Ukuran Makanan (mxn) */
-                            //     m = wordToInt(LFile.TabWords[0]);
-                            //     n = wordToInt(LFile.TabWords[1]);
-                            //     break;
+                            case 5:     /* Ukuran Makanan (mxn) */
+                                Absis(size) = wordToInt(LFile.TabWords[0]);
+                                Ordinat(size) = wordToInt(LFile.TabWords[1]);
+                                break;
                             default:
                                 break;
                         }
                         ADVNewline();
                     }
-                    createMakanan(&M, id, name, exp, loc, delivery);
+                    createMakanan(&M, id, name, exp, loc, delivery, size);
                     insertFood(&g->listMakanan, M);
                 }
                 break;

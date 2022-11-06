@@ -24,6 +24,7 @@ void makeDummyInfoType(infotype * dummy) {
     TIME tempdeli;
     char temploc;
     Makanan temp;
+    POINT tempsize;
 
     // ALGORITMA
     tempid = 0;
@@ -31,7 +32,9 @@ void makeDummyInfoType(infotype * dummy) {
     CreateTime(&tempexp, 0, 0, 0);
     CreateTime(&tempdeli, 0, 0, 0);
     temploc = 'x';
+    Absis(tempsize) = 0;
+    Ordinat(tempsize) = 0;
 
-    createMakanan(&temp, tempid, tempnama, tempexp, temploc, tempdeli);
+    createMakanan(&temp, tempid, tempnama, tempexp, temploc, tempdeli, tempsize);
     MakeinfoType(dummy, temp);
 }

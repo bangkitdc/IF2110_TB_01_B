@@ -1,31 +1,37 @@
-6           
-11          
-Ayam Mentah 
-1 0 0       
-0 0 15      
-Buy         
-21          
-Ayam Potong 
-0 2 0      
-0 0 0       
-Chop        
-10          
+6
+11
+Ayam Mentah
+1 0 0
+0 0 15
+Buy
+1 1
+21
+Ayam Potong
+0 2 0
+0 0 0
+Chop
+1 1
+10
 Tepung
 0 1 0
 0 0 30
 Buy
-15          
+1 1
+15
 Minyak Goreng
 0 1 30
 0 1 0
 Buy
-31          
+1 1
+31
 Ayam Tepung
 0 0 30
 0 0 0
 Mix
-37          
+1 1
+37
 Ayam Goreng
 0 0 15
 0 0 0
 Fry
+1 1
