@@ -19,8 +19,8 @@ int main() {
 
     ListWord L;
     createListWord(&L);
-    CreateEmptyStack(&stack_undo);
-    CreateEmptyStack(&stack_redo);
+    CreateEmpty(&stack_undo);
+    CreateEmpty(&stack_redo);
     CreateListMakananDin(&latest_notification, 1000);
     createMatrixKulkas(10, 20, &kulkas);
 
@@ -185,24 +185,16 @@ int main() {
                         if (L.Length != 1) {
                             sprintRed("Command UNDO tidak memiliki argumen. Coba Lagi!\n");
                         } else {
-                            if (!IsStackEmpty(stack_undo)) {
-                                Undo(&stack_undo, &stack_redo, &latest_state);
-                                loadState(&simulator, &latest_state, "ADMIN", &latest_notification, &kulkas, game.currentTime);
-                            } else {
-                                sprintRed("Tidak bisa UNDO.\n")
-                            }
+                            Undo(&stack_undo, &stack_redo, &latest_state);
+                            loadState(&simulator, &latest_state, "ADMIN", &latest_notification, &kulkas, game.currentTime);
                         }
                         break;
                     case 14: /* REDO */
                         if (L.Length != 1) {
                             sprintRed("Command REDO tidak memiliki argumen. Coba Lagi!\n");
                         } else {
-                            if (!IsStackEmpty(stack_redo)) {
-                                Redo(&stack_undo, &stack_redo, &latest_state);
-                                loadState(&simulator, &latest_state, "ADMIN", &latest_notification, &kulkas, game.currentTime);
-                            } else {
-                                sprintRed("Tidak bisa REDO.\n")
-                            }
+                            Redo(&stack_undo, &stack_redo, &latest_state);
+                            loadState(&simulator, &latest_state, "ADMIN", &latest_notification, &kulkas, game.currentTime);
                         }
                         break;
                     default:
