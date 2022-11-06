@@ -22,6 +22,7 @@ void makeDummyInfoType(infotype * dummy) {
     char* tempnama;
     TIME tempexp;
     TIME tempdeli;
+    TIME temppengolahan;
     char temploc;
     Makanan temp;
     POINT tempsize;
@@ -34,7 +35,8 @@ void makeDummyInfoType(infotype * dummy) {
     temploc = 'x';
     Absis(tempsize) = 0;
     Ordinat(tempsize) = 0;
+    CreateTime(&temppengolahan, 0, 0, 0);
 
-    createMakanan(&temp, tempid, tempnama, tempexp, temploc, tempdeli, tempsize);
+    createMakanan(&temp, tempid, tempnama, tempexp, temploc, tempdeli, tempsize, temppengolahan);
     MakeinfoType(dummy, temp);
 }

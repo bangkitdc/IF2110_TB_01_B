@@ -114,9 +114,9 @@ void inputConfigFile(Game *g,Simulator *sim, char *PATH, int type) {
                 int i, j, k;
                 for (i = 0; i < n; i++) {
                     Makanan M;
-                    int id, day1, hour1, min1, day2, hour2, min2;
+                    int id, day1, hour1, min1, day2, hour2, min2, day3, hour3, min3;
                     char *name;
-                    TIME exp, delivery;
+                    TIME exp, delivery, pengolahan;
                     char loc;
                     POINT size;
                     for (j = 0; j < 6; j++) {
@@ -152,6 +152,10 @@ void inputConfigFile(Game *g,Simulator *sim, char *PATH, int type) {
                                 } else if (isWordEq(MIX_FILE, LFile.TabWords[0])) {
                                     loc = 'M';
                                 }
+                                day3 = wordToInt(LFile.TabWords[1]);
+                                hour3 = wordToInt(LFile.TabWords[2]);
+                                min3 = wordToInt(LFile.TabWords[3]);
+                                CreateTime(&pengolahan, day3, hour3, min3);
                                 break;
                             case 5:     /* Ukuran Makanan (mxn) */
                                 Absis(size) = wordToInt(LFile.TabWords[0]);
@@ -162,7 +166,7 @@ void inputConfigFile(Game *g,Simulator *sim, char *PATH, int type) {
                         }
                         ADVNewline();
                     }
-                    createMakanan(&M, id, name, exp, loc, delivery, size);
+                    createMakanan(&M, id, name, exp, loc, delivery, size, pengolahan);
                     insertFood(&g->listMakanan, M);
                 }
                 break;
@@ -224,19 +228,19 @@ void inputConfigFile(Game *g,Simulator *sim, char *PATH, int type) {
 
 void help() {
     sprintCyan("============== List Command ==============\n");
-    printf("[1] MOVE X (X: NORTH/ SOUTH/ WEST/ EAST)\n");
-    printf("[2] BUY\n");
-    printf("[3] FRY\n");
-    printf("[4] CHOP\n");
-    printf("[5] BOIL\n");
-    printf("[6] MIX\n");
-    printf("[7] WAIT X Y (X: jam, Y: menit,)\n");
-    printf("[8] INVENTORY\n");
-    printf("[9] INVENTORY\n");
-    printf("[10] CATALOG\n");
-    printf("[11] COOKBOOK\n");
-    printf("[12] HELP\n");
-    printf("[13] EXIT\n");
+    printf("  [1] MOVE X (X: NORTH/ SOUTH/ WEST/ EAST)\n");
+    printf("  [2] BUY\n");
+    printf("  [3] FRY\n");
+    printf("  [4] CHOP\n");
+    printf("  [5] BOIL\n");
+    printf("  [6] MIX\n");
+    printf("  [7] WAIT X Y (X: jam, Y: menit)\n");
+    printf("  [8] INVENTORY\n");
+    printf("  [9] INVENTORY\n");
+    printf("  [10] CATALOG\n");
+    printf("  [11] COOKBOOK\n");
+    printf("  [12] HELP\n");
+    printf("  [13] EXIT\n");
 }
 
 void exitGame() {

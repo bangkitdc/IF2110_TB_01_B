@@ -2,6 +2,7 @@
 
 #include <stdio.h>
 #include "liststatikM.h"
+#include "../../utility/color/color.h"
 
 /* ********** KONSTRUKTOR ********** */
 /* Konstruktor : create List kosong untuk list makanan */
@@ -46,7 +47,7 @@ void printCatalog(ListStatikM l) {
     int i;
 
     // ALGORITMA
-    printf("List Makanan\n");
+    sprintCyan("============== List Makanan ==============\n");
     printf("(nama - durasi kedaluwarsa - aksi yang diperlukan - delivery time - size)\n");
 
     if (listLengthStatikM(l) > 0) {
@@ -59,16 +60,24 @@ void printCatalog(ListStatikM l) {
                     printf(" - BUY - ");
                     break;
                 case 'F':
-                    printf(" - FRY - ");
+                    printf(" - FRY (");
+                    TulisTIME2(PENGOLAHAN(temp));
+                    printf(") - ");
                     break;
                 case 'M':
-                    printf(" - MIX - ");
+                    printf(" - MIX (");
+                    TulisTIME2(PENGOLAHAN(temp));
+                    printf(") - ");
                     break;
                 case 'C':
-                    printf(" - CHOP - ");
+                    printf(" - CHOP (");
+                    TulisTIME2(PENGOLAHAN(temp));
+                    printf(") - ");
                     break;
                 case 'B':
-                    printf(" - BOIL - ");
+                    printf(" - BOIL (");
+                    TulisTIME2(PENGOLAHAN(temp));
+                    printf(") - ");
                     break;
                 default:
                     break;

@@ -5,7 +5,7 @@
 #include "makanan.h"
 
 /* Konstruktor */
-void createMakanan(Makanan *M, int id, char *name, TIME exp, char loc, TIME delivery, POINT size) {
+void createMakanan(Makanan *M, int id, char *name, TIME exp, char loc, TIME delivery, POINT size, TIME pengolahan) {
     /* I.S. Makanan sembarang dan input sesuai batasan */
     /* F.S. Makanan terdefinisi sesuai input */
     
@@ -16,6 +16,7 @@ void createMakanan(Makanan *M, int id, char *name, TIME exp, char loc, TIME deli
     LOC(*M) = loc;
     DELIVERY(*M) = delivery;
     SIZE(*M) = size;
+    PENGOLAHAN(*M) = pengolahan;
 }
 
 /* Predikat */
