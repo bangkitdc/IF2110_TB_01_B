@@ -118,17 +118,26 @@ int main() {
                         } else {
                             boolean stuck, flag = true;
                             if (isWordEq(NORTH, L.TabWords[1])) {
+                                simulatorToState(simulator, game.currentTime, latest_notification, kulkas, &latest_state);
+                                Push(&stack_undo,latest_state);
                                 gerakUser(&simulator, &game.map, &stuck, 'w');
                             } else if (isWordEq(SOUTH, L.TabWords[1])) {
+                                simulatorToState(simulator, game.currentTime, latest_notification, kulkas, &latest_state);
+                                Push(&stack_undo,latest_state);
                                 gerakUser(&simulator, &game.map, &stuck, 's');
                             } else if (isWordEq(WEST, L.TabWords[1])) {
+                                simulatorToState(simulator, game.currentTime, latest_notification, kulkas, &latest_state);
+                                Push(&stack_undo,latest_state);
                                 gerakUser(&simulator, &game.map, &stuck, 'a');
                             } else if (isWordEq(EAST, L.TabWords[1])) {
+                                simulatorToState(simulator, game.currentTime, latest_notification, kulkas, &latest_state);
+                                Push(&stack_undo,latest_state);
                                 gerakUser(&simulator, &game.map, &stuck, 'd');
                             } else {
                                 sprintRed("Argumen tidak tersedia. Pilih NORTH/ SOUTH/ WEST/ EAST !\n");
                                 break;
                             }
+
                             if (stuck) {
                                 sprintRed("Menabrak, Silahkan liat peta!\n");
                             } else {
@@ -136,8 +145,6 @@ int main() {
                                 WriteLokasi(simulator.lokasi);
                                 TulisTIME3(game.currentTime);
                                 printf("\n"); DisplayMap(game.map, simulator.lokasi);
-                                simulatorToState(simulator, game.currentTime, latest_notification, kulkas, &latest_state);
-                                Push(&stack_undo,latest_state);
                             }   
                         }
                         break;
@@ -163,12 +170,12 @@ int main() {
                             jam = wordToInt(L.TabWords[1]);
                             menit = wordToInt(L.TabWords[2]);
                             if (jam != -999 && menit != -999) {
+                                simulatorToState(simulator, game.currentTime, latest_notification, kulkas, &latest_state);
+                                Push(&stack_undo,latest_state);
                                 game.currentTime = NextNMenit(game.currentTime, jam * 60 + menit);
                                 WriteLokasi(simulator.lokasi);
                                 TulisTIME3(game.currentTime);
                                 printf("\n"); DisplayMap(game.map, simulator.lokasi);
-                                simulatorToState(simulator, game.currentTime, latest_notification, kulkas, &latest_state);
-                                Push(&stack_undo,latest_state);
                             } else {
                                 sprintRed("2 Argumen harus integer >= 0. Coba Lagi!\n");
                             }
