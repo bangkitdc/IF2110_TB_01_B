@@ -185,16 +185,24 @@ int main() {
                         if (L.Length != 1) {
                             sprintRed("Command UNDO tidak memiliki argumen. Coba Lagi!\n");
                         } else {
-                            Undo(&stack_undo, &stack_redo, &latest_state);
-                            loadState(&simulator, &latest_state, "ADMIN", &latest_notification, &kulkas, game.currentTime);
+                            if (!IsStackEmpty(stack_undo)) {
+                                Undo(&stack_undo, &stack_redo, &latest_state);
+                                loadState(&simulator, &latest_state, "ADMIN", &latest_notification, &kulkas, game.currentTime);
+                            } else {
+                                sprintRed("Tidak bisa UNDO.\n")
+                            }
                         }
                         break;
                     case 14: /* REDO */
                         if (L.Length != 1) {
                             sprintRed("Command REDO tidak memiliki argumen. Coba Lagi!\n");
                         } else {
-                            Redo(&stack_undo, &stack_redo, &latest_state);
-                            loadState(&simulator, &latest_state, "ADMIN", &latest_notification, &kulkas, game.currentTime);
+                            if (!IsStackEmpty(stack_redo)) {
+                                Redo(&stack_undo, &stack_redo, &latest_state);
+                                loadState(&simulator, &latest_state, "ADMIN", &latest_notification, &kulkas, game.currentTime);
+                            } else {
+                                sprintRed("Tidak bisa REDO.\n")
+                            }
                         }
                         break;
                     default:
