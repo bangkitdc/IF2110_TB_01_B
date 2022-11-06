@@ -22,6 +22,7 @@ typedef struct {
   TIME waktu; // Waktu terkini
   POINT koordinat; // Posisi simulator
   PrioQueue inventory; // Prioqueue berupa makanan dalam inventory yang disertai waktu expired
+  PrioQueue delivery; // Prioqueue berupa waktu delivery
   MatrixKulkas kulkas; // Isi kulkas terkini
   ListDinMakanan listMakanan; // List makanan yang berubah (misal abis di-FRY/di-BOIL/kedaluarsa)
 } State; // State yang disimpan di dalam stack
