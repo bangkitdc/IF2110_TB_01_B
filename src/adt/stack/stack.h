@@ -46,19 +46,21 @@ typedef struct {
 #define InfoWaktu(X) (X).waktu
 #define InfoKoordinat(X) (X).koordinat
 #define InfoInventory(X) (X).inventory
+#define InfoKulkas(X) (X).kulkas
+#define InfoNotif(X) (X).listMakanan
 
 /* ************ Prototype ************ */
 /* *** Konstruktor/Kreator *** */
-void CreateEmpty(Stack *S);
+void CreateEmptyStack(Stack *S);
 /* I.S. sembarang; */
 /* F.S. Membuat sebuah stack S yang kosong berkapasitas MaxStack */
 /* jadi indeksnya antara 0.. MaxStack */
 /* Ciri stack kosong : TOP bernilai Nil */
 
 /* ************ Predikat Untuk test keadaan KOLEKSI ************ */
-boolean IsEmpty(Stack S);
+boolean IsStackEmpty(Stack S);
 /* Mengirim true jika Stack kosong: lihat definisi di atas */
-boolean IsFull(Stack S);
+boolean IsStackFull(Stack S);
 /* Mengirim true jika tabel penampung nilai elemen stack penuh */
 
 /* ************ Menambahkan sebuah elemen ke Stack ************ */
@@ -78,12 +80,12 @@ void EmptyStack(Stack * S);
 /* I.S. S tidak mungkin kosong */
 /* F.S. S kosong */
 
-void Undo(Stack * SMain, Stack * SSecondary);
+void Undo(Stack * SMain, Stack * SSecondary, State * currentState);
 /* Meng-undo aksi pada SMain */
 /* I.S. SMain tidak boleh kosong */
 /* F.S. Elemen TOP pada SMain telah di-pop, dan elemen tersebut dipush ke SSecondary */
 
-void Redo(Stack * SMain, Stack * SSecondary);
+void Redo(Stack * SMain, Stack *SSecondary, State *currentState);
 /* Meng-redo aksi pada SMain */
 /* I.S. SSecondary tidak boleh kosong */
 /* F.S. Elemen TOP pada SSecondary telah di-pop, dan elemen tersebut dipush ke SMain */

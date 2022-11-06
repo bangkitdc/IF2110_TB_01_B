@@ -3,7 +3,7 @@
 
 /* ************ Prototype ************ */
 /* *** Konstruktor/Kreator *** */
-void CreateEmpty(Stack *S) {
+void CreateEmptyStack(Stack *S) {
 /* I.S. sembarang; */
 /* F.S. Membuat sebuah stack S yang kosong berkapasitas MaxStack */
 /* jadi indeksnya antara 0.. MaxStack */
@@ -12,11 +12,11 @@ void CreateEmpty(Stack *S) {
 }
 
 /* ************ Predikat Untuk test keadaan KOLEKSI ************ */
-boolean IsEmpty(Stack S) {
+boolean IsStackEmpty(Stack S) {
 /* Mengirim true jika Stack kosong: lihat definisi di atas */
     return (Top(S) == Nil);
 }
-boolean IsFull(Stack S) {
+boolean IsStackFull(Stack S) {
 /* Mengirim true jika tabel penampung nilai elemen stack penuh */
     return (Top(S) == MaxStack - 1);
 }
@@ -44,7 +44,7 @@ void EmptyStack(Stack * S) {
 /* I.S. S tidak mungkin kosong */
 /* F.S. S kosong */
     State temp;
-    while (!IsEmpty(*S)) {
+    while (!IsStackEmpty(*S)) {
         Pop(S, &temp);
     }
 
@@ -57,7 +57,7 @@ void Undo(Stack * SMain, Stack * SSecondary, State * currentState) {
     State temp;
     Pop(SMain, &temp);
     Push(SSecondary, temp);
-    currentState = temp;    
+    *currentState = temp;    
 }
 
 void Redo(Stack * SMain, Stack * SSecondary, State * currentState) {
@@ -68,6 +68,6 @@ void Redo(Stack * SMain, Stack * SSecondary, State * currentState) {
     State temp;
     Pop(SSecondary, &temp);
     Push(SMain, temp);
-    currentState = temp;
+    *currentState = temp;
     EmptyStack(SSecondary);
 }
