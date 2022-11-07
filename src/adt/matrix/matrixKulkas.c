@@ -4,7 +4,7 @@
 #include "matrixKulkas.h"
 
 /* rowEff >= 1 dan colEff >= 1 */
-/* Indeks matriks yang digunakan: [0..ROW_CAP-1][0..COL_CAP-1] */
+/* Indeks matriks yang digunakan: [0..ROW_CAP_K-1][0..COL_CAP_K-1] */
 /* Memori matriks yang dipakai selalu di "ujung kiri atas" */
 
 /* ********** DEFINISI PROTOTIPE PRIMITIF ********** */
@@ -31,7 +31,7 @@ void createMatrixKulkas(int nRows, int nCols, MatrixKulkas *m)
 boolean isMatrixKulkasIdxValid(int i, int j)
 /* Mengirimkan true jika i, j adalah index yang valid untuk matriks apa pun */
 {
-    return (i>=0 && i<ROW_CAP && j>=0 && j<COL_CAP);
+    return (i>=0 && i<ROW_CAP_K && j>=0 && j<COL_CAP_K);
 }
 
 /* *** Selektor: Untuk sebuah matriks m yang terdefinisi: *** */

@@ -38,6 +38,8 @@ Word MOVE_COMMAND = {"MOVE", 4};
 Word CATALOG_COMMAND = {"CATALOG", 7};
 Word COOKBOOK_COMMAND = {"COOKBOOK", 8};
 Word WAIT_COMMAND = {"WAIT", 4};
+Word UNDO_COMMAND = {"UNDO", 4};
+Word REDO_COMMAND = {"REDO", 4};
 
 Word BUY_FILE = {"Buy", 3};
 Word FRY_FILE = {"Fry", 3};
@@ -85,10 +87,12 @@ int MenuInput(Word w) {
         MOVE_COMMAND,
         CATALOG_COMMAND,
         COOKBOOK_COMMAND,
-        WAIT_COMMAND},
-    13 };
+        WAIT_COMMAND,
+        UNDO_COMMAND,
+        REDO_COMMAND},
+    15 };
 
-    for (int i = 0; i < 13; i ++) {
+    for (int i = 0; i < 15; i ++) {
         if (isWordEq(w, LCommand.TabWords[i])) {
             return i;
         }

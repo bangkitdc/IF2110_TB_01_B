@@ -9,6 +9,7 @@ void CreateEmptyStack(Stack *S) {
 /* jadi indeksnya antara 0.. MaxStack */
 /* Ciri stack kosong : TOP bernilai Nil */
     Top(*S) = Nil;
+
 }
 
 /* ************ Predikat Untuk test keadaan KOLEKSI ************ */
@@ -47,7 +48,6 @@ void EmptyStack(Stack * S) {
     while (!IsStackEmpty(*S)) {
         Pop(S, &temp);
     }
-
 }
 
 void Undo(Stack * SMain, Stack * SSecondary, State * currentState) {
