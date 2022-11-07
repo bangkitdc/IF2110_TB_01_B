@@ -11,6 +11,7 @@
 #include "../machine/wordmachine.h"
 #include "../infotype/infotype.h"
 #include "../listdin/listdinmakanan.h"
+#include "../point/point.h"
 
 #define Nil -1
 /* Konstanta untuk mendefinisikan address tak terdefinisi */
@@ -95,10 +96,22 @@ void PrintPrioQueue (PrioQueue Q);
 /* Mencetak isi queue Q ke layar */
 /* I.S. Q terdefinisi, mungkin kosong */
 /* F.S. Q tercetak ke layar dengan format:
-<time-1> <elemen-1>
-...
-<time-n> <elemen-n>
-#
+    List Makanan di Inventory
+    (nama - waktu sisa kedaluwarsa)
+    makanan1 - x hari y jam z menit
+    makanan2 - y menit
+    dst
+*/
+
+void PrintPrioQueueDelivery (PrioQueue Q);
+/* Mencetak isi Delivery list */
+/* I.S. Q terdefinisi, mungkin kosong */
+/* F.S. Q tercetak ke layar dengan format:
+    List Makanan di Perjalanan
+    (nama - waktu sisa delivery)
+    makanan1 - x hari y jam z menit
+    makanan2 - y menit
+    dst
 */
 
 /* Operasi untuk mengurus inventory dan delivery list */

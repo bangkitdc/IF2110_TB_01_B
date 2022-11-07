@@ -79,7 +79,7 @@ void Enqueue1 (PrioQueue * Q, infotype X) {
         tempidx = Tail(*Q);
 
         // geser yang timenya > x ke kanan
-        while ((Time(X) < Time(Elmt(*Q, tempidx))) && counter > 0) {
+        while (TLT(Time(X), Time(Elmt(*Q, tempidx))) && counter > 0) {
             (*Q).T[tempidx + 1] = (*Q).T[tempidx];
 
             tempidx--;
@@ -253,7 +253,7 @@ void PrintPrioQueue (PrioQueue Q) {
 /* F.S. Q tercetak ke layar dengan format:
     List Makanan di Inventory
     (nama - waktu sisa kedaluwarsa)
-    makanan1 - x menit
+    makanan1 - x hari y jam z menit
     makanan2 - y menit
     dst
 */
@@ -269,12 +269,47 @@ void PrintPrioQueue (PrioQueue Q) {
     ctr = 1;
     while (!IsEmptyPrioqueue(Q)) {
         Dequeue(&Q, &temp);
-        printf("%d. %s - %ld menit\n", ctr, NAME(Info(temp)), Time(temp)); // dijadiin nama makanan dulu
+        printf("%d. %s - ", ctr, NAME(Info(temp))); // dijadiin nama makanan dulu
+        TulisTIME2(Time(temp));
+        printf("\n");
         ctr++;
     }
 
     if (ctr == 1) {
         printf("Inventorynya kosong.. :(\n");
+    }
+}
+
+void PrintPrioQueueDelivery (PrioQueue Q) {
+/* Mencetak isi Delivery list */
+/* I.S. Q terdefinisi, mungkin kosong */
+/* F.S. Q tercetak ke layar dengan format:
+    List Makanan di Perjalanan
+    (nama - waktu sisa delivery)
+    makanan1 - x hari y jam z menit
+    makanan2 - y menit
+    dst
+*/
+
+    /* KAMUS */
+    infotype temp;
+    int ctr;
+
+    /* ALGORITMA */
+    printf("List Makanan di Perjalanan\n");
+    printf("(nama - waktu sisa delivery)\n");
+
+    ctr = 1;
+    while (!IsEmptyPrioqueue(Q)) {
+        Dequeue(&Q, &temp);
+        printf("%d. %s - ", ctr, NAME(Info(temp))); // dijadiin nama makanan dulu
+        TulisTIME2(Time(temp));
+        printf("\n");
+        ctr++;
+    }
+
+    if (ctr == 1) {
+        printf("Delivery list kosong.. :(\n");
     }
 }
 
@@ -295,8 +330,8 @@ void PasstimeQueue(PrioQueue * Q, int x, ListDinMakanan * notif) {
     for (i = 1; i <= x; i++) {
         while (!IsEmptyPrioqueue(*Q)) {
             Dequeue(Q, &tempvar);
-            Time(tempvar)--;
-            if (Time(tempvar) == 0) {
+            Time(tempvar) = PrevMenit(Time(tempvar));
+            if (TIMEToMenit(Time(tempvar)) == 0) {
                 insertLastMakanan(notif, tempvar);
             } else {
                 Enqueue(&temp, tempvar);
@@ -329,10 +364,10 @@ void PassTimeDelivery(PrioQueue * deliList, PrioQueue * destination, int x, List
     for (i = 1; i <= x; i++) {
         while (!IsEmptyPrioqueue(*deliList)) {
             Dequeue(deliList, &tempvar);
-            Time(tempvar)--;
-            if (Time(tempvar) == 0) {
-                Time(tempvar) = TIMEToMenit(EXP(Info(tempvar)));
-
+            Time(tempvar) = PrevMenit(Time(tempvar));
+            if (TIMEToMenit(Time(tempvar)) == 0) {
+                Time(tempvar) = EXP(Info(tempvar));
+                LOC(Info(tempvar)) = 'B';
                 DELIVERY(Info(tempvar)) = temptime;
                 Enqueue(destination, tempvar);
                 insertLastMakanan(notif, tempvar);
@@ -367,7 +402,7 @@ int IndexOfPrioqueue(PrioQueue Q, infotype x) {
     found = false;
     idx = 0;
     while (!found && !IsEmptyPrioqueue(temp)) {
-        if (Time(InfoHead(temp)) == Time(x) && ID(Info(InfoHead(temp))) == ID(Info(x))) {
+        if (TEQ(Time(InfoHead(temp)), Time(x)) && ID(Info(InfoHead(temp))) == ID(Info(x))) {
             found = true;
         } else {
             idx++;

@@ -73,7 +73,7 @@ void printListMakanan(ListDinMakanan l) {
     } else {
         printf("\n");
         for (i = getFirstIdxS(l); i <= getLastIdxS(l); i++) {
-            if (Time(ELMT_LISTDINAMIS_Makanan(l, i)) == 0) {
+            if (TIMEToMenit(Time(ELMT_LISTDINAMIS_Makanan(l, i))) == 0) {
                 printf("- %s telah kadaluarsa :(\n", NAME(Info(ELMT_LISTDINAMIS_Makanan(l, i))));
             } else {
                 if (LOC(Info(ELMT_LISTDINAMIS_Makanan(l, i))) == 'F') {
@@ -114,7 +114,7 @@ void printListMakananUndo(ListDinMakanan l) {
     } else {
         printf("\n");
         for (i = getFirstIdxS(l); i <= getLastIdxS(l); i++) {
-            if (Time(ELMT_LISTDINAMIS_Makanan(l, i)) == 0) {
+            if (TIMEToMenit(Time(ELMT_LISTDINAMIS_Makanan(l, i))) == 0) {
                 printf("- %s dikembalikan ke inventory\n", NAME(Info(ELMT_LISTDINAMIS_Makanan(l, i))));
             } else {
                 if (LOC(Info(ELMT_LISTDINAMIS_Makanan(l, i))) == 'F') {

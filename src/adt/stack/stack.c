@@ -69,5 +69,4 @@ void Redo(Stack * SMain, Stack * SSecondary, State * currentState) {
     Pop(SSecondary, &temp);
     Push(SMain, temp);
     *currentState = temp;
-    EmptyStack(SSecondary);
 }
