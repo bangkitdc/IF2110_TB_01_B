@@ -80,6 +80,8 @@ void printListMakanan(ListDinMakanan l) {
                     printf("- %s telah digoreng\n", NAME(Info(ELMT_LISTDINAMIS_Makanan(l, i))));
                 } else if (LOC(Info(ELMT_LISTDINAMIS_Makanan(l, i))) == 'T') {
                     printf("- %s telah masuk ke inventory\n", NAME(Info(ELMT_LISTDINAMIS_Makanan(l, i))));
+                } else if (LOC(Info(ELMT_LISTDINAMIS_Makanan(l, i))) == 't') {
+                    printf("- %s telah masuk ke delivery list\n", NAME(Info(ELMT_LISTDINAMIS_Makanan(l, i))));
                 } else if (LOC(Info(ELMT_LISTDINAMIS_Makanan(l, i))) == 'C') {
                     printf("- %s telah terpotong\n", NAME(Info(ELMT_LISTDINAMIS_Makanan(l, i))));
                 } else if (LOC(Info(ELMT_LISTDINAMIS_Makanan(l, i))) == 'B') {
@@ -121,6 +123,8 @@ void printListMakananUndo(ListDinMakanan l) {
                     printf("- %s tidak jadi digoreng\n", NAME(Info(ELMT_LISTDINAMIS_Makanan(l, i))));
                 } else if (LOC(Info(ELMT_LISTDINAMIS_Makanan(l, i))) == 'T') {
                     printf("- %s masuk kembali ke delivery list\n", NAME(Info(ELMT_LISTDINAMIS_Makanan(l, i))));
+                } else if (LOC(Info(ELMT_LISTDINAMIS_Makanan(l, i))) == 't') {
+                    printf("- %s tidak jadi masuk delivery list\n", NAME(Info(ELMT_LISTDINAMIS_Makanan(l, i))));
                 } else if (LOC(Info(ELMT_LISTDINAMIS_Makanan(l, i))) == 'C') {
                     printf("- %s tidak jadi dipotong\n", NAME(Info(ELMT_LISTDINAMIS_Makanan(l, i))));
                 } else if (LOC(Info(ELMT_LISTDINAMIS_Makanan(l, i))) == 'B') {
