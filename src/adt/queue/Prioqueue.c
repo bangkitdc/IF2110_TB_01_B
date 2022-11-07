@@ -367,8 +367,8 @@ void PassTimeDelivery(PrioQueue * deliList, PrioQueue * destination, int x, List
             Time(tempvar) = PrevMenit(Time(tempvar));
             if (TIMEToMenit(Time(tempvar)) == 0) {
                 Time(tempvar) = EXP(Info(tempvar));
-                LOC(Info(tempvar)) = 'B';
                 DELIVERY(Info(tempvar)) = temptime;
+                LOC(Info(tempvar)) = 'T';
                 Enqueue(destination, tempvar);
                 insertLastMakanan(notif, tempvar);
             } else {
