@@ -11,6 +11,7 @@
 #include "../color/color.h"
 #include "../../adt/map/map.h"
 #include "../../adt/simulator/simulator.h"
+#include "../../adt/stack/stack.h"
 
 void startMenu();
 

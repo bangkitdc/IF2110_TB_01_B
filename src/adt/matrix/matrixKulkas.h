@@ -7,19 +7,19 @@
 #include "../queue/Prioqueue.h"
 
 /* Ukuran maksimum baris dan kolom */
-#define ROW_CAP 100
-#define COL_CAP 100
+#define ROW_CAP_K 10
+#define COL_CAP_K 20
 
 typedef int IdxType; /* Index baris, kolom */
 typedef infotype ElType;
 typedef struct
 {
-   ElType mem[ROW_CAP][COL_CAP];
+   ElType mem[ROW_CAP_K][COL_CAP_K];
    int rowEff; /* banyaknya/ukuran baris yg terdefinisi */
    int colEff; /* banyaknya/ukuran kolom yg terdefinisi */
 } MatrixKulkas;
 /* rowEff >= 1 dan colEff >= 1 */
-/* Indeks matriks yang digunakan: [0..ROW_CAP-1][0..COL_CAP-1] */
+/* Indeks matriks yang digunakan: [0..ROW_CAP_K-1][0..COL_CAP_K-1] */
 /* Memori matriks yang dipakai selalu di "ujung kiri atas" */
 
 /* ********** DEFINISI PROTOTIPE PRIMITIF ********** */
