@@ -7,16 +7,17 @@
 #include "../../include/boolean.h"
 #include "charmachine.h"
 
-#define NMax 100
+#define NMax1 100
+#define NMax2 50
 #define BLANK ' '
 
 typedef struct {
-   char TabWord[NMax]; /* container penyimpan kata, indeks yang dipakai [0..NMax-1] */
+   char TabWord[NMax1]; /* container penyimpan kata, indeks yang dipakai [0..NMax-1] */
    int Length;
 } Word;
 
 typedef struct {
-   Word TabWords[NMax];
+   Word TabWords[NMax2];
    int Length;
 } ListWord;
 

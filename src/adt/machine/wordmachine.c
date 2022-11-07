@@ -80,7 +80,7 @@ void CopyWord(){
    /* ALGORITMA */
    currentWord.Length = 0;
    while (currentChar != BLANK && currentChar != MARK) {
-      if (currentWord.Length < NMax) {
+      if (currentWord.Length < NMax1) {
          currentWord.TabWord[currentWord.Length] = currentChar;
          currentWord.Length += 1;
          ADV();

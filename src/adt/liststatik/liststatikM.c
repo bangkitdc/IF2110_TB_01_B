@@ -47,7 +47,7 @@ void printCatalog(ListStatikM l) {
     int i;
 
     // ALGORITMA
-    sprintCyan("============== List Makanan ==============\n");
+    sprintCyan("\n============== List Makanan ==============\n");
     printf("(nama - durasi kedaluwarsa - aksi yang diperlukan - delivery time - size)\n");
 
     if (listLengthStatikM(l) > 0) {
@@ -90,6 +90,14 @@ void printCatalog(ListStatikM l) {
             printf(" - (%d x %d)", Absis(SIZE(temp)), Ordinat(SIZE(temp)));
             printf("\n");
         }
+
+        // https://stackoverflow.com/questions/39025074/c-program-how-to-print-in-table-format-alignment
+        // for (int i = 0; i < listLengthStatikM(l); i ++) {
+        //     Makanan temp = ELMT_LISTSTATIKM(l, i);
+        //     printf("%-10d\t\t %-12s\t\t %8c\t %8d\n\n", ID(temp), NAME(temp), LOC(temp), Absis(SIZE(temp)));
+        // }
+    } else {
+        sprintRed("\nCatalog kosong :(\n");
     }
 }
 

@@ -15,7 +15,7 @@
 #include "../liststatik/liststatikM.h"
 
 #define Nil -1
-#define MaxStack 50
+#define MaxStack 30
 /* Nil adalah stack dengan elemen kosong . */
 
 typedef struct {
