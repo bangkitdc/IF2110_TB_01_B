@@ -3,6 +3,7 @@
 #include "utils.h"
 #include "../../include/boolean.h"
 
+
 const char *bnmo[] = {
     "        .................        ",
     "      .IIIIIIIIIIIIIIIIIII.      ",
@@ -245,6 +246,30 @@ void help() {
     printf("  [11] COOKBOOK\n");
     printf("  [12] HELP\n");
     printf("  [13] EXIT\n");
+}
+
+void printCookBook(ListStatikT listResep, ListStatikM listMakanan){
+    Makanan display;
+    Tree resep;
+    for(int i=0;i<listResep.elEff;i++){
+        resep = listResep.list[i];
+        display = getMakananFromId(resep->info, listMakanan);
+        printf("%d. %s\n", i+1, display.name);
+        printf("   ");
+        if(display.location == 'B'){
+            printf("BOIL");
+        }else if(display.location == 'F'){
+            printf("FRY");
+        }else if(display.location == 'C'){
+            printf("CHOP");
+        }else if(display.location == 'M'){
+            printf("MIX");
+        }
+        for(int j=0;j<resep->childEff;j++){
+            printf(" - %s", getMakananFromId(resep->children[i]->info, listMakanan).name);
+        }
+        printf("\n");
+    }
 }
 
 void exitGame() {

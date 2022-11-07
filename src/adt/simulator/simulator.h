@@ -75,9 +75,14 @@ boolean adjacent(Simulator s, Map peta, char x);
 /* Mengecek apakah simulator bersebelahan dengan tempat tertentu */
 
 void displayListMakananAksi(ListStatikM listMakanan, ListStatikM *hasil, char aksi);
+// menampilkan makanan apa saja yang bisa dimasak berdasarkan aksi
 
 Tree getTreeFromMakanan(Makanan makanan, ListStatikT listResep);
+// mendapatkan tree makanan dari adt makanan
 
 void mengolahMakanan(Makanan makananOlah, PrioQueue *inventory, ListStatikT listResep, ListStatikM listMakanan, char lokasiAksi);
+// mengolah makanan
+
+Makanan getMakananFromId(int id, ListStatikM listMakanan);
 
 #endif
