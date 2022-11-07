@@ -188,10 +188,10 @@ void inputConfigFile(Game *g,Simulator *sim, char *PATH, int type) {
                         addChild(&parent, newTreeNode(wordToInt(LFile.TabWords[2+j])));
                     }
                     (&g->listResep)->list[i] = parent;
-                    // for(int j=0;j<i;j++){
-                    //     tambahBahan(&parent, (&g->listResep)->list[j]);
-                    //     tambahBahan(&(&g->listResep)->list[j], parent);
-                    // }
+                    for(int j=0;j<i;j++){
+                        tambahBahan(&parent, (&g->listResep)->list[j]);
+                        tambahBahan(&(&g->listResep)->list[j], parent);
+                    }
                 }
                 break;
             case 3: /* Config Peta */;
@@ -246,6 +246,19 @@ void help() {
     printf("  [11] COOKBOOK\n");
     printf("  [12] HELP\n");
     printf("  [13] EXIT\n");
+}
+
+void tambahBahan(Tree *p, Tree l){
+    Tree parent;
+    for(int i=0;i<(*p)->childEff;i++){
+        parent = (*p)->children[i];
+        if(parent->info == l->info){
+            l->childEff = (*p)->childEff;
+            for(int j=0;j<parent->childEff;j++){
+                parent->children[j] = l->children[j];
+            }
+        }
+    }
 }
 
 void printCookBook(ListStatikT listResep, ListStatikM listMakanan){
