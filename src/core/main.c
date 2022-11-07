@@ -121,18 +121,22 @@ int main() {
                                 simulatorToState(simulator, game.currentTime, latest_notification, kulkas, &latest_state);
                                 Push(&stack_undo,latest_state);
                                 gerakUser(&simulator, &game.map, &stuck, 'w');
+                                EmptyStack(&stack_redo);
                             } else if (isWordEq(SOUTH, L.TabWords[1])) {
                                 simulatorToState(simulator, game.currentTime, latest_notification, kulkas, &latest_state);
                                 Push(&stack_undo,latest_state);
                                 gerakUser(&simulator, &game.map, &stuck, 's');
+                                EmptyStack(&stack_redo);
                             } else if (isWordEq(WEST, L.TabWords[1])) {
                                 simulatorToState(simulator, game.currentTime, latest_notification, kulkas, &latest_state);
                                 Push(&stack_undo,latest_state);
                                 gerakUser(&simulator, &game.map, &stuck, 'a');
+                                EmptyStack(&stack_redo);
                             } else if (isWordEq(EAST, L.TabWords[1])) {
                                 simulatorToState(simulator, game.currentTime, latest_notification, kulkas, &latest_state);
                                 Push(&stack_undo,latest_state);
                                 gerakUser(&simulator, &game.map, &stuck, 'd');
+                                EmptyStack(&stack_redo);
                             } else {
                                 sprintRed("Argumen tidak tersedia. Pilih NORTH/ SOUTH/ WEST/ EAST !\n");
                                 break;
@@ -176,12 +180,27 @@ int main() {
                                 WriteLokasi(simulator.lokasi);
                                 TulisTIME3(game.currentTime);
                                 printf("\n"); DisplayMap(game.map, simulator.lokasi);
+                                EmptyStack(&stack_redo);
                             } else {
                                 sprintRed("2 Argumen harus integer >= 0. Coba Lagi!\n");
                             }
                         }
                         break;
-                    case 13: /* UNDO */
+                    case 13: /* MASUKKULKAS X Y*/
+                        if (L.Length != 3) {
+                            sprintRed("Command MASUKKULKAS memiliki 2 argumen. Coba Lagi!\n");
+                        } else {
+
+                        }
+                        break;
+                    case 14: /* KELUARKULKAS X Y*/
+                        if (L.Length != 3) {
+                            sprintRed("Command KELUARKULKAS memiliki 2 argumen. Coba Lagi!\n");
+                        } else {
+                            
+                        }
+                        break;
+                    case 15: /* UNDO */
                         if (L.Length != 1) {
                             sprintRed("Command UNDO tidak memiliki argumen. Coba Lagi!\n");
                         } else {
@@ -193,7 +212,7 @@ int main() {
                             }
                         }
                         break;
-                    case 14: /* REDO */
+                    case 16: /* REDO */
                         if (L.Length != 1) {
                             sprintRed("Command REDO tidak memiliki argumen. Coba Lagi!\n");
                         } else {

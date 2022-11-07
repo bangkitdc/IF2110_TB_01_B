@@ -8,7 +8,7 @@ void MakeinfoType (infotype * x, Makanan m) {
     // KAMUS
 
     // ALGORITMA
-    Time(*x) = TIMEToMenit(EXP(m));
+    Time(*x) = EXP(m);
     Info(*x) = m;
 }
 

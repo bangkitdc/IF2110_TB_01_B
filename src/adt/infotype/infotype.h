@@ -6,7 +6,7 @@
 
 /* Definisi elemen dan address */
 typedef struct {
-    long time;              /* berisi waktu dalam menit */
+    TIME time;              /* berisi waktu dalam menit */
     Makanan info;           /* makanan */
 } infotype;
 
