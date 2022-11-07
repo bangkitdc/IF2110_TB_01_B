@@ -8,6 +8,7 @@
 #include "../../adt/machine/wordmachine.h"
 #include "../../adt/tree/tree.h"
 #include "../../adt/liststatik/liststatikT.h"
+#include "../../adt/liststatik/liststatikM.h"
 #include "../color/color.h"
 #include "../../adt/map/map.h"
 #include "../../adt/simulator/simulator.h"
@@ -24,5 +25,7 @@ int MenuInput(Word w);
 void help();
 
 void exitGame();
+
+void printCookBook(ListStatikT listResep, ListStatikM listMakanan);
 
 #endif

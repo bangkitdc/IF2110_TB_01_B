@@ -359,3 +359,14 @@ void mengolahMakanan(Makanan makananOlah, PrioQueue *inventory, ListStatikT list
         }
     }
 }
+
+Makanan getMakananFromId(int id, ListStatikM listMakanan){
+    int i=0;
+    Makanan hasil;
+    while(listMakanan.contents[i].id != MARKSTATIK){
+        if(listMakanan.contents[i].id == id){
+            hasil = listMakanan.contents[i];
+        }
+    }
+    return hasil;
+}
