@@ -13,6 +13,7 @@ int main() {
     State latest_state;
     ListDinMakanan latest_notification;
     MatrixKulkas kulkas;
+    PrioQueue delivery_list;
 
     startMenu();
     int input;
@@ -23,6 +24,7 @@ int main() {
     CreateEmptyStack(&stack_redo);
     CreateListMakananDin(&latest_notification, 1000);
     createMatrixKulkas(10, 20, &kulkas);
+    CreateEmptyPrioqueue (&delivery_list, 100);
 
     do {
         /* Baca Command START/ EXIT */
@@ -109,7 +111,7 @@ int main() {
                         if (L.Length != 1) {
                             sprintRed("Command DELIVERY tidak memiliki argumen. Coba Lagi!\n");
                         } else {
-                            /* code */
+                            PrintPrioQueueDelivery(delivery_list);
                         }
                         break;
                     case 9: /* MOVE */
@@ -205,8 +207,11 @@ int main() {
                             sprintRed("Command UNDO tidak memiliki argumen. Coba Lagi!\n");
                         } else {
                             if (!IsStackEmpty(stack_undo)) {
-                            Undo(&stack_undo, &stack_redo, &latest_state);
-                            loadState(&simulator, &latest_state, "ADMIN", &latest_notification, &kulkas, &game.currentTime);
+                                Undo(&stack_undo, &stack_redo, &latest_state);
+                                loadState(&simulator, &latest_state, "ADMIN", &latest_notification, &kulkas, &game.currentTime);
+                                WriteLokasi(simulator.lokasi);
+                                TulisTIME3(game.currentTime);
+                                printf("\n"); DisplayMap(game.map, simulator.lokasi);
                             } else {
                                 sprintRed("Tidak bisa UNDO.\n");
                             }
@@ -219,6 +224,9 @@ int main() {
                             if (!IsStackEmpty(stack_redo)) {
                                 Redo(&stack_undo, &stack_redo, &latest_state);
                                 loadState(&simulator, &latest_state, "ADMIN", &latest_notification, &kulkas, &game.currentTime);
+                                WriteLokasi(simulator.lokasi);
+                                TulisTIME3(game.currentTime);
+                                printf("\n"); DisplayMap(game.map, simulator.lokasi);
                             } else {
                                 sprintRed("Tidak bisa REDO.\n");
                             }

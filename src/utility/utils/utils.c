@@ -39,6 +39,8 @@ Word MOVE_COMMAND = {"MOVE", 4};
 Word CATALOG_COMMAND = {"CATALOG", 7};
 Word COOKBOOK_COMMAND = {"COOKBOOK", 8};
 Word WAIT_COMMAND = {"WAIT", 4};
+Word MASUKKULKAS_COMMAND = {"MASUKKULKAS", 11};
+Word KELUARKULKAS_COMMAND = {"KELUARKULKAS", 12};
 Word UNDO_COMMAND = {"UNDO", 4};
 Word REDO_COMMAND = {"REDO", 4};
 
@@ -89,11 +91,13 @@ int MenuInput(Word w) {
         CATALOG_COMMAND,
         COOKBOOK_COMMAND,
         WAIT_COMMAND,
+        MASUKKULKAS_COMMAND,
+        KELUARKULKAS_COMMAND,
         UNDO_COMMAND,
         REDO_COMMAND},
-    15 };
+    17 };
 
-    for (int i = 0; i < 15; i ++) {
+    for (int i = 0; i < 17; i ++) {
         if (isWordEq(w, LCommand.TabWords[i])) {
             return i;
         }
@@ -236,20 +240,24 @@ void inputConfigFile(Game *g,Simulator *sim, char *PATH, int type) {
 }
 
 void help() {
-    sprintCyan("============== List Command ==============\n");
-    printf("  [1] MOVE X (X: NORTH/ SOUTH/ WEST/ EAST)\n");
-    printf("  [2] BUY\n");
-    printf("  [3] FRY\n");
-    printf("  [4] CHOP\n");
-    printf("  [5] BOIL\n");
-    printf("  [6] MIX\n");
-    printf("  [7] WAIT X Y (X: jam, Y: menit)\n");
-    printf("  [8] INVENTORY\n");
-    printf("  [9] INVENTORY\n");
+    sprintCyan("\n============== List Command ==============\n");
+    printf("  [1]  MOVE X (X: NORTH/ SOUTH/ WEST/ EAST)\n");
+    printf("  [2]  BUY\n");
+    printf("  [3]  FRY\n");
+    printf("  [4]  CHOP\n");
+    printf("  [5]  BOIL\n");
+    printf("  [6]  MIX\n");
+    printf("  [7]  WAIT X Y (X: jam, Y: menit)\n");
+    printf("  [8]  INVENTORY\n");
+    printf("  [9]  DELIVERY\n");
     printf("  [10] CATALOG\n");
     printf("  [11] COOKBOOK\n");
-    printf("  [12] HELP\n");
-    printf("  [13] EXIT\n");
+    printf("  [12] UNDO\n");
+    printf("  [13] REDO\n");
+    printf("  [14] MASUKKULKAS\n");
+    printf("  [15] KELUARKULKAS\n");
+    printf("  [16] HELP\n");
+    printf("  [17] EXIT\n");
 }
 
 void tambahBahan(Tree *p, Tree l){

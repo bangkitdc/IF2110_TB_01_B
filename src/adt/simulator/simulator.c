@@ -342,7 +342,7 @@ void mengolahMakanan(Makanan makananOlah, PrioQueue *inventory, ListStatikT list
             Delete(inventory, treeMakananOlah->children[i]->info, &tmp);
         }
         tmp.info = makananOlah;
-        tmp.time = TIMEToMenit(makananOlah.expiry);
+        tmp.time = makananOlah.expiry;
         Enqueue(inventory, tmp);
         printf("%s selesai dibuat dan sudah masuk inventory!\n", makananOlah.name);
     }else{                                           // jika tidak bisa dibuat

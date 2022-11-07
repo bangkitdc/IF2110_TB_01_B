@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "../../include/boolean.h"
 #include "prioqueue.h"
+#include "../../utility/color/color.h"
 
 /* ********* Prototype ********* */
 boolean IsEmptyPrioqueue (PrioQueue Q) {
@@ -263,20 +264,21 @@ void PrintPrioQueue (PrioQueue Q) {
     int ctr;
 
     /* ALGORITMA */
-    printf("List Makanan di Inventory\n");
-    printf("(nama - waktu sisa kedaluwarsa)\n");
+    if (IsEmptyPrioqueue(Q)) {
+        sprintRed("\nInventorynya kosong.. :(\n");
+    } else {
+        sprintCyan("\n================ Inventory ===============\n");
+        printf("(nama - waktu sisa kedaluwarsa)\n");
 
-    ctr = 1;
-    while (!IsEmptyPrioqueue(Q)) {
-        Dequeue(&Q, &temp);
-        printf("%d. %s - ", ctr, NAME(Info(temp))); // dijadiin nama makanan dulu
-        TulisTIME2(Time(temp));
-        printf("\n");
-        ctr++;
-    }
-
-    if (ctr == 1) {
-        printf("Inventorynya kosong.. :(\n");
+        ctr = 1;
+        while (!IsEmptyPrioqueue(Q))
+        {
+            Dequeue(&Q, &temp);
+            printf("  [%d] %s - ", ctr, NAME(Info(temp))); // dijadiin nama makanan dulu
+            TulisTIME2(Time(temp));
+            printf("\n");
+            ctr++;
+        }
     }
 }
 
@@ -296,23 +298,22 @@ void PrintPrioQueueDelivery (PrioQueue Q) {
     int ctr;
 
     /* ALGORITMA */
-    printf("List Makanan di Perjalanan\n");
-    printf("(nama - waktu sisa delivery)\n");
+    if (IsEmptyPrioqueue(Q)) {
+        sprintRed("\nDelivery list kosong.. :(\n");
+    } else {
+        sprintCyan("\n============ Makanan sedang OTW ==========\n");
+        printf("(nama - waktu sisa delivery)\n");
 
-    ctr = 1;
-    while (!IsEmptyPrioqueue(Q)) {
-        Dequeue(&Q, &temp);
-        printf("%d. %s - ", ctr, NAME(Info(temp))); // dijadiin nama makanan dulu
-        TulisTIME2(Time(temp));
-        printf("\n");
-        ctr++;
-    }
-
-    if (ctr == 1) {
-        printf("Delivery list kosong.. :(\n");
+        ctr = 1;
+        while (!IsEmptyPrioqueue(Q)) {
+            Dequeue(&Q, &temp);
+            printf("  [%d] %s - ", ctr, NAME(Info(temp))); // dijadiin nama makanan dulu
+            TulisTIME2(Time(temp));
+            printf("\n");
+            ctr++;
+        }
     }
 }
-
 /* Operasi untuk mengurus inventory dan delivery list */
 void PasstimeQueue(PrioQueue * Q, int x, ListDinMakanan * notif) {
 /* Mengurangi waktu tiap elemen di queue */
