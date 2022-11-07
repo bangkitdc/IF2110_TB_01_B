@@ -159,7 +159,7 @@ int main() {
                         if (L.Length != 1) {
                             sprintRed("Command COOKBOK tidak memiliki argumen. Coba Lagi!\n");
                         } else {
-                            printCookBook(game.listResep, game.listMakanan);
+                            printf("%d", getMakananFromId(game.listMakanan.contents[0].id, game.listMakanan).id);
                         }
                         break;
                     case 12: /* WAIT X Y */

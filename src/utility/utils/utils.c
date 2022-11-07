@@ -193,6 +193,10 @@ void inputConfigFile(Game *g,Simulator *sim, char *PATH, int type) {
                         tambahBahan(&(&g->listResep)->list[j], parent);
                     }
                 }
+                // for (int i = 0; i < (&g->listResep)->elEff;i++ ) {
+                //     printPreorder(g->listResep.list[i]);
+                //     printf("\n");
+                // }
                 break;
             case 3: /* Config Peta */;
                 //Map MapGame;
@@ -253,7 +257,7 @@ void tambahBahan(Tree *p, Tree l){
     for(int i=0;i<(*p)->childEff;i++){
         parent = (*p)->children[i];
         if(parent->info == l->info){
-            l->childEff = (*p)->childEff;
+            parent->childEff = l->childEff;
             for(int j=0;j<parent->childEff;j++){
                 parent->children[j] = l->children[j];
             }

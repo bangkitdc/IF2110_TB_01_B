@@ -24,6 +24,8 @@ int MenuInput(Word w);
 
 void help();
 
+void tambahBahan(Tree *p, Tree l);
+
 void exitGame();
 
 void printCookBook(ListStatikT listResep, ListStatikM listMakanan);
