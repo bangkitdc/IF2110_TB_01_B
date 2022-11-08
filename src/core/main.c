@@ -62,35 +62,103 @@ int main() {
                         if (L.Length != 1) {
                             sprintRed("Command BUY tidak memiliki argumen. Coba Lagi!\n");
                         } else {
-                            /* code */
+                            boolean CekAdjBuy = adjacent(simulator, game.map.Peta, 'T');
+                            if (!CekAdjBuy) {
+                                printf("\nBNMO tidak berada di area telepon!\n");
+                            } else {
+                                printf("List Bahan Makanan:\n");
+                                ListStatikM makananBisaDibeli; //ini buat nyimpen makanan apa aja yang bisa dibeli
+                                infotype makananDibeli;  // ini buat nyimpen makanan yang dipilih untuk dibeli
+                                createLSMakanan(&makananBisaDibeli);
+                                int no = 1;
+                                for (int i=0; i < listLengthStatikM(game.listMakanan); i++) {
+                                    if (!isMakananDelivered(game.listMakanan.contents[i])) {
+                                        insertFood(&makananBisaDibeli, game.listMakanan.contents[i]);
+                                        printf("    %d. %s ", no, NAME(game.listMakanan.contents[i]));
+                                        TulisTIME2(DELIVERY(game.listMakanan.contents[i]));
+                                        printf("\n");
+                                        no += 1;
+                                    }
+                                }
+                                int PilBuy;
+                                printf("\nKirim 0 untuk exit.\n\nEnter Command: ");
+                                scanf("%d", &PilBuy);
+                                char c;
+                                scanf("%c", &c); //cuma buat ngehandle enter, nanti diganti bangkit
+                                if (PilBuy > 0 && PilBuy < no) {
+                                    makananDibeli.info = makananBisaDibeli.contents[PilBuy-1];
+                                    makananDibeli.time = makananBisaDibeli.contents[PilBuy-1].delivery;
+                                    Enqueue(&delivery_list, makananDibeli);
+                                }
+                            }
                         }
                         break;
                     case 2: /* FRY */
                         if (L.Length != 1) {
                             sprintRed("Command FRY tidak memiliki argumen. Coba Lagi!\n");
                         } else {
-                            /* code */
+                            ListStatikM makananBisaDiolah;
+                            int length, pilih;
+                            char c;
+                            displayListMakananAksi(game.listMakanan, &makananBisaDiolah, &length, 'F');
+                            sprintBlue("\nEnter Command: \n");
+                            printf("> ");
+                            scanf("%d", &pilih);
+                            scanf("%c", &c); // hanya untuk tidak terjadi command error karena karakter enter
+                            if(pilih>=1 && pilih <= length){
+                                mengolahMakanan(makananBisaDiolah.contents[pilih-1], &(simulator.inventory), game.listResep, game.listMakanan);
+                            }
                         }
                         break;
                     case 3: /* CHOP */
                         if (L.Length != 1) {
                             sprintRed("Command CHOP tidak memiliki argumen. Coba Lagi!\n");
                         } else {
-                            /* code */
+                            ListStatikM makananBisaDiolah;
+                            int length, pilih;
+                            char c;
+                            displayListMakananAksi(game.listMakanan, &makananBisaDiolah, &length, 'C');
+                            sprintBlue("\nEnter Command: \n");
+                            printf("> ");
+                            scanf("%d", &pilih);
+                            scanf("%c", &c); // hanya untuk tidak terjadi command error karena karakter enter
+                            if(pilih>=1 && pilih <= length){
+                                mengolahMakanan(makananBisaDiolah.contents[pilih-1], &(simulator.inventory), game.listResep, game.listMakanan);
+                            }
                         }
                         break;
                     case 4: /* BOIL */
                         if (L.Length != 1) {
                             sprintRed("Command BOIL tidak memiliki argumen. Coba Lagi!\n");
                         } else {
-                            /* code */
+                            ListStatikM makananBisaDiolah;
+                            int length, pilih;
+                            char c;
+                            displayListMakananAksi(game.listMakanan, &makananBisaDiolah, &length, 'B');
+                            sprintBlue("\nEnter Command: \n");
+                            printf("> ");
+                            scanf("%d", &pilih);
+                            scanf("%c", &c); // hanya untuk tidak terjadi command error karena karakter enter
+                            if(pilih>=1 && pilih <= length){
+                                mengolahMakanan(makananBisaDiolah.contents[pilih-1], &(simulator.inventory), game.listResep, game.listMakanan);
+                            }
                         }
                         break;
                     case 5: /* MIX */
                         if (L.Length != 1) {
                             sprintRed("Command MIX tidak memiliki argumen. Coba Lagi!\n");
                         } else {
-                            /* code */
+                            ListStatikM makananBisaDiolah;
+                            int length, pilih;
+                            char c;
+                            displayListMakananAksi(game.listMakanan, &makananBisaDiolah, &length, 'M');
+                            sprintBlue("\nEnter Command: \n");
+                            printf("> ");
+                            scanf("%d", &pilih);
+                            scanf("%c", &c); // hanya untuk tidak terjadi command error karena karakter enter
+                            if(pilih>=1 && pilih <= length){
+                                mengolahMakanan(makananBisaDiolah.contents[pilih-1], &(simulator.inventory), game.listResep, game.listMakanan);
+                            }
                         }
                         break;
                     case 6: /* HELP */
@@ -104,7 +172,7 @@ int main() {
                         if (L.Length != 1) {
                             sprintRed("Command INVENTORY tidak memiliki argumen. Coba Lagi!\n");
                         } else {
-                            /* code */
+                            PrintPrioQueue(simulator.inventory);
                         }
                         break;
                     case 8: /* DELIVERY */

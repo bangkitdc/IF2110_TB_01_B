@@ -170,7 +170,6 @@ void penomorMakananKulkas(infotype * var, int id, MatrixKulkas kulkas, boolean *
 
     // KAMUS
     int temp, i, j;
-    boolean ada;
 
     // ALGORITMA
     temp = ID(Info(*var));
@@ -178,9 +177,9 @@ void penomorMakananKulkas(infotype * var, int id, MatrixKulkas kulkas, boolean *
 
     // cek apakah ada makanan dengan id yang sama di kulkas
     *ada = false;
-    for (i = 0; i <= getLastIdxRowKulkas(*kulkas); i++) {
-        for (j = 0; j <= getLastIdxColKulkas(*kulkas); j++) {
-            if (ID(Info(Elmt(*kulkas, i, j))) == temp) {
+    for (i = 0; i <= getLastIdxRowKulkas(kulkas); i++) {
+        for (j = 0; j <= getLastIdxColKulkas(kulkas); j++) {
+            if (ID(Info(ELMTK(kulkas, i, j))) == temp) {
                 *ada = true;
                 break;
             }
@@ -253,7 +252,7 @@ void ambilDariKulkas(Simulator * s, int idmakanan, MatrixKulkas * kulkas, ListDi
     insertLastMakanan(currentNotif, var);
 }
 
-boolean adjacent(Simulator s, Matrix peta, char x) {
+boolean adjacent(Simulator s, Matrix peta, char c) {
 /* Mengecek apakah simulator bersebelahan dengan tempat tertentu */
 
     // KAMUS
@@ -263,31 +262,36 @@ boolean adjacent(Simulator s, Matrix peta, char x) {
     x = Absis(Lokasi(s)); 
     y = Ordinat(Lokasi(s)); 
 
-    if (ELMT_MATRIX(peta, x-1, y) == x) {
+    if (ELMT_MATRIX(peta, x-1, y) == c) {
         return true;
-    } else if (ELMT_MATRIX(peta, x+1, y) == x) {
+    } else if (ELMT_MATRIX(peta, x+1, y) == c) {
         return true;
-    } else if (ELMT_MATRIX(peta, x, y+1) == x) {
+    } else if (ELMT_MATRIX(peta, x, y+1) == c) {
         return true;
-    } else if (ELMT_MATRIX(peta, x, y-1) == x) {
+    } else if (ELMT_MATRIX(peta, x, y-1) == c) {
         return true;
     } else {
         return false;
     }
 }
 
-void displayListMakananAksi(ListStatikM listMakanan, ListStatikM *hasil, char aksi){
-    int i;
+void displayListMakananAksi(ListStatikM listMakanan, ListStatikM *hasil, int *length, char aksi){
+    int i,j;
     createLSMakanan(hasil);
     i=0;
+    j=0;
     while(listMakanan.contents[i].id != MARKSTATIK){
         if(listMakanan.contents[i].location == aksi){
             insertFood(hasil, listMakanan.contents[i]);
+            j++;
         }
+        i++;
     }
+    *length = j;
     i=0;
     while((*hasil).contents[i].id!=MARKSTATIK){
         printf("%d. %s\n", i+1,(*hasil).contents[i].name);
+        i++;
     }
 }
 
@@ -304,7 +308,7 @@ Tree getTreeFromMakanan(Makanan makanan, ListStatikT listResep)
     return hasil;
 }
 
-void mengolahMakanan(Makanan makananOlah, PrioQueue *inventory, ListStatikT listResep, ListStatikM listMakanan, char lokasiAksi){
+void mengolahMakanan(Makanan makananOlah, PrioQueue *inventory, ListStatikT listResep, ListStatikM listMakanan){
     Tree treeMakananOlah;
     infotype tmp;
     int id, idBahan[10];
@@ -314,12 +318,14 @@ void mengolahMakanan(Makanan makananOlah, PrioQueue *inventory, ListStatikT list
     bisa = false;
     for(int i=0;i<treeMakananOlah->childEff;i++){            //menelusuri tiap bahan makanan
         idBahan[i] = treeMakananOlah->children[i]->info;
-        id = treeMakananOlah->children[i]->info;
+        id = idBahan[i];
         ada = false;
 
-        for(int j=(*inventory).HEAD;j<=(*inventory).TAIL;j++){    // mencari apakah ada bahan pada inventori
-            if(id == (*inventory).T[j].info.id){
-                ada = true;
+        if(!IsEmptyPrioqueue(*inventory)){
+            for(int j=inventory->HEAD;j<=inventory->TAIL;j++){    // mencari apakah ada bahan pada inventori
+                if(id == inventory->T[j].info.id){
+                    ada = true;
+                }
             }
         }
 
@@ -343,14 +349,11 @@ void mengolahMakanan(Makanan makananOlah, PrioQueue *inventory, ListStatikT list
         printf("%s selesai dibuat dan sudah masuk inventory!\n", makananOlah.name);
     }else{                                           // jika tidak bisa dibuat
         printf("Gagal membuat %s karena kamu tidak memiliki bahan berikut:\n", makananOlah.name);
+        int j=0;
         for(int i=0;i<treeMakananOlah->childEff;i++){
             if(idBahan[i]!=-1){
-                int j;
-                while (listMakanan.contents[j].id != MARKSTATIK){
-                    if(id == listMakanan.contents[j].id){
-                        printf("   %d. %s\n", i+1, listMakanan.contents[j].name);
-                    }
-                }
+                j++;
+                printf("   %d. %s\n", j, getMakananFromId(idBahan[i],listMakanan).name);
             }
         }
     }

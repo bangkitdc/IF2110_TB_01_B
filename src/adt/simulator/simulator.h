@@ -83,15 +83,16 @@ void ambilDariKulkas(Simulator * s, int idmakanan, MatrixKulkas * kulkas, ListDi
 boolean adjacent(Simulator s, Matrix peta, char x);
 /* Mengecek apakah simulator bersebelahan dengan tempat tertentu */
 
-void displayListMakananAksi(ListStatikM listMakanan, ListStatikM *hasil, char aksi);
+void displayListMakananAksi(ListStatikM listMakanan, ListStatikM *hasil, int *length, char aksi);
 // menampilkan makanan apa saja yang bisa dimasak berdasarkan aksi
 
 Tree getTreeFromMakanan(Makanan makanan, ListStatikT listResep);
 // mendapatkan tree makanan dari adt makanan
 
-void mengolahMakanan(Makanan makananOlah, PrioQueue *inventory, ListStatikT listResep, ListStatikM listMakanan, char lokasiAksi);
+void mengolahMakanan(Makanan makananOlah, PrioQueue *inventory, ListStatikT listResep, ListStatikM listMakanan);
 // mengolah makanan
 
 Makanan getMakananFromId(int id, ListStatikM listMakanan);
+// mendapatkan makanan dari id
 
 #endif
