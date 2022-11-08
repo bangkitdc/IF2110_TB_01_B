@@ -39,10 +39,10 @@ Word MOVE_COMMAND = {"MOVE", 4};
 Word CATALOG_COMMAND = {"CATALOG", 7};
 Word COOKBOOK_COMMAND = {"COOKBOOK", 8};
 Word WAIT_COMMAND = {"WAIT", 4};
-Word MASUKKULKAS_COMMAND = {"MASUKKULKAS", 11};
-Word KELUARKULKAS_COMMAND = {"KELUARKULKAS", 12};
 Word UNDO_COMMAND = {"UNDO", 4};
 Word REDO_COMMAND = {"REDO", 4};
+Word MASUKKULKAS_COMMAND = {"MASUKKULKAS", 11};
+Word KELUARKULKAS_COMMAND = {"KELUARKULKAS", 12};
 
 Word BUY_FILE = {"Buy", 3};
 Word FRY_FILE = {"Fry", 3};
@@ -91,10 +91,10 @@ int MenuInput(Word w) {
         CATALOG_COMMAND,
         COOKBOOK_COMMAND,
         WAIT_COMMAND,
-        MASUKKULKAS_COMMAND,
-        KELUARKULKAS_COMMAND,
         UNDO_COMMAND,
-        REDO_COMMAND},
+        REDO_COMMAND,
+        MASUKKULKAS_COMMAND,
+        KELUARKULKAS_COMMAND},
     17 };
 
     for (int i = 0; i < 17; i ++) {
@@ -258,6 +258,28 @@ void help() {
     printf("  [15] KELUARKULKAS\n");
     printf("  [16] HELP\n");
     printf("  [17] EXIT\n");
+}
+
+int select(int min, int max) {
+    char minChar = min + '0';
+    char maxChar = max + '0';
+    sprintBlue("\nKirim 0 untuk exit.\n\nEnter Command: \n");
+    printf("> ");
+    ListWord L;
+    createListWord(&L);
+    L = readLine();
+    while (L.Length != 1 || wordToInt(L.TabWords[0]) == -999 || (wordToInt(L.TabWords[0]) < min || wordToInt(L.TabWords[0]) > max)) {
+        if (wordToInt(L.TabWords[0]) == 0) {
+            return 0;
+        } else {
+            sprintRed("\nInput invalid. Silahkan masukkan angka ("); 
+            printRed(minChar); printRed('-'); printRed(maxChar); printRed(')'); printf("\n");
+            printf("> ");
+            L = readLine();
+        }
+    }
+
+    return wordToInt(L.TabWords[0]);
 }
 
 void tambahBahan(Tree *p, Tree l){
