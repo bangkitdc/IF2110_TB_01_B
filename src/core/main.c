@@ -73,6 +73,7 @@ int main() {
                                 int no = 1;
                                 for (int i=0; i < listLengthStatikM(game.listMakanan); i++) {
                                     if (isMakananBuyable(game.listMakanan.contents[i])) {
+                                        insertFood(&makananBisaDibeli, game.listMakanan.contents[i]);
                                         printf("  [%d] %s (", no, NAME(game.listMakanan.contents[i]));
                                         TulisTIME2(DELIVERY(game.listMakanan.contents[i]));
                                         printf(")\n");
@@ -85,7 +86,9 @@ int main() {
                                     sprintRed("\nMembatalkan command BUY\n");
                                     break;
                                 } else {
-
+                                    makananDibeli.info = makananBisaDibeli.contents[PilBuy - 1];
+                                    makananDibeli.time = makananBisaDibeli.contents[PilBuy - 1].delivery;
+                                    Enqueue(&delivery_list, makananDibeli);
                                 }
                             }
                         }
