@@ -77,7 +77,7 @@ void pindahKeKulkas(infotype var, int nomor, MatrixKulkas * kulkas, ListDinMakan
 void ambilDariKulkas(Simulator * s, MatrixKulkas * kulkas, int idxX, int idxY, ListDinMakanan * currentNotif);
 /* Mengambil makanan dari kulkas dan memasukkannya ke inventory */
 
-boolean adjacent(Simulator s, Map peta, char x);
+boolean adjacent(Simulator s, Matrix peta, char x);
 /* Mengecek apakah simulator bersebelahan dengan tempat tertentu */
 
 void displayListMakananAksi(ListStatikM listMakanan, ListStatikM *hasil, char aksi);
