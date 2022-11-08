@@ -62,7 +62,27 @@ int main() {
                         if (L.Length != 1) {
                             sprintRed("Command BUY tidak memiliki argumen. Coba Lagi!\n");
                         } else {
-                            /* code */
+                            boolean CekAdjBuy = adjacent(simulator, game.map, 'T');
+                            if (!CekAdjBuy) {
+                                printf("BNMO tidak berada di area telepon!\n");
+                            } else {
+                                printf("List Bahan Makanan:\n");
+                                int no = 1;
+                                for (int i=0; i < listLengthStatikM(game.listMakanan); i++) {
+                                    if (isMakananDelivered(game.listMakanan.contents[i])) {
+                                        printf("    %d. %s ", no, NAME(game.listMakanan.contents[i]));
+                                        TulisTIME2(DELIVERY(game.listMakanan.contents[i]));
+                                        printf("\n");
+                                        no += 1;
+                                    }
+                                }
+                                int PilBuy;
+                                printf("\nKirim 0 untuk exit.\n\nEnter Command: ");
+                                scanf("%d", &PilBuy);
+                                if (PilBuy != 0) {
+                                    
+                                }
+                            }
                         }
                         break;
                     case 2: /* FRY */
