@@ -269,16 +269,16 @@ int select(int min, int max) {
     createListWord(&L);
     L = readLine();
     while (L.Length != 1 || wordToInt(L.TabWords[0]) == -999 || (wordToInt(L.TabWords[0]) < min || wordToInt(L.TabWords[0]) > max)) {
-        if (wordToInt(L.TabWords[0]) == 0) {
+        if (wordToInt(L.TabWords[0]) == 0 && L.Length == 1) {
             return 0;
         } else {
             sprintRed("\nInput invalid. Silahkan masukkan angka ("); 
-            printRed(minChar); printRed('-'); printRed(maxChar); printRed(')'); printf("\n");
+            printRed(minChar); printRed('-'); printRed(maxChar); sprintRed(') atau angka 0 untuk exit!'); printf("\n");
             printf("> ");
             L = readLine();
         }
     }
-
+    printf("%d\n", L.Length);
     return wordToInt(L.TabWords[0]);
 }
 
