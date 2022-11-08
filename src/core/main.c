@@ -62,7 +62,7 @@ int main() {
                         if (L.Length != 1) {
                             sprintRed("Command BUY tidak memiliki argumen. Coba Lagi!\n");
                         } else {
-                            boolean CekAdjBuy = adjacent(simulator, game.map, 'T');
+                            boolean CekAdjBuy = adjacent(simulator, game.map.Peta, 'T');
                             if (!CekAdjBuy) {
                                 printf("\nBNMO tidak berada di area telepon!\n");
                             } else {
@@ -89,7 +89,17 @@ int main() {
                         if (L.Length != 1) {
                             sprintRed("Command FRY tidak memiliki argumen. Coba Lagi!\n");
                         } else {
-                            /* code */
+                            ListStatikM makananBisaDiolah;
+                            int length, pilih;
+                            char c;
+                            displayListMakananAksi(game.listMakanan, &makananBisaDiolah, &length, 'F');
+                            sprintBlue("\nEnter Command: \n");
+                            printf("> ");
+                            scanf("%d", &pilih);
+                            scanf("%c", &c); // hanya untuk tidak terjadi command error karena karakter enter
+                            if(pilih>=1 && pilih <= length){
+                                mengolahMakanan(makananBisaDiolah.contents[pilih-1], &(simulator.inventory), game.listResep, game.listMakanan);
+                            }
                         }
                         break;
                     case 3: /* CHOP */
