@@ -64,7 +64,7 @@ int main() {
                         } else {
                             boolean CekAdjBuy = adjacent(simulator, game.map.Peta, 'T');
                             if (!CekAdjBuy) {
-                                printf("\nBNMO tidak berada di area telepon!\n");
+                                sprintRed("\nBNMO sedang tidak berada di area telepon!\n");
                             } else {
                                 printf("List Bahan Makanan:\n");
                                 ListStatikM makananBisaDibeli; //ini buat nyimpen makanan apa aja yang bisa dibeli
@@ -72,22 +72,22 @@ int main() {
                                 createLSMakanan(&makananBisaDibeli);
                                 int no = 1;
                                 for (int i=0; i < listLengthStatikM(game.listMakanan); i++) {
-                                    if (!isMakananDelivered(game.listMakanan.contents[i])) {
+                                    if (isMakananBuyable(game.listMakanan.contents[i])) {
                                         insertFood(&makananBisaDibeli, game.listMakanan.contents[i]);
-                                        printf("    %d. %s ", no, NAME(game.listMakanan.contents[i]));
+                                        printf("  [%d] %s (", no, NAME(game.listMakanan.contents[i]));
                                         TulisTIME2(DELIVERY(game.listMakanan.contents[i]));
-                                        printf("\n");
+                                        printf(")\n");
                                         no += 1;
                                     }
                                 }
                                 int PilBuy;
-                                printf("\nKirim 0 untuk exit.\n\nEnter Command: ");
-                                scanf("%d", &PilBuy);
-                                char c;
-                                scanf("%c", &c); //cuma buat ngehandle enter, nanti diganti bangkit
-                                if (PilBuy > 0 && PilBuy < no) {
-                                    makananDibeli.info = makananBisaDibeli.contents[PilBuy-1];
-                                    makananDibeli.time = makananBisaDibeli.contents[PilBuy-1].delivery;
+                                PilBuy = select(1, no);
+                                if (PilBuy == 0) {
+                                    sprintRed("\nMembatalkan command BUY\n");
+                                    break;
+                                } else {
+                                    makananDibeli.info = makananBisaDibeli.contents[PilBuy - 1];
+                                    makananDibeli.time = makananBisaDibeli.contents[PilBuy - 1].delivery;
                                     Enqueue(&delivery_list, makananDibeli);
                                 }
                             }
@@ -189,7 +189,7 @@ int main() {
                             boolean stuck, flag = true;
                             if (isWordEq(NORTH, L.TabWords[1])) {
                                 simulatorToState(simulator, game.currentTime, latest_notification, kulkas, &latest_state);
-                                Push(&stack_undo,latest_state);
+                                Push(&stack_undo, latest_state);
                                 gerakUser(&simulator, &game.map, &stuck, 'w');
                                 EmptyStack(&stack_redo);
                             } else if (isWordEq(SOUTH, L.TabWords[1])) {
@@ -261,6 +261,7 @@ int main() {
                             sprintRed("Command UNDO tidak memiliki argumen. Coba Lagi!\n");
                         } else {
                             if (!IsStackEmpty(stack_undo)) {
+                                simulatorToState(simulator, game.currentTime, latest_notification, kulkas, &latest_state);
                                 Undo(&stack_undo, &stack_redo, &latest_state);
                                 loadState(&simulator, &latest_state, "ADMIN", &latest_notification, &kulkas, &game.currentTime);
                                 WriteLokasi(simulator.lokasi);
@@ -276,6 +277,7 @@ int main() {
                             sprintRed("Command REDO tidak memiliki argumen. Coba Lagi!\n");
                         } else {
                             if (!IsStackEmpty(stack_redo)) {
+                                simulatorToState(simulator, game.currentTime, latest_notification, kulkas, &latest_state);
                                 Redo(&stack_undo, &stack_redo, &latest_state);
                                 loadState(&simulator, &latest_state, "ADMIN", &latest_notification, &kulkas, &game.currentTime);
                                 WriteLokasi(simulator.lokasi);
