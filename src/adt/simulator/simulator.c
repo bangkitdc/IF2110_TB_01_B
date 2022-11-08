@@ -280,18 +280,23 @@ boolean adjacent(Simulator s, Map peta, char x) {
     }
 }
 
-void displayListMakananAksi(ListStatikM listMakanan, ListStatikM *hasil, char aksi){
-    int i;
+void displayListMakananAksi(ListStatikM listMakanan, ListStatikM *hasil, int *length, char aksi){
+    int i,j;
     createLSMakanan(hasil);
     i=0;
+    j=0;
     while(listMakanan.contents[i].id != MARKSTATIK){
         if(listMakanan.contents[i].location == aksi){
             insertFood(hasil, listMakanan.contents[i]);
+            j++;
         }
+        i++;
     }
+    *length = j;
     i=0;
     while((*hasil).contents[i].id!=MARKSTATIK){
         printf("%d. %s\n", i+1,(*hasil).contents[i].name);
+        i++;
     }
 }
 
@@ -308,7 +313,7 @@ Tree getTreeFromMakanan(Makanan makanan, ListStatikT listResep)
     return hasil;
 }
 
-void mengolahMakanan(Makanan makananOlah, PrioQueue *inventory, ListStatikT listResep, ListStatikM listMakanan, char lokasiAksi){
+void mengolahMakanan(Makanan makananOlah, PrioQueue *inventory, ListStatikT listResep, ListStatikM listMakanan){
     Tree treeMakananOlah;
     infotype tmp;
     int id, idBahan[10];
@@ -318,12 +323,14 @@ void mengolahMakanan(Makanan makananOlah, PrioQueue *inventory, ListStatikT list
     bisa = false;
     for(int i=0;i<treeMakananOlah->childEff;i++){            //menelusuri tiap bahan makanan
         idBahan[i] = treeMakananOlah->children[i]->info;
-        id = treeMakananOlah->children[i]->info;
+        id = idBahan[i];
         ada = false;
 
-        for(int j=(*inventory).HEAD;j<=(*inventory).TAIL;j++){    // mencari apakah ada bahan pada inventori
-            if(id == (*inventory).T[j].info.id){
-                ada = true;
+        if(!IsEmptyPrioqueue(*inventory)){
+            for(int j=inventory->HEAD;j<=inventory->TAIL;j++){    // mencari apakah ada bahan pada inventori
+                if(id == inventory->T[j].info.id){
+                    ada = true;
+                }
             }
         }
 
@@ -347,14 +354,11 @@ void mengolahMakanan(Makanan makananOlah, PrioQueue *inventory, ListStatikT list
         printf("%s selesai dibuat dan sudah masuk inventory!\n", makananOlah.name);
     }else{                                           // jika tidak bisa dibuat
         printf("Gagal membuat %s karena kamu tidak memiliki bahan berikut:\n", makananOlah.name);
+        int j=0;
         for(int i=0;i<treeMakananOlah->childEff;i++){
             if(idBahan[i]!=-1){
-                int j;
-                while (listMakanan.contents[j].id != MARKSTATIK){
-                    if(id == listMakanan.contents[j].id){
-                        printf("   %d. %s\n", i+1, listMakanan.contents[j].name);
-                    }
-                }
+                j++;
+                printf("   %d. %s\n", j, getMakananFromId(idBahan[i],listMakanan).name);
             }
         }
     }
