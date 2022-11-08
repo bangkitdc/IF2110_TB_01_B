@@ -66,7 +66,6 @@ void Redo(Stack * SMain, Stack * SSecondary, State * currentState) {
 /* F.S. Elemen TOP pada SSecondary telah di-pop, dan elemen tersebut dipush ke SMain. currentState diassign state yang di-redo */
 /* Stack SSecondary dikosongkan */
     State temp;
-
     Push(SMain, *currentState);
     Pop(SSecondary, &temp);
     *currentState = temp;
