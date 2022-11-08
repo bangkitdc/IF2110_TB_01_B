@@ -367,6 +367,7 @@ Makanan getMakananFromId(int id, ListStatikM listMakanan){
         if(listMakanan.contents[i].id == id){
             hasil = listMakanan.contents[i];
         }
+        i++;
     }
     return hasil;
 }

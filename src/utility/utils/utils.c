@@ -291,7 +291,7 @@ void printCookBook(ListStatikT listResep, ListStatikM listMakanan){
             printf("MIX");
         }
         for(int j=0;j<resep->childEff;j++){
-            printf(" - %s", getMakananFromId(resep->children[i]->info, listMakanan).name);
+            printf(" - %s", getMakananFromId(resep->children[j]->info, listMakanan).name);
         }
         printf("\n");
     }
