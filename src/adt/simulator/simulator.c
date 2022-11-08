@@ -193,6 +193,18 @@ void penomorMakananKulkas(infotype * var, int id, MatrixKulkas kulkas, boolean *
     }
 }
 
+void hapusIdKulkas(infotype * var) {
+/* mengembalikan ID makanan yang sementara diubah untuk masuk ke kulkas */
+
+    // KAMUS
+    int temp;
+
+    // ALGORITMA
+    temp = ID(Info(*var));
+    temp = temp/1000;
+    ID(Info(*var)) = temp;
+}
+
 void ambilDariInventory (Simulator * s, int idx, infotype * var) {
 /* prekondisi : idx valid */
 
@@ -202,41 +214,42 @@ void ambilDariInventory (Simulator * s, int idx, infotype * var) {
     DeleteAt(&Inventory(*s), idx, var);
 }
 
-void pindahKeKulkas(infotype var, int nomor, MatrixKulkas * kulkas, ListDinMakanan * currentNotif, ListStatikP daftarindex) {
+void pindahKeKulkas(infotype var, MatrixKulkas * kulkas, ListDinMakanan * currentNotif, int idX, int idY) {
 /* Memindahkan makanan di inventori berdasarkan list of point ke kulkas */
 /* prekondisi : list of pointnya sudah valid, dan pada point tersebut slot di kulkasnya kosong */
 
     // KAMUS
-    int i, x, y;
 
     // ALGORITMA
-    for (i = 1; i <= listLengthStatikP(daftarindex); i++) {
-        x = Absis(ELMT_LISTSTATIKP(daftarindex, i-1));
-        y = Ordinat(ELMT_LISTSTATIKP(daftarindex, i-1)); 
-        ELMTK(*kulkas, x, y) = var;
-        LOC(Info(var)) = 'K';
-        insertLastMakanan(currentNotif, var);
-    }
+    ELMTK(*kulkas, idX, idY) = var;
+    LOC(Info(var)) = 'K';
+    insertLastMakanan(currentNotif, var);
 }
 
-void ambilDariKulkas(Simulator * s, MatrixKulkas * kulkas, int idxX, int idxY, ListDinMakanan * currentNotif) {
+void ambilDariKulkas(Simulator * s, int idmakanan, MatrixKulkas * kulkas, ListDinMakanan * currentNotif) {
 /* Mengambil makanan dari kulkas dan memasukkannya ke inventory */
 
     // KAMUS
-    infotype dummy, temp;
+    int i, j;
+    infotype var, dummy;
 
     // ALGORITMA
     makeDummyInfoType(&dummy);
-    if (cekSpotKosongKulkas(*kulkas, idxX, idxY)) {
-        printf("Tidak ada makanan di slot itu.. :(\n");
-    } else {
-        temp = ELMTK(*kulkas, idxX, idxY);
-        ELMTK(*kulkas, idxX, idxY) = dummy;
-        Enqueue(&Inventory(*s), temp);
-        LOC(Info(temp)) = 'k';
-        insertLastMakanan(currentNotif, temp);
+    for (i = 0; i <= 9; i++) {
+        for (j = 0; j <= 19; j++) {
+            if (ID(Info(ELMTK(*kulkas, i, j))) == idmakanan) {
+                var = ELMTK(*kulkas, i, j);
+                ELMTK(*kulkas, i, j) = dummy;
+            }
+        }
     }
+    
+    // ubah ID makanan di var
+    hapusIdKulkas(&var);
 
+    // masukkan kembali ke inventory
+    Enqueue(&Inventory(*s), var);
+    insertLastMakanan(currentNotif, var);
 }
 
 boolean adjacent(Simulator s, Matrix peta, char c) {

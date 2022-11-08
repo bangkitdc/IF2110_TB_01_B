@@ -55,7 +55,6 @@ void Undo(Stack * SMain, Stack * SSecondary, State * currentState) {
 /* I.S. SMain tidak boleh kosong */   
 /* F.S. Elemen TOP pada SMain telah di-pop, dan elemen tersebut dipush ke SSecondary. currentState diassign state yang di-undo */
     State temp;
-    
     Push(SSecondary, *currentState);
     Pop(SMain, &temp);
     *currentState = temp;    
