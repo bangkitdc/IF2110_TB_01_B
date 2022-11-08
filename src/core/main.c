@@ -188,21 +188,7 @@ int main() {
                             }
                         }
                         break;
-                    case 13: /* MASUKKULKAS X Y*/
-                        if (L.Length != 3) {
-                            sprintRed("Command MASUKKULKAS memiliki 2 argumen. Coba Lagi!\n");
-                        } else {
-
-                        }
-                        break;
-                    case 14: /* KELUARKULKAS X Y*/
-                        if (L.Length != 3) {
-                            sprintRed("Command KELUARKULKAS memiliki 2 argumen. Coba Lagi!\n");
-                        } else {
-                            
-                        }
-                        break;
-                    case 15: /* UNDO */
+                    case 13: /* UNDO */
                         if (L.Length != 1) {
                             sprintRed("Command UNDO tidak memiliki argumen. Coba Lagi!\n");
                         } else {
@@ -217,7 +203,7 @@ int main() {
                             }
                         }
                         break;
-                    case 16: /* REDO */
+                    case 14: /* REDO */
                         if (L.Length != 1) {
                             sprintRed("Command REDO tidak memiliki argumen. Coba Lagi!\n");
                         } else {
@@ -230,6 +216,20 @@ int main() {
                             } else {
                                 sprintRed("Tidak bisa REDO.\n");
                             }
+                        }
+                        break;
+                    case 15: /* MASUKKULKAS X Y*/
+                        if (L.Length != 3) {
+                            sprintRed("Command MASUKKULKAS memiliki 2 argumen. Coba Lagi!\n");
+                        } else {
+
+                        }
+                        break;
+                    case 16: /* KELUARKULKAS X Y*/
+                        if (L.Length != 3) {
+                            sprintRed("Command KELUARKULKAS memiliki 2 argumen. Coba Lagi!\n");
+                        } else {
+                            
                         }
                         break;
                     default:
