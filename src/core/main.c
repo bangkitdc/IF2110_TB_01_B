@@ -218,11 +218,35 @@ int main() {
                             }
                         }
                         break;
-                    case 15: /* MASUKKULKAS X Y*/
-                        if (L.Length != 3) {
-                            sprintRed("Command MASUKKULKAS memiliki 2 argumen. Coba Lagi!\n");
+                    case 15: /* MASUKKULKAS X Y Z*/
+                        if (L.Length != 4) {
+                            sprintRed("Command MASUKKULKAS memiliki 3 argumen. Coba Lagi!\n");
                         } else {
+                            // infotype tempinfotype;
+                            // boolean idtidakvalid;
+                            // ListWord tempindexkulkas;
+                            // createListWord(&tempindexkulkas);
+                            // int X = wordToInt(L.TabWords[1]);
+                            // int Y = wordToInt(L.TabWords[2]);
+                            // int Z = wordToInt(L.TabWords[3]); // Z == 1, secara landscape, selain itu secara portrait
 
+                            // if (!isFullKulkas(kulkas)) {
+                            //     ambilDariInventory(&simulator, X, &tempinfotype);
+                            //     penomorMakananKulkas(&tempinfotype, Y, kulkas, &idtidakvalid)
+                            //     if (!idtidakvalid) {
+                            //         if (Absis(SIZE(Info(tempinfotype))) * Ordinat(SIZE(Info(tempinfotype))) <= countElmtDummy(kulkas)) {
+                            //             if (Z == 1) {
+                            //                 // minta input index
+                            //             } else {
+                            //                 // minta input index
+                            //             }
+                            //         } else {
+                            //             sprintRed("Kulkas tidak bisa menampung makanan kamu :(\n");
+                            //         }
+                            //     }
+                            // } else {
+                            //     sprintRed("Kulkas sudah penuh.. :(\n");
+                            // }
                         }
                         break;
                     case 16: /* KELUARKULKAS X Y*/
