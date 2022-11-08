@@ -64,7 +64,7 @@ int main() {
                         } else {
                             boolean CekAdjBuy = adjacent(simulator, game.map, 'T');
                             if (!CekAdjBuy) {
-                                printf("BNMO tidak berada di area telepon!\n");
+                                printf("\nBNMO tidak berada di area telepon!\n");
                             } else {
                                 printf("List Bahan Makanan:\n");
                                 int no = 1;
