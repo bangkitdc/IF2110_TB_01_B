@@ -24,6 +24,8 @@ int MenuInput(Word w);
 
 void help();
 
+int select(int min, int max);
+
 void tambahBahan(Tree *p, Tree l);
 
 void exitGame();
