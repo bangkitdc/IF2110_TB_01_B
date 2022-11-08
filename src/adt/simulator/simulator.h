@@ -90,5 +90,6 @@ void mengolahMakanan(Makanan makananOlah, PrioQueue *inventory, ListStatikT list
 // mengolah makanan
 
 Makanan getMakananFromId(int id, ListStatikM listMakanan);
+// mendapatkan makanan dari id
 
 #endif
