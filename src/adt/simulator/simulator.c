@@ -248,7 +248,7 @@ void ambilDariKulkas(Simulator * s, int idmakanan, MatrixKulkas * kulkas, ListDi
     hapusIdKulkas(&var);
 
     // masukkan kembali ke inventory
-    Enqueue(&Inventory(*s), var)
+    Enqueue(&Inventory(*s), var);
     insertLastMakanan(currentNotif, var);
 }
 

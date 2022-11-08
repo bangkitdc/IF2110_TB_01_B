@@ -331,19 +331,20 @@ int main() {
 
                                                 for (i = atas; i <= bawah; i++) {
                                                     for (j = kiri; j <= kanan; j++) {
-                                                        if (ID(ELMTK(kulkas,i,j)) != 0) {
+                                                        if (ID(Info(ELMTK(kulkas,i,j))) != 0) {
                                                             idxkulkasvalid = false;
                                                         }
                                                     }
                                                 }
 
-                                                if (idxkulkas) {
+                                                if (idxkulkasvalid) {
                                                     for (i = atas; i <= bawah; i++) {
                                                         for (j = kiri; j <= kanan; j++) {
                                                             pindahKeKulkas(tempinfotype, &kulkas, &latest_notification, i, j);
                                                         }
                                                     }
                                                 } else {
+                                                    sprintRed("Ada makanan lain di posisi tersebut..\n");
                                                     // kembalikan ID awal
                                                     hapusIdKulkas(&tempinfotype);
                                                     Enqueue(&Inventory(simulator), tempinfotype);
