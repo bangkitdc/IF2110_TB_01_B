@@ -165,38 +165,58 @@ boolean cekSpotKosongKulkas(MatrixKulkas kulkas, int idxX, int idxY) {
     }
 }
 
-void pindahKeKulkas(Simulator * s, int idx, MatrixKulkas * kulkas, ListDinMakanan * currentNotif) {
-/* Memindahkan makanan di inventori dengan index idx ke kulkas */
+void penomorMakananKulkas(infotype * var, int id, MatrixKulkas kulkas, boolean * ada) {
+/* menomori makanan yang akan dimasukkan ke kulkas, dengan cara mengubah indexnya */
 
     // KAMUS
-    infotype temp;
-    int i, j;
-    boolean moved;
+    int temp, i, j;
+    boolean ada;
 
     // ALGORITMA
-    DeleteAt(&Inventory(*s), idx, &temp);
+    temp = ID(Info(*var));
+    temp = temp * 1000 + id;
 
-    moved = false;
+    // cek apakah ada makanan dengan id yang sama di kulkas
+    *ada = false;
     for (i = 0; i <= getLastIdxRowKulkas(*kulkas); i++) {
         for (j = 0; j <= getLastIdxColKulkas(*kulkas); j++) {
-            if (cekSpotKosongKulkas(*kulkas, i, j)) {
-                moved = true;
+            if (ID(Info(Elmt(*kulkas, i, j))) == temp) {
+                *ada = true;
                 break;
             }
         }
-
-        if (moved) {
-            break;
-        }
     }
 
-    if (!moved) {
-        Enqueue(&Inventory(*s), temp);
-        printf("kulkas sudah penuh :(\n");
+    if (*ada) {
+        printf("Nomor makanan tersebut sudah ada.. :(\n");
     } else {
-        ELMTK(*kulkas, i, j) = temp;
-        LOC(Info(temp)) = 'K';
-        insertLastMakanan(currentNotif, temp);
+        ID(Info(*var)) = temp;
+    }
+}
+
+void ambilDariInventory (Simulator * s, int idx, infotype * var) {
+/* prekondisi : idx valid */
+
+    // KAMUS
+
+    // ALGORITMA
+    DeleteAt(&Inventory(*s), idx, var);
+}
+
+void pindahKeKulkas(infotype var, int nomor, MatrixKulkas * kulkas, ListDinMakanan * currentNotif, ListStatikP daftarindex) {
+/* Memindahkan makanan di inventori berdasarkan list of point ke kulkas */
+/* prekondisi : list of pointnya sudah valid, dan pada point tersebut slot di kulkasnya kosong */
+
+    // KAMUS
+    int i, x, y;
+
+    // ALGORITMA
+    for (i = 1; i <= listLengthStatikP(*daftarindex); i++) {
+        x = Absis(ELMT_LISTSTATIKP(*daftarindex, i-1));
+        y = Ordinat(ELMT_LISTSTATIKP(*daftarindex, i-1)); 
+        ELMTK(*kulkas, x, y) = var;
+        LOC(Info(var)) = 'K';
+        insertLastMakanan(currentNotif, var);
     }
 }
 
@@ -220,63 +240,26 @@ void ambilDariKulkas(Simulator * s, MatrixKulkas * kulkas, int idxX, int idxY, L
 
 }
 
-boolean adjacent(Simulator s, Map peta, char x) {
+boolean adjacent(Simulator s, Matrix peta, char x) {
 /* Mengecek apakah simulator bersebelahan dengan tempat tertentu */
 
     // KAMUS
-    int i, length;
-    boolean bersebelahan;
-    POINT lokasiSimulator;
+    int x, y;
 
     // ALGORITMA
-    bersebelahan = false;
-    lokasiSimulator = Lokasi(s);
+    x = Absis(Lokasi(s)); 
+    y = Ordinat(Lokasi(s)); 
 
-    if (x == 'T') {
-        length = listLengthStatikP(TMap(peta)) - 1;
-        for (i = 0; i <= length; i++) {
-            if (SideBy(lokasiSimulator, ELMT_LISTSTATIKP(TMap(peta), i))) {
-                bersebelahan = true;
-                break;
-            }
-        }
-        return bersebelahan;
-    } else if (x == 'F') {
-        length = listLengthStatikP(FMap(peta)) - 1;
-        for (i = 0; i <= length; i++) {
-            if (SideBy(lokasiSimulator, ELMT_LISTSTATIKP(FMap(peta), i))) {
-                bersebelahan = true;
-                break;
-            }
-        }
-        return bersebelahan;
-    } else if (x == 'M') {
-        length = listLengthStatikP(MMap(peta)) - 1;
-        for (i = 0; i <= length; i++) {
-            if (SideBy(lokasiSimulator, ELMT_LISTSTATIKP(MMap(peta), i))) {
-                bersebelahan = true;
-                break;
-            }
-        }
-        return bersebelahan;
-    } else if (x == 'C') {
-        length = listLengthStatikP(CMap(peta)) - 1;
-        for (i = 0; i <= length; i++) {
-            if (SideBy(lokasiSimulator, ELMT_LISTSTATIKP(CMap(peta), i))) {
-                bersebelahan = true;
-                break;
-            }
-        }
-        return bersebelahan;
-    } else if (x == 'B') {
-        length = listLengthStatikP(BMap(peta)) - 1;
-        for (i = 0; i <= length; i++) {
-            if (SideBy(lokasiSimulator, ELMT_LISTSTATIKP(BMap(peta), i))) {
-                bersebelahan = true;
-                break;
-            }
-        }
-        return bersebelahan;
+    if (ELMT_MATRIX(peta, x-1, y) == x) {
+        return true;
+    } else if (ELMT_MATRIX(peta, x+1, y) == x) {
+        return true;
+    } else if (ELMT_MATRIX(peta, x, y+1) == x) {
+        return true;
+    } else if (ELMT_MATRIX(peta, x, y-1) == x) {
+        return true;
+    } else {
+        return false;
     }
 }
 

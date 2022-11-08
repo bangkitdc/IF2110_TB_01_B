@@ -65,7 +65,13 @@ void MWest(Map *MGame, boolean *stuck, Simulator *s);
 boolean cekSpotKosongKulkas(MatrixKulkas kulkas, int idxX, int idxY);
 /* mengecek apakah di kulkas pada index i, j kosong */
 
-void pindahKeKulkas(Simulator * s, int idx, MatrixKulkas * kulkas, ListDinMakanan * currentNotif);
+void penomorMakananKulkas(infotype * var, int id, MatrixKulkas kulkas, boolean * ada);
+/* menomori makanan yang akan dimasukkan ke kulkas, dengan cara mengubah indexnya */
+
+void ambilDariInventory (Simulator * s, int idx, infotype * var);
+/* prekondisi : idx valid */
+
+void pindahKeKulkas(infotype var, int nomor, MatrixKulkas * kulkas, ListDinMakanan * currentNotif, ListStatikP daftarindex);
 /* Memindahkan makanan di inventori dengan index idx ke kulkas */
 
 void ambilDariKulkas(Simulator * s, MatrixKulkas * kulkas, int idxX, int idxY, ListDinMakanan * currentNotif);

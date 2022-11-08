@@ -66,6 +66,9 @@ void displayMatrixKulkas(MatrixKulkas m);
 int countElmtKulkas(MatrixKulkas m);
 /* Mengirimkan banyaknya elemen m */
 
+int countElmtDummy(MatrixKulkas m);
+/* Menghitung banyaknya elemen dummy di kulkas */
+
 boolean isFullKulkas(MatrixKulkas m);
 /* Mengirim true jika kulkas penuh, false jika tidak */
 
