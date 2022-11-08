@@ -68,13 +68,16 @@ boolean cekSpotKosongKulkas(MatrixKulkas kulkas, int idxX, int idxY);
 void penomorMakananKulkas(infotype * var, int id, MatrixKulkas kulkas, boolean * ada);
 /* menomori makanan yang akan dimasukkan ke kulkas, dengan cara mengubah indexnya */
 
+void hapusIdKulkas(infotype * var);
+/* mengembalikan ID makanan yang sementara diubah untuk masuk ke kulkas */
+
 void ambilDariInventory (Simulator * s, int idx, infotype * var);
 /* prekondisi : idx valid */
 
-void pindahKeKulkas(infotype var, int nomor, MatrixKulkas * kulkas, ListDinMakanan * currentNotif, ListStatikP daftarindex);
+void pindahKeKulkas(infotype var, MatrixKulkas * kulkas, ListDinMakanan * currentNotif, int idX, int idY);
 /* Memindahkan makanan di inventori dengan index idx ke kulkas */
 
-void ambilDariKulkas(Simulator * s, MatrixKulkas * kulkas, int idxX, int idxY, ListDinMakanan * currentNotif);
+void ambilDariKulkas(Simulator * s, int idmakanan, MatrixKulkas * kulkas, ListDinMakanan * currentNotif);
 /* Mengambil makanan dari kulkas dan memasukkannya ke inventory */
 
 boolean adjacent(Simulator s, Matrix peta, char x);

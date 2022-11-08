@@ -218,42 +218,106 @@ int main() {
                             }
                         }
                         break;
-                    case 15: /* MASUKKULKAS X Y Z*/
-                        if (L.Length != 4) {
-                            sprintRed("Command MASUKKULKAS memiliki 3 argumen. Coba Lagi!\n");
+                    case 15: /* MASUKKULKAS X Y*/
+                        if (L.Length != 3) {
+                            sprintRed("Command MASUKKULKAS memiliki 2 argumen. Coba Lagi!\n");
                         } else {
-                            // infotype tempinfotype;
-                            // boolean idtidakvalid;
-                            // ListWord tempindexkulkas;
-                            // createListWord(&tempindexkulkas);
-                            // int X = wordToInt(L.TabWords[1]);
-                            // int Y = wordToInt(L.TabWords[2]);
-                            // int Z = wordToInt(L.TabWords[3]); // Z == 1, secara landscape, selain itu secara portrait
+                            infotype tempinfotype;
+                            boolean idtidakvalid;
+                            ListWord tempindexkulkas;
+                            int inputtempindexkulkas;
+                            createListWord(&tempindexkulkas);
+                            int X = wordToInt(L.TabWords[1]);
+                            int Y = wordToInt(L.TabWords[2]);
 
-                            // if (!isFullKulkas(kulkas)) {
-                            //     ambilDariInventory(&simulator, X, &tempinfotype);
-                            //     penomorMakananKulkas(&tempinfotype, Y, kulkas, &idtidakvalid)
-                            //     if (!idtidakvalid) {
-                            //         if (Absis(SIZE(Info(tempinfotype))) * Ordinat(SIZE(Info(tempinfotype))) <= countElmtDummy(kulkas)) {
-                            //             if (Z == 1) {
-                            //                 // minta input index
-                            //             } else {
-                            //                 // minta input index
-                            //             }
-                            //         } else {
-                            //             sprintRed("Kulkas tidak bisa menampung makanan kamu :(\n");
-                            //         }
-                            //     }
-                            // } else {
-                            //     sprintRed("Kulkas sudah penuh.. :(\n");
-                            // }
+                            if (!isFullKulkas(kulkas)) {
+                                ambilDariInventory(&simulator, X, &tempinfotype);
+                                penomorMakananKulkas(&tempinfotype, Y, kulkas, &idtidakvalid)
+                                if (!idtidakvalid) {
+                                    if (Absis(SIZE(Info(tempinfotype))) * Ordinat(SIZE(Info(tempinfotype))) <= countElmtDummy(kulkas)) {
+                                        // minta input index pojok kiri atas dan index pojok kanan bawah
+                                        sprintYellow("Masukkan index pojok kiri atas, dan index pojok kanan bawah\n");
+                                        sprintYellow("Urutannya: kiri atas kanan bawah\n");
+                                        tempindexkulkas = readLine();
+                                        inputtempindexkulkas = MenuInput(tempindexkulkas.TabWords[0]);
+                                        if (tempindexkulkas.Length != 4) {
+                                            sprintRed("Butuh 2 index\n");
+                                            // kembalikan ID awal
+                                            hapusIdKulkas(&tempinfotype);
+                                            Enqueue(&Inventory(simulator), tempinfotype);
+                                        } else {
+                                            int kiri = wordToInt(tempindexkulkas.TabWords[0]);
+                                            int atas = wordToInt(tempindexkulkas.TabWords[1]);
+                                            int kanan = wordToInt(tempindexkulkas.TabWords[2]);
+                                            int bawah = wordToInt(tempindexkulkas.TabWords[3]);
+                                            if ((bawah - atas + 1) * (kanan - kiri + 1) != Absis(SIZE(Info(tempinfotype))) * Ordinat(SIZE(Info(tempinfotype)))) {
+                                                sprintRed("Index tidak valid.. :(\n");
+                                                // kembalikan ID awal
+                                                hapusIdKulkas(&tempinfotype);
+                                                Enqueue(&Inventory(simulator), tempinfotype);
+                                            } else {
+                                                int i, j;
+                                                boolean idxkulkasvalid;
+
+                                                idxkulkasvalid = true;
+
+                                                for (i = atas; i <= bawah; i++) {
+                                                    for (j = kiri; j <= kanan; j++) {
+                                                        if (ID(ELMTK(kulkas,i,j)) != 0) {
+                                                            idxkulkasvalid = false;
+                                                        }
+                                                    }
+                                                }
+
+                                                if (idxkulkas) {
+                                                    for (i = atas; i <= bawah; i++) {
+                                                        for (j = kiri; j <= kanan; j++) {
+                                                            pindahKeKulkas(tempinfotype, &kulkas, &latest_notification, i, j);
+                                                        }
+                                                    }
+                                                } else {
+                                                    // kembalikan ID awal
+                                                    hapusIdKulkas(&tempinfotype);
+                                                    Enqueue(&Inventory(simulator), tempinfotype);
+                                                }
+                                            }
+                                        }
+                                    } else {
+                                        sprintRed("Kulkas tidak bisa menampung makanan kamu :(\n");
+                                        // kembalikan ID awal
+                                        hapusIdKulkas(&tempinfotype);
+                                        Enqueue(&Inventory(simulator), tempinfotype);
+                                    }
+                                }
+                            } else {
+                                sprintRed("Kulkas sudah penuh.. :(\n");
+                            }
                         }
                         break;
-                    case 16: /* KELUARKULKAS X Y*/
-                        if (L.Length != 3) {
-                            sprintRed("Command KELUARKULKAS memiliki 2 argumen. Coba Lagi!\n");
+                    case 16: /* KELUARKULKAS X*/
+                        if (L.Length != 2) {
+                            sprintRed("Command KELUARKULKAS memiliki 1 argumen. Coba Lagi!\n");
                         } else {
-                            
+                            int tempidmakanan, i, j;
+                            boolean ada;
+                            tempidmakanan = wordToInt(L.TabWords[1]);
+
+                            // cek terlebih dahulu apakah ada makanan di kulkas dengan ID tersebut
+                            ada = false;
+                            for (i = 0; i <= 9; i++) {
+                                for (j = 0; j <= 19; j++) {
+                                    if (ID(Info(ELMTK(kulkas, i, j))) == tempidmakanan) {
+                                        ada = true;
+                                    }
+                                }
+                            }
+
+                            if (!ada) {
+                                sprintRed("Tidak ada makanan dengan ID tersebut di kulkas\n");
+                            } else {
+                                // ambil dari kulkas
+                                ambilDariKulkas(&simulator, tempidmakanan, &kulkas, &latest_notification);
+                            }
                         }
                         break;
                     default:
