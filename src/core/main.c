@@ -44,7 +44,7 @@ int main() {
     switch (input) {
         case 1: /* START */
             startGame(&game, &simulator);
-            while(!game.endGame) {
+            while(!isEndGame(game)) {
                 sprintBlue("\nEnter Command: \n");
                 printf("> ");
                 L = readLine();
@@ -143,6 +143,7 @@ int main() {
                                 mengolahMakanan(makananBisaDiolah.contents[pilBoil - 1], &(simulator.inventory), game.listResep, game.listMakanan);
                                 EmptyStack(&stack_redo);
                             }
+                        }
                         break;
                     case 5: /* MIX */
                         if (L.Length != 1) {
@@ -152,7 +153,7 @@ int main() {
                             int length, pilMix;
                             displayListMakananAksi(game.listMakanan, &makananBisaDiolah, &length, 'M');
                             pilMix = select(1, length);
-                            if (pilBoil == 0) {
+                            if (pilMix == 0) {
                                 sprintRed("\nMembatalkan command MIX\n");
                                 break;
                             } else {
@@ -304,7 +305,7 @@ int main() {
 
                             if (!isFullKulkas(kulkas)) {
                                 ambilDariInventory(&simulator, X, &tempinfotype);
-                                penomorMakananKulkas(&tempinfotype, Y, kulkas, &idtidakvalid)
+                                penomorMakananKulkas(&tempinfotype, Y, kulkas, &idtidakvalid);
                                 if (!idtidakvalid) {
                                     if (Absis(SIZE(Info(tempinfotype))) * Ordinat(SIZE(Info(tempinfotype))) <= countElmtDummy(kulkas)) {
                                         // minta input index pojok kiri atas dan index pojok kanan bawah
@@ -399,12 +400,12 @@ int main() {
                         break;
                     default:
                         sprintRed("Command Invalid. Ketik HELP untuk melihat list Command\n");
-                        break;
+                        break;   
+                    }
+                
+                if (isEndGame(game)) {
+                    exitGame();
                 }
-            }
-            if (isEndGame) {
-                exitGame();
-            }
             break;
         case 2: /* EXIT */
             exitGame();
@@ -412,7 +413,6 @@ int main() {
         default:
             break;
         }
-    }
     }
     return 0;
 }
