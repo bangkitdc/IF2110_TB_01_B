@@ -240,6 +240,7 @@ void inputConfigFile(Game *g,Simulator *sim, char *PATH, int type) {
 }
 
 void help() {
+    sprintCyan("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2 LIST COMMAND \xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2");
     sprintCyan("\n============== List Command ==============\n");
     printf("  [1]  MOVE X (X: NORTH/ SOUTH/ WEST/ EAST)\n");
     printf("  [2]  BUY\n");
@@ -273,7 +274,7 @@ int select(int min, int max) {
             return 0;
         } else {
             sprintRed("\nInput invalid. Silahkan masukkan angka ("); 
-            printRed(minChar); printRed('-'); printRed(maxChar); sprintRed(') atau angka 0 untuk exit!'); printf("\n");
+            printRed(minChar); printRed('-'); printRed(maxChar); sprintRed(") atau angka 0 untuk exit!"); printf("\n");
             printf("> ");
             L = readLine();
         }
