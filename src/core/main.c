@@ -89,6 +89,7 @@ int main() {
                                     makananDibeli.info = makananBisaDibeli.contents[PilBuy - 1];
                                     makananDibeli.time = makananBisaDibeli.contents[PilBuy - 1].delivery;
                                     Enqueue(&delivery_list, makananDibeli);
+                                    EmptyStack(&stack_redo);
                                 }
                             }
                         }
@@ -106,6 +107,7 @@ int main() {
                                 break;
                             } else {
                                 mengolahMakanan(makananBisaDiolah.contents[pilFry - 1], &(simulator.inventory), game.listResep, game.listMakanan);
+                                EmptyStack(&stack_redo);
                             }
                         }
                         break;
@@ -122,6 +124,7 @@ int main() {
                                 break;
                             } else {
                                 mengolahMakanan(makananBisaDiolah.contents[pilChop-1], &(simulator.inventory), game.listResep, game.listMakanan);
+                                EmptyStack(&stack_redo);
                             }
                         }
                         break;
@@ -138,6 +141,7 @@ int main() {
                                 break;
                             } else {
                                 mengolahMakanan(makananBisaDiolah.contents[pilBoil - 1], &(simulator.inventory), game.listResep, game.listMakanan);
+                                EmptyStack(&stack_redo);
                             }
                         break;
                     case 5: /* MIX */
@@ -153,6 +157,7 @@ int main() {
                                 break;
                             } else {
                                 mengolahMakanan(makananBisaDiolah.contents[pilMix-1], &(simulator.inventory), game.listResep, game.listMakanan);
+                                EmptyStack(&stack_redo);
                             }
                         }
                         break;
@@ -263,6 +268,7 @@ int main() {
                                 TulisTIME3(game.currentTime);
                                 printf("\n"); DisplayMap(game.map, simulator.lokasi);
                             } else {
+                                // IsStackEmpty(stack_undo) [stack_undo kosong]
                                 sprintRed("Tidak bisa UNDO.\n");
                             }
                         }
@@ -279,6 +285,7 @@ int main() {
                                 TulisTIME3(game.currentTime);
                                 printf("\n"); DisplayMap(game.map, simulator.lokasi);
                             } else {
+                                // IsStackEmpty(stack_redo) [stack_redo kosong]
                                 sprintRed("Tidak bisa REDO.\n");
                             }
                         }
@@ -326,6 +333,8 @@ int main() {
 
                                                 idxkulkasvalid = true;
 
+                                                // Mengecek apakah index kulkas valid, yakni saat tidak ada makanan lain
+                                                // di posisi tersebut
                                                 for (i = atas; i <= bawah; i++) {
                                                     for (j = kiri; j <= kanan; j++) {
                                                         if (ID(Info(ELMTK(kulkas,i,j))) != 0) {
@@ -340,7 +349,8 @@ int main() {
                                                             pindahKeKulkas(tempinfotype, &kulkas, &latest_notification, i, j);
                                                         }
                                                     }
-                                                } else {
+                                                    EmptyStack(&stack_redo);
+                                                } else { //idxkulkasvalid == false
                                                     sprintRed("Ada makanan lain di posisi tersebut..\n");
                                                     // kembalikan ID awal
                                                     hapusIdKulkas(&tempinfotype);
@@ -348,14 +358,14 @@ int main() {
                                                 }
                                             }
                                         }
-                                    } else {
+                                    } else { // Absis(SIZE(Info(tempinfotype))) * Ordinat(SIZE(Info(tempinfotype))) > countElmtDummy(kulkas)
                                         sprintRed("Kulkas tidak bisa menampung makanan kamu :(\n");
                                         // kembalikan ID awal
                                         hapusIdKulkas(&tempinfotype);
                                         Enqueue(&Inventory(simulator), tempinfotype);
                                     }
                                 }
-                            } else {
+                            } else { //isFullKulkas(kulkas)
                                 sprintRed("Kulkas sudah penuh.. :(\n");
                             }
                         }
