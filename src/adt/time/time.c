@@ -56,6 +56,59 @@ void TulisTIME3 (TIME T) {
    printf("Waktu: %d.%d\n", Hour(T), Minute(T));
 }
 
+void TulisTIME4 (TIME T) {
+   boolean hari = false;
+   boolean jam = false;
+   boolean menit = false;
+   if(T.DD > 0){
+      printf("%-2d %-5s", T.DD, "hari");
+      hari = true;
+   }
+   if(T.HH > 0){
+      if (hari) {
+         printf(" ");
+      }
+      printf("%-2d %-5s", T.HH, "jam");
+      jam = true;
+   }
+   if(T.MM > 0){
+      if (jam) {
+         printf(" ");
+      }
+      printf("%-2d %-5s", T.MM, "menit");
+      menit = true;
+   }
+   if (jam && !hari && !menit || hari && !jam && !menit || menit && !hari && !jam) {
+      printf("\t");
+   }
+}
+
+void TulisTIME5 (TIME T) {
+   boolean hari = false;
+   boolean jam = false;
+   boolean menit = false;
+   printf("(");
+   if(T.DD > 0){
+      printf("%-2d %-5s", T.DD, "hari");
+      hari = true;
+   }
+   if(T.HH > 0){
+      if (hari) {
+         printf(" ");
+      }
+      printf("%-2d %-5s", T.HH, "jam");
+      jam = true;
+   }
+   if(T.MM > 0){
+      if (jam) {
+         printf(" ");
+      }
+      printf("%-2d %-5s", T.MM, "menit");
+      menit = true;
+   }
+   printf(")");
+}
+
 /* ***************************************************************** */
 /* KELOMPOK KONVERSI TERHADAP TYPE                                   */
 /* ***************************************************************** */

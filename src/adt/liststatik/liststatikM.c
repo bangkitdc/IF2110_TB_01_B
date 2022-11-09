@@ -47,47 +47,49 @@ void printCatalog(ListStatikM l) {
     int i;
 
     // ALGORITMA
-    sprintCyan("\n============== List Makanan ==============\n");
-    printf("(nama - durasi kedaluwarsa - aksi yang diperlukan - delivery time - size)\n");
+    sprintCyan("\t\t     \xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2 LIST MAKANAN \xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\n");
+    printf("=====================================================================================================\n");
+    printf("No  Nama\t\t Expired in\t\t Action\t\t\t Delivery time\t\t Size\n");  // TABLE TITLES !
+    printf("=====================================================================================================\n");
+    
+    // sprintCyan("\n============== List Makanan ==============\n");
+    // printf("(nama - durasi kedaluwarsa - aksi yang diperlukan - delivery time - size)\n");
 
     if (listLengthStatikM(l) > 0) {
         for (i = 0; i < listLengthStatikM(l); i ++) {
             Makanan temp = ELMT_LISTSTATIKM(l, i);
-            printf("  [%d] %s - ", i + 1, NAME(temp));
-            TulisTIME2(EXP(temp));
+            printf("%2d  %-15s\t ", i + 1, NAME(temp));
+            TulisTIME4(EXP(temp));
             switch (LOC(temp)) {
                 case 'T':
-                    printf(" - BUY - ");
+                    printf("\t BUY\t\t");
                     break;
                 case 'F':
-                    printf(" - FRY (");
-                    TulisTIME2(PENGOLAHAN(temp));
-                    printf(") - ");
+                    printf("\t FRY  ");
+                    TulisTIME5(PENGOLAHAN(temp));
                     break;
                 case 'M':
-                    printf(" - MIX (");
-                    TulisTIME2(PENGOLAHAN(temp));
-                    printf(") - ");
+                    printf("\t MIX  ");
+                    TulisTIME5(PENGOLAHAN(temp));
                     break;
                 case 'C':
-                    printf(" - CHOP (");
-                    TulisTIME2(PENGOLAHAN(temp));
-                    printf(") - ");
+                    printf("\t CHOP ");
+                    TulisTIME5(PENGOLAHAN(temp));
                     break;
                 case 'B':
-                    printf(" - BOIL (");
-                    TulisTIME2(PENGOLAHAN(temp));
-                    printf(") - ");
+                    printf("\t BOIL ");
+                    TulisTIME5(PENGOLAHAN(temp));
                     break;
                 default:
                     break;
             }
             if (TIMEToMenit(DELIVERY(temp)) == 0) {
-                printf("0");
+                printf("\t 0\t\t");
             } else {
-                TulisTIME2(DELIVERY(temp));
+                printf("\t ");
+                TulisTIME4(DELIVERY(temp));
             }
-            printf(" - (%d x %d)", Absis(SIZE(temp)), Ordinat(SIZE(temp)));
+            printf("\t%d x %d", Absis(SIZE(temp)), Ordinat(SIZE(temp)));
             printf("\n");
         }
 

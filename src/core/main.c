@@ -64,7 +64,7 @@ int main() {
                         } else {
                             boolean CekAdjBuy = adjacent(simulator, game.map.Peta, 'T');
                             if (!CekAdjBuy) {
-                                sprintRed("\nBNMO sedang tidak berada di area telepon!\n");
+                                sprintRed("\nBNMO sedang tidak berada di area telepon(T), silahkan lihat peta!\n");
                             } else {
                                 printf("List Bahan Makanan:\n");
                                 ListStatikM makananBisaDibeli; //ini buat nyimpen makanan apa aja yang bisa dibeli
@@ -98,16 +98,21 @@ int main() {
                         if (L.Length != 1) {
                             sprintRed("Command FRY tidak memiliki argumen. Coba Lagi!\n");
                         } else {
-                            ListStatikM makananBisaDiolah;
-                            int length, pilFry;
-                            displayListMakananAksi(game.listMakanan, &makananBisaDiolah, &length, 'F');
-                            pilFry = select(1, length);
-                            if (pilFry == 0) {
-                                sprintRed("\nMembatalkan command FRY\n");
-                                break;
+                            boolean CekAdjFry = adjacent(simulator, game.map.Peta, 'F');
+                            if (!CekAdjFry) {
+                                sprintRed("\nBNMO sedang tidak berada di area fry(F), silahkan lihat peta!\n");
                             } else {
-                                mengolahMakanan(makananBisaDiolah.contents[pilFry - 1], &(simulator.inventory), game.listResep, game.listMakanan);
-                                EmptyStack(&stack_redo);
+                                ListStatikM makananBisaDiolah;
+                                int length, pilFry;
+                                displayListMakananAksi(game.listMakanan, &makananBisaDiolah, &length, 'F');
+                                pilFry = select(1, length);
+                                if (pilFry == 0) {
+                                    sprintRed("\nMembatalkan command FRY\n");
+                                    break;
+                                } else {
+                                    mengolahMakanan(makananBisaDiolah.contents[pilFry - 1], &(simulator.inventory), game.listResep, game.listMakanan);
+                                    EmptyStack(&stack_redo);
+                                }
                             }
                         }
                         break;
@@ -115,16 +120,21 @@ int main() {
                         if (L.Length != 1) {
                             sprintRed("Command CHOP tidak memiliki argumen. Coba Lagi!\n");
                         } else {
-                            ListStatikM makananBisaDiolah;
-                            int length, pilChop;
-                            displayListMakananAksi(game.listMakanan, &makananBisaDiolah, &length, 'C');
-                            pilChop = select(1, length);
-                            if (pilChop == 0) {
-                                sprintRed("\nMembatalkan command CHOP\n");
-                                break;
+                            boolean CekAdjChop = adjacent(simulator, game.map.Peta, 'C');
+                            if (!CekAdjChop) {
+                                sprintRed("\nBNMO sedang tidak berada di area chop(C), silahkan lihat peta!\n");
                             } else {
-                                mengolahMakanan(makananBisaDiolah.contents[pilChop-1], &(simulator.inventory), game.listResep, game.listMakanan);
-                                EmptyStack(&stack_redo);
+                                ListStatikM makananBisaDiolah;
+                                int length, pilChop;
+                                displayListMakananAksi(game.listMakanan, &makananBisaDiolah, &length, 'C');
+                                pilChop = select(1, length);
+                                if (pilChop == 0) {
+                                    sprintRed("\nMembatalkan command CHOP\n");
+                                    break;
+                                } else {
+                                    mengolahMakanan(makananBisaDiolah.contents[pilChop-1], &(simulator.inventory), game.listResep, game.listMakanan);
+                                    EmptyStack(&stack_redo);
+                                }
                             }
                         }
                         break;
@@ -132,16 +142,21 @@ int main() {
                         if (L.Length != 1) {
                             sprintRed("Command BOIL tidak memiliki argumen. Coba Lagi!\n");
                         } else {
-                            ListStatikM makananBisaDiolah;
-                            int length, pilBoil;
-                            displayListMakananAksi(game.listMakanan, &makananBisaDiolah, &length, 'B');
-                            pilBoil = select(1, length);
-                            if (pilBoil == 0) {
-                                sprintRed("\nMembatalkan command BOIL\n");
-                                break;
+                            boolean CekAdjBoil = adjacent(simulator, game.map.Peta, 'B');
+                            if (!CekAdjBoil) {
+                                sprintRed("\nBNMO sedang tidak berada di area boil(B), silahkan lihat peta!\n");
                             } else {
-                                mengolahMakanan(makananBisaDiolah.contents[pilBoil - 1], &(simulator.inventory), game.listResep, game.listMakanan);
-                                EmptyStack(&stack_redo);
+                                ListStatikM makananBisaDiolah;
+                                int length, pilBoil;
+                                displayListMakananAksi(game.listMakanan, &makananBisaDiolah, &length, 'B');
+                                pilBoil = select(1, length);
+                                if (pilBoil == 0) {
+                                    sprintRed("\nMembatalkan command BOIL\n");
+                                    break;
+                                } else {
+                                    mengolahMakanan(makananBisaDiolah.contents[pilBoil - 1], &(simulator.inventory), game.listResep, game.listMakanan);
+                                    EmptyStack(&stack_redo);
+                                }
                             }
                         }
                         break;
@@ -149,16 +164,21 @@ int main() {
                         if (L.Length != 1) {
                             sprintRed("Command MIX tidak memiliki argumen. Coba Lagi!\n");
                         } else {
-                            ListStatikM makananBisaDiolah;
-                            int length, pilMix;
-                            displayListMakananAksi(game.listMakanan, &makananBisaDiolah, &length, 'M');
-                            pilMix = select(1, length);
-                            if (pilMix == 0) {
-                                sprintRed("\nMembatalkan command MIX\n");
-                                break;
+                            boolean CekAdjMix = adjacent(simulator, game.map.Peta, 'M');
+                            if (!CekAdjMix) {
+                                sprintRed("\nBNMO sedang tidak berada di area mix(M), silahkan lihat peta!\n");
                             } else {
-                                mengolahMakanan(makananBisaDiolah.contents[pilMix-1], &(simulator.inventory), game.listResep, game.listMakanan);
-                                EmptyStack(&stack_redo);
+                                ListStatikM makananBisaDiolah;
+                                int length, pilMix;
+                                displayListMakananAksi(game.listMakanan, &makananBisaDiolah, &length, 'M');
+                                pilMix = select(1, length);
+                                if (pilMix == 0) {
+                                    sprintRed("\nMembatalkan command MIX\n");
+                                    break;
+                                } else {
+                                    mengolahMakanan(makananBisaDiolah.contents[pilMix-1], &(simulator.inventory), game.listResep, game.listMakanan);
+                                    EmptyStack(&stack_redo);
+                                }
                             }
                         }
                         break;
