@@ -393,6 +393,7 @@ int main() {
                             } else {
                                 // ambil dari kulkas
                                 ambilDariKulkas(&simulator, tempidmakanan, &kulkas, &latest_notification);
+                                EmptyStack(&stack_redo);
                             }
                         }
                         break;
