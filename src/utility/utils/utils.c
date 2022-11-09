@@ -240,25 +240,27 @@ void inputConfigFile(Game *g,Simulator *sim, char *PATH, int type) {
 }
 
 void help() {
-    sprintCyan("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2 LIST COMMAND \xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2");
-    sprintCyan("\n============== List Command ==============\n");
-    printf("  [1]  MOVE X (X: NORTH/ SOUTH/ WEST/ EAST)\n");
-    printf("  [2]  BUY\n");
-    printf("  [3]  FRY\n");
-    printf("  [4]  CHOP\n");
-    printf("  [5]  BOIL\n");
-    printf("  [6]  MIX\n");
-    printf("  [7]  WAIT X Y (X: jam, Y: menit)\n");
-    printf("  [8]  INVENTORY\n");
-    printf("  [9]  DELIVERY\n");
-    printf("  [10] CATALOG\n");
-    printf("  [11] COOKBOOK\n");
-    printf("  [12] UNDO\n");
-    printf("  [13] REDO\n");
-    printf("  [14] MASUKKULKAS\n");
-    printf("  [15] KELUARKULKAS\n");
-    printf("  [16] HELP\n");
-    printf("  [17] EXIT\n");
+    sprintCyan("      \xB2\xB2\xB2\xB2\xB2\xB2\xB2 LIST COMMAND \xB2\xB2\xB2\xB2\xB2\xB2\xB2\n");
+    printf("========================================\n");
+    printf("No  Command                             \n"); // TABLE TITLES !
+    printf("========================================\n");
+    printf("%2d  MOVE X (X: NORTH/ SOUTH/ WEST/ EAST)\n", 1);
+    printf("%2d  BUY\n", 2);
+    printf("%2d  FRY\n", 3);
+    printf("%2d  CHOP\n", 4);
+    printf("%2d  BOIL\n", 5);
+    printf("%2d  MIX\n", 6);
+    printf("%2d  WAIT X Y (X: jam, Y: menit)\n", 7);
+    printf("%2d  INVENTORY\n", 8);
+    printf("%2d  DELIVERY\n", 9);
+    printf("%2d  CATALOG\n", 10);
+    printf("%2d  COOKBOOK\n", 11);
+    printf("%2d  UNDO\n", 12);
+    printf("%2d  REDO\n", 13);
+    printf("%2d  MASUKKULKAS\n", 14);
+    printf("%2d  KELUARKULKAS\n", 15);
+    printf("%2d  HELP\n", 16);
+    printf("%2d  EXIT\n", 17);
 }
 
 int select(int min, int max) {

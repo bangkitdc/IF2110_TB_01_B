@@ -45,6 +45,10 @@ void TulisTIME2 (TIME T);
 
 void TulisTIME3 (TIME T);
 
+void TulisTIME4 (TIME T);
+
+void TulisTIME5 (TIME T);
+
 /* ***************************************************************** */
 /* KELOMPOK KONVERSI TERHADAP TYPE                                   */
 /* ***************************************************************** */
