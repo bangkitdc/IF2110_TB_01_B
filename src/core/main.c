@@ -402,7 +402,7 @@ int main() {
                         sprintRed("Command Invalid. Ketik HELP untuk melihat list Command\n");
                         break;   
                     }
-                
+                }
                 if (isEndGame(game)) {
                     exitGame();
                 }
