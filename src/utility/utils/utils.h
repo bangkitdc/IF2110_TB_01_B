@@ -13,6 +13,7 @@
 #include "../../adt/map/map.h"
 #include "../../adt/simulator/simulator.h"
 #include "../../adt/stack/stack.h"
+#include "../../adt/set/set.h"
 
 void startMenu();
 
@@ -31,5 +32,11 @@ void tambahBahan(Tree *p, Tree l);
 void exitGame();
 
 void printCookBook(ListStatikT listResep, ListStatikM listMakanan);
+
+int getUrutanFromListMakanan(ListStatikM listMakanan, int idMakanan);
+
+boolean apakahBisa(Tree t, Set s, ListStatikM listMakanan);
+
+void rekomendasiMakanan(ListStatikM listMakanan, PrioQueue listInvenMakanan, ListStatikT listResep);
 
 #endif

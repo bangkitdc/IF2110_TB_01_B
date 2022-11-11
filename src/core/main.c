@@ -518,6 +518,13 @@ int main() {
                             displayMatrixKulkas(kulkas);
                         }
                         break;
+                    case 18: /*REKOMENDASI*/
+                        if (L.Length != 1) {
+                            sprintRed("Command REKOMENDASI tidak memiliki argumen. Coba Lagi!\n");
+                        } else {
+                            rekomendasiMakanan(game.listMakanan, simulator.inventory, game.listResep);
+                        }
+                        break;
                     default:
                         sprintRed("Command Invalid. Ketik HELP untuk melihat list Command\n");
                         break;   
