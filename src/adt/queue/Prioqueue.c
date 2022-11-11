@@ -369,6 +369,7 @@ void PassTimeDelivery(PrioQueue * deliList, PrioQueue * destination, int x, List
         while (!IsEmptyPrioqueue(*deliList)) {
             Dequeue(deliList, &tempvar);
             Time(tempvar) = PrevMenit(Time(tempvar));
+            TulisTIME(Time(tempvar));
             if (TIMEToMenit(Time(tempvar)) == 0) {
                 Time(tempvar) = EXP(Info(tempvar));
                 DELIVERY(Info(tempvar)) = temptime;
@@ -383,7 +384,6 @@ void PassTimeDelivery(PrioQueue * deliList, PrioQueue * destination, int x, List
         // salin kembali dari temp ke Q
         CopyQueue(&temp, deliList);
         DeAlokasi(&temp);
-        CreateEmptyPrioqueue(&temp, MaxElPrioqueue(*deliList));
     }
 }
 
