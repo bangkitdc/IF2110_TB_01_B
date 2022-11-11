@@ -9,7 +9,7 @@ void startGame(Game *game, Simulator *simulator) {
     POINT p;
     PrioQueue pQueue;
     CreatePoint(&p, 0, 0);
-    CreateEmptyPrioqueue(&pQueue, 100);
+    CreateEmptyPrioqueue(&pQueue, 50);
     CreateTime (&game->currentTime, 0, 1, 23);
     createLSMakanan(&game->listMakanan);
     CreateListTree(&game->listResep);

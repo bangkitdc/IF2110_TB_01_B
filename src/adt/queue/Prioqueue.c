@@ -387,7 +387,9 @@ void PassTimeDelivery(PrioQueue * deliList, PrioQueue * destination, int x, List
         // salin kembali dari temp ke Q
         DeAlokasi(deliList);
         CreateEmptyPrioqueue(deliList, MaxElPrioqueue(temp));
-        CopyQueue(&temp, deliList);
+        if (!IsEmptyPrioqueue(temp)) {
+            CopyQueue(&temp, deliList);
+        }
         DeAlokasi(&temp);
         CreateEmptyPrioqueue(&temp, MaxElPrioqueue(*deliList));
     }

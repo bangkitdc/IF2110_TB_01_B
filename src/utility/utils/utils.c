@@ -296,7 +296,7 @@ void tambahBahan(Tree *p, Tree l){
             }
         }
     }else{
-        printf("%d", (*p)->info);
+        // printf("%d", (*p)->info);
         for(int i=0;i<(*p)->childEff;i++){
             tambahBahan(&(*p)->children[i],l);
         }
