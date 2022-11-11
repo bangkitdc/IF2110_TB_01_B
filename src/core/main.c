@@ -427,7 +427,7 @@ int main() {
                         }
                         break;
                     case 17: /*KULKAS*/
-                        if (L.Length != 2) {
+                        if (L.Length != 1) {
                             sprintRed("Command KULKAS tidak memiliki argumen. Coba Lagi!\n");
                         } else {
                             displayMatrixKulkas(kulkas);

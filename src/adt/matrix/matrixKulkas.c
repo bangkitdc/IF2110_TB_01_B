@@ -116,25 +116,7 @@ int countElmtDummy(MatrixKulkas m) {
 boolean isFullKulkas(MatrixKulkas m) {
 /* Mengirim true jika kulkas penuh, false jika tidak */
 
-    int total = countElmtKulkas(m);
-    int ctr = 0;
-    infotype var;
-
-    makeDummyInfoType(&var);
-    for(int i=0;i<ROW_EFFK(m);i++){
-        for(int j=0;j<COL_EFFK(m);j++){
-            infotype temp = ELMTK(m, i, j);
-            if ((ID(Info(temp)) == ID(Info(var))) && (NAME(Info(temp)) == NAME(Info(var))) && (LOC(Info(temp)) == LOC(Info(var))) && (TIMEToMenit(EXP(Info(temp))) == TIMEToMenit(EXP(Info(var)))) && (TIMEToMenit(DELIVERY(Info(temp))) == TIMEToMenit(DELIVERY(Info(var))))) {
-                ctr++;
-            }
-        }
-    }
-
-    if (total == ctr) {
-        return false;
-    } else {
-        return true;
-    }
+    return (countElmtDummy(m) == 0);
 }
 
 /* ********** KELOMPOK TEST TERHADAP MatrixKulkas ********** */
