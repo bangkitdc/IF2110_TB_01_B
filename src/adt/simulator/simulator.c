@@ -225,6 +225,8 @@ void pindahKeKulkas(infotype var, MatrixKulkas * kulkas, ListDinMakanan * curren
     // ALGORITMA
     ELMTK(*kulkas, idX, idY) = var;
     LOC(Info(var)) = 'K';
+    dealocateListMakanan(currentNotif);
+    CreateListMakananDin(currentNotif; 100);
     insertLastMakanan(currentNotif, var);
 }
 
@@ -251,6 +253,8 @@ void ambilDariKulkas(Simulator * s, int idmakanan, MatrixKulkas * kulkas, ListDi
 
     // masukkan kembali ke inventory
     Enqueue(&Inventory(*s), var);
+    dealocateListMakanan(currentNotif);
+    CreateListMakananDin(currentNotif; 100);
     insertLastMakanan(currentNotif, var);
 }
 
