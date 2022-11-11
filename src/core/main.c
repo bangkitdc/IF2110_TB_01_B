@@ -91,7 +91,7 @@ int main() {
                                 } else {
                                     // masukin ke stack undo
                                     State tempstate;
-                                    simulatorToState(simulator, game.currentTime, latest_notification, kulkas, &tempstate);
+                                    simulatorToState(simulator, delivery_list, game.currentTime, latest_notification, kulkas, &tempstate);
                                     Push(&stack_undo, tempstate);
                                     makananDibeli.info = makananBisaDibeli.contents[PilBuy - 1];
                                     makananDibeli.time = makananBisaDibeli.contents[PilBuy - 1].delivery;
