@@ -48,6 +48,7 @@ typedef struct {
 #define InfoInventory(X) (X).inventory
 #define InfoKulkas(X) (X).kulkas
 #define InfoNotif(X) (X).listMakanan
+#define InfoDelivery(X) (X).delivery
 
 /* ************ Prototype ************ */
 /* *** Konstruktor/Kreator *** */

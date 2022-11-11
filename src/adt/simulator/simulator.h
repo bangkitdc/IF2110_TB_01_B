@@ -42,11 +42,11 @@ void gantiLokasi(Simulator * s, POINT p);
 void gerakUser(Simulator * s, Map * peta, boolean * stuck, char x);
 /* Menggerakkan user */
 
-void simulatorToState(Simulator s, TIME currentTime, ListDinMakanan currentNotif, MatrixKulkas currentKulkas, State* temp);
+void simulatorToState(Simulator s, PrioQueue deliverylist, TIME currentTime, ListDinMakanan currentNotif, MatrixKulkas currentKulkas, State* temp);
 /* mengkonversi simulator s ke State*/
 /* digunakan saat mau menyimpan State ke stack */
 
-void loadState(Simulator * s, State * st, char * currentUsername, ListDinMakanan * currentNotif, MatrixKulkas * currentKulkas, TIME * currentTime);
+void loadState(Simulator * s, PrioQueue * deliverylist, State * st, char * currentUsername, ListDinMakanan * currentNotif, MatrixKulkas * currentKulkas, TIME * currentTime);
 /* mengkonversi State dari stack ke simulator dan menyimpannya di simulator */
 /* digunakan saat undo dan redo */
 

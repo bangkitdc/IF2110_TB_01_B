@@ -246,22 +246,22 @@ int main() {
                         } else {
                             boolean stuck, flag = true;
                             if (isWordEq(NORTH, L.TabWords[1])) {
-                                simulatorToState(simulator, game.currentTime, latest_notification, kulkas, &latest_state);
+                                simulatorToState(simulator, delivery_list, game.currentTime, latest_notification, kulkas, &latest_state);
                                 Push(&stack_undo, latest_state);
                                 gerakUser(&simulator, &game.map, &stuck, 'w');
                                 EmptyStack(&stack_redo);
                             } else if (isWordEq(SOUTH, L.TabWords[1])) {
-                                simulatorToState(simulator, game.currentTime, latest_notification, kulkas, &latest_state);
+                                simulatorToState(simulator, delivery_list, game.currentTime, latest_notification, kulkas, &latest_state);
                                 Push(&stack_undo,latest_state);
                                 gerakUser(&simulator, &game.map, &stuck, 's');
                                 EmptyStack(&stack_redo);
                             } else if (isWordEq(WEST, L.TabWords[1])) {
-                                simulatorToState(simulator, game.currentTime, latest_notification, kulkas, &latest_state);
+                                simulatorToState(simulator, delivery_list, game.currentTime, latest_notification, kulkas, &latest_state);
                                 Push(&stack_undo,latest_state);
                                 gerakUser(&simulator, &game.map, &stuck, 'a');
                                 EmptyStack(&stack_redo);
                             } else if (isWordEq(EAST, L.TabWords[1])) {
-                                simulatorToState(simulator, game.currentTime, latest_notification, kulkas, &latest_state);
+                                simulatorToState(simulator, delivery_list, game.currentTime, latest_notification, kulkas, &latest_state);
                                 Push(&stack_undo,latest_state);
                                 gerakUser(&simulator, &game.map, &stuck, 'd');
                                 EmptyStack(&stack_redo);
@@ -303,7 +303,7 @@ int main() {
                             jam = wordToInt(L.TabWords[1]);
                             menit = wordToInt(L.TabWords[2]);
                             if (jam != -999 && menit != -999) {
-                                simulatorToState(simulator, game.currentTime, latest_notification, kulkas, &latest_state);
+                                simulatorToState(simulator, delivery_list, game.currentTime, latest_notification, kulkas, &latest_state);
                                 Push(&stack_undo,latest_state);
                                 game.currentTime = NextNMenit(game.currentTime, jam * 60 + menit);
                                 for (int i = 1; i <= jam * 60 + menit; i++) {
@@ -326,9 +326,9 @@ int main() {
                             sprintRed("Command UNDO tidak memiliki argumen. Coba Lagi!\n");
                         } else {
                             if (!IsStackEmpty(stack_undo)) {
-                                simulatorToState(simulator, game.currentTime, latest_notification, kulkas, &latest_state);
+                                simulatorToState(simulator, delivery_list, game.currentTime, latest_notification, kulkas, &latest_state);
                                 Undo(&stack_undo, &stack_redo, &latest_state);
-                                loadState(&simulator, &latest_state, "ADMIN", &latest_notification, &kulkas, &game.currentTime);
+                                simulatorToState(simulator, delivery_list, game.currentTime, latest_notification, kulkas, &latest_state);
                                 WriteLokasi(simulator.lokasi);
                                 TulisTIME3(game.currentTime);
                                 printf("\n");
@@ -345,9 +345,9 @@ int main() {
                             sprintRed("Command REDO tidak memiliki argumen. Coba Lagi!\n");
                         } else {
                             if (!IsStackEmpty(stack_redo)) {
-                                simulatorToState(simulator, game.currentTime, latest_notification, kulkas, &latest_state);
+                                simulatorToState(simulator, delivery_list, game.currentTime, latest_notification, kulkas, &latest_state);
                                 Redo(&stack_undo, &stack_redo, &latest_state);
-                                loadState(&simulator, &latest_state, "ADMIN", &latest_notification, &kulkas, &game.currentTime);
+                                simulatorToState(simulator, delivery_list, game.currentTime, latest_notification, kulkas, &latest_state);
                                 WriteLokasi(simulator.lokasi);
                                 TulisTIME3(game.currentTime);
                                 printf("\n");
