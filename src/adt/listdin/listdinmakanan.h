@@ -111,6 +111,7 @@ void expandListMakanan(ListDinMakanan *l, int num);
 /* F.S. Ukuran list bertambah sebanyak num */
 
 /* ********* MENYALIN ISI LISTDIN ********* */
-void copyListDinMakanan(ListDinMakanan l1, ListDinMakanan * l2);
+void copyListDinMakanan(ListDinMakanan l1, ListDinMakanan *l2);
 /* Menyalin elemen di l1 ke l2 */
+
 #endif

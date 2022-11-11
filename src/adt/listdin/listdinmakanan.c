@@ -168,11 +168,13 @@ void expandListMakanan(ListDinMakanan *l, int num) {
 }
 
 /* ********* MENYALIN ISI LISTDIN ********* */
-void copyListDinMakanan(ListDinMakanan l1, ListDinMakanan * l2) {
-/* Menyalin elemen di l1 ke l2 */
+void copyListDinMakanan(ListDinMakanan l1, ListDinMakanan *l2)
+{
+    /* Menyalin elemen di l1 ke l2 */
 
     CreateListMakananDin(l2, CAPACITY_LISTDINAMIS_Makanan(l1));
-    for (int i = 0; i < NEFF_Makanan(l1); i++) {
+    for (int i = 0; i < NEFF_Makanan(l1); i++)
+    {
         insertLastMakanan(l2, ELMT_LISTDINAMIS_Makanan(l1, i));
-    } 
+    }
 }

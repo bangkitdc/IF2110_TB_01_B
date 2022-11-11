@@ -329,10 +329,23 @@ int main() {
                             jam = wordToInt(L.TabWords[1]);
                             menit = wordToInt(L.TabWords[2]);
                             if (jam != -999 && menit != -999) {
-                                PrioQueue temp;
-                                CreateEmptyPrioqueue(&temp, 20);
-                                CopyQueue(&delivery_list, &temp);
+                                PrioQueue tempDelivery;
+                                CreateEmptyPrioqueue(&tempDelivery, 50);
+                                CopyQueue(&delivery_list, &tempDelivery);
+                                
+                                Simulator tempSimulator;
+                                POINT pTemp;
+                                PrioQueue pQueueTemp;
+                                CreatePoint(&pTemp, 0, 0);
+                                CreateEmptyPrioqueue(&pQueueTemp, 50);
+                                createSimulator(&tempSimulator, "TEMP", pTemp, pQueueTemp);
 
+                                copySimulator(&simulator, &tempSimulator);
+                                PrintPrioQueue(tempSimulator.inventory); printf("\n");
+
+                                ListDinMakanan tempNotification;
+                                CreateListMakananDin(&tempNotification, 50);
+                                copyListDinMakanan(latest_notification, &tempNotification);
                                 // if (!IsStackEmpty(stack_undo)) {
                                 //     PrintPrioQueueDelivery(InfoTop(stack_undo).delivery); printf("\n");
                                 // } else {
@@ -340,7 +353,7 @@ int main() {
                                 // }
 
                                 // masuk stack undo
-                                simulatorToState(simulator, temp, game.currentTime, latest_notification, kulkas, &latest_state);                                
+                                simulatorToState(tempSimulator, tempDelivery, game.currentTime, tempNotification, kulkas, &latest_state);                                
                                 Push(&stack_undo,latest_state);
 
                                 // reset notifikasi
