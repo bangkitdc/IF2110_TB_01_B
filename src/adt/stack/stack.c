@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "stack.h"
 
 /* ************ Prototype ************ */
@@ -65,6 +66,7 @@ void Undo(Stack * SMain, Stack * SSecondary, State * currentState) {
 /* F.S. Elemen TOP pada SMain telah di-pop, dan elemen tersebut dipush ke SSecondary. currentState diassign state yang di-undo */
     State temp;
     Push(SSecondary, *currentState);
+    free(currentState);
     Pop(SMain, &temp);
     *currentState = temp;
 }
@@ -76,6 +78,7 @@ void Redo(Stack * SMain, Stack * SSecondary, State * currentState) {
 /* Stack SSecondary dikosongkan */
     State temp;
     Push(SMain, *currentState);
+    free(currentState);
     Pop(SSecondary, &temp);
     *currentState = temp;
 }

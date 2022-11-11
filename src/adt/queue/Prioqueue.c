@@ -343,6 +343,8 @@ void PasstimeQueue(PrioQueue * Q, int x, ListDinMakanan * notif) {
         }
 
         // salin kembali dari temp ke Q
+        DeAlokasi(Q);
+        CreateEmptyPrioqueue(Q, MaxElPrioqueue(temp));
         CopyQueue(&temp, Q);
         DeAlokasi(&temp);
         CreateEmptyPrioqueue(&temp, MaxElPrioqueue(*Q));
@@ -383,8 +385,11 @@ void PassTimeDelivery(PrioQueue * deliList, PrioQueue * destination, int x, List
         }
 
         // salin kembali dari temp ke Q
+        DeAlokasi(deliList);
+        CreateEmptyPrioqueue(deliList, MaxElPrioqueue(temp));
         CopyQueue(&temp, deliList);
         DeAlokasi(&temp);
+        CreateEmptyPrioqueue(&temp, MaxElPrioqueue(*deliList));
     }
 }
 

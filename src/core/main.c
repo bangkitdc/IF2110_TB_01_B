@@ -384,11 +384,12 @@ int main() {
                                 // Pop(&stack_undo, &latest_state);
                                 Undo(&stack_undo, &stack_redo, &latest_state);
                                 loadState(&simulator, &delivery_list, latest_state, "ADMIN", &latest_notification, &kulkas, &game.currentTime);
-                                WriteLokasi(simulator.lokasi);
-                                TulisTIME3(game.currentTime);
-                                printf("\n");
-                                printListMakananUndo(latest_notification); 
-                                DisplayMap(game.map, simulator.lokasi);
+                                PrintPrioQueueDelivery(delivery_list);
+                                // WriteLokasi(simulator.lokasi);
+                                // TulisTIME3(game.currentTime);
+                                // printf("\n");
+                                // printListMakananUndo(latest_notification); 
+                                // DisplayMap(game.map, simulator.lokasi);
                             } else {
                                 // IsStackEmpty(stack_undo) [stack_undo kosong]
                                 sprintRed("Tidak bisa UNDO.\n");
