@@ -99,10 +99,6 @@ int main() {
 
                                     makananDibeli.info = makananBisaDibeli.contents[PilBuy - 1];
                                     makananDibeli.time = makananBisaDibeli.contents[PilBuy - 1].delivery;
-                                    Enqueue(&delivery_list, makananDibeli);
-
-                                    printf("\nBerhasil memesan %s. %s akan diantar dalam ", Info(makananDibeli).name, Info(makananDibeli).name);
-                                    TulisTIME2(Info(makananDibeli).delivery); printf(".\n");
                                     TIME lama = PENGOLAHAN(Info(makananDibeli));
 
                                     game.currentTime = NextNMenit(game.currentTime, TIMEToMenit(lama));
@@ -110,6 +106,12 @@ int main() {
                                         PasstimeQueue(&Inventory(simulator), 1, &latest_notification);
                                         PassTimeDelivery(&delivery_list, &Inventory(simulator), 1, &latest_notification);
                                     }
+                                    
+                                    Enqueue(&delivery_list, makananDibeli);
+
+                                    printf("\nBerhasil memesan %s. %s akan diantar dalam ", Info(makananDibeli).name, Info(makananDibeli).name);
+                                    TulisTIME2(Info(makananDibeli).delivery); printf(".\n");
+                                    
                                     // masukkan ke notif
                                     LOC(Info(makananDibeli)) = 't';
                                     insertLastMakanan(&latest_notification, makananDibeli);
@@ -328,10 +330,10 @@ int main() {
                                 dealocateListMakanan(&latest_notification);
                                 CreateListMakananDin(&latest_notification, 100);
                                 game.currentTime = NextNMenit(game.currentTime, jam * 60 + menit);
-                                for (int i = 1; i <= jam * 60 + menit; i++) {
-                                    PasstimeQueue(&Inventory(simulator), 1, &latest_notification);
-                                    PassTimeDelivery(&delivery_list, &Inventory(simulator), 1, &latest_notification);
-                                }
+                                //for (int i = 1; i <= jam * 60 + menit; i++) {
+                                PasstimeQueue(&Inventory(simulator), 1, &latest_notification);
+                                PassTimeDelivery(&delivery_list, &Inventory(simulator), 1, &latest_notification);
+                                //}
                                 WriteLokasi(simulator.lokasi);
                                 TulisTIME3(game.currentTime);
                                 printf("\n");
