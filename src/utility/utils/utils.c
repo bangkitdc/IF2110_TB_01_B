@@ -288,14 +288,17 @@ int select(int min, int max) {
 }
 
 void tambahBahan(Tree *p, Tree l){
-    Tree parent;
-    for(int i=0;i<(*p)->childEff;i++){
-        parent = (*p)->children[i];
-        if(parent->info == l->info){
-            parent->childEff = l->childEff;
-            for(int j=0;j<parent->childEff;j++){
-                parent->children[j] = l->children[j];
+    if((*p)->childEff == 0 ){
+        if((*p)->info == l->info){
+            (*p)->childEff = l->childEff;
+            for(int j=0;j<(*p)->childEff;j++){
+                (*p)->children[j] = l->children[j];
             }
+        }
+    }else{
+        printf("%d", (*p)->info);
+        for(int i=0;i<(*p)->childEff;i++){
+            tambahBahan(&(*p)->children[i],l);
         }
     }
 }
