@@ -350,7 +350,7 @@ int main() {
                             if (!IsStackEmpty(stack_undo)) {
                                 simulatorToState(simulator, delivery_list, game.currentTime, latest_notification, kulkas, &latest_state);
                                 Undo(&stack_undo, &stack_redo, &latest_state);
-                                simulatorToState(simulator, delivery_list, game.currentTime, latest_notification, kulkas, &latest_state);
+                                loadState(&simulator, &delivery_list, &latest_state, "ADMIN", &latest_notification, &kulkas, &game.currentTime);
                                 WriteLokasi(simulator.lokasi);
                                 TulisTIME3(game.currentTime);
                                 printf("\n");
@@ -369,7 +369,7 @@ int main() {
                             if (!IsStackEmpty(stack_redo)) {
                                 simulatorToState(simulator, delivery_list, game.currentTime, latest_notification, kulkas, &latest_state);
                                 Redo(&stack_undo, &stack_redo, &latest_state);
-                                simulatorToState(simulator, delivery_list, game.currentTime, latest_notification, kulkas, &latest_state);
+                                loadState(&simulator, &delivery_list, &latest_state, "ADMIN", &latest_notification, &kulkas, &game.currentTime);
                                 WriteLokasi(simulator.lokasi);
                                 TulisTIME3(game.currentTime);
                                 printf("\n");
