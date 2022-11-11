@@ -270,7 +270,7 @@ int main() {
                                 game.currentTime = NextNMenit(game.currentTime, jam * 60 + menit);
                                 for (int i = 1; i <= jam * 60 + menit; i++) {
                                     PasstimeQueue(&Inventory(simulator), 1, &latest_notification);
-                                    PassTimeDelivery(&Inventory(simulator), 1, &latest_notification);
+                                    PassTimeDelivery(&delivery_list, &Inventory(simulator), 1, &latest_notification);
                                 }
                                 WriteLokasi(simulator.lokasi);
                                 TulisTIME3(game.currentTime);
@@ -326,72 +326,76 @@ int main() {
                             createListWord(&tempindexkulkas);
                             int X = wordToInt(L.TabWords[1]);
                             int Y = wordToInt(L.TabWords[2]);
-
-                            if (!isFullKulkas(kulkas)) {
-                                ambilDariInventory(&simulator, X, &tempinfotype);
-                                penomorMakananKulkas(&tempinfotype, Y, kulkas, &idtidakvalid);
-                                if (!idtidakvalid) {
-                                    if (Absis(SIZE(Info(tempinfotype))) * Ordinat(SIZE(Info(tempinfotype))) <= countElmtDummy(kulkas)) {
-                                        // minta input index pojok kiri atas dan index pojok kanan bawah
-                                        sprintYellow("Masukkan index pojok kiri atas, dan index pojok kanan bawah\n");
-                                        sprintYellow("Urutannya: kiri atas kanan bawah\n");
-                                        tempindexkulkas = readLine();
-                                        inputtempindexkulkas = MenuInput(tempindexkulkas.TabWords[0]);
-                                        if (tempindexkulkas.Length != 4) {
-                                            sprintRed("Butuh 2 index\n");
-                                            // kembalikan ID awal
-                                            hapusIdKulkas(&tempinfotype);
-                                            Enqueue(&Inventory(simulator), tempinfotype);
-                                        } else {
-                                            int kiri = wordToInt(tempindexkulkas.TabWords[0]);
-                                            int atas = wordToInt(tempindexkulkas.TabWords[1]);
-                                            int kanan = wordToInt(tempindexkulkas.TabWords[2]);
-                                            int bawah = wordToInt(tempindexkulkas.TabWords[3]);
-                                            if ((bawah - atas + 1) * (kanan - kiri + 1) != Absis(SIZE(Info(tempinfotype))) * Ordinat(SIZE(Info(tempinfotype)))) {
-                                                sprintRed("Index tidak valid.. :(\n");
+                            
+                            if (X <= NBElmtPrioqueue(Inventory(simulator)) && X > 0) {
+                                if (!isFullKulkas(kulkas)) {
+                                    ambilDariInventory(&simulator, X-1, &tempinfotype);
+                                    penomorMakananKulkas(&tempinfotype, Y, kulkas, &idtidakvalid);
+                                    if (!idtidakvalid) {
+                                        if (Absis(SIZE(Info(tempinfotype))) * Ordinat(SIZE(Info(tempinfotype))) <= countElmtDummy(kulkas)) {
+                                            // minta input index pojok kiri atas dan index pojok kanan bawah
+                                            sprintYellow("Masukkan index pojok kiri atas, dan index pojok kanan bawah\n");
+                                            sprintYellow("Urutannya: kiri atas kanan bawah\n");
+                                            tempindexkulkas = readLine();
+                                            inputtempindexkulkas = MenuInput(tempindexkulkas.TabWords[0]);
+                                            if (tempindexkulkas.Length != 4) {
+                                                sprintRed("Butuh 2 index\n");
                                                 // kembalikan ID awal
                                                 hapusIdKulkas(&tempinfotype);
                                                 Enqueue(&Inventory(simulator), tempinfotype);
                                             } else {
-                                                int i, j;
-                                                boolean idxkulkasvalid;
-
-                                                idxkulkasvalid = true;
-
-                                                // Mengecek apakah index kulkas valid, yakni saat tidak ada makanan lain
-                                                // di posisi tersebut
-                                                for (i = atas; i <= bawah; i++) {
-                                                    for (j = kiri; j <= kanan; j++) {
-                                                        if (ID(Info(ELMTK(kulkas,i,j))) != 0) {
-                                                            idxkulkasvalid = false;
-                                                        }
-                                                    }
-                                                }
-
-                                                if (idxkulkasvalid) {
-                                                    for (i = atas; i <= bawah; i++) {
-                                                        for (j = kiri; j <= kanan; j++) {
-                                                            pindahKeKulkas(tempinfotype, &kulkas, &latest_notification, i, j);
-                                                        }
-                                                    }
-                                                    EmptyStack(&stack_redo);
-                                                } else { //idxkulkasvalid == false
-                                                    sprintRed("Ada makanan lain di posisi tersebut..\n");
+                                                int kiri = wordToInt(tempindexkulkas.TabWords[0]);
+                                                int atas = wordToInt(tempindexkulkas.TabWords[1]);
+                                                int kanan = wordToInt(tempindexkulkas.TabWords[2]);
+                                                int bawah = wordToInt(tempindexkulkas.TabWords[3]);
+                                                if ((bawah - atas + 1) * (kanan - kiri + 1) != Absis(SIZE(Info(tempinfotype))) * Ordinat(SIZE(Info(tempinfotype)))) {
+                                                    sprintRed("Index tidak valid.. :(\n");
                                                     // kembalikan ID awal
                                                     hapusIdKulkas(&tempinfotype);
                                                     Enqueue(&Inventory(simulator), tempinfotype);
+                                                } else {
+                                                    int i, j;
+                                                    boolean idxkulkasvalid;
+
+                                                    idxkulkasvalid = true;
+
+                                                    // Mengecek apakah index kulkas valid, yakni saat tidak ada makanan lain
+                                                    // di posisi tersebut
+                                                    for (i = atas; i <= bawah; i++) {
+                                                        for (j = kiri; j <= kanan; j++) {
+                                                            if (ID(Info(ELMTK(kulkas,i,j))) != 0) {
+                                                                idxkulkasvalid = false;
+                                                            }
+                                                        }
+                                                    }
+
+                                                    if (idxkulkasvalid) {
+                                                        for (i = atas; i <= bawah; i++) {
+                                                            for (j = kiri; j <= kanan; j++) {
+                                                                pindahKeKulkas(tempinfotype, &kulkas, &latest_notification, i, j);
+                                                            }
+                                                        }
+                                                        EmptyStack(&stack_redo);
+                                                    } else { //idxkulkasvalid == false
+                                                        sprintRed("Ada makanan lain di posisi tersebut..\n");
+                                                        // kembalikan ID awal
+                                                        hapusIdKulkas(&tempinfotype);
+                                                        Enqueue(&Inventory(simulator), tempinfotype);
+                                                    }
                                                 }
                                             }
+                                        } else { // Absis(SIZE(Info(tempinfotype))) * Ordinat(SIZE(Info(tempinfotype))) > countElmtDummy(kulkas)
+                                            sprintRed("Kulkas tidak bisa menampung makanan kamu :(\n");
+                                            // kembalikan ID awal
+                                            hapusIdKulkas(&tempinfotype);
+                                            Enqueue(&Inventory(simulator), tempinfotype);
                                         }
-                                    } else { // Absis(SIZE(Info(tempinfotype))) * Ordinat(SIZE(Info(tempinfotype))) > countElmtDummy(kulkas)
-                                        sprintRed("Kulkas tidak bisa menampung makanan kamu :(\n");
-                                        // kembalikan ID awal
-                                        hapusIdKulkas(&tempinfotype);
-                                        Enqueue(&Inventory(simulator), tempinfotype);
                                     }
+                                } else { //isFullKulkas(kulkas)
+                                    sprintRed("Kulkas sudah penuh.. :(\n");
                                 }
-                            } else { //isFullKulkas(kulkas)
-                                sprintRed("Kulkas sudah penuh.. :(\n");
+                            } else {
+                                sprintRed("Tidak ada makanan pada urutan tersebut di Inventory.. :(\n");   
                             }
                         }
                         break;
