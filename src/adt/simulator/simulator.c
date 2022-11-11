@@ -46,7 +46,7 @@ void gerakUser(Simulator * s, Map * peta, boolean * stuck, char x) {
     }
 }
 
-void simulatorToState(Simulator s, TIME currentTime, ListDinMakanan currentNotif, MatrixKulkas currentKulkas, State* temp) {
+void simulatorToState(Simulator s, PrioQueue deliverylist, TIME currentTime, ListDinMakanan currentNotif, MatrixKulkas currentKulkas, State* temp) {
 /* mengkonversi simulator s ke State*/
 /* digunakan saat mau menyimpan State ke stack */
 
@@ -56,9 +56,10 @@ void simulatorToState(Simulator s, TIME currentTime, ListDinMakanan currentNotif
     InfoInventory(*temp) = Inventory(s);
     InfoNotif(*temp) = currentNotif;
     InfoKulkas(*temp) = currentKulkas;
+    InfoDelivery(*temp) = deliverylist;
 }
 
-void loadState(Simulator * s, State * st, char * currentUsername, ListDinMakanan * currentNotif, MatrixKulkas * currentKulkas, TIME * currentTime) {
+void loadState(Simulator * s, PrioQueue * deliverylist, State * st, char * currentUsername, ListDinMakanan * currentNotif, MatrixKulkas * currentKulkas, TIME * currentTime) {
 /* mengkonversi State dari stack ke simulator dan menyimpannya di simulator */
 /* digunakan saat undo dan redo */
 
@@ -69,6 +70,7 @@ void loadState(Simulator * s, State * st, char * currentUsername, ListDinMakanan
     *currentTime = InfoWaktu(*st);
     *currentNotif = InfoNotif(*st);
     *currentKulkas = InfoKulkas(*st);
+    *deliverylist = InfoDelivery(*st);
 }
 
 void setInventory(Simulator * s, PrioQueue inventory) {
