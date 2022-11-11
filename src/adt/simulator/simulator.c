@@ -60,18 +60,19 @@ void simulatorToState(Simulator s, PrioQueue deliverylist, TIME currentTime, Lis
     InfoDelivery(*temp) = deliverylist;
 }
 
-void loadState(Simulator * s, PrioQueue * deliverylist, State * st, char * currentUsername, ListDinMakanan * currentNotif, MatrixKulkas * currentKulkas, TIME * currentTime) {
+void loadState(Simulator * s, PrioQueue * deliverylist, State st, char * currentUsername, ListDinMakanan * currentNotif, MatrixKulkas * currentKulkas, TIME * currentTime) {
 /* mengkonversi State dari stack ke simulator dan menyimpannya di simulator */
 /* digunakan saat undo dan redo */
 
     // KAMUS
 
     // ALGORITMA
-    createSimulator(s, currentUsername, InfoKoordinat(*st), InfoInventory(*st));
-    *currentTime = InfoWaktu(*st);
-    *currentNotif = InfoNotif(*st);
-    *currentKulkas = InfoKulkas(*st);
-    *deliverylist = InfoDelivery(*st);
+    createSimulator(s, currentUsername, InfoKoordinat(st), InfoInventory(st));
+    *currentTime = InfoWaktu(st);
+    *currentNotif = InfoNotif(st);
+    *currentKulkas = InfoKulkas(st);
+    *deliverylist = InfoDelivery(st);
+    // PrintPrioQueueDelivery(*deliverylist);
 }
 
 void setInventory(Simulator * s, PrioQueue inventory) {

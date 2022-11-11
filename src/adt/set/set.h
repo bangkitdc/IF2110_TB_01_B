@@ -5,7 +5,7 @@
 
 #include "../../include/boolean.h"
 #include "../makanan/makanan.h"
-#include "../listdin/listdinmakanan.h"
+#include "../queue/Prioqueue.h"
 #include "../liststatik/liststatikM.h"
 #include "../infotype/infotype.h"
 
@@ -45,7 +45,7 @@ void makeSetFromListMakanan(Set *s, ListStatikM daftarMakanan);
 /* I.S. s terdefinisi */
 /* F.S. Meng-assign elemen-elemen pada set s dengan 0 pada daftarMakanan */
 
-void makeSetFromInventory(Set *s, ListStatikM daftarMakanan, ListDinMakanan inventory);
+void makeSetFromInventory(Set *s, ListStatikM daftarMakanan, PrioQueue inventory);
 /* I.S. s terdefinisi */
 /* F.S. Meng-assign elemen tertentu pada set s dengan 1 jika makanan yang berkorespondensi dengan indeks daftarMakanan
 tersedia di inventory */

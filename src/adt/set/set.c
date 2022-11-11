@@ -47,13 +47,13 @@ void makeSetFromListMakanan(Set *s, ListStatikM daftarMakanan) {
     }
 }
 
-void makeSetFromInventory(Set *s, ListStatikM daftarMakanan, ListDinMakanan inventory) {
+void makeSetFromInventory(Set *s, ListStatikM daftarMakanan, PrioQueue inventory) {
 /* I.S. s terdefinisi */
 /* F.S. Meng-assign elemen tertentu pada set s dengan 1 jika makanan yang berkorespondensi dengan indeks daftarMakanan
 tersedia di inventory */
     for (int i = 0; i < listLengthStatikM(daftarMakanan); i++) {
-        for (int j = 0; j < listMakananLengthDinamis(inventory); j++) {
-            if ((ID(Info(ELMT_LISTDINAMIS_Makanan(inventory, j)))) == ID(ELMT_LISTSTATIKM(daftarMakanan, i))) {
+        for (int j = Head(inventory); j <= Tail(inventory); j++) {
+            if (inventory.T[j].info.id == ID(ELMT_LISTSTATIKM(daftarMakanan, i))) {
                 ELMT_SET(*s, i) = 1;
             }
         }
