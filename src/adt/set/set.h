@@ -7,6 +7,7 @@
 #include "../makanan/makanan.h"
 #include "../listdin/listdinmakanan.h"
 #include "../liststatik/liststatikM.h"
+#include "../infotype/infotype.h"
 
 /*  Kamus Umum */
 #define CAPACITY_SET 50
@@ -40,9 +41,14 @@ boolean isAnggota(int a, Set s);
 /* isSubset: Memeriksa apakah set s merupakan subset dari set t */
 boolean isSubset(Set s, Set t);
 
-void makeSetFromInventory(Set *s, ListDinMakanan inventory);
+void makeSetFromListMakanan(Set *s, ListStatikM daftarMakanan);
 /* I.S. s terdefinisi */
-/* F.S. Meng-assign elemen makanan di set s dengan 1 jika
-makanan terdapat di inventory dan 0 jika tidak ada */
+/* F.S. Meng-assign elemen-elemen pada set s dengan 0 pada daftarMakanan */
+
+void makeSetFromInventory(Set *s, ListStatikM daftarMakanan, ListDinMakanan inventory);
+/* I.S. s terdefinisi */
+/* F.S. Meng-assign elemen tertentu pada set s dengan 1 jika makanan yang berkorespondensi dengan indeks daftarMakanan
+tersedia di inventory */
+
 
 #endif

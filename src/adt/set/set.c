@@ -39,9 +39,23 @@ boolean isSubset(Set s, Set t) {
     return same;
 }
 
-void makeSetFromInventory(Set *s, ListDinMakanan inventory) {
+void makeSetFromListMakanan(Set *s, ListStatikM daftarMakanan) {
 /* I.S. s terdefinisi */
-/* F.S. Meng-assign elemen makanan di set s dengan 1 jika
-makanan terdapat di inventory dan 0 jika tidak ada */
+/* F.S. Meng-assign elemen-elemen pada set s dengan 0 pada daftarMakanan */
+    for (int i = 0; i < listLengthStatikM(daftarMakanan); i++) {
+        ELMT_SET(*s, i) = 0;
+    }
+}
 
+void makeSetFromInventory(Set *s, ListStatikM daftarMakanan, ListDinMakanan inventory) {
+/* I.S. s terdefinisi */
+/* F.S. Meng-assign elemen tertentu pada set s dengan 1 jika makanan yang berkorespondensi dengan indeks daftarMakanan
+tersedia di inventory */
+    for (int i = 0; i < listLengthStatikM(daftarMakanan); i++) {
+        for (int j = 0; j < listMakananLengthDinamis(inventory); j++) {
+            if ((ID(Info(ELMT_LISTDINAMIS_Makanan(inventory, j)))) == ID(ELMT_LISTSTATIKM(daftarMakanan, i))) {
+                ELMT_SET(*s, i) = 1;
+            }
+        }
+    }
 }
