@@ -22,7 +22,7 @@ int main() {
     createListWord(&L);
     CreateEmptyStack(&stack_undo);
     CreateEmptyStack(&stack_redo);
-    CreateListMakananDin(&latest_notification, 1000);
+    CreateListMakananDin(&latest_notification, 100);
     createMatrixKulkas(10, 20, &kulkas);
     CreateEmptyPrioqueue (&delivery_list, 100);
 
@@ -93,6 +93,10 @@ int main() {
                                     State tempstate;
                                     simulatorToState(simulator, game.currentTime, latest_notification, kulkas, &tempstate);
                                     Push(&stack_undo, tempstate);
+                                    // kosongkan notifikasi
+                                    dealocateListMakanan(&latest_notification);
+                                    CreateListMakananDin(&latest_notification, 100);
+
                                     makananDibeli.info = makananBisaDibeli.contents[PilBuy - 1];
                                     makananDibeli.time = makananBisaDibeli.contents[PilBuy - 1].delivery;
                                     Enqueue(&delivery_list, makananDibeli);
@@ -130,6 +134,7 @@ int main() {
                                     sprintRed("\nMembatalkan command FRY\n");
                                     break;
                                 } else {
+                                    // masuk stack undo
                                     mengolahMakanan(makananBisaDiolah.contents[pilFry - 1], &(simulator.inventory), game.listResep, game.listMakanan);
                                     // TIME lama = PENGOLAHAN(makananDibeli);
                                     // game.currentTime = NextNMenit(game.currentTime, TIMEToMenit(lama));
@@ -158,6 +163,8 @@ int main() {
                                     sprintRed("\nMembatalkan command CHOP\n");
                                     break;
                                 } else {
+                                    // masuk stack undo
+                                    // reset notifikasi
                                     mengolahMakanan(makananBisaDiolah.contents[pilChop-1], &(simulator.inventory), game.listResep, game.listMakanan);
                                     // TIME lama = PENGOLAHAN(makananDibeli);
                                     // game.currentTime = NextNMenit(game.currentTime, TIMEToMenit(lama));
@@ -186,6 +193,8 @@ int main() {
                                     sprintRed("\nMembatalkan command BOIL\n");
                                     break;
                                 } else {
+                                    // masuk stack undo
+                                    // reset notifikasi
                                     mengolahMakanan(makananBisaDiolah.contents[pilBoil - 1], &(simulator.inventory), game.listResep, game.listMakanan);
                                     // TIME lama = PENGOLAHAN(makananDibeli);
                                     // game.currentTime = NextNMenit(game.currentTime, TIMEToMenit(lama));
@@ -214,6 +223,8 @@ int main() {
                                     sprintRed("\nMembatalkan command MIX\n");
                                     break;
                                 } else {
+                                    // masuk stack undo
+                                    // reset notifikasi
                                     mengolahMakanan(makananBisaDiolah.contents[pilMix-1], &(simulator.inventory), game.listResep, game.listMakanan);
                                     // TIME lama = PENGOLAHAN(makananDibeli);
                                     // game.currentTime = NextNMenit(game.currentTime, TIMEToMenit(lama));
@@ -310,8 +321,12 @@ int main() {
                             jam = wordToInt(L.TabWords[1]);
                             menit = wordToInt(L.TabWords[2]);
                             if (jam != -999 && menit != -999) {
+                                // masuk stack undo
                                 simulatorToState(simulator, delivery_list, game.currentTime, latest_notification, kulkas, &latest_state);
                                 Push(&stack_undo,latest_state);
+                                // reset notifikasi
+                                dealocateListMakanan(&latest_notification);
+                                CreateListMakananDin(&latest_notification, 100);
                                 game.currentTime = NextNMenit(game.currentTime, jam * 60 + menit);
                                 for (int i = 1; i <= jam * 60 + menit; i++) {
                                     PasstimeQueue(&Inventory(simulator), 1, &latest_notification);
@@ -421,6 +436,12 @@ int main() {
                                                     }
 
                                                     if (idxkulkasvalid) {
+                                                        // masuk ke stack undo
+                                                        simulatorToState(simulator, delivery_list, game.currentTime, latest_notification, kulkas, &latest_state);
+                                                        Push(&stack_undo,latest_state);
+                                                        // reset notifikasi
+                                                        dealocateListMakanan(&latest_notification);
+                                                        CreateListMakananDin(&latest_notification, 100);
                                                         for (i = atas; i <= bawah; i++) {
                                                             for (j = kiri; j <= kanan; j++) {
                                                                 pindahKeKulkas(tempinfotype, &kulkas, &latest_notification, i, j);
@@ -473,6 +494,12 @@ int main() {
                             if (!ada) {
                                 sprintRed("Tidak ada makanan dengan ID tersebut di kulkas\n");
                             } else {
+                                // masuk stack undo
+                                simulatorToState(simulator, delivery_list, game.currentTime, latest_notification, kulkas, &latest_state);
+                                Push(&stack_undo,latest_state);
+                                // reset notifikasi
+                                dealocateListMakanan(&latest_notification);
+                                CreateListMakananDin(&latest_notification, 100);
                                 // ambil dari kulkas
                                 ambilDariKulkas(&simulator, tempidmakanan, &kulkas, &latest_notification);
                                 EmptyStack(&stack_redo);
