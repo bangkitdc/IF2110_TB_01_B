@@ -86,9 +86,22 @@ int main() {
                                     sprintRed("\nMembatalkan command BUY\n");
                                     break;
                                 } else {
+                                    // masukin ke stack undo
+                                    State tempstate;
+                                    simulatorToState(simulator, game.currentTime, latest_notification, kulkas, &tempstate);
+                                    Push(&stack_undo, tempstate);
                                     makananDibeli.info = makananBisaDibeli.contents[PilBuy - 1];
                                     makananDibeli.time = makananBisaDibeli.contents[PilBuy - 1].delivery;
                                     Enqueue(&delivery_list, makananDibeli);
+                                    TIME lama = PENGOLAHAN(makananDibeli);
+                                    game.currentTime = NextNMenit(game.currentTime, TIMEToMenit(lama));
+                                    for (int i = 1; i <= TIMEToMenit(lama); i++) {
+                                        PasstimeQueue(&Inventory(simulator), 1, &latest_notification);
+                                        PassTimeDelivery(&delivery_list, &Inventory(simulator), 1, &latest_notification);
+                                    }
+                                    // masukkan ke notif
+                                    LOC(Info(makananDibeli)) = 't';
+                                    insertLastMakanan(&latest_notification, &makananDibeli)
                                     EmptyStack(&stack_redo);
                                 }
                             }
@@ -111,6 +124,12 @@ int main() {
                                     break;
                                 } else {
                                     mengolahMakanan(makananBisaDiolah.contents[pilFry - 1], &(simulator.inventory), game.listResep, game.listMakanan);
+                                    // TIME lama = PENGOLAHAN(makananDibeli);
+                                    // game.currentTime = NextNMenit(game.currentTime, TIMEToMenit(lama));
+                                    // for (int i = 1; i <= TIMEToMenit(lama); i++) {
+                                    //     PasstimeQueue(&Inventory(simulator), 1, &latest_notification);
+                                    //     PassTimeDelivery(&delivery_list, &Inventory(simulator), 1, &latest_notification);
+                                    // }
                                     EmptyStack(&stack_redo);
                                 }
                             }
@@ -133,6 +152,12 @@ int main() {
                                     break;
                                 } else {
                                     mengolahMakanan(makananBisaDiolah.contents[pilChop-1], &(simulator.inventory), game.listResep, game.listMakanan);
+                                    // TIME lama = PENGOLAHAN(makananDibeli);
+                                    // game.currentTime = NextNMenit(game.currentTime, TIMEToMenit(lama));
+                                    // for (int i = 1; i <= TIMEToMenit(lama); i++) {
+                                    //     PasstimeQueue(&Inventory(simulator), 1, &latest_notification);
+                                    //     PassTimeDelivery(&delivery_list, &Inventory(simulator), 1, &latest_notification);
+                                    // }
                                     EmptyStack(&stack_redo);
                                 }
                             }
@@ -155,6 +180,12 @@ int main() {
                                     break;
                                 } else {
                                     mengolahMakanan(makananBisaDiolah.contents[pilBoil - 1], &(simulator.inventory), game.listResep, game.listMakanan);
+                                    // TIME lama = PENGOLAHAN(makananDibeli);
+                                    // game.currentTime = NextNMenit(game.currentTime, TIMEToMenit(lama));
+                                    // for (int i = 1; i <= TIMEToMenit(lama); i++) {
+                                    //     PasstimeQueue(&Inventory(simulator), 1, &latest_notification);
+                                    //     PassTimeDelivery(&delivery_list, &Inventory(simulator), 1, &latest_notification);
+                                    // }
                                     EmptyStack(&stack_redo);
                                 }
                             }
@@ -177,6 +208,12 @@ int main() {
                                     break;
                                 } else {
                                     mengolahMakanan(makananBisaDiolah.contents[pilMix-1], &(simulator.inventory), game.listResep, game.listMakanan);
+                                    // TIME lama = PENGOLAHAN(makananDibeli);
+                                    // game.currentTime = NextNMenit(game.currentTime, TIMEToMenit(lama));
+                                    // for (int i = 1; i <= TIMEToMenit(lama); i++) {
+                                    //     PasstimeQueue(&Inventory(simulator), 1, &latest_notification);
+                                    //     PassTimeDelivery(&delivery_list, &Inventory(simulator), 1, &latest_notification);
+                                    // }
                                     EmptyStack(&stack_redo);
                                 }
                             }
@@ -239,6 +276,7 @@ int main() {
                                 game.currentTime = NextMenit(game.currentTime);
                                 WriteLokasi(simulator.lokasi);
                                 TulisTIME3(game.currentTime);
+                                printListMakanan(latest_notification);
                                 printf("\n"); DisplayMap(game.map, simulator.lokasi);
                             }   
                         }
@@ -274,7 +312,9 @@ int main() {
                                 }
                                 WriteLokasi(simulator.lokasi);
                                 TulisTIME3(game.currentTime);
-                                printf("\n"); DisplayMap(game.map, simulator.lokasi);
+                                printf("\n");
+                                printListMakanan(latest_notification); 
+                                DisplayMap(game.map, simulator.lokasi);
                                 EmptyStack(&stack_redo);
                             } else {
                                 sprintRed("2 Argumen harus integer >= 0. Coba Lagi!\n");
@@ -291,7 +331,9 @@ int main() {
                                 loadState(&simulator, &latest_state, "ADMIN", &latest_notification, &kulkas, &game.currentTime);
                                 WriteLokasi(simulator.lokasi);
                                 TulisTIME3(game.currentTime);
-                                printf("\n"); DisplayMap(game.map, simulator.lokasi);
+                                printf("\n");
+                                printListMakananUndo(latest_notification); 
+                                DisplayMap(game.map, simulator.lokasi);
                             } else {
                                 // IsStackEmpty(stack_undo) [stack_undo kosong]
                                 sprintRed("Tidak bisa UNDO.\n");
@@ -308,7 +350,9 @@ int main() {
                                 loadState(&simulator, &latest_state, "ADMIN", &latest_notification, &kulkas, &game.currentTime);
                                 WriteLokasi(simulator.lokasi);
                                 TulisTIME3(game.currentTime);
-                                printf("\n"); DisplayMap(game.map, simulator.lokasi);
+                                printf("\n");
+                                printListMakanan(latest_notification); 
+                                DisplayMap(game.map, simulator.lokasi);
                             } else {
                                 // IsStackEmpty(stack_redo) [stack_redo kosong]
                                 sprintRed("Tidak bisa REDO.\n");
