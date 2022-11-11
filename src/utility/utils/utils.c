@@ -43,6 +43,7 @@ Word UNDO_COMMAND = {"UNDO", 4};
 Word REDO_COMMAND = {"REDO", 4};
 Word MASUKKULKAS_COMMAND = {"MASUKKULKAS", 11};
 Word KELUARKULKAS_COMMAND = {"KELUARKULKAS", 12};
+Word KULKAS_COMMAND = {"KULKAS", 6};
 
 Word BUY_FILE = {"Buy", 3};
 Word FRY_FILE = {"Fry", 3};
@@ -94,10 +95,11 @@ int MenuInput(Word w) {
         UNDO_COMMAND,
         REDO_COMMAND,
         MASUKKULKAS_COMMAND,
-        KELUARKULKAS_COMMAND},
-    17 };
+        KELUARKULKAS_COMMAND,
+        KULKAS_COMMAND},
+    18 };
 
-    for (int i = 0; i < 17; i ++) {
+    for (int i = 0; i < 18; i ++) {
         if (isWordEq(w, LCommand.TabWords[i])) {
             return i;
         }
@@ -259,8 +261,9 @@ void help() {
     printf("%2d  REDO\n", 13);
     printf("%2d  MASUKKULKAS\n", 14);
     printf("%2d  KELUARKULKAS\n", 15);
-    printf("%2d  HELP\n", 16);
-    printf("%2d  EXIT\n", 17);
+    printf("%2d  KULKAS\n", 16);
+    printf("%2d  HELP\n", 17);
+    printf("%2d  EXIT\n", 18);
 }
 
 int select(int min, int max) {
