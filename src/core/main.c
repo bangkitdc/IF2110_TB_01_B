@@ -22,9 +22,9 @@ int main() {
     createListWord(&L);
     CreateEmptyStack(&stack_undo);
     CreateEmptyStack(&stack_redo);
-    CreateListMakananDin(&latest_notification, 100);
+    CreateListMakananDin(&latest_notification, 50);
     createMatrixKulkas(10, 20, &kulkas);
-    CreateEmptyPrioqueue (&delivery_list, 100);
+    CreateEmptyPrioqueue (&delivery_list, 50);
 
     do {
         /* Baca Command START/ EXIT */
@@ -91,7 +91,7 @@ int main() {
                                 } else {
                                     // masukin ke stack undo
                                     State tempstate;
-                                    simulatorToState(simulator, game.currentTime, latest_notification, kulkas, &tempstate);
+                                    simulatorToState(simulator, delivery_list, game.currentTime, latest_notification, kulkas, &tempstate);
                                     Push(&stack_undo, tempstate);
                                     // kosongkan notifikasi
                                     dealocateListMakanan(&latest_notification);
@@ -324,11 +324,12 @@ int main() {
                             menit = wordToInt(L.TabWords[2]);
                             if (jam != -999 && menit != -999) {
                                 // masuk stack undo
-                                simulatorToState(simulator, delivery_list, game.currentTime, latest_notification, kulkas, &latest_state);
+                                simulatorToState(simulator, delivery_list, game.currentTime, latest_notification, kulkas, &latest_state);                                
                                 Push(&stack_undo,latest_state);
+                                
                                 // reset notifikasi
                                 dealocateListMakanan(&latest_notification);
-                                CreateListMakananDin(&latest_notification, 100);
+                                CreateListMakananDin(&latest_notification, 50);
                                 game.currentTime = NextNMenit(game.currentTime, jam * 60 + menit);
                                 for (int i = 1; i <= jam * 60 + menit; i++) {
                                     PasstimeQueue(&Inventory(simulator), 1, &latest_notification);
@@ -351,6 +352,8 @@ int main() {
                         } else {
                             if (!IsStackEmpty(stack_undo)) {
                                 simulatorToState(simulator, delivery_list, game.currentTime, latest_notification, kulkas, &latest_state);
+                                // Push(&stack_redo, latest_state);
+                                // Pop(&stack_undo, &latest_state);
                                 Undo(&stack_undo, &stack_redo, &latest_state);
                                 loadState(&simulator, &delivery_list, &latest_state, "ADMIN", &latest_notification, &kulkas, &game.currentTime);
                                 PrintPrioQueueDelivery(delivery_list);
