@@ -290,10 +290,16 @@ int main() {
                                 break;
                             }
 
+                            printf("(%d)\n", Top(stack_undo));
+
                             if (stuck) {
                                 sprintRed("Menabrak, Silahkan liat peta!\n");
                             } else {
                                 game.currentTime = NextMenit(game.currentTime);
+                                PasstimeQueue(&Inventory(simulator), 1, &latest_notification);
+                                PassTimeDelivery(&delivery_list, &Inventory(simulator), 1, &latest_notification);
+                                // PasstimeQueue(&latest_state.inventory, 1, &latest_notification);
+                                // PassTimeDelivery(&latest_state.delivery, &latest_state.inventory, 1, &latest_notification);
                                 WriteLokasi(simulator.lokasi);
                                 TulisTIME3(game.currentTime);
                                 printListMakanan(latest_notification);
@@ -323,6 +329,13 @@ int main() {
                             jam = wordToInt(L.TabWords[1]);
                             menit = wordToInt(L.TabWords[2]);
                             if (jam != -999 && menit != -999) {
+
+                                if (!IsStackEmpty(stack_undo)) {
+                                    PrintPrioQueueDelivery(InfoTop(stack_undo).delivery); printf("\n");
+                                } else {
+                                    printf("KOSONG TAUGAK\n");
+                                }
+                                 
                                 // masuk stack undo
                                 simulatorToState(simulator, delivery_list, game.currentTime, latest_notification, kulkas, &latest_state);                                
                                 Push(&stack_undo,latest_state);
@@ -334,7 +347,17 @@ int main() {
                                 for (int i = 1; i <= jam * 60 + menit; i++) {
                                     PasstimeQueue(&Inventory(simulator), 1, &latest_notification);
                                     PassTimeDelivery(&delivery_list, &Inventory(simulator), 1, &latest_notification);
+                                    // PasstimeQueue(&latest_state.inventory, 1, &latest_notification);
+                                    // PassTimeDelivery(&latest_state.delivery, &latest_state.inventory, 1, &latest_notification);
                                 }
+                                // loadState(&simulator, &delivery_list, latest_state, "ADMIN", &latest_notification, &kulkas, &game.currentTime);
+                                
+                                if (!IsStackEmpty(stack_undo)) {
+                                    PrintPrioQueueDelivery(InfoTop(stack_undo).delivery); printf("\n");
+                                } else {
+                                    printf("KOSONG TAUGAK\n");
+                                }
+
                                 WriteLokasi(simulator.lokasi);
                                 TulisTIME3(game.currentTime);
                                 printf("\n");
@@ -351,11 +374,16 @@ int main() {
                             sprintRed("Command UNDO tidak memiliki argumen. Coba Lagi!\n");
                         } else {
                             if (!IsStackEmpty(stack_undo)) {
+                                    PrintPrioQueueDelivery(InfoTop(stack_undo).delivery); printf("\n");
+                                } else {
+                                    printf("KOSONG TAUGAK\n");
+                                }
+                            if (!IsStackEmpty(stack_undo)) {
                                 simulatorToState(simulator, delivery_list, game.currentTime, latest_notification, kulkas, &latest_state);
                                 // Push(&stack_redo, latest_state);
                                 // Pop(&stack_undo, &latest_state);
                                 Undo(&stack_undo, &stack_redo, &latest_state);
-                                loadState(&simulator, &delivery_list, &latest_state, "ADMIN", &latest_notification, &kulkas, &game.currentTime);
+                                loadState(&simulator, &delivery_list, latest_state, "ADMIN", &latest_notification, &kulkas, &game.currentTime);
                                 WriteLokasi(simulator.lokasi);
                                 TulisTIME3(game.currentTime);
                                 printf("\n");
@@ -365,6 +393,11 @@ int main() {
                                 // IsStackEmpty(stack_undo) [stack_undo kosong]
                                 sprintRed("Tidak bisa UNDO.\n");
                             }
+                            if (!IsStackEmpty(stack_undo)) {
+                                    PrintPrioQueueDelivery(InfoTop(stack_undo).delivery); printf("\n");
+                                } else {
+                                    printf("KOSONG TAUGAK\n");
+                                }
                         }
                         break;
                     case 14: /* REDO */
@@ -374,7 +407,7 @@ int main() {
                             if (!IsStackEmpty(stack_redo)) {
                                 simulatorToState(simulator, delivery_list, game.currentTime, latest_notification, kulkas, &latest_state);
                                 Redo(&stack_undo, &stack_redo, &latest_state);
-                                loadState(&simulator, &delivery_list, &latest_state, "ADMIN", &latest_notification, &kulkas, &game.currentTime);
+                                loadState(&simulator, &delivery_list, latest_state, "ADMIN", &latest_notification, &kulkas, &game.currentTime);
                                 WriteLokasi(simulator.lokasi);
                                 TulisTIME3(game.currentTime);
                                 printf("\n");

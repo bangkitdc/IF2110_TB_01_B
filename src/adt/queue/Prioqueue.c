@@ -369,14 +369,15 @@ void PassTimeDelivery(PrioQueue * deliList, PrioQueue * destination, int x, List
         while (!IsEmptyPrioqueue(*deliList)) {
             Dequeue(deliList, &tempvar);
             Time(tempvar) = PrevMenit(Time(tempvar));
-            TulisTIME(Time(tempvar));
+            // TulisTIME(Time(tempvar));
             if (TIMEToMenit(Time(tempvar)) == 0) {
                 Time(tempvar) = EXP(Info(tempvar));
                 DELIVERY(Info(tempvar)) = temptime;
                 LOC(Info(tempvar)) = 'T';
                 Enqueue(destination, tempvar);
                 insertLastMakanan(notif, tempvar);
-            } else {
+            } 
+            else {
                 Enqueue(&temp, tempvar);
             }
         }

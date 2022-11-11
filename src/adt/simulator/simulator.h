@@ -46,7 +46,7 @@ void simulatorToState(Simulator s, PrioQueue deliverylist, TIME currentTime, Lis
 /* mengkonversi simulator s ke State*/
 /* digunakan saat mau menyimpan State ke stack */
 
-void loadState(Simulator * s, PrioQueue * deliverylist, State * st, char * currentUsername, ListDinMakanan * currentNotif, MatrixKulkas * currentKulkas, TIME * currentTime);
+void loadState(Simulator * s, PrioQueue * deliverylist, State st, char * currentUsername, ListDinMakanan * currentNotif, MatrixKulkas * currentKulkas, TIME * currentTime);
 /* mengkonversi State dari stack ke simulator dan menyimpannya di simulator */
 /* digunakan saat undo dan redo */
 
