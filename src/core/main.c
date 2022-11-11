@@ -66,7 +66,10 @@ int main() {
                             if (!CekAdjBuy) {
                                 sprintRed("\nBNMO sedang tidak berada di area telepon(T), silahkan lihat peta!\n");
                             } else {
-                                printf("List Bahan Makanan:\n");
+                                printf("\n======================\n");
+                                printf("=        %-4s        =\n", "BUY");
+                                printf("======================\n");
+                                printf("List Bahan Makanan Yang Bisa Dibeli:\n");
                                 ListStatikM makananBisaDibeli; //ini buat nyimpen makanan apa aja yang bisa dibeli
                                 infotype makananDibeli;  // ini buat nyimpen makanan yang dipilih untuk dibeli
                                 createLSMakanan(&makananBisaDibeli);
@@ -81,7 +84,7 @@ int main() {
                                     }
                                 }
                                 int PilBuy;
-                                PilBuy = select(1, no);
+                                PilBuy = select(1, (no - 1));
                                 if (PilBuy == 0) {
                                     sprintRed("\nMembatalkan command BUY\n");
                                     break;
@@ -89,6 +92,8 @@ int main() {
                                     makananDibeli.info = makananBisaDibeli.contents[PilBuy - 1];
                                     makananDibeli.time = makananBisaDibeli.contents[PilBuy - 1].delivery;
                                     Enqueue(&delivery_list, makananDibeli);
+                                    printf("\nBerhasil memesan %s. %s akan diantar dalam ", Info(makananDibeli).name, Info(makananDibeli).name);
+                                    TulisTIME2(Info(makananDibeli).delivery); printf(".\n");
                                     EmptyStack(&stack_redo);
                                 }
                             }
