@@ -85,6 +85,7 @@ void copySimulator(Simulator * s1, Simulator * s2) {
 
     // ALGORITMA
     CreateEmptyPrioqueue(&temp, MaxElPrioqueue(Inventory(*s1)));
+    CopyQueue(&Inventory(*s1), &temp);
     CreatePoint(&temppoint, Absis(Lokasi(*s1)), Ordinat(Lokasi(*s1)));
     tempname = Username(*s1);
 
