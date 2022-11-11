@@ -291,8 +291,31 @@ void displayListMakananAksi(ListStatikM listMakanan, ListStatikM *hasil, int *le
     }
     *length = j;
     i=0;
+    char *dispAksi;
+    switch (aksi) {
+        case 'M':
+            dispAksi = "MIX";
+            break;
+        case 'C':
+            dispAksi = "CHOP";
+            break;
+        case 'F':
+            dispAksi = "FRY";
+            break;
+        case 'B':
+            dispAksi = "BOIL";
+            break;
+        default:
+            break;
+    }
+
+    printf("\n======================\n");
+    printf("=        %-4s        =\n", dispAksi);
+    printf("======================\n");
+
+    printf("List Bahan Makanan yang Bisa Dibuat:\n");
     while((*hasil).contents[i].id!=MARKSTATIK){
-        printf("%d. %s\n", i+1,(*hasil).contents[i].name);
+        printf("  [%d] %s\n", i+1,(*hasil).contents[i].name);
         i++;
     }
 }
@@ -350,12 +373,12 @@ void mengolahMakanan(Makanan makananOlah, PrioQueue *inventory, ListStatikT list
         Enqueue(inventory, tmp);
         printf("%s selesai dibuat dan sudah masuk inventory!\n", makananOlah.name);
     }else{                                           // jika tidak bisa dibuat
-        printf("Gagal membuat %s karena kamu tidak memiliki bahan berikut:\n", makananOlah.name);
+        printf("\nGagal membuat %s karena kamu tidak memiliki bahan berikut:\n", makananOlah.name);
         int j=0;
         for(int i=0;i<treeMakananOlah->childEff;i++){
             if(idBahan[i]!=-1){
                 j++;
-                printf("   %d. %s\n", j, getMakananFromId(idBahan[i],listMakanan).name);
+                printf("  [%d] %s\n", j, getMakananFromId(idBahan[i],listMakanan).name);
             }
         }
     }
