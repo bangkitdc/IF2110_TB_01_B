@@ -270,7 +270,7 @@ int main() {
                                 game.currentTime = NextNMenit(game.currentTime, jam * 60 + menit);
                                 for (int i = 1; i <= jam * 60 + menit; i++) {
                                     PasstimeQueue(&Inventory(simulator), 1, &latest_notification);
-                                    PassTimeDelivery(&Inventory(simulator), 1, &latest_notification);
+                                    PassTimeDelivery(&delivery_list, &Inventory(simulator), 1, &latest_notification);
                                 }
                                 WriteLokasi(simulator.lokasi);
                                 TulisTIME3(game.currentTime);
