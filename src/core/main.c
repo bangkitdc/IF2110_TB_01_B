@@ -390,6 +390,8 @@ int main() {
                                             hapusIdKulkas(&tempinfotype);
                                             Enqueue(&Inventory(simulator), tempinfotype);
                                         }
+                                    } else {
+                                        Enqueue(&Inventory(simulator), tempinfotype);
                                     }
                                 } else { //isFullKulkas(kulkas)
                                     sprintRed("Kulkas sudah penuh.. :(\n");
