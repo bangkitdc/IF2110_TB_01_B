@@ -284,7 +284,6 @@ int select(int min, int max) {
             L = readLine();
         }
     }
-    printf("%d\n", L.Length);
     return wordToInt(L.TabWords[0]);
 }
 

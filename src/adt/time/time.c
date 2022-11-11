@@ -42,12 +42,18 @@ void TulisTIME (TIME T)
 void TulisTIME2 (TIME T)
 {
    if(T.DD > 0){
-      printf("%d hari ", T.DD);
+      printf("%d hari", T.DD);
    }
    if(T.HH > 0){
-      printf("%d jam ", T.HH);
+      if (T.DD > 0) {
+         printf(" ");
+      }
+      printf("%d jam", T.HH);
    }
    if(T.MM > 0){
+      if (T.HH > 0) {
+         printf(" ");
+      }
       printf("%d menit", T.MM);
    }
 }
