@@ -108,7 +108,7 @@ int main() {
                                     }
                                     // masukkan ke notif
                                     LOC(Info(makananDibeli)) = 't';
-                                    insertLastMakanan(&latest_notification, &makananDibeli)
+                                    insertLastMakanan(&latest_notification, makananDibeli);
                                     EmptyStack(&stack_redo);
                                 }
                             }
