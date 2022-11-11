@@ -166,3 +166,13 @@ void expandListMakanan(ListDinMakanan *l, int num) {
     CAPACITY_LISTDINAMIS_Makanan(*l) += num;
     BUFFER_Makanan(*l) = realloc (BUFFER_Makanan(*l), CAPACITY_LISTDINAMIS_Makanan(*l) * sizeof(infotype));
 }
+
+/* ********* MENYALIN ISI LISTDIN ********* */
+void copyListDinMakanan(ListDinMakanan l1, ListDinMakanan * l2) {
+/* Menyalin elemen di l1 ke l2 */
+
+    CreateListMakananDin(l2, CAPACITY_LISTDINAMIS_Makanan(l1));
+    for (int i = 0; i < NEFF_Makanan(l1); i++) {
+        insertLastMakanan(l2, ELMT_LISTDINAMIS_Makanan(l1, i));
+    } 
+}
