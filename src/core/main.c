@@ -93,7 +93,7 @@ int main() {
                                     makananDibeli.info = makananBisaDibeli.contents[PilBuy - 1];
                                     makananDibeli.time = makananBisaDibeli.contents[PilBuy - 1].delivery;
                                     Enqueue(&delivery_list, makananDibeli);
-                                    TIME lama = PENGOLAHAN(makananDibeli);
+                                    TIME lama = PENGOLAHAN(Info(makananDibeli));
                                     game.currentTime = NextNMenit(game.currentTime, TIMEToMenit(lama));
                                     for (int i = 1; i <= TIMEToMenit(lama); i++) {
                                         PasstimeQueue(&Inventory(simulator), 1, &latest_notification);
@@ -101,7 +101,7 @@ int main() {
                                     }
                                     // masukkan ke notif
                                     LOC(Info(makananDibeli)) = 't';
-                                    insertLastMakanan(&latest_notification, &makananDibeli)
+                                    insertLastMakanan(&latest_notification, &makananDibeli);
                                     EmptyStack(&stack_redo);
                                 }
                             }
