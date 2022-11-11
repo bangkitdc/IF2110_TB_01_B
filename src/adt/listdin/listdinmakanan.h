@@ -109,4 +109,9 @@ void expandListMakanan(ListDinMakanan *l, int num);
 /* Proses : Menambahkan capacity l sebanyak num */
 /* I.S. List sudah terdefinisi */
 /* F.S. Ukuran list bertambah sebanyak num */
+
+/* ********* MENYALIN ISI LISTDIN ********* */
+void copyListDinMakanan(ListDinMakanan l1, ListDinMakanan *l2);
+/* Menyalin elemen di l1 ke l2 */
+
 #endif
