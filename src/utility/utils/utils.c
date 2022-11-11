@@ -327,6 +327,65 @@ void printCookBook(ListStatikT listResep, ListStatikM listMakanan){
     }
 }
 
+int getUrutanFromListMakanan(ListStatikM listMakanan, int idMakanan){
+    int urutan;
+    for(int i=0;i<listLengthStatikM(listMakanan);i++){
+        if(listMakanan.contents[i].id == idMakanan){
+            urutan = i;
+            break;
+        }
+    }
+    return urutan;
+}
+
+boolean apakahBisa(Tree t, Set s, ListStatikM listMakanan){
+    boolean bisa;
+    if(t->childEff == 0){
+        bisa = s.contents[getUrutanFromListMakanan(listMakanan, t->info)] == 1;
+    }else{
+        if(s.contents[getUrutanFromListMakanan(listMakanan, t->info)] == 1){
+            bisa = true;
+        }else{
+            bisa = true;
+            for(int i=0;i<t->childEff;i++){
+                bisa = apakahBisa(t->children[i], s, listMakanan);
+                if(bisa == false){
+                    break;
+                }
+            }
+        }
+        return bisa;
+    }
+}
+
+void rekomendasiMakanan(ListStatikM listMakanan, PrioQueue listInvenMakanan, ListStatikT listResep){
+    Set s;
+    Address treeRekomen;
+    Makanan rekomen;
+    boolean bisa;
+    int i;
+    createSet(&s);
+    makeSetFromListMakanan(&s, listMakanan);
+    makeSetFromInventory(&s, listMakanan, listInvenMakanan);
+    i=0;
+    for(int i=0;i<listResep.elEff;i++){
+        if(listResep.list[i]->childEff != 0){
+            bisa = true;
+            treeRekomen = listResep.list[i];
+            for(int j=0;j<treeRekomen->childEff && bisa;j++){
+                if(!apakahBisa(treeRekomen->children[j], s, listMakanan)){
+                    bisa = false;
+                }
+            }
+            if(bisa){
+                rekomen = getMakananFromId(treeRekomen->info, listMakanan);
+                printf("%d. %s\n", i+1, rekomen.name);
+                i++;
+            }
+        }
+    }
+}
+
 void exitGame() {
     sprintGreen("\nTerima kasih telah menggunakan BNMO\n\n");
     exit(0);
