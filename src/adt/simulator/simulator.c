@@ -75,6 +75,22 @@ void loadState(Simulator * s, PrioQueue * deliverylist, State st, char * current
     // PrintPrioQueueDelivery(*deliverylist);
 }
 
+void copySimulator(Simulator * s1, Simulator * s2) {
+/* mengcopy simulator 1 ke simulator 2 */
+
+    // KAMUS
+    PrioQueue temp;
+    POINT temppoint;
+    char* tempname;
+
+    // ALGORITMA
+    CreateEmptyPrioqueue(&temp, MaxElPrioqueue(Inventory(*s1)));
+    CreatePoint(&temppoint, Absis(Lokasi(*s1)), Ordinat(Lokasi(*s1)));
+    tempname = Username(*s1);
+
+    createSimulator(s2, tempname, temppoint, temp);
+}
+
 void setInventory(Simulator * s, PrioQueue inventory) {
 /* mengassign inventory di awal */
 

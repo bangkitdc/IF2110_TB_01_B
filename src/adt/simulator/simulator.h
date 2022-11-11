@@ -50,6 +50,9 @@ void loadState(Simulator * s, PrioQueue * deliverylist, State st, char * current
 /* mengkonversi State dari stack ke simulator dan menyimpannya di simulator */
 /* digunakan saat undo dan redo */
 
+void copySimulator(Simulator * s1, Simulator * s2);
+/* mengcopy simulator 1 ke simulator 2 */
+
 void setInventory(Simulator * s, PrioQueue inventory);
 /* mengassign inventory di awal */
 
