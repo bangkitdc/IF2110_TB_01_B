@@ -290,8 +290,6 @@ int main() {
                                 break;
                             }
 
-                            printf("(%d)\n", Top(stack_undo));
-
                             if (stuck) {
                                 sprintRed("Menabrak, Silahkan liat peta!\n");
                             } else {
