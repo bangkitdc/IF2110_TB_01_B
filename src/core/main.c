@@ -99,10 +99,6 @@ int main() {
 
                                     makananDibeli.info = makananBisaDibeli.contents[PilBuy - 1];
                                     makananDibeli.time = makananBisaDibeli.contents[PilBuy - 1].delivery;
-                                    Enqueue(&delivery_list, makananDibeli);
-
-                                    printf("\nBerhasil memesan %s. %s akan diantar dalam ", Info(makananDibeli).name, Info(makananDibeli).name);
-                                    TulisTIME2(Info(makananDibeli).delivery); printf(".\n");
                                     TIME lama = PENGOLAHAN(Info(makananDibeli));
 
                                     game.currentTime = NextNMenit(game.currentTime, TIMEToMenit(lama));
@@ -110,6 +106,12 @@ int main() {
                                         PasstimeQueue(&Inventory(simulator), 1, &latest_notification);
                                         PassTimeDelivery(&delivery_list, &Inventory(simulator), 1, &latest_notification);
                                     }
+                                    
+                                    Enqueue(&delivery_list, makananDibeli);
+
+                                    printf("\nBerhasil memesan %s. %s akan diantar dalam ", Info(makananDibeli).name, Info(makananDibeli).name);
+                                    TulisTIME2(Info(makananDibeli).delivery); printf(".\n");
+                                    
                                     // masukkan ke notif
                                     LOC(Info(makananDibeli)) = 't';
                                     insertLastMakanan(&latest_notification, makananDibeli);
