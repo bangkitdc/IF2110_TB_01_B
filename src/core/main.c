@@ -99,7 +99,8 @@ int main() {
 
                                     printf("\nBerhasil memesan %s. %s akan diantar dalam ", Info(makananDibeli).name, Info(makananDibeli).name);
                                     TulisTIME2(Info(makananDibeli).delivery); printf(".\n");
-                                    TIME lama = PENGOLAHAN(makananDibeli);
+                                    TIME lama = PENGOLAHAN(Info(makananDibeli));
+
                                     game.currentTime = NextNMenit(game.currentTime, TIMEToMenit(lama));
                                     for (int i = 1; i <= TIMEToMenit(lama); i++) {
                                         PasstimeQueue(&Inventory(simulator), 1, &latest_notification);
@@ -108,7 +109,6 @@ int main() {
                                     // masukkan ke notif
                                     LOC(Info(makananDibeli)) = 't';
                                     insertLastMakanan(&latest_notification, &makananDibeli)
-
                                     EmptyStack(&stack_redo);
                                 }
                             }
