@@ -14,6 +14,7 @@ int main() {
     ListDinMakanan latest_notification;
     MatrixKulkas kulkas;
     PrioQueue delivery_list;
+    infotype makananDibeli; // ini buat nyimpen makanan yang dipilih untuk dibeli
 
     startMenu();
     int input;
@@ -71,8 +72,9 @@ int main() {
                                 printf("======================\n");
                                 printf("List Bahan Makanan Yang Bisa Dibeli:\n");
                                 ListStatikM makananBisaDibeli; //ini buat nyimpen makanan apa aja yang bisa dibeli
-                                infotype makananDibeli;  // ini buat nyimpen makanan yang dipilih untuk dibeli
+                                
                                 createLSMakanan(&makananBisaDibeli);
+        
                                 int no = 1;
                                 for (int i=0; i < listLengthStatikM(game.listMakanan); i++) {
                                     if (isMakananBuyable(game.listMakanan.contents[i])) {
@@ -110,8 +112,8 @@ int main() {
                                     Enqueue(&delivery_list, makananDibeli);
 
                                     printf("\nBerhasil memesan %s. %s akan diantar dalam ", Info(makananDibeli).name, Info(makananDibeli).name);
-                                    TulisTIME2(Info(makananDibeli).delivery); printf(".\n");
-                                    
+                                    TulisTIME2(DELIVERY(Info(makananDibeli))); printf(".\n");
+
                                     // masukkan ke notif
                                     LOC(Info(makananDibeli)) = 't';
                                     insertLastMakanan(&latest_notification, makananDibeli);
