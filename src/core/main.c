@@ -293,11 +293,13 @@ int main() {
                             if (stuck) {
                                 sprintRed("Menabrak, Silahkan liat peta!\n");
                             } else {
+                                // kosongkan notifikasi
+                                dealocateListMakanan(&latest_notification);
+                                CreateListMakananDin(&latest_notification, 50);
                                 game.currentTime = NextMenit(game.currentTime);
                                 PasstimeQueue(&Inventory(simulator), 1, &latest_notification);
                                 PassTimeDelivery(&delivery_list, &Inventory(simulator), 1, &latest_notification);
-                                // PasstimeQueue(&latest_state.inventory, 1, &latest_notification);
-                                // PassTimeDelivery(&latest_state.delivery, &latest_state.inventory, 1, &latest_notification);
+
                                 WriteLokasi(simulator.lokasi);
                                 TulisTIME3(game.currentTime);
                                 printListMakanan(latest_notification);
@@ -340,7 +342,6 @@ int main() {
 
                                 copySimulator(&simulator, &tempSimulator);
                                 PrintPrioQueue(tempSimulator.inventory); printf("\n");
-
                                 ListDinMakanan tempNotification;
                                 CreateListMakananDin(&tempNotification, 50);
                                 copyListDinMakanan(latest_notification, &tempNotification);
@@ -353,10 +354,10 @@ int main() {
                                 // masuk stack undo
                                 simulatorToState(tempSimulator, tempDelivery, game.currentTime, tempNotification, kulkas, &latest_state);                                
                                 Push(&stack_undo,latest_state);
-
                                 // reset notifikasi
                                 dealocateListMakanan(&latest_notification);
                                 CreateListMakananDin(&latest_notification, 50);
+                                
                                 game.currentTime = NextNMenit(game.currentTime, jam * 60 + menit);
                                 for (int i = 1; i <= jam * 60 + menit; i++) {
                                     PasstimeQueue(&Inventory(simulator), 1, &latest_notification);
