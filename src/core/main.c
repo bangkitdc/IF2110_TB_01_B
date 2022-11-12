@@ -89,14 +89,6 @@ int main() {
                                     sprintRed("\nMembatalkan command BUY\n");
                                     break;
                                 } else {
-                                    // masukin ke stack undo
-                                    State tempstate;
-                                    simulatorToState(simulator, delivery_list, game.currentTime, latest_notification, kulkas, &tempstate);
-                                    Push(&stack_undo, tempstate);
-                                    // kosongkan notifikasi
-                                    dealocateListMakanan(&latest_notification);
-                                    CreateListMakananDin(&latest_notification, 50);
-
                                     makananDibeli.info = makananBisaDibeli.contents[PilBuy - 1];
                                     makananDibeli.time = makananBisaDibeli.contents[PilBuy - 1].delivery;
                                     TIME lama = PENGOLAHAN(Info(makananDibeli));
@@ -111,11 +103,20 @@ int main() {
 
                                     printf("\nBerhasil memesan %s. %s akan diantar dalam ", Info(makananDibeli).name, Info(makananDibeli).name);
                                     TulisTIME2(Info(makananDibeli).delivery); printf(".\n");
-                                    
+
                                     // masukkan ke notif
                                     LOC(Info(makananDibeli)) = 't';
                                     insertLastMakanan(&latest_notification, makananDibeli);
                                     EmptyStack(&stack_redo);
+
+                                    // masukin ke stack undo
+                                    State tempstate;
+                                    simulatorToState(simulator, delivery_list, game.currentTime, latest_notification, kulkas, &tempstate);
+                                    Push(&stack_undo, tempstate);
+
+                                    // kosongkan notifikasi
+                                    dealocateListMakanan(&latest_notification);
+                                    CreateListMakananDin(&latest_notification, 50);
                                 }
                             }
                         }
@@ -293,9 +294,6 @@ int main() {
                             if (stuck) {
                                 sprintRed("Menabrak, Silahkan liat peta!\n");
                             } else {
-                                // kosongkan notifikasi
-                                dealocateListMakanan(&latest_notification);
-                                CreateListMakananDin(&latest_notification, 50);
                                 game.currentTime = NextMenit(game.currentTime);
                                 PasstimeQueue(&Inventory(simulator), 1, &latest_notification);
                                 PassTimeDelivery(&delivery_list, &Inventory(simulator), 1, &latest_notification);
@@ -304,6 +302,20 @@ int main() {
                                 TulisTIME3(game.currentTime);
                                 printListMakanan(latest_notification);
                                 printf("\n"); DisplayMap(game.map, simulator.lokasi);
+
+                                // masukkan ke notif
+                                LOC(Info(makananDibeli)) = 't';
+                                insertLastMakanan(&latest_notification, makananDibeli);
+                                EmptyStack(&stack_redo);
+
+                                // masukin ke stack undo
+                                State tempstate;
+                                simulatorToState(simulator, delivery_list, game.currentTime, latest_notification, kulkas, &tempstate);
+                                Push(&stack_undo, tempstate);
+                                
+                                // kosongkan notifikasi
+                                dealocateListMakanan(&latest_notification);
+                                CreateListMakananDin(&latest_notification, 50);
                             }   
                         }
                         break;
@@ -350,13 +362,6 @@ int main() {
                                 // } else {
                                 //     printf("KOSONG TAUGAK\n");
                                 // }
-
-                                // masuk stack undo
-                                simulatorToState(tempSimulator, tempDelivery, game.currentTime, tempNotification, kulkas, &latest_state);                                
-                                Push(&stack_undo,latest_state);
-                                // reset notifikasi
-                                dealocateListMakanan(&latest_notification);
-                                CreateListMakananDin(&latest_notification, 50);
                                 
                                 game.currentTime = NextNMenit(game.currentTime, jam * 60 + menit);
                                 for (int i = 1; i <= jam * 60 + menit; i++) {
@@ -381,6 +386,14 @@ int main() {
                                 printf("\n");
                                 printListMakanan(latest_notification); 
                                 DisplayMap(game.map, simulator.lokasi);
+
+                                // masuk stack undo
+                                simulatorToState(tempSimulator, tempDelivery, game.currentTime, tempNotification, kulkas, &latest_state);                                
+                                Push(&stack_undo,latest_state);
+                                // reset notifikasi
+                                dealocateListMakanan(&latest_notification);
+                                CreateListMakananDin(&latest_notification, 50);
+
                                 EmptyStack(&stack_redo);
                             } else {
                                 sprintRed("2 Argumen harus integer >= 0. Coba Lagi!\n");
@@ -482,17 +495,18 @@ int main() {
                                                     }
 
                                                     if (idxkulkasvalid) {
+                                                        for (i = atas; i <= bawah; i++) {
+                                                            for (j = kiri; j <= kanan; j++) {
+                                                                pindahKeKulkas(tempinfotype, &kulkas, &latest_notification, i, j);
+                                                            }
+                                                        }
                                                         // masuk ke stack undo
                                                         simulatorToState(simulator, delivery_list, game.currentTime, latest_notification, kulkas, &latest_state);
                                                         Push(&stack_undo,latest_state);
                                                         // reset notifikasi
                                                         dealocateListMakanan(&latest_notification);
                                                         CreateListMakananDin(&latest_notification, 100);
-                                                        for (i = atas; i <= bawah; i++) {
-                                                            for (j = kiri; j <= kanan; j++) {
-                                                                pindahKeKulkas(tempinfotype, &kulkas, &latest_notification, i, j);
-                                                            }
-                                                        }
+                                                        
                                                         EmptyStack(&stack_redo);
                                                     } else { //idxkulkasvalid == false
                                                         sprintRed("Ada makanan lain di posisi tersebut..\n");
@@ -540,14 +554,15 @@ int main() {
                             if (!ada) {
                                 sprintRed("Tidak ada makanan dengan ID tersebut di kulkas\n");
                             } else {
+                                // ambil dari kulkas
+                                ambilDariKulkas(&simulator, tempidmakanan, &kulkas, &latest_notification);
                                 // masuk stack undo
                                 simulatorToState(simulator, delivery_list, game.currentTime, latest_notification, kulkas, &latest_state);
                                 Push(&stack_undo,latest_state);
                                 // reset notifikasi
                                 dealocateListMakanan(&latest_notification);
                                 CreateListMakananDin(&latest_notification, 100);
-                                // ambil dari kulkas
-                                ambilDariKulkas(&simulator, tempidmakanan, &kulkas, &latest_notification);
+                                                                
                                 EmptyStack(&stack_redo);
                             }
                         }
