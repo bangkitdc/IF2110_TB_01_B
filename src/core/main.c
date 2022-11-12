@@ -89,6 +89,14 @@ int main() {
                                     sprintRed("\nMembatalkan command BUY\n");
                                     break;
                                 } else {
+                                    // masukin ke stack undo
+                                    State tempstate;
+                                    simulatorToState(simulator, delivery_list, game.currentTime, latest_notification, kulkas, &tempstate);
+                                    Push(&stack_undo, tempstate);
+                                    // kosongkan notifikasi
+                                    dealocateListMakanan(&latest_notification);
+                                    CreateListMakananDin(&latest_notification, 50);
+
                                     makananDibeli.info = makananBisaDibeli.contents[PilBuy - 1];
                                     makananDibeli.time = makananBisaDibeli.contents[PilBuy - 1].delivery;
                                     TIME lama = PENGOLAHAN(Info(makananDibeli));
@@ -103,20 +111,11 @@ int main() {
 
                                     printf("\nBerhasil memesan %s. %s akan diantar dalam ", Info(makananDibeli).name, Info(makananDibeli).name);
                                     TulisTIME2(Info(makananDibeli).delivery); printf(".\n");
-
+                                    
                                     // masukkan ke notif
                                     LOC(Info(makananDibeli)) = 't';
                                     insertLastMakanan(&latest_notification, makananDibeli);
                                     EmptyStack(&stack_redo);
-
-                                    // masukin ke stack undo
-                                    State tempstate;
-                                    simulatorToState(simulator, delivery_list, game.currentTime, latest_notification, kulkas, &tempstate);
-                                    Push(&stack_undo, tempstate);
-
-                                    // kosongkan notifikasi
-                                    dealocateListMakanan(&latest_notification);
-                                    CreateListMakananDin(&latest_notification, 50);
                                 }
                             }
                         }
@@ -297,25 +296,12 @@ int main() {
                                 game.currentTime = NextMenit(game.currentTime);
                                 PasstimeQueue(&Inventory(simulator), 1, &latest_notification);
                                 PassTimeDelivery(&delivery_list, &Inventory(simulator), 1, &latest_notification);
-
+                                // PasstimeQueue(&latest_state.inventory, 1, &latest_notification);
+                                // PassTimeDelivery(&latest_state.delivery, &latest_state.inventory, 1, &latest_notification);
                                 WriteLokasi(simulator.lokasi);
                                 TulisTIME3(game.currentTime);
                                 printListMakanan(latest_notification);
                                 printf("\n"); DisplayMap(game.map, simulator.lokasi);
-
-                                // masukkan ke notif
-                                LOC(Info(makananDibeli)) = 't';
-                                insertLastMakanan(&latest_notification, makananDibeli);
-                                EmptyStack(&stack_redo);
-
-                                // masukin ke stack undo
-                                State tempstate;
-                                simulatorToState(simulator, delivery_list, game.currentTime, latest_notification, kulkas, &tempstate);
-                                Push(&stack_undo, tempstate);
-                                
-                                // kosongkan notifikasi
-                                dealocateListMakanan(&latest_notification);
-                                CreateListMakananDin(&latest_notification, 50);
                             }   
                         }
                         break;
@@ -354,6 +340,7 @@ int main() {
 
                                 copySimulator(&simulator, &tempSimulator);
                                 PrintPrioQueue(tempSimulator.inventory); printf("\n");
+
                                 ListDinMakanan tempNotification;
                                 CreateListMakananDin(&tempNotification, 50);
                                 copyListDinMakanan(latest_notification, &tempNotification);
@@ -362,7 +349,14 @@ int main() {
                                 // } else {
                                 //     printf("KOSONG TAUGAK\n");
                                 // }
-                                
+
+                                // masuk stack undo
+                                simulatorToState(tempSimulator, tempDelivery, game.currentTime, tempNotification, kulkas, &latest_state);                                
+                                Push(&stack_undo,latest_state);
+
+                                // reset notifikasi
+                                dealocateListMakanan(&latest_notification);
+                                CreateListMakananDin(&latest_notification, 50);
                                 game.currentTime = NextNMenit(game.currentTime, jam * 60 + menit);
                                 for (int i = 1; i <= jam * 60 + menit; i++) {
                                     PasstimeQueue(&Inventory(simulator), 1, &latest_notification);
@@ -386,14 +380,6 @@ int main() {
                                 printf("\n");
                                 printListMakanan(latest_notification); 
                                 DisplayMap(game.map, simulator.lokasi);
-
-                                // masuk stack undo
-                                simulatorToState(tempSimulator, tempDelivery, game.currentTime, tempNotification, kulkas, &latest_state);                                
-                                Push(&stack_undo,latest_state);
-                                // reset notifikasi
-                                dealocateListMakanan(&latest_notification);
-                                CreateListMakananDin(&latest_notification, 50);
-
                                 EmptyStack(&stack_redo);
                             } else {
                                 sprintRed("2 Argumen harus integer >= 0. Coba Lagi!\n");
@@ -405,6 +391,10 @@ int main() {
                             sprintRed("Command UNDO tidak memiliki argumen. Coba Lagi!\n");
                         } else {
                             if (!IsStackEmpty(stack_undo)) {
+                                ListDinMakanan tempnotif;
+                                CreateListMakananDin(&tempnotif, 50);
+                                copyListDinMakanan(latest_notification, &tempnotif);
+
                                 simulatorToState(simulator, delivery_list, game.currentTime, latest_notification, kulkas, &latest_state);
                                 // Push(&stack_redo, latest_state);
                                 // Pop(&stack_undo, &latest_state);
@@ -413,7 +403,7 @@ int main() {
                                 WriteLokasi(simulator.lokasi);
                                 TulisTIME3(game.currentTime);
                                 printf("\n");
-                                printListMakananUndo(latest_notification); 
+                                printListMakananUndo(tempnotif); 
                                 DisplayMap(game.map, simulator.lokasi);
                             } else {
                                 // IsStackEmpty(stack_undo) [stack_undo kosong]
@@ -426,13 +416,17 @@ int main() {
                             sprintRed("Command REDO tidak memiliki argumen. Coba Lagi!\n");
                         } else {
                             if (!IsStackEmpty(stack_redo)) {
+                                ListDinMakanan tempnotif;
+                                CreateListMakananDin(&tempnotif, 50);
+                                copyListDinMakanan(latest_notification, &tempnotif);
+
                                 simulatorToState(simulator, delivery_list, game.currentTime, latest_notification, kulkas, &latest_state);
                                 Redo(&stack_undo, &stack_redo, &latest_state);
                                 loadState(&simulator, &delivery_list, latest_state, "ADMIN", &latest_notification, &kulkas, &game.currentTime);
                                 WriteLokasi(simulator.lokasi);
                                 TulisTIME3(game.currentTime);
                                 printf("\n");
-                                printListMakanan(latest_notification); 
+                                printListMakanan(tempnotif); 
                                 DisplayMap(game.map, simulator.lokasi);
                             } else {
                                 // IsStackEmpty(stack_redo) [stack_redo kosong]
@@ -495,18 +489,17 @@ int main() {
                                                     }
 
                                                     if (idxkulkasvalid) {
-                                                        for (i = atas; i <= bawah; i++) {
-                                                            for (j = kiri; j <= kanan; j++) {
-                                                                pindahKeKulkas(tempinfotype, &kulkas, &latest_notification, i, j);
-                                                            }
-                                                        }
                                                         // masuk ke stack undo
                                                         simulatorToState(simulator, delivery_list, game.currentTime, latest_notification, kulkas, &latest_state);
                                                         Push(&stack_undo,latest_state);
                                                         // reset notifikasi
                                                         dealocateListMakanan(&latest_notification);
                                                         CreateListMakananDin(&latest_notification, 100);
-                                                        
+                                                        for (i = atas; i <= bawah; i++) {
+                                                            for (j = kiri; j <= kanan; j++) {
+                                                                pindahKeKulkas(tempinfotype, &kulkas, &latest_notification, i, j);
+                                                            }
+                                                        }
                                                         EmptyStack(&stack_redo);
                                                     } else { //idxkulkasvalid == false
                                                         sprintRed("Ada makanan lain di posisi tersebut..\n");
@@ -554,15 +547,14 @@ int main() {
                             if (!ada) {
                                 sprintRed("Tidak ada makanan dengan ID tersebut di kulkas\n");
                             } else {
-                                // ambil dari kulkas
-                                ambilDariKulkas(&simulator, tempidmakanan, &kulkas, &latest_notification);
                                 // masuk stack undo
                                 simulatorToState(simulator, delivery_list, game.currentTime, latest_notification, kulkas, &latest_state);
                                 Push(&stack_undo,latest_state);
                                 // reset notifikasi
                                 dealocateListMakanan(&latest_notification);
                                 CreateListMakananDin(&latest_notification, 100);
-                                                                
+                                // ambil dari kulkas
+                                ambilDariKulkas(&simulator, tempidmakanan, &kulkas, &latest_notification);
                                 EmptyStack(&stack_redo);
                             }
                         }
