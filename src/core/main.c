@@ -266,27 +266,41 @@ int main() {
                         if (L.Length != 2) {
                             sprintRed("Command MOVE memiliki 1 argumen, arah. Coba Lagi!\n");
                         } else {
+                            PrioQueue tempDelivery;
+                            CreateEmptyPrioqueue(&tempDelivery, 50);
+                            CopyQueue(&delivery_list, &tempDelivery);
+                            
+                            Simulator tempSimulator;
+                            POINT pTemp;
+                            PrioQueue pQueueTemp;
+                            CreatePoint(&pTemp, 0, 0);
+                            CreateEmptyPrioqueue(&pQueueTemp, 50);
+                            createSimulator(&tempSimulator, "TEMP", pTemp, pQueueTemp);
+
+                            copySimulator(&simulator, &tempSimulator);
+                            PrintPrioQueue(tempSimulator.inventory); printf("\n");
+
+                            ListDinMakanan tempNotification;
+                            CreateListMakananDin(&tempNotification, 50);
+                            copyListDinMakanan(latest_notification, &tempNotification);
+
+                            // masuk stack undo
+                            simulatorToState(tempSimulator, tempDelivery, game.currentTime, tempNotification, kulkas, &latest_state);                                
+                            Push(&stack_undo,latest_state);
+
+                            // reset notifikasi
+                            dealocateListMakanan(&latest_notification);
+                            CreateListMakananDin(&latest_notification, 50);
+                            
                             boolean stuck, flag = true;
                             if (isWordEq(NORTH, L.TabWords[1])) {
-                                simulatorToState(simulator, delivery_list, game.currentTime, latest_notification, kulkas, &latest_state);
-                                Push(&stack_undo, latest_state);
                                 gerakUser(&simulator, &game.map, &stuck, 'w');
-                                EmptyStack(&stack_redo);
                             } else if (isWordEq(SOUTH, L.TabWords[1])) {
-                                simulatorToState(simulator, delivery_list, game.currentTime, latest_notification, kulkas, &latest_state);
-                                Push(&stack_undo,latest_state);
                                 gerakUser(&simulator, &game.map, &stuck, 's');
-                                EmptyStack(&stack_redo);
                             } else if (isWordEq(WEST, L.TabWords[1])) {
-                                simulatorToState(simulator, delivery_list, game.currentTime, latest_notification, kulkas, &latest_state);
-                                Push(&stack_undo,latest_state);
                                 gerakUser(&simulator, &game.map, &stuck, 'a');
-                                EmptyStack(&stack_redo);
                             } else if (isWordEq(EAST, L.TabWords[1])) {
-                                simulatorToState(simulator, delivery_list, game.currentTime, latest_notification, kulkas, &latest_state);
-                                Push(&stack_undo,latest_state);
                                 gerakUser(&simulator, &game.map, &stuck, 'd');
-                                EmptyStack(&stack_redo);
                             } else {
                                 sprintRed("Argumen tidak tersedia. Pilih NORTH/ SOUTH/ WEST/ EAST !\n");
                                 break;
@@ -304,6 +318,7 @@ int main() {
                                 TulisTIME3(game.currentTime);
                                 printListMakanan(latest_notification);
                                 printf("\n"); DisplayMap(game.map, simulator.lokasi);
+                                EmptyStack(&stack_redo);
                             }   
                         }
                         break;
