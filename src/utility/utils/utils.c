@@ -427,15 +427,6 @@ void mengolahMakanan(Makanan makananOlah, Simulator *simulator, PrioQueue *deliv
     }
 
     if(bisa){                                        // jika bisa dibuat
-        // push to stack undo
-        State tempstate;
-        simulatorToState(*simulator, *delivery_list, game->currentTime, *latest_notification, kulkas, &tempstate);
-        Push(stackUndo, tempstate);
-
-        // mengosongkan notifikasi
-        dealocateListMakanan(latest_notification);
-        CreateListMakananDin(latest_notification, 50);
-
         // change time
         TIME lama;
         lama = getMakananFromId(treeMakananOlah->info, game->listMakanan).pengolahan;
