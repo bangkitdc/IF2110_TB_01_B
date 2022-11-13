@@ -444,6 +444,7 @@ void mengolahMakanan(Makanan makananOlah, Simulator *simulator, PrioQueue *deliv
         tmp.time = makananOlah.expiry;
 
         Enqueue(&simulator->inventory, tmp);
+        insertLastMakanan(latest_notification, tmp);
         printf("%s selesai dibuat dan sudah masuk inventory!\n", makananOlah.name);
     }else{                                           // jika tidak bisa dibuat
         printf("\nGagal membuat %s karena kamu tidak memiliki bahan berikut:\n", makananOlah.name);
