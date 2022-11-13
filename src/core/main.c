@@ -517,17 +517,13 @@ int main() {
                             sprintRed("Command REDO tidak memiliki argumen. Coba Lagi!\n");
                         } else {
                             if (!IsStackEmpty(stack_redo)) {
-                                ListDinMakanan tempnotif;
-                                CreateListMakananDin(&tempnotif, 50);
-                                copyListDinMakanan(latest_notification, &tempnotif);
-
                                 simulatorToState(simulator, delivery_list, game.currentTime, latest_notification, kulkas, &latest_state);
                                 Redo(&stack_undo, &stack_redo, &latest_state);
                                 loadState(&simulator, &delivery_list, latest_state, "ADMIN", &latest_notification, &kulkas, &game.currentTime);
                                 WriteLokasi(simulator.lokasi);
                                 TulisTIME3(game.currentTime);
                                 printf("\n");
-                                printListMakanan(tempnotif); 
+                                printListMakanan(latest_notification); 
                                 DisplayMap(game.map, simulator.lokasi);
                             } else {
                                 // IsStackEmpty(stack_redo) [stack_redo kosong]
@@ -691,7 +687,7 @@ int main() {
                                 // reset notifikasi
                                 dealocateListMakanan(&latest_notification);
                                 CreateListMakananDin(&latest_notification, 50);
-                                
+
                                 // ambil dari kulkas
                                 ambilDariKulkas(&simulator, tempidmakanan, &kulkas, &latest_notification);
                                 EmptyStack(&stack_redo);
