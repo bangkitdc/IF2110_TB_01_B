@@ -138,14 +138,7 @@ int main() {
                                     sprintRed("\nMembatalkan command FRY\n");
                                     break;
                                 } else {
-                                    // masuk stack undo
-                                    mengolahMakanan(makananBisaDiolah.contents[pilFry - 1], &(simulator.inventory), game.listResep, game.listMakanan);
-                                    // TIME lama = PENGOLAHAN(makananDibeli);
-                                    // game.currentTime = NextNMenit(game.currentTime, TIMEToMenit(lama));
-                                    // for (int i = 1; i <= TIMEToMenit(lama); i++) {
-                                    //     PasstimeQueue(&Inventory(simulator), 1, &latest_notification);
-                                    //     PassTimeDelivery(&delivery_list, &Inventory(simulator), 1, &latest_notification);
-                                    // }
+                                    mengolahMakanan(makananBisaDiolah.contents[pilFry-1], &simulator, &delivery_list, &latest_notification, kulkas, &stack_undo, &game);
                                     EmptyStack(&stack_redo);
                                 }
                             }
@@ -167,15 +160,7 @@ int main() {
                                     sprintRed("\nMembatalkan command CHOP\n");
                                     break;
                                 } else {
-                                    // masuk stack undo
-                                    // reset notifikasi
-                                    mengolahMakanan(makananBisaDiolah.contents[pilChop-1], &(simulator.inventory), game.listResep, game.listMakanan);
-                                    // TIME lama = PENGOLAHAN(makananDibeli);
-                                    // game.currentTime = NextNMenit(game.currentTime, TIMEToMenit(lama));
-                                    // for (int i = 1; i <= TIMEToMenit(lama); i++) {
-                                    //     PasstimeQueue(&Inventory(simulator), 1, &latest_notification);
-                                    //     PassTimeDelivery(&delivery_list, &Inventory(simulator), 1, &latest_notification);
-                                    // }
+                                    mengolahMakanan(makananBisaDiolah.contents[pilChop-1], &simulator, &delivery_list, &latest_notification, kulkas, &stack_undo, &game);
                                     EmptyStack(&stack_redo);
                                 }
                             }
@@ -197,15 +182,7 @@ int main() {
                                     sprintRed("\nMembatalkan command BOIL\n");
                                     break;
                                 } else {
-                                    // masuk stack undo
-                                    // reset notifikasi
-                                    mengolahMakanan(makananBisaDiolah.contents[pilBoil - 1], &(simulator.inventory), game.listResep, game.listMakanan);
-                                    // TIME lama = PENGOLAHAN(makananDibeli);
-                                    // game.currentTime = NextNMenit(game.currentTime, TIMEToMenit(lama));
-                                    // for (int i = 1; i <= TIMEToMenit(lama); i++) {
-                                    //     PasstimeQueue(&Inventory(simulator), 1, &latest_notification);
-                                    //     PassTimeDelivery(&delivery_list, &Inventory(simulator), 1, &latest_notification);
-                                    // }
+                                    mengolahMakanan(makananBisaDiolah.contents[pilBoil-1], &simulator, &delivery_list, &latest_notification, kulkas, &stack_undo, &game);
                                     EmptyStack(&stack_redo);
                                 }
                             }
@@ -227,15 +204,7 @@ int main() {
                                     sprintRed("\nMembatalkan command MIX\n");
                                     break;
                                 } else {
-                                    // masuk stack undo
-                                    // reset notifikasi
-                                    mengolahMakanan(makananBisaDiolah.contents[pilMix-1], &(simulator.inventory), game.listResep, game.listMakanan);
-                                    // TIME lama = PENGOLAHAN(makananDibeli);
-                                    // game.currentTime = NextNMenit(game.currentTime, TIMEToMenit(lama));
-                                    // for (int i = 1; i <= TIMEToMenit(lama); i++) {
-                                    //     PasstimeQueue(&Inventory(simulator), 1, &latest_notification);
-                                    //     PassTimeDelivery(&delivery_list, &Inventory(simulator), 1, &latest_notification);
-                                    // }
+                                    mengolahMakanan(makananBisaDiolah.contents[pilMix-1], &simulator, &delivery_list, &latest_notification, kulkas, &stack_undo, &game);
                                     EmptyStack(&stack_redo);
                                 }
                             }
@@ -356,6 +325,7 @@ int main() {
                                 createSimulator(&tempSimulator, "TEMP", pTemp, pQueueTemp);
 
                                 copySimulator(&simulator, &tempSimulator);
+                                
                                 PrintPrioQueue(tempSimulator.inventory); printf("\n");
 
                                 ListDinMakanan tempNotification;

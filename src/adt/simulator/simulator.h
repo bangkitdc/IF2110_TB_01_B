@@ -92,9 +92,6 @@ void displayListMakananAksi(ListStatikM listMakanan, ListStatikM *hasil, int *le
 Tree getTreeFromMakanan(Makanan makanan, ListStatikT listResep);
 // mendapatkan tree makanan dari adt makanan
 
-void mengolahMakanan(Makanan makananOlah, PrioQueue *inventory, ListStatikT listResep, ListStatikM listMakanan);
-// mengolah makanan
-
 Makanan getMakananFromId(int id, ListStatikM listMakanan);
 // mendapatkan makanan dari id
 
