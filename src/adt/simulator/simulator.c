@@ -356,57 +356,6 @@ Tree getTreeFromMakanan(Makanan makanan, ListStatikT listResep)
     return hasil;
 }
 
-void mengolahMakanan(Makanan makananOlah, PrioQueue *inventory, ListStatikT listResep, ListStatikM listMakanan){
-    Tree treeMakananOlah;
-    infotype tmp;
-    int id, idBahan[10];
-    boolean bisa, ada;
-
-    treeMakananOlah = getTreeFromMakanan(makananOlah, listResep);
-    bisa = false;
-    for(int i=0;i<treeMakananOlah->childEff;i++){            //menelusuri tiap bahan makanan
-        idBahan[i] = treeMakananOlah->children[i]->info;
-        id = idBahan[i];
-        ada = false;
-
-        if(!IsEmptyPrioqueue(*inventory)){
-            for(int j=inventory->HEAD;j<=inventory->TAIL;j++){    // mencari apakah ada bahan pada inventori
-                if(id == inventory->T[j].info.id){
-                    ada = true;
-                }
-            }
-        }
-
-        if(ada){           
-            idBahan[i] = -1;
-            if(i==0){
-                bisa = true;
-            }
-        }else{
-            bisa = false;
-        }
-    }
-
-    if(bisa){                                        // jika bisa dibuat
-        for(int i=0;i<treeMakananOlah->childEff;i++){
-            Delete(inventory, treeMakananOlah->children[i]->info, &tmp);
-        }
-        tmp.info = makananOlah;
-        tmp.time = makananOlah.expiry;
-        Enqueue(inventory, tmp);
-        printf("%s selesai dibuat dan sudah masuk inventory!\n", makananOlah.name);
-    }else{                                           // jika tidak bisa dibuat
-        printf("\nGagal membuat %s karena kamu tidak memiliki bahan berikut:\n", makananOlah.name);
-        int j=0;
-        for(int i=0;i<treeMakananOlah->childEff;i++){
-            if(idBahan[i]!=-1){
-                j++;
-                printf("  [%d] %s\n", j, getMakananFromId(idBahan[i],listMakanan).name);
-            }
-        }
-    }
-}
-
 Makanan getMakananFromId(int id, ListStatikM listMakanan){
     int i=0;
     Makanan hasil;

@@ -364,19 +364,23 @@ void rekomendasiMakanan(ListStatikM listMakanan, PrioQueue listInvenMakanan, Lis
     Makanan rekomen;
     boolean bisa;
     int i;
+
     createSet(&s);
     makeSetFromListMakanan(&s, listMakanan);
     makeSetFromInventory(&s, listMakanan, listInvenMakanan);
     i=0;
+
     for(int i=0;i<listResep.elEff;i++){
         if(listResep.list[i]->childEff != 0){
             bisa = true;
             treeRekomen = listResep.list[i];
+
             for(int j=0;j<treeRekomen->childEff && bisa;j++){
                 if(!apakahBisa(treeRekomen->children[j], s, listMakanan)){
                     bisa = false;
                 }
             }
+            
             if(bisa){
                 rekomen = getMakananFromId(treeRekomen->info, listMakanan);
                 printf("%d. %s\n", i+1, rekomen.name);
@@ -389,4 +393,75 @@ void rekomendasiMakanan(ListStatikM listMakanan, PrioQueue listInvenMakanan, Lis
 void exitGame() {
     sprintGreen("\nTerima kasih telah menggunakan BNMO\n\n");
     exit(0);
+}
+
+void mengolahMakanan(Makanan makananOlah, Simulator *simulator, PrioQueue *delivery_list, ListDinMakanan *latest_notification, MatrixKulkas kulkas, Stack *stackUndo, Game *game){
+    Tree treeMakananOlah;
+    infotype tmp;
+    int id, idBahan[10];
+    boolean bisa, ada;
+
+    treeMakananOlah = getTreeFromMakanan(makananOlah, game->listResep);
+    bisa = false;
+    for(int i=0;i<treeMakananOlah->childEff;i++){            //menelusuri tiap bahan makanan
+        idBahan[i] = treeMakananOlah->children[i]->info;
+        id = idBahan[i];
+        ada = false;
+
+        if(!IsEmptyPrioqueue(simulator->inventory)){
+            for(int j=simulator->inventory.HEAD;j<=simulator->inventory.TAIL;j++){    // mencari apakah ada bahan pada inventori
+                if(id == simulator->inventory.T[j].info.id){
+                    ada = true;
+                }
+            }
+        }
+
+        if(ada){           
+            idBahan[i] = -1;
+            if(i==0){
+                bisa = true;
+            }
+        }else{
+            bisa = false;
+        }
+    }
+
+    if(bisa){                                        // jika bisa dibuat
+        // push to stack undo
+        State tempstate;
+        simulatorToState(*simulator, *delivery_list, game->currentTime, *latest_notification, kulkas, &tempstate);
+        Push(stackUndo, tempstate);
+
+        // mengosongkan notifikasi
+        dealocateListMakanan(latest_notification);
+        CreateListMakananDin(latest_notification, 50);
+
+        // change time
+        TIME lama;
+        lama = getMakananFromId(treeMakananOlah->info, game->listMakanan).pengolahan;
+        game->currentTime = NextNMenit(game->currentTime, TIMEToMenit(lama));
+        for(int i=1; i<= TIMEToMenit(lama); i++){
+            PasstimeQueue(&simulator->inventory, 1, latest_notification);
+            PassTimeDelivery(delivery_list, &simulator->inventory, 1, latest_notification);
+        }
+        // delete bahan
+        for(int i=0;i<treeMakananOlah->childEff;i++){
+            Delete(&simulator->inventory, treeMakananOlah->children[i]->info, &tmp);
+        }
+
+        tmp.info = makananOlah;
+        tmp.time = makananOlah.expiry;
+
+        Enqueue(&simulator->inventory, tmp);
+        printf("%s selesai dibuat dan sudah masuk inventory!\n", makananOlah.name);
+    }else{                                           // jika tidak bisa dibuat
+        printf("\nGagal membuat %s karena kamu tidak memiliki bahan berikut:\n", makananOlah.name);
+        int j=0;
+        for(int i=0;i<treeMakananOlah->childEff;i++){
+            if(idBahan[i]!=-1){
+                j++;
+                printf("  [%d] %s\n", j, getMakananFromId(idBahan[i],game->listMakanan).name);
+            }
+        }
+    }
 }
