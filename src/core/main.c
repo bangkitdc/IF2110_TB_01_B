@@ -155,33 +155,7 @@ int main() {
                                     sprintRed("\nMembatalkan command FRY\n");
                                     break;
                                 } else {
-                                    PrioQueue tempDelivery;
-                                    CreateEmptyPrioqueue(&tempDelivery, 50);
-                                    CopyQueue(&delivery_list, &tempDelivery);
-                                    
-                                    Simulator tempSimulator;
-                                    POINT pTemp;
-                                    PrioQueue pQueueTemp;
-                                    CreatePoint(&pTemp, 0, 0);
-                                    CreateEmptyPrioqueue(&pQueueTemp, 50);
-                                    createSimulator(&tempSimulator, "TEMP", pTemp, pQueueTemp);
-
-                                    copySimulator(&simulator, &tempSimulator);
-
-                                    ListDinMakanan tempNotification;
-                                    CreateListMakananDin(&tempNotification, 50);
-                                    copyListDinMakanan(latest_notification, &tempNotification);
-
-                                    // masuk stack undo
-                                    simulatorToState(tempSimulator, tempDelivery, game.currentTime, tempNotification, kulkas, &latest_state);                                
-                                    Push(&stack_undo,latest_state);
-
-                                    // reset notifikasi
-                                    dealocateListMakanan(&latest_notification);
-                                    CreateListMakananDin(&latest_notification, 50);
-
-                                    mengolahMakanan(makananBisaDiolah.contents[pilFry-1], &simulator, &delivery_list, &latest_notification, kulkas, &stack_undo, &game);
-                                    EmptyStack(&stack_redo);
+                                    mengolahMakanan(makananBisaDiolah.contents[pilFry-1], &simulator, &delivery_list, &latest_notification, kulkas, &stack_undo, &stack_redo, &game, &latest_state);
                                 }
                             }
                         }
@@ -202,33 +176,7 @@ int main() {
                                     sprintRed("\nMembatalkan command CHOP\n");
                                     break;
                                 } else {
-                                    PrioQueue tempDelivery;
-                                    CreateEmptyPrioqueue(&tempDelivery, 50);
-                                    CopyQueue(&delivery_list, &tempDelivery);
-                                    
-                                    Simulator tempSimulator;
-                                    POINT pTemp;
-                                    PrioQueue pQueueTemp;
-                                    CreatePoint(&pTemp, 0, 0);
-                                    CreateEmptyPrioqueue(&pQueueTemp, 50);
-                                    createSimulator(&tempSimulator, "TEMP", pTemp, pQueueTemp);
-
-                                    copySimulator(&simulator, &tempSimulator);
-
-                                    ListDinMakanan tempNotification;
-                                    CreateListMakananDin(&tempNotification, 50);
-                                    copyListDinMakanan(latest_notification, &tempNotification);
-
-                                    // masuk stack undo
-                                    simulatorToState(tempSimulator, tempDelivery, game.currentTime, tempNotification, kulkas, &latest_state);                                
-                                    Push(&stack_undo,latest_state);
-
-                                    // reset notifikasi
-                                    dealocateListMakanan(&latest_notification);
-                                    CreateListMakananDin(&latest_notification, 50);
-
-                                    mengolahMakanan(makananBisaDiolah.contents[pilChop-1], &simulator, &delivery_list, &latest_notification, kulkas, &stack_undo, &game);
-                                    EmptyStack(&stack_redo);
+                                    mengolahMakanan(makananBisaDiolah.contents[pilChop-1], &simulator, &delivery_list, &latest_notification, kulkas, &stack_undo, &stack_redo, &game, &latest_state);
                                 }
                             }
                         }
@@ -249,33 +197,7 @@ int main() {
                                     sprintRed("\nMembatalkan command BOIL\n");
                                     break;
                                 } else {
-                                    PrioQueue tempDelivery;
-                                    CreateEmptyPrioqueue(&tempDelivery, 50);
-                                    CopyQueue(&delivery_list, &tempDelivery);
-                                    
-                                    Simulator tempSimulator;
-                                    POINT pTemp;
-                                    PrioQueue pQueueTemp;
-                                    CreatePoint(&pTemp, 0, 0);
-                                    CreateEmptyPrioqueue(&pQueueTemp, 50);
-                                    createSimulator(&tempSimulator, "TEMP", pTemp, pQueueTemp);
-
-                                    copySimulator(&simulator, &tempSimulator);
-
-                                    ListDinMakanan tempNotification;
-                                    CreateListMakananDin(&tempNotification, 50);
-                                    copyListDinMakanan(latest_notification, &tempNotification);
-
-                                    // masuk stack undo
-                                    simulatorToState(tempSimulator, tempDelivery, game.currentTime, tempNotification, kulkas, &latest_state);                                
-                                    Push(&stack_undo,latest_state);
-
-                                    // reset notifikasi
-                                    dealocateListMakanan(&latest_notification);
-                                    CreateListMakananDin(&latest_notification, 50);
-
-                                    mengolahMakanan(makananBisaDiolah.contents[pilBoil-1], &simulator, &delivery_list, &latest_notification, kulkas, &stack_undo, &game);
-                                    EmptyStack(&stack_redo);
+                                    mengolahMakanan(makananBisaDiolah.contents[pilBoil-1], &simulator, &delivery_list, &latest_notification, kulkas, &stack_undo, &stack_redo, &game, &latest_state);
                                 }
                             }
                         }
@@ -296,33 +218,7 @@ int main() {
                                     sprintRed("\nMembatalkan command MIX\n");
                                     break;
                                 } else {
-                                    PrioQueue tempDelivery;
-                                    CreateEmptyPrioqueue(&tempDelivery, 50);
-                                    CopyQueue(&delivery_list, &tempDelivery);
-                                    
-                                    Simulator tempSimulator;
-                                    POINT pTemp;
-                                    PrioQueue pQueueTemp;
-                                    CreatePoint(&pTemp, 0, 0);
-                                    CreateEmptyPrioqueue(&pQueueTemp, 50);
-                                    createSimulator(&tempSimulator, "TEMP", pTemp, pQueueTemp);
-
-                                    copySimulator(&simulator, &tempSimulator);
-
-                                    ListDinMakanan tempNotification;
-                                    CreateListMakananDin(&tempNotification, 50);
-                                    copyListDinMakanan(latest_notification, &tempNotification);
-
-                                    // masuk stack undo
-                                    simulatorToState(tempSimulator, tempDelivery, game.currentTime, tempNotification, kulkas, &latest_state);                                
-                                    Push(&stack_undo,latest_state);
-
-                                    // reset notifikasi
-                                    dealocateListMakanan(&latest_notification);
-                                    CreateListMakananDin(&latest_notification, 50);
-
-                                    mengolahMakanan(makananBisaDiolah.contents[pilMix-1], &simulator, &delivery_list, &latest_notification, kulkas, &stack_undo, &game);
-                                    EmptyStack(&stack_redo);
+                                    mengolahMakanan(makananBisaDiolah.contents[pilMix-1], &simulator, &delivery_list, &latest_notification, kulkas, &stack_undo, &stack_redo, &game, &latest_state);
                                 }
                             }
                         }
