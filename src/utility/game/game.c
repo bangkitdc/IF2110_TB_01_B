@@ -14,8 +14,9 @@ void startGame(Game *game, Simulator *simulator) {
     createLSMakanan(&game->listMakanan);
     CreateListTree(&game->listResep);
 
-    char name[20];
+    Word markName = {"-1", 2};
 
+    Word name;
     ListWord L;
     createListWord(&L);
     do {
@@ -25,24 +26,25 @@ void startGame(Game *game, Simulator *simulator) {
         L = readLine();
 
         if (L.Length == 1 && L.TabWords[0].Length <= 20) {
-            int i;
-            for (i = 0; i < L.TabWords[0].Length; i ++) {
-                name[i] = L.TabWords[0].TabWord[i];
-            }
-            name[i] = '\0';
+            // int i;
+            // for (i = 0; i < L.TabWords[0].Length; i ++) {
+            //     name[i] = L.TabWords[0].TabWord[i];
+            // }
+            // name[i] = '\0';
+            copyWord(L.TabWords[0], &name);
             // name = { wordToString(L.TabWords[0]) };
         } else {
-            name[0] = '-'; name[1] = '1'; name[2] = '\0';
+            // name = {"-1", 2};
+            copyWord(markName, &name);
         }
-        if (name[0] == '-' && name[1] == '1' && name[2] == '\0')
-        {
+        if (isWordEq(name, markName)) {
             sprintRed("Input tidak valid, username harus terdiri dari 1 kata dan <= 20 karakter. Ulangi input!\n");
         }
-    } while (name[0] == '-' && name[1] == '1' && name[2] == '\0');
+    } while (isWordEq(name, markName));
 
     createSimulator(simulator, name, p, pQueue);
 
-    printf("\nHalo %s,\n", simulator->username);
+    printf("\nHalo %s,\n", wordToString(simulator->username));
     printf("Selamat datang di BNMO!\n\n");
 
     inputConfigFile(game, simulator, dirMakanan, MAKANAN);

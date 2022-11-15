@@ -535,13 +535,14 @@ void mengolahMakanan(Makanan makananOlah, Simulator *simulator, PrioQueue *deliv
         PrioQueue tempDelivery;
         CreateEmptyPrioqueue(&tempDelivery, 50);
         CopyQueue(delivery_list, &tempDelivery);
+        Word TEMP = {"TEMP", 4};
 
         Simulator tempSimulator;
         POINT pTemp;
         PrioQueue pQueueTemp;
         CreatePoint(&pTemp, 0, 0);
         CreateEmptyPrioqueue(&pQueueTemp, 50);
-        createSimulator(&tempSimulator, "TEMP", pTemp, pQueueTemp);
+        createSimulator(&tempSimulator, TEMP, pTemp, pQueueTemp);
 
         copySimulator(simulator, &tempSimulator);
 
