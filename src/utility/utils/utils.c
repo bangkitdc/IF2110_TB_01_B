@@ -43,6 +43,7 @@ Word REDO_COMMAND = {"REDO", 4};
 Word MASUKKULKAS_COMMAND = {"MASUKKULKAS", 11};
 Word KELUARKULKAS_COMMAND = {"KELUARKULKAS", 12};
 Word KULKAS_COMMAND = {"KULKAS", 6};
+Word REKOMENDASI_COMMAND = {"REKOMENDASI", 11};
 
 Word BUY_FILE = {"Buy", 3};
 Word FRY_FILE = {"Fry", 3};
@@ -103,10 +104,11 @@ int MenuInput(Word w)
          REDO_COMMAND,
          MASUKKULKAS_COMMAND,
          KELUARKULKAS_COMMAND,
-         KULKAS_COMMAND},
-        18};
+         KULKAS_COMMAND,
+         REKOMENDASI_COMMAND},
+        19};
 
-    for (int i = 0; i < 18; i++)
+    for (int i = 0; i < 19; i++)
     {
         if (isWordEq(w, LCommand.TabWords[i]))
         {
@@ -305,8 +307,9 @@ void help()
     printf("%2d  MASUKKULKAS\n", 14);
     printf("%2d  KELUARKULKAS\n", 15);
     printf("%2d  KULKAS\n", 16);
-    printf("%2d  HELP\n", 17);
-    printf("%2d  EXIT\n", 18);
+    printf("%2d  REKOMENDASI\n", 17);
+    printf("%2d  HELP\n", 18);
+    printf("%2d  EXIT\n", 19);
 }
 
 int select(int min, int max)
@@ -445,14 +448,14 @@ void rekomendasiMakanan(ListStatikM listMakanan, PrioQueue listInvenMakanan, Lis
     Address treeRekomen;
     Makanan rekomen;
     boolean bisa;
-    int i;
+    int i, num;
 
     createSet(&s);
     makeSetFromListMakanan(&s, listMakanan);
     makeSetFromInventory(&s, listMakanan, listInvenMakanan);
-    i = 0;
+    num = 1;
 
-    for (int i = 0; i < listResep.elEff; i++)
+    for (i = 0; i < listResep.elEff; i++)
     {
         if (listResep.list[i]->childEff != 0)
         {
@@ -470,10 +473,14 @@ void rekomendasiMakanan(ListStatikM listMakanan, PrioQueue listInvenMakanan, Lis
             if (bisa)
             {
                 rekomen = getMakananFromId(treeRekomen->info, listMakanan);
-                printf("%d. %s\n", i + 1, rekomen.name);
-                i++;
+                printf("%d. %s\n", num, rekomen.name);
+                num++;
             }
         }
+    }
+
+    if (num == 1) {
+        printf("\nTidak ada rekomendasi makanan.\n");
     }
 }
 

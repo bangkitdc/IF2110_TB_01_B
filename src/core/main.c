@@ -396,7 +396,7 @@ int main() {
                                 // Push(&stack_redo, latest_state);
                                 // Pop(&stack_undo, &latest_state);
                                 Undo(&stack_undo, &stack_redo, &latest_state);
-                                loadState(&simulator, &delivery_list, latest_state, "ADMIN", &latest_notification, &kulkas, &game.currentTime);
+                                loadState(&simulator, &delivery_list, latest_state, simulator.username, &latest_notification, &kulkas, &game.currentTime);
                                 WriteLokasi(simulator.lokasi);
                                 TulisTIME3(game.currentTime);
                                 printf("\n");
@@ -415,7 +415,7 @@ int main() {
                             if (!IsStackEmpty(stack_redo)) {
                                 simulatorToState(simulator, delivery_list, game.currentTime, latest_notification, kulkas, &latest_state);
                                 Redo(&stack_undo, &stack_redo, &latest_state);
-                                loadState(&simulator, &delivery_list, latest_state, "ADMIN", &latest_notification, &kulkas, &game.currentTime);
+                                loadState(&simulator, &delivery_list, latest_state, simulator.username, &latest_notification, &kulkas, &game.currentTime);
                                 WriteLokasi(simulator.lokasi);
                                 TulisTIME3(game.currentTime);
                                 printf("\n");
@@ -601,7 +601,11 @@ int main() {
                         if (L.Length != 1) {
                             sprintRed("Command REKOMENDASI tidak memiliki argumen. Coba Lagi!\n");
                         } else {
-                            rekomendasiMakanan(game.listMakanan, simulator.inventory, game.listResep);
+                            if (IsEmptyPrioqueue(simulator.inventory)) {
+                                sprintRed("\nInventory kosong, tidak ada rekomendasi makanan.\n");
+                            } else {
+                                rekomendasiMakanan(game.listMakanan, simulator.inventory, game.listResep);
+                            }
                         }
                         break;
                     default:
@@ -610,6 +614,7 @@ int main() {
                     }
                 }
                 if (isEndGame(game)) {
+                    printf("Terima kasih yaa ><, %s\n", simulator.username);
                     exitGame();
                 }
             break;
