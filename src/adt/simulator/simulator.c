@@ -3,7 +3,7 @@
 #include "simulator.h"
 
 /* PRIMITIF SIMULATOR*/
-void createSimulator(Simulator* s, char* Username, POINT lokasi, PrioQueue inventory) {
+void createSimulator(Simulator* s, Word Username, POINT lokasi, PrioQueue inventory) {
 /* Mengassign simulator */
 
     // ALGORITMA
@@ -12,14 +12,15 @@ void createSimulator(Simulator* s, char* Username, POINT lokasi, PrioQueue inven
     setInventory(s, inventory);
 }
 
-void gantiUser(Simulator * s, char* username) {
+void gantiUser(Simulator * s, Word username) {
 /* Mengganti username */
 
     // KAMUS
     int i;
 
     // ALGORITMA
-    Username(*s) = username;
+    copyWord(username, &Username(*s));
+    // Username(*s) = username;
 }
 
 void gantiLokasi(Simulator * s, POINT p) {
@@ -60,7 +61,7 @@ void simulatorToState(Simulator s, PrioQueue deliverylist, TIME currentTime, Lis
     InfoDelivery(*temp) = deliverylist;
 }
 
-void loadState(Simulator * s, PrioQueue * deliverylist, State st, char * currentUsername, ListDinMakanan * currentNotif, MatrixKulkas * currentKulkas, TIME * currentTime) {
+void loadState(Simulator * s, PrioQueue * deliverylist, State st, Word currentUsername, ListDinMakanan * currentNotif, MatrixKulkas * currentKulkas, TIME * currentTime) {
 /* mengkonversi State dari stack ke simulator dan menyimpannya di simulator */
 /* digunakan saat undo dan redo */
 
@@ -81,13 +82,14 @@ void copySimulator(Simulator * s1, Simulator * s2) {
     // KAMUS
     PrioQueue temp;
     POINT temppoint;
-    char* tempname;
+    Word tempname;
 
     // ALGORITMA
     CreateEmptyPrioqueue(&temp, MaxElPrioqueue(Inventory(*s1)));
     CopyQueue(&Inventory(*s1), &temp);
     CreatePoint(&temppoint, Absis(Lokasi(*s1)), Ordinat(Lokasi(*s1)));
-    tempname = Username(*s1);
+    // tempname = Username(*s1);
+    copyWord(Username(*s1), &tempname);
 
     createSimulator(s2, tempname, temppoint, temp);
 }

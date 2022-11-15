@@ -5,6 +5,7 @@ Word NORTH = {"NORTH", 5};
 Word SOUTH = {"SOUTH", 5};
 Word WEST = {"WEST", 4};
 Word EAST = {"EAST", 4};
+Word TEMP = {"TEMP", 4};
 
 int main() {
     Game game;
@@ -46,6 +47,7 @@ int main() {
         case 1: /* START */
             startGame(&game, &simulator);
             while(!isEndGame(game)) {
+                // printf("\n%s\n", wordToString(simulator.username));
                 sprintBlue("\nEnter Command: \n");
                 printf("> ");
                 L = readLine();
@@ -100,7 +102,7 @@ int main() {
                                     PrioQueue pQueueTemp;
                                     CreatePoint(&pTemp, 0, 0);
                                     CreateEmptyPrioqueue(&pQueueTemp, 50);
-                                    createSimulator(&tempSimulator, "TEMP", pTemp, pQueueTemp);
+                                    createSimulator(&tempSimulator, TEMP, pTemp, pQueueTemp);
 
                                     copySimulator(&simulator, &tempSimulator);
 
@@ -257,7 +259,7 @@ int main() {
                             PrioQueue pQueueTemp;
                             CreatePoint(&pTemp, 0, 0);
                             CreateEmptyPrioqueue(&pQueueTemp, 50);
-                            createSimulator(&tempSimulator, "TEMP", pTemp, pQueueTemp);
+                            createSimulator(&tempSimulator, TEMP, pTemp, pQueueTemp);
 
                             copySimulator(&simulator, &tempSimulator);
 
@@ -334,7 +336,7 @@ int main() {
                                 PrioQueue pQueueTemp;
                                 CreatePoint(&pTemp, 0, 0);
                                 CreateEmptyPrioqueue(&pQueueTemp, 50);
-                                createSimulator(&tempSimulator, "TEMP", pTemp, pQueueTemp);
+                                createSimulator(&tempSimulator, TEMP, pTemp, pQueueTemp);
 
                                 copySimulator(&simulator, &tempSimulator);
 
@@ -491,7 +493,7 @@ int main() {
                                                         PrioQueue pQueueTemp;
                                                         CreatePoint(&pTemp, 0, 0);
                                                         CreateEmptyPrioqueue(&pQueueTemp, 50);
-                                                        createSimulator(&tempSimulator, "TEMP", pTemp, pQueueTemp);
+                                                        createSimulator(&tempSimulator, TEMP, pTemp, pQueueTemp);
 
                                                         copySimulator(&simulator, &tempSimulator);
 
@@ -568,7 +570,7 @@ int main() {
                                 PrioQueue pQueueTemp;
                                 CreatePoint(&pTemp, 0, 0);
                                 CreateEmptyPrioqueue(&pQueueTemp, 50);
-                                createSimulator(&tempSimulator, "TEMP", pTemp, pQueueTemp);
+                                createSimulator(&tempSimulator, TEMP, pTemp, pQueueTemp);
 
                                 copySimulator(&simulator, &tempSimulator);
 
@@ -614,7 +616,7 @@ int main() {
                     }
                 }
                 if (isEndGame(game)) {
-                    printf("Terima kasih yaa ><, %s\n", simulator.username);
+                    printf("\nSemangat yak ><, %s", wordToString(simulator.username));
                     exitGame();
                 }
             break;
