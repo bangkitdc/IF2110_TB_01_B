@@ -13,9 +13,37 @@ void startGame(Game *game, Simulator *simulator) {
     CreateTime (&game->currentTime, 0, 1, 23);
     createLSMakanan(&game->listMakanan);
     CreateListTree(&game->listResep);
-    createSimulator(simulator, "ADMIN", p, pQueue);
 
-    printf("\nSelamat datang di BNMO!\n\n");
+    char name[20];
+
+    ListWord L;
+    createListWord(&L);
+    do {
+        /* Baca Nama */
+        sprintCyan("\nEnter Username: \n");
+        printf("> ");
+        L = readLine();
+
+        if (L.Length == 1 && L.TabWords[0].Length <= 20) {
+            int i;
+            for (i = 0; i < L.TabWords[0].Length; i ++) {
+                name[i] = L.TabWords[0].TabWord[i];
+            }
+            name[i] = '\0';
+            // name = { wordToString(L.TabWords[0]) };
+        } else {
+            name[0] = '-'; name[1] = '1'; name[2] = '\0';
+        }
+        if (name[0] == '-' && name[1] == '1' && name[2] == '\0')
+        {
+            sprintRed("Input tidak valid, username harus terdiri dari 1 kata dan <= 20 karakter. Ulangi input!\n");
+        }
+    } while (name[0] == '-' && name[1] == '1' && name[2] == '\0');
+
+    createSimulator(simulator, name, p, pQueue);
+
+    printf("\nHalo %s,\n", simulator->username);
+    printf("Selamat datang di BNMO!\n\n");
 
     inputConfigFile(game, simulator, dirMakanan, MAKANAN);
     inputConfigFile(game, simulator, dirResep, RESEP);
@@ -23,6 +51,7 @@ void startGame(Game *game, Simulator *simulator) {
 
     WriteLokasi(simulator->lokasi);
     TulisTIME3(game->currentTime);
+    printf("Notifikasi: -\n");      /* IDLE status saja, notifikasi asli ada di main */
     
     printf("\n"); DisplayMap(game->map, simulator->lokasi);
 
