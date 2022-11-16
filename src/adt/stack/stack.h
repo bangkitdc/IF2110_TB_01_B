@@ -91,4 +91,7 @@ void Redo(Stack * SMain, Stack *SSecondary, State *currentState);
 /* I.S. SSecondary tidak boleh kosong */
 /* F.S. Elemen TOP pada SSecondary telah di-pop, dan elemen tersebut dipush ke SMain */
 
+void ReallocateStack(Stack * S1, Stack * S2);
+/* Mengurangi jumlah undo */
+
 #endif
