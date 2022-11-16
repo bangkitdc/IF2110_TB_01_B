@@ -5,6 +5,7 @@ Word NORTH = {"NORTH", 5};
 Word SOUTH = {"SOUTH", 5};
 Word WEST = {"WEST", 4};
 Word EAST = {"EAST", 4};
+Word TEMP = {"TEMP", 4};
 
 int main() {
     Game game;
@@ -46,6 +47,7 @@ int main() {
         case 1: /* START */
             startGame(&game, &simulator);
             while(!isEndGame(game)) {
+                // printf("\n%s\n", wordToString(simulator.username));
                 sprintBlue("\nEnter Command: \n");
                 printf("> ");
                 L = readLine();
@@ -99,8 +101,8 @@ int main() {
                                     POINT pTemp;
                                     PrioQueue pQueueTemp;
                                     CreatePoint(&pTemp, 0, 0);
-                                    CreateEmptyPrioqueue(&pQueueTemp, 10);
-                                    createSimulator(&tempSimulator, "TEMP", pTemp, pQueueTemp);
+                                    CreateEmptyPrioqueue(&pQueueTemp, 50);
+                                    createSimulator(&tempSimulator, TEMP, pTemp, pQueueTemp);
 
                                     copySimulator(&simulator, &tempSimulator);
 
@@ -156,14 +158,14 @@ int main() {
                                     break;
                                 } else {
                                     PrioQueue tempDelivery;
-                                    CreateEmptyPrioqueue(&tempDelivery, 10);
+                                    CreateEmptyPrioqueue(&tempDelivery, 50);
                                     CopyQueue(&delivery_list, &tempDelivery);
                                     
                                     Simulator tempSimulator;
                                     POINT pTemp;
                                     PrioQueue pQueueTemp;
                                     CreatePoint(&pTemp, 0, 0);
-                                    CreateEmptyPrioqueue(&pQueueTemp, 10);
+                                    CreateEmptyPrioqueue(&pQueueTemp, 50);
                                     createSimulator(&tempSimulator, "TEMP", pTemp, pQueueTemp);
 
                                     copySimulator(&simulator, &tempSimulator);
@@ -203,14 +205,14 @@ int main() {
                                     break;
                                 } else {
                                     PrioQueue tempDelivery;
-                                    CreateEmptyPrioqueue(&tempDelivery, 10);
+                                    CreateEmptyPrioqueue(&tempDelivery, 50);
                                     CopyQueue(&delivery_list, &tempDelivery);
                                     
                                     Simulator tempSimulator;
                                     POINT pTemp;
                                     PrioQueue pQueueTemp;
                                     CreatePoint(&pTemp, 0, 0);
-                                    CreateEmptyPrioqueue(&pQueueTemp, 10);
+                                    CreateEmptyPrioqueue(&pQueueTemp, 50);
                                     createSimulator(&tempSimulator, "TEMP", pTemp, pQueueTemp);
 
                                     copySimulator(&simulator, &tempSimulator);
@@ -250,14 +252,14 @@ int main() {
                                     break;
                                 } else {
                                     PrioQueue tempDelivery;
-                                    CreateEmptyPrioqueue(&tempDelivery, 10);
+                                    CreateEmptyPrioqueue(&tempDelivery, 50);
                                     CopyQueue(&delivery_list, &tempDelivery);
                                     
                                     Simulator tempSimulator;
                                     POINT pTemp;
                                     PrioQueue pQueueTemp;
                                     CreatePoint(&pTemp, 0, 0);
-                                    CreateEmptyPrioqueue(&pQueueTemp, 10);
+                                    CreateEmptyPrioqueue(&pQueueTemp, 50);
                                     createSimulator(&tempSimulator, "TEMP", pTemp, pQueueTemp);
 
                                     copySimulator(&simulator, &tempSimulator);
@@ -297,14 +299,14 @@ int main() {
                                     break;
                                 } else {
                                     PrioQueue tempDelivery;
-                                    CreateEmptyPrioqueue(&tempDelivery, 10);
+                                    CreateEmptyPrioqueue(&tempDelivery, 50);
                                     CopyQueue(&delivery_list, &tempDelivery);
                                     
                                     Simulator tempSimulator;
                                     POINT pTemp;
                                     PrioQueue pQueueTemp;
                                     CreatePoint(&pTemp, 0, 0);
-                                    CreateEmptyPrioqueue(&pQueueTemp, 10);
+                                    CreateEmptyPrioqueue(&pQueueTemp, 50);
                                     createSimulator(&tempSimulator, "TEMP", pTemp, pQueueTemp);
 
                                     copySimulator(&simulator, &tempSimulator);
@@ -360,7 +362,7 @@ int main() {
                             POINT pTemp;
                             PrioQueue pQueueTemp;
                             CreatePoint(&pTemp, 0, 0);
-                            CreateEmptyPrioqueue(&pQueueTemp, 10);
+                            CreateEmptyPrioqueue(&pQueueTemp, 50);
                             createSimulator(&tempSimulator, "TEMP", pTemp, pQueueTemp);
 
                             copySimulator(&simulator, &tempSimulator);
@@ -437,7 +439,7 @@ int main() {
                                 POINT pTemp;
                                 PrioQueue pQueueTemp;
                                 CreatePoint(&pTemp, 0, 0);
-                                CreateEmptyPrioqueue(&pQueueTemp, 10);
+                                CreateEmptyPrioqueue(&pQueueTemp, 50);
                                 createSimulator(&tempSimulator, "TEMP", pTemp, pQueueTemp);
 
                                 copySimulator(&simulator, &tempSimulator);
@@ -500,7 +502,7 @@ int main() {
                                 // Push(&stack_redo, latest_state);
                                 // Pop(&stack_undo, &latest_state);
                                 Undo(&stack_undo, &stack_redo, &latest_state);
-                                loadState(&simulator, &delivery_list, latest_state, "ADMIN", &latest_notification, &kulkas, &game.currentTime);
+                                loadState(&simulator, &delivery_list, latest_state, simulator.username, &latest_notification, &kulkas, &game.currentTime);
                                 WriteLokasi(simulator.lokasi);
                                 TulisTIME3(game.currentTime);
                                 printf("\n");
@@ -519,7 +521,7 @@ int main() {
                             if (!IsStackEmpty(stack_redo)) {
                                 simulatorToState(simulator, delivery_list, game.currentTime, latest_notification, kulkas, &latest_state);
                                 Redo(&stack_undo, &stack_redo, &latest_state);
-                                loadState(&simulator, &delivery_list, latest_state, "ADMIN", &latest_notification, &kulkas, &game.currentTime);
+                                loadState(&simulator, &delivery_list, latest_state, simulator.username, &latest_notification, &kulkas, &game.currentTime);
                                 WriteLokasi(simulator.lokasi);
                                 TulisTIME3(game.currentTime);
                                 printf("\n");
@@ -594,7 +596,7 @@ int main() {
                                                         POINT pTemp;
                                                         PrioQueue pQueueTemp;
                                                         CreatePoint(&pTemp, 0, 0);
-                                                        CreateEmptyPrioqueue(&pQueueTemp, 10);
+                                                        CreateEmptyPrioqueue(&pQueueTemp, 50);
                                                         createSimulator(&tempSimulator, "TEMP", pTemp, pQueueTemp);
 
                                                         copySimulator(&simulator, &tempSimulator);
@@ -671,7 +673,7 @@ int main() {
                                 POINT pTemp;
                                 PrioQueue pQueueTemp;
                                 CreatePoint(&pTemp, 0, 0);
-                                CreateEmptyPrioqueue(&pQueueTemp, 10);
+                                CreateEmptyPrioqueue(&pQueueTemp, 50);
                                 createSimulator(&tempSimulator, "TEMP", pTemp, pQueueTemp);
 
                                 copySimulator(&simulator, &tempSimulator);
@@ -705,7 +707,11 @@ int main() {
                         if (L.Length != 1) {
                             sprintRed("Command REKOMENDASI tidak memiliki argumen. Coba Lagi!\n");
                         } else {
-                            rekomendasiMakanan(game.listMakanan, simulator.inventory, game.listResep);
+                            if (IsEmptyPrioqueue(simulator.inventory)) {
+                                sprintRed("\nInventory kosong, tidak ada rekomendasi makanan.\n");
+                            } else {
+                                rekomendasiMakanan(game.listMakanan, simulator.inventory, game.listResep);
+                            }
                         }
                         break;
                     default:
@@ -714,6 +720,7 @@ int main() {
                     }
                 }
                 if (isEndGame(game)) {
+                    printf("\nSemangat yak ><, %s", wordToString(simulator.username));
                     exitGame();
                 }
             break;

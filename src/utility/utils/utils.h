@@ -39,5 +39,5 @@ boolean apakahBisa(Tree t, Set s, ListStatikM listMakanan);
 
 void rekomendasiMakanan(ListStatikM listMakanan, PrioQueue listInvenMakanan, ListStatikT listResep);
 
-void mengolahMakanan(Makanan makananOlah, Simulator *simulator, PrioQueue *delivery_list, ListDinMakanan *latest_notification, MatrixKulkas kulkas, Stack *stackUndo, Game *game);
+void mengolahMakanan(Makanan makananOlah, Simulator *simulator, PrioQueue *delivery_list, ListDinMakanan *latest_notification, MatrixKulkas kulkas, Stack *stackUndo, Stack *stackRedo, Game *game, State *latest_state);
 #endif
