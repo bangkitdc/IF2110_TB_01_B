@@ -166,7 +166,7 @@ int main() {
                                     PrioQueue pQueueTemp;
                                     CreatePoint(&pTemp, 0, 0);
                                     CreateEmptyPrioqueue(&pQueueTemp, 50);
-                                    createSimulator(&tempSimulator, "TEMP", pTemp, pQueueTemp);
+                                    createSimulator(&tempSimulator, TEMP, pTemp, pQueueTemp);
 
                                     copySimulator(&simulator, &tempSimulator);
 
@@ -182,7 +182,7 @@ int main() {
                                     dealocateListMakanan(&latest_notification);
                                     CreateListMakananDin(&latest_notification, 50);
 
-                                    mengolahMakanan(makananBisaDiolah.contents[pilFry-1], &simulator, &delivery_list, &latest_notification, kulkas, &stack_undo, &game);
+                                    mengolahMakanan(makananBisaDiolah.contents[pilFry-1], &simulator, &delivery_list, &latest_notification, kulkas, &stack_undo, &stack_redo, &game, &latest_state);
                                     EmptyStack(&stack_redo);
                                 }
                             }
@@ -213,7 +213,7 @@ int main() {
                                     PrioQueue pQueueTemp;
                                     CreatePoint(&pTemp, 0, 0);
                                     CreateEmptyPrioqueue(&pQueueTemp, 50);
-                                    createSimulator(&tempSimulator, "TEMP", pTemp, pQueueTemp);
+                                    createSimulator(&tempSimulator, TEMP, pTemp, pQueueTemp);
 
                                     copySimulator(&simulator, &tempSimulator);
 
@@ -229,7 +229,7 @@ int main() {
                                     dealocateListMakanan(&latest_notification);
                                     CreateListMakananDin(&latest_notification, 50);
 
-                                    mengolahMakanan(makananBisaDiolah.contents[pilChop-1], &simulator, &delivery_list, &latest_notification, kulkas, &stack_undo, &game);
+                                    mengolahMakanan(makananBisaDiolah.contents[pilChop-1], &simulator, &delivery_list, &latest_notification, kulkas, &stack_undo, &stack_redo, &game, &latest_state);
                                     EmptyStack(&stack_redo);
                                 }
                             }
@@ -260,7 +260,7 @@ int main() {
                                     PrioQueue pQueueTemp;
                                     CreatePoint(&pTemp, 0, 0);
                                     CreateEmptyPrioqueue(&pQueueTemp, 50);
-                                    createSimulator(&tempSimulator, "TEMP", pTemp, pQueueTemp);
+                                    createSimulator(&tempSimulator, TEMP, pTemp, pQueueTemp);
 
                                     copySimulator(&simulator, &tempSimulator);
 
@@ -276,7 +276,7 @@ int main() {
                                     dealocateListMakanan(&latest_notification);
                                     CreateListMakananDin(&latest_notification, 50);
 
-                                    mengolahMakanan(makananBisaDiolah.contents[pilBoil-1], &simulator, &delivery_list, &latest_notification, kulkas, &stack_undo, &game);
+                                    mengolahMakanan(makananBisaDiolah.contents[pilBoil-1], &simulator, &delivery_list, &latest_notification, kulkas, &stack_undo, &stack_redo, &game, &latest_state);
                                     EmptyStack(&stack_redo);
                                 }
                             }
@@ -307,7 +307,7 @@ int main() {
                                     PrioQueue pQueueTemp;
                                     CreatePoint(&pTemp, 0, 0);
                                     CreateEmptyPrioqueue(&pQueueTemp, 50);
-                                    createSimulator(&tempSimulator, "TEMP", pTemp, pQueueTemp);
+                                    createSimulator(&tempSimulator, TEMP, pTemp, pQueueTemp);
 
                                     copySimulator(&simulator, &tempSimulator);
 
@@ -323,7 +323,7 @@ int main() {
                                     dealocateListMakanan(&latest_notification);
                                     CreateListMakananDin(&latest_notification, 50);
 
-                                    mengolahMakanan(makananBisaDiolah.contents[pilMix-1], &simulator, &delivery_list, &latest_notification, kulkas, &stack_undo, &game);
+                                    mengolahMakanan(makananBisaDiolah.contents[pilMix-1], &simulator, &delivery_list, &latest_notification, kulkas, &stack_undo, &stack_redo, &game, &latest_state);
                                     EmptyStack(&stack_redo);
                                 }
                             }
@@ -363,7 +363,7 @@ int main() {
                             PrioQueue pQueueTemp;
                             CreatePoint(&pTemp, 0, 0);
                             CreateEmptyPrioqueue(&pQueueTemp, 50);
-                            createSimulator(&tempSimulator, "TEMP", pTemp, pQueueTemp);
+                            createSimulator(&tempSimulator, TEMP, pTemp, pQueueTemp);
 
                             copySimulator(&simulator, &tempSimulator);
 
@@ -441,7 +441,7 @@ int main() {
                                 PrioQueue pQueueTemp;
                                 CreatePoint(&pTemp, 0, 0);
                                 CreateEmptyPrioqueue(&pQueueTemp, 50);
-                                createSimulator(&tempSimulator, "TEMP", pTemp, pQueueTemp);
+                                createSimulator(&tempSimulator, TEMP, pTemp, pQueueTemp);
 
                                 copySimulator(&simulator, &tempSimulator);
 
@@ -598,7 +598,7 @@ int main() {
                                                         PrioQueue pQueueTemp;
                                                         CreatePoint(&pTemp, 0, 0);
                                                         CreateEmptyPrioqueue(&pQueueTemp, 50);
-                                                        createSimulator(&tempSimulator, "TEMP", pTemp, pQueueTemp);
+                                                        createSimulator(&tempSimulator, TEMP, pTemp, pQueueTemp);
 
                                                         copySimulator(&simulator, &tempSimulator);
 
@@ -675,7 +675,7 @@ int main() {
                                 PrioQueue pQueueTemp;
                                 CreatePoint(&pTemp, 0, 0);
                                 CreateEmptyPrioqueue(&pQueueTemp, 50);
-                                createSimulator(&tempSimulator, "TEMP", pTemp, pQueueTemp);
+                                createSimulator(&tempSimulator, TEMP, pTemp, pQueueTemp);
 
                                 copySimulator(&simulator, &tempSimulator);
 
