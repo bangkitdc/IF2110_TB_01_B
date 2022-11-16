@@ -87,21 +87,15 @@ void ReallocateStack(Stack * S1, Stack * temp) {
 /* Mengurangi jumlah undo */
 
     // KAMUS
+    Stack temp;
     State tempstate;
 
     // ALGORITMA 
     printf("bisa tot\n");
+    CreateEmptyStack(&temp);
     while (Top(*S1) < 4) {
         Pop(S1, &tempstate);
         Push1(&temp, tempstate);
     }
-
-    EmptyStack(S1);
-    CreateEmptyStack(S1);
-
-    while (!IsStackEmpty(temp)) {
-        Pop(&temp, &tempstate);
-        Push1(S1, tempstate);
-    }
-    printf("bisa tot\n");
+    Top(*S1) -= 1; 
 }
