@@ -26,7 +26,7 @@ int main() {
     CreateEmptyStack(&stack_redo);
     CreateListMakananDin(&latest_notification, 50);
     createMatrixKulkas(10, 20, &kulkas);
-    CreateEmptyPrioqueue (&delivery_list, 50);
+    CreateEmptyPrioqueue (&delivery_list, 10);
 
     do {
         /* Baca Command START/ EXIT */
@@ -94,7 +94,7 @@ int main() {
                                     break;
                                 } else {
                                     PrioQueue tempDelivery;
-                                    CreateEmptyPrioqueue(&tempDelivery, 50);
+                                    CreateEmptyPrioqueue(&tempDelivery, 10);
                                     CopyQueue(&delivery_list, &tempDelivery);
                                     
                                     Simulator tempSimulator;
@@ -157,7 +157,33 @@ int main() {
                                     sprintRed("\nMembatalkan command FRY\n");
                                     break;
                                 } else {
-                                    mengolahMakanan(makananBisaDiolah.contents[pilFry-1], &simulator, &delivery_list, &latest_notification, kulkas, &stack_undo, &stack_redo, &game, &latest_state);
+                                    PrioQueue tempDelivery;
+                                    CreateEmptyPrioqueue(&tempDelivery, 50);
+                                    CopyQueue(&delivery_list, &tempDelivery);
+                                    
+                                    Simulator tempSimulator;
+                                    POINT pTemp;
+                                    PrioQueue pQueueTemp;
+                                    CreatePoint(&pTemp, 0, 0);
+                                    CreateEmptyPrioqueue(&pQueueTemp, 50);
+                                    createSimulator(&tempSimulator, "TEMP", pTemp, pQueueTemp);
+
+                                    copySimulator(&simulator, &tempSimulator);
+
+                                    ListDinMakanan tempNotification;
+                                    CreateListMakananDin(&tempNotification, 50);
+                                    copyListDinMakanan(latest_notification, &tempNotification);
+
+                                    // masuk stack undo
+                                    simulatorToState(tempSimulator, tempDelivery, game.currentTime, tempNotification, kulkas, &latest_state);                                
+                                    Push(&stack_undo,latest_state);
+
+                                    // reset notifikasi
+                                    dealocateListMakanan(&latest_notification);
+                                    CreateListMakananDin(&latest_notification, 50);
+
+                                    mengolahMakanan(makananBisaDiolah.contents[pilFry-1], &simulator, &delivery_list, &latest_notification, kulkas, &stack_undo, &game);
+                                    EmptyStack(&stack_redo);
                                 }
                             }
                         }
@@ -178,7 +204,33 @@ int main() {
                                     sprintRed("\nMembatalkan command CHOP\n");
                                     break;
                                 } else {
-                                    mengolahMakanan(makananBisaDiolah.contents[pilChop-1], &simulator, &delivery_list, &latest_notification, kulkas, &stack_undo, &stack_redo, &game, &latest_state);
+                                    PrioQueue tempDelivery;
+                                    CreateEmptyPrioqueue(&tempDelivery, 50);
+                                    CopyQueue(&delivery_list, &tempDelivery);
+                                    
+                                    Simulator tempSimulator;
+                                    POINT pTemp;
+                                    PrioQueue pQueueTemp;
+                                    CreatePoint(&pTemp, 0, 0);
+                                    CreateEmptyPrioqueue(&pQueueTemp, 50);
+                                    createSimulator(&tempSimulator, "TEMP", pTemp, pQueueTemp);
+
+                                    copySimulator(&simulator, &tempSimulator);
+
+                                    ListDinMakanan tempNotification;
+                                    CreateListMakananDin(&tempNotification, 50);
+                                    copyListDinMakanan(latest_notification, &tempNotification);
+
+                                    // masuk stack undo
+                                    simulatorToState(tempSimulator, tempDelivery, game.currentTime, tempNotification, kulkas, &latest_state);                                
+                                    Push(&stack_undo,latest_state);
+
+                                    // reset notifikasi
+                                    dealocateListMakanan(&latest_notification);
+                                    CreateListMakananDin(&latest_notification, 50);
+
+                                    mengolahMakanan(makananBisaDiolah.contents[pilChop-1], &simulator, &delivery_list, &latest_notification, kulkas, &stack_undo, &game);
+                                    EmptyStack(&stack_redo);
                                 }
                             }
                         }
@@ -199,7 +251,33 @@ int main() {
                                     sprintRed("\nMembatalkan command BOIL\n");
                                     break;
                                 } else {
-                                    mengolahMakanan(makananBisaDiolah.contents[pilBoil-1], &simulator, &delivery_list, &latest_notification, kulkas, &stack_undo, &stack_redo, &game, &latest_state);
+                                    PrioQueue tempDelivery;
+                                    CreateEmptyPrioqueue(&tempDelivery, 50);
+                                    CopyQueue(&delivery_list, &tempDelivery);
+                                    
+                                    Simulator tempSimulator;
+                                    POINT pTemp;
+                                    PrioQueue pQueueTemp;
+                                    CreatePoint(&pTemp, 0, 0);
+                                    CreateEmptyPrioqueue(&pQueueTemp, 50);
+                                    createSimulator(&tempSimulator, "TEMP", pTemp, pQueueTemp);
+
+                                    copySimulator(&simulator, &tempSimulator);
+
+                                    ListDinMakanan tempNotification;
+                                    CreateListMakananDin(&tempNotification, 50);
+                                    copyListDinMakanan(latest_notification, &tempNotification);
+
+                                    // masuk stack undo
+                                    simulatorToState(tempSimulator, tempDelivery, game.currentTime, tempNotification, kulkas, &latest_state);                                
+                                    Push(&stack_undo,latest_state);
+
+                                    // reset notifikasi
+                                    dealocateListMakanan(&latest_notification);
+                                    CreateListMakananDin(&latest_notification, 50);
+
+                                    mengolahMakanan(makananBisaDiolah.contents[pilBoil-1], &simulator, &delivery_list, &latest_notification, kulkas, &stack_undo, &game);
+                                    EmptyStack(&stack_redo);
                                 }
                             }
                         }
@@ -220,7 +298,33 @@ int main() {
                                     sprintRed("\nMembatalkan command MIX\n");
                                     break;
                                 } else {
-                                    mengolahMakanan(makananBisaDiolah.contents[pilMix-1], &simulator, &delivery_list, &latest_notification, kulkas, &stack_undo, &stack_redo, &game, &latest_state);
+                                    PrioQueue tempDelivery;
+                                    CreateEmptyPrioqueue(&tempDelivery, 50);
+                                    CopyQueue(&delivery_list, &tempDelivery);
+                                    
+                                    Simulator tempSimulator;
+                                    POINT pTemp;
+                                    PrioQueue pQueueTemp;
+                                    CreatePoint(&pTemp, 0, 0);
+                                    CreateEmptyPrioqueue(&pQueueTemp, 50);
+                                    createSimulator(&tempSimulator, "TEMP", pTemp, pQueueTemp);
+
+                                    copySimulator(&simulator, &tempSimulator);
+
+                                    ListDinMakanan tempNotification;
+                                    CreateListMakananDin(&tempNotification, 50);
+                                    copyListDinMakanan(latest_notification, &tempNotification);
+
+                                    // masuk stack undo
+                                    simulatorToState(tempSimulator, tempDelivery, game.currentTime, tempNotification, kulkas, &latest_state);                                
+                                    Push(&stack_undo,latest_state);
+
+                                    // reset notifikasi
+                                    dealocateListMakanan(&latest_notification);
+                                    CreateListMakananDin(&latest_notification, 50);
+
+                                    mengolahMakanan(makananBisaDiolah.contents[pilMix-1], &simulator, &delivery_list, &latest_notification, kulkas, &stack_undo, &game);
+                                    EmptyStack(&stack_redo);
                                 }
                             }
                         }
@@ -251,7 +355,7 @@ int main() {
                             sprintRed("Command MOVE memiliki 1 argumen, arah. Coba Lagi!\n");
                         } else {
                             PrioQueue tempDelivery;
-                            CreateEmptyPrioqueue(&tempDelivery, 50);
+                            CreateEmptyPrioqueue(&tempDelivery, 10);
                             CopyQueue(&delivery_list, &tempDelivery);
                             
                             Simulator tempSimulator;
@@ -259,7 +363,7 @@ int main() {
                             PrioQueue pQueueTemp;
                             CreatePoint(&pTemp, 0, 0);
                             CreateEmptyPrioqueue(&pQueueTemp, 50);
-                            createSimulator(&tempSimulator, TEMP, pTemp, pQueueTemp);
+                            createSimulator(&tempSimulator, "TEMP", pTemp, pQueueTemp);
 
                             copySimulator(&simulator, &tempSimulator);
 
@@ -328,7 +432,7 @@ int main() {
                             menit = wordToInt(L.TabWords[2]);
                             if (jam != -999 && menit != -999) {
                                 PrioQueue tempDelivery;
-                                CreateEmptyPrioqueue(&tempDelivery, 50);
+                                CreateEmptyPrioqueue(&tempDelivery, 10);
                                 CopyQueue(&delivery_list, &tempDelivery);
                                 
                                 Simulator tempSimulator;
@@ -336,7 +440,7 @@ int main() {
                                 PrioQueue pQueueTemp;
                                 CreatePoint(&pTemp, 0, 0);
                                 CreateEmptyPrioqueue(&pQueueTemp, 50);
-                                createSimulator(&tempSimulator, TEMP, pTemp, pQueueTemp);
+                                createSimulator(&tempSimulator, "TEMP", pTemp, pQueueTemp);
 
                                 copySimulator(&simulator, &tempSimulator);
 
@@ -485,7 +589,7 @@ int main() {
 
                                                     if (idxkulkasvalid) {
                                                         PrioQueue tempDelivery;
-                                                        CreateEmptyPrioqueue(&tempDelivery, 50);
+                                                        CreateEmptyPrioqueue(&tempDelivery, 10);
                                                         CopyQueue(&delivery_list, &tempDelivery);
                                                         
                                                         Simulator tempSimulator;
@@ -493,7 +597,7 @@ int main() {
                                                         PrioQueue pQueueTemp;
                                                         CreatePoint(&pTemp, 0, 0);
                                                         CreateEmptyPrioqueue(&pQueueTemp, 50);
-                                                        createSimulator(&tempSimulator, TEMP, pTemp, pQueueTemp);
+                                                        createSimulator(&tempSimulator, "TEMP", pTemp, pQueueTemp);
 
                                                         copySimulator(&simulator, &tempSimulator);
 
@@ -562,7 +666,7 @@ int main() {
                                 sprintRed("Tidak ada makanan dengan ID tersebut di kulkas\n");
                             } else {
                                 PrioQueue tempDelivery;
-                                CreateEmptyPrioqueue(&tempDelivery, 50);
+                                CreateEmptyPrioqueue(&tempDelivery, 10);
                                 CopyQueue(&delivery_list, &tempDelivery);
                                 
                                 Simulator tempSimulator;
@@ -570,7 +674,7 @@ int main() {
                                 PrioQueue pQueueTemp;
                                 CreatePoint(&pTemp, 0, 0);
                                 CreateEmptyPrioqueue(&pQueueTemp, 50);
-                                createSimulator(&tempSimulator, TEMP, pTemp, pQueueTemp);
+                                createSimulator(&tempSimulator, "TEMP", pTemp, pQueueTemp);
 
                                 copySimulator(&simulator, &tempSimulator);
 
