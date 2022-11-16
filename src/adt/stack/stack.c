@@ -24,6 +24,18 @@ boolean IsStackFull(Stack S) {
 }
 
 /* ************ Menambahkan sebuah elemen ke Stack ************ */
+void Push1(Stack * S, State X) {
+/* Menambahkan X sebagai elemen Stack S. */
+/* I.S. S mungkin kosong, tabel penampung elemen stack TIDAK penuh */
+/* F.S. X menjadi TOP yang baru,TOP bertambah 1 */
+    if (IsStackEmpty(*S)) {
+        Top(*S) = 0;
+    } else {
+        Top(*S) += 1;
+    }
+    InfoTop(*S) = X;
+}
+
 void Push(Stack * S, State X) {
 /* Menambahkan X sebagai elemen Stack S. */
 /* I.S. S mungkin kosong, tabel penampung elemen stack TIDAK penuh */
@@ -31,6 +43,9 @@ void Push(Stack * S, State X) {
     if (IsStackEmpty(*S)) {
         Top(*S) = 0;
     } else {
+        if (Top(*S) >= 24) {
+            ReallocateStack(S);
+        }
         Top(*S) += 1;
     }
     InfoTop(*S) = X;
@@ -81,4 +96,29 @@ void Redo(Stack * SMain, Stack * SSecondary, State * currentState) {
     free(currentState);
     Pop(SSecondary, &temp);
     *currentState = temp;
+}
+
+void ReallocateStack(Stack * S1) {
+/* Mengurangi jumlah undo */
+
+    // KAMUS
+    Stack temp;
+    State tempstate;
+
+    // ALGORITMA 
+    printf("bisa tot\n");
+    CreateEmptyStack(&temp);
+    while (Top(*S1) < 4) {
+        Pop(S1, &tempstate);
+        Push1(&temp, tempstate);
+    }
+
+    EmptyStack(S1);
+    CreateEmptyStack(S1);
+
+    while (!IsStackEmpty(temp)) {
+        Pop(&temp, &tempstate);
+        Push1(S1, tempstate);
+    }
+    printf("bisa tot\n");
 }
