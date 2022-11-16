@@ -111,7 +111,7 @@ int main() {
                                     copyListDinMakanan(latest_notification, &tempNotification);
 
                                     // masuk stack undo
-                                    simulatorToState(tempSimulator, tempDelivery, game.currentTime, tempNotification, kulkas, &latest_state);                                
+                                    simulatorToState(tempSimulator, tempDelivery, game.currentTime, tempNotification, kulkas, &latest_state); 
                                     Push(&stack_undo,latest_state);
 
                                     // reset notifikasi
@@ -175,7 +175,7 @@ int main() {
                                     copyListDinMakanan(latest_notification, &tempNotification);
 
                                     // masuk stack undo
-                                    simulatorToState(tempSimulator, tempDelivery, game.currentTime, tempNotification, kulkas, &latest_state);                                
+                                    simulatorToState(tempSimulator, tempDelivery, game.currentTime, tempNotification, kulkas, &latest_state);
                                     Push(&stack_undo,latest_state);
 
                                     // reset notifikasi
@@ -222,7 +222,7 @@ int main() {
                                     copyListDinMakanan(latest_notification, &tempNotification);
 
                                     // masuk stack undo
-                                    simulatorToState(tempSimulator, tempDelivery, game.currentTime, tempNotification, kulkas, &latest_state);                                
+                                    simulatorToState(tempSimulator, tempDelivery, game.currentTime, tempNotification, kulkas, &latest_state);
                                     Push(&stack_undo,latest_state);
 
                                     // reset notifikasi
@@ -269,7 +269,7 @@ int main() {
                                     copyListDinMakanan(latest_notification, &tempNotification);
 
                                     // masuk stack undo
-                                    simulatorToState(tempSimulator, tempDelivery, game.currentTime, tempNotification, kulkas, &latest_state);                                
+                                    simulatorToState(tempSimulator, tempDelivery, game.currentTime, tempNotification, kulkas, &latest_state);
                                     Push(&stack_undo,latest_state);
 
                                     // reset notifikasi
@@ -316,7 +316,7 @@ int main() {
                                     copyListDinMakanan(latest_notification, &tempNotification);
 
                                     // masuk stack undo
-                                    simulatorToState(tempSimulator, tempDelivery, game.currentTime, tempNotification, kulkas, &latest_state);                                
+                                    simulatorToState(tempSimulator, tempDelivery, game.currentTime, tempNotification, kulkas, &latest_state);
                                     Push(&stack_undo,latest_state);
 
                                     // reset notifikasi
@@ -372,7 +372,7 @@ int main() {
                             copyListDinMakanan(latest_notification, &tempNotification);
 
                             // masuk stack undo
-                            simulatorToState(tempSimulator, tempDelivery, game.currentTime, tempNotification, kulkas, &latest_state);                                
+                            simulatorToState(tempSimulator, tempDelivery, game.currentTime, tempNotification, kulkas, &latest_state);
                             Push(&stack_undo,latest_state);
 
                             // reset notifikasi
@@ -455,7 +455,7 @@ int main() {
                                 // }
 
                                 // masuk stack undo
-                                simulatorToState(tempSimulator, tempDelivery, game.currentTime, tempNotification, kulkas, &latest_state);                                
+                                simulatorToState(tempSimulator, tempDelivery, game.currentTime, tempNotification, kulkas, &latest_state);
                                 Push(&stack_undo,latest_state);
 
                                 // reset notifikasi
@@ -607,7 +607,7 @@ int main() {
                                                         copyListDinMakanan(latest_notification, &tempNotification);
 
                                                         // masuk stack undo
-                                                        simulatorToState(tempSimulator, tempDelivery, game.currentTime, tempNotification, kulkas, &latest_state);                                
+                                                        simulatorToState(tempSimulator, tempDelivery, game.currentTime, tempNotification, kulkas, &latest_state);
                                                         Push(&stack_undo,latest_state);
 
                                                         // reset notifikasi
@@ -684,7 +684,7 @@ int main() {
                                 copyListDinMakanan(latest_notification, &tempNotification);
 
                                 // masuk stack undo
-                                simulatorToState(tempSimulator, tempDelivery, game.currentTime, tempNotification, kulkas, &latest_state);                                
+                                simulatorToState(tempSimulator, tempDelivery, game.currentTime, tempNotification, kulkas, &latest_state);
                                 Push(&stack_undo,latest_state);
 
                                 // reset notifikasi
