@@ -7,7 +7,7 @@
 #include "../point/point.h"
 
 /*  Kamus Umum */
-#define CAPACITY_LISTSTATIKP 100
+#define CAPACITY_LISTSTATIKP 50
 /* Kapasitas penyimpanan */
 #define IDX_MIN 0
 /* Indeks minimum list */

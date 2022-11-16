@@ -25,7 +25,7 @@ int main() {
     CreateEmptyStack(&stack_redo);
     CreateListMakananDin(&latest_notification, 50);
     createMatrixKulkas(10, 20, &kulkas);
-    CreateEmptyPrioqueue (&delivery_list, 50);
+    CreateEmptyPrioqueue (&delivery_list, 10);
 
     do {
         /* Baca Command START/ EXIT */
@@ -92,14 +92,14 @@ int main() {
                                     break;
                                 } else {
                                     PrioQueue tempDelivery;
-                                    CreateEmptyPrioqueue(&tempDelivery, 50);
+                                    CreateEmptyPrioqueue(&tempDelivery, 10);
                                     CopyQueue(&delivery_list, &tempDelivery);
                                     
                                     Simulator tempSimulator;
                                     POINT pTemp;
                                     PrioQueue pQueueTemp;
                                     CreatePoint(&pTemp, 0, 0);
-                                    CreateEmptyPrioqueue(&pQueueTemp, 50);
+                                    CreateEmptyPrioqueue(&pQueueTemp, 10);
                                     createSimulator(&tempSimulator, "TEMP", pTemp, pQueueTemp);
 
                                     copySimulator(&simulator, &tempSimulator);
@@ -156,14 +156,14 @@ int main() {
                                     break;
                                 } else {
                                     PrioQueue tempDelivery;
-                                    CreateEmptyPrioqueue(&tempDelivery, 50);
+                                    CreateEmptyPrioqueue(&tempDelivery, 10);
                                     CopyQueue(&delivery_list, &tempDelivery);
                                     
                                     Simulator tempSimulator;
                                     POINT pTemp;
                                     PrioQueue pQueueTemp;
                                     CreatePoint(&pTemp, 0, 0);
-                                    CreateEmptyPrioqueue(&pQueueTemp, 50);
+                                    CreateEmptyPrioqueue(&pQueueTemp, 10);
                                     createSimulator(&tempSimulator, "TEMP", pTemp, pQueueTemp);
 
                                     copySimulator(&simulator, &tempSimulator);
@@ -203,14 +203,14 @@ int main() {
                                     break;
                                 } else {
                                     PrioQueue tempDelivery;
-                                    CreateEmptyPrioqueue(&tempDelivery, 50);
+                                    CreateEmptyPrioqueue(&tempDelivery, 10);
                                     CopyQueue(&delivery_list, &tempDelivery);
                                     
                                     Simulator tempSimulator;
                                     POINT pTemp;
                                     PrioQueue pQueueTemp;
                                     CreatePoint(&pTemp, 0, 0);
-                                    CreateEmptyPrioqueue(&pQueueTemp, 50);
+                                    CreateEmptyPrioqueue(&pQueueTemp, 10);
                                     createSimulator(&tempSimulator, "TEMP", pTemp, pQueueTemp);
 
                                     copySimulator(&simulator, &tempSimulator);
@@ -250,14 +250,14 @@ int main() {
                                     break;
                                 } else {
                                     PrioQueue tempDelivery;
-                                    CreateEmptyPrioqueue(&tempDelivery, 50);
+                                    CreateEmptyPrioqueue(&tempDelivery, 10);
                                     CopyQueue(&delivery_list, &tempDelivery);
                                     
                                     Simulator tempSimulator;
                                     POINT pTemp;
                                     PrioQueue pQueueTemp;
                                     CreatePoint(&pTemp, 0, 0);
-                                    CreateEmptyPrioqueue(&pQueueTemp, 50);
+                                    CreateEmptyPrioqueue(&pQueueTemp, 10);
                                     createSimulator(&tempSimulator, "TEMP", pTemp, pQueueTemp);
 
                                     copySimulator(&simulator, &tempSimulator);
@@ -297,14 +297,14 @@ int main() {
                                     break;
                                 } else {
                                     PrioQueue tempDelivery;
-                                    CreateEmptyPrioqueue(&tempDelivery, 50);
+                                    CreateEmptyPrioqueue(&tempDelivery, 10);
                                     CopyQueue(&delivery_list, &tempDelivery);
                                     
                                     Simulator tempSimulator;
                                     POINT pTemp;
                                     PrioQueue pQueueTemp;
                                     CreatePoint(&pTemp, 0, 0);
-                                    CreateEmptyPrioqueue(&pQueueTemp, 50);
+                                    CreateEmptyPrioqueue(&pQueueTemp, 10);
                                     createSimulator(&tempSimulator, "TEMP", pTemp, pQueueTemp);
 
                                     copySimulator(&simulator, &tempSimulator);
@@ -353,14 +353,14 @@ int main() {
                             sprintRed("Command MOVE memiliki 1 argumen, arah. Coba Lagi!\n");
                         } else {
                             PrioQueue tempDelivery;
-                            CreateEmptyPrioqueue(&tempDelivery, 50);
+                            CreateEmptyPrioqueue(&tempDelivery, 10);
                             CopyQueue(&delivery_list, &tempDelivery);
                             
                             Simulator tempSimulator;
                             POINT pTemp;
                             PrioQueue pQueueTemp;
                             CreatePoint(&pTemp, 0, 0);
-                            CreateEmptyPrioqueue(&pQueueTemp, 50);
+                            CreateEmptyPrioqueue(&pQueueTemp, 10);
                             createSimulator(&tempSimulator, "TEMP", pTemp, pQueueTemp);
 
                             copySimulator(&simulator, &tempSimulator);
@@ -430,14 +430,14 @@ int main() {
                             menit = wordToInt(L.TabWords[2]);
                             if (jam != -999 && menit != -999) {
                                 PrioQueue tempDelivery;
-                                CreateEmptyPrioqueue(&tempDelivery, 50);
+                                CreateEmptyPrioqueue(&tempDelivery, 10);
                                 CopyQueue(&delivery_list, &tempDelivery);
                                 
                                 Simulator tempSimulator;
                                 POINT pTemp;
                                 PrioQueue pQueueTemp;
                                 CreatePoint(&pTemp, 0, 0);
-                                CreateEmptyPrioqueue(&pQueueTemp, 50);
+                                CreateEmptyPrioqueue(&pQueueTemp, 10);
                                 createSimulator(&tempSimulator, "TEMP", pTemp, pQueueTemp);
 
                                 copySimulator(&simulator, &tempSimulator);
@@ -587,14 +587,14 @@ int main() {
 
                                                     if (idxkulkasvalid) {
                                                         PrioQueue tempDelivery;
-                                                        CreateEmptyPrioqueue(&tempDelivery, 50);
+                                                        CreateEmptyPrioqueue(&tempDelivery, 10);
                                                         CopyQueue(&delivery_list, &tempDelivery);
                                                         
                                                         Simulator tempSimulator;
                                                         POINT pTemp;
                                                         PrioQueue pQueueTemp;
                                                         CreatePoint(&pTemp, 0, 0);
-                                                        CreateEmptyPrioqueue(&pQueueTemp, 50);
+                                                        CreateEmptyPrioqueue(&pQueueTemp, 10);
                                                         createSimulator(&tempSimulator, "TEMP", pTemp, pQueueTemp);
 
                                                         copySimulator(&simulator, &tempSimulator);
@@ -664,14 +664,14 @@ int main() {
                                 sprintRed("Tidak ada makanan dengan ID tersebut di kulkas\n");
                             } else {
                                 PrioQueue tempDelivery;
-                                CreateEmptyPrioqueue(&tempDelivery, 50);
+                                CreateEmptyPrioqueue(&tempDelivery, 10);
                                 CopyQueue(&delivery_list, &tempDelivery);
                                 
                                 Simulator tempSimulator;
                                 POINT pTemp;
                                 PrioQueue pQueueTemp;
                                 CreatePoint(&pTemp, 0, 0);
-                                CreateEmptyPrioqueue(&pQueueTemp, 50);
+                                CreateEmptyPrioqueue(&pQueueTemp, 10);
                                 createSimulator(&tempSimulator, "TEMP", pTemp, pQueueTemp);
 
                                 copySimulator(&simulator, &tempSimulator);
