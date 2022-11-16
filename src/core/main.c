@@ -300,7 +300,8 @@ int main() {
                                 WriteLokasi(simulator.lokasi);
                                 TulisTIME3(game.currentTime);
                                 printListMakanan(latest_notification);
-                                printf("\n"); DisplayMap(game.map, simulator.lokasi);
+                                printf("\n"); 
+                                DisplayMap(game.map, simulator.lokasi);
                                 EmptyStack(&stack_redo);
                             }   
                         }
@@ -376,8 +377,8 @@ int main() {
 
                                 WriteLokasi(simulator.lokasi);
                                 TulisTIME3(game.currentTime);
+                                printListMakanan(latest_notification);
                                 printf("\n");
-                                printListMakanan(latest_notification); 
                                 DisplayMap(game.map, simulator.lokasi);
                                 EmptyStack(&stack_redo);
                             } else {
@@ -401,8 +402,8 @@ int main() {
                                 loadState(&simulator, &delivery_list, latest_state, simulator.username, &latest_notification, &kulkas, &game.currentTime);
                                 WriteLokasi(simulator.lokasi);
                                 TulisTIME3(game.currentTime);
+                                printListMakananUndo(tempnotif);
                                 printf("\n");
-                                printListMakananUndo(tempnotif); 
                                 DisplayMap(game.map, simulator.lokasi);
                             } else {
                                 // IsStackEmpty(stack_undo) [stack_undo kosong]
@@ -420,8 +421,8 @@ int main() {
                                 loadState(&simulator, &delivery_list, latest_state, simulator.username, &latest_notification, &kulkas, &game.currentTime);
                                 WriteLokasi(simulator.lokasi);
                                 TulisTIME3(game.currentTime);
+                                printListMakanan(latest_notification);
                                 printf("\n");
-                                printListMakanan(latest_notification); 
                                 DisplayMap(game.map, simulator.lokasi);
                             } else {
                                 // IsStackEmpty(stack_redo) [stack_redo kosong]
