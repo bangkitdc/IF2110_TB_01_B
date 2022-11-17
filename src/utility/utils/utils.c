@@ -302,7 +302,7 @@ void help()
     printf("%2d  UNDO\n", 12);
     printf("%2d  REDO\n", 13);
     printf("%2d  MASUKKULKAS X Y (X: index makanan di Inventory, Y: nomor yang ingin dipakai)\n", 14);
-    printf("%2d  KELUARKULKAS\n", 15);
+    printf("%2d  KELUARKULKAS X (X: ID makanan di kulkas)\n", 15);
     printf("%2d  KULKAS\n", 16);
     printf("%2d  REKOMENDASI\n", 17);
     printf("%2d  HELP\n", 18);
@@ -489,7 +489,7 @@ void rekomendasiMakanan(ListStatikM listMakanan, PrioQueue listInvenMakanan, Lis
     }
 
     if (num == 1) {
-        printf("\nTidak ada rekomendasi makanan.\n");
+        sprintRed("\nTidak ada rekomendasi makanan dari bahan di Inventory. Cek COOKBOOK!\n");
     }
 }
 

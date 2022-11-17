@@ -128,15 +128,23 @@ int main() {
                                         PassTimeDelivery(&delivery_list, &Inventory(simulator), 1, &latest_notification);
                                     }
                                     
-                                    Enqueue(&delivery_list, makananDibeli);
+                                    if (TIMEToMenit(makananDibeli.time) != 0) {
+                                        Enqueue(&delivery_list, makananDibeli);
 
-                                    printf("\nBerhasil memesan %s. %s akan diantar dalam ", Info(makananDibeli).name, Info(makananDibeli).name);
-                                    TulisTIME2(DELIVERY(Info(makananDibeli))); printf(".\n");
+                                        printf("\nBerhasil memesan %s. %s akan diantar dalam ", Info(makananDibeli).name, Info(makananDibeli).name);
+                                        TulisTIME2(DELIVERY(Info(makananDibeli))); printf(".\n");
 
-                                    // Masukkan ke notif
-                                    LOC(Info(makananDibeli)) = 't';
-                                    insertLastMakanan(&latest_notification, makananDibeli);
-                                    EmptyStack(&stack_redo);
+                                        // Masukkan ke notif
+                                        LOC(Info(makananDibeli)) = 't';
+                                        insertLastMakanan(&latest_notification, makananDibeli);
+                                        EmptyStack(&stack_redo);
+                                    } else {
+                                        makananDibeli.time = makananDibeli.info.expiry;
+                                        Enqueue(&Inventory(simulator), makananDibeli);
+                                        printf("\nBerhasil memesan %s. %s telah masuk inventory\n", Info(makananDibeli).name, Info(makananDibeli).name);
+                                        insertLastMakanan(&latest_notification, makananDibeli);
+                                        EmptyStack(&stack_redo);
+                                    }
                                 }
                             }
                         }
@@ -516,6 +524,7 @@ int main() {
                         if (L.Length != 3) {
                             sprintRed("Command MASUKKULKAS memiliki 2 argumen. Coba Lagi!\n");
                         } else {
+                            displayMatrixKulkas(kulkas);
                             infotype tempinfotype;
                             boolean idtidakvalid;
                             ListWord tempindexkulkas;
@@ -674,6 +683,8 @@ int main() {
                                 // Ambil dari kulkas
                                 ambilDariKulkas(&simulator, tempidmakanan, &kulkas, &latest_notification);
                                 EmptyStack(&stack_redo);
+                                
+                                displayMatrixKulkas(kulkas);
                             }
                         }
                         break;
