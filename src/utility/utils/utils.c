@@ -63,7 +63,9 @@ void startMenu() {
                "\x1B[0m");
     }
     printf("\n");
-    sprintCyan("======= List Command =======\n");
+    sprintCyan("============================\n");
+    sprintCyan("=       List Command       =\n");
+    sprintCyan("============================\n");
     sprintGreen("[1] START \n");
     sprintRed("[2] EXIT \n");
 }
@@ -282,7 +284,7 @@ void inputConfigFile(Game *g, Simulator *sim, char *PATH, int type)
 
 void help()
 {
-    sprintCyan("      \xB2\xB2\xB2\xB2\xB2\xB2\xB2 LIST COMMAND \xB2\xB2\xB2\xB2\xB2\xB2\xB2\n");
+    sprintCyan("\n      \xB2\xB2\xB2\xB2\xB2\xB2\xB2 LIST COMMAND \xB2\xB2\xB2\xB2\xB2\xB2\xB2\n");
     printf("========================================\n");
     printf("No  Command                             \n"); // TABLE TITLES !
     printf("========================================\n");
@@ -299,7 +301,7 @@ void help()
     printf("%2d  COOKBOOK\n", 11);
     printf("%2d  UNDO\n", 12);
     printf("%2d  REDO\n", 13);
-    printf("%2d  MASUKKULKAS\n", 14);
+    printf("%2d  MASUKKULKAS X Y (X: index makanan di Inventory, Y: nomor yang ingin dipakai)\n", 14);
     printf("%2d  KELUARKULKAS\n", 15);
     printf("%2d  KULKAS\n", 16);
     printf("%2d  REKOMENDASI\n", 17);
@@ -363,27 +365,31 @@ void printCookBook(ListStatikT listResep, ListStatikM listMakanan)
 {
     Makanan display;
     Tree resep;
+    sprintCyan("\n        \xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2 COOKBOOK \xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\n");
+    printf("===========================================\n");
+    printf("No  Resep                                  \n"); // TABLE TITLES !
+    printf("===========================================\n");
     for (int i = 0; i < listResep.elEff; i++)
     {
         resep = listResep.list[i];
         display = getMakananFromId(resep->info, listMakanan);
-        printf("%d. %s\n", i + 1, display.name);
+        printf("%2d  %s\n", i + 1, display.name);
         printf("   ");
         if (display.location == 'B')
         {
-            printf("BOIL");
+            printf(" BOIL");
         }
         else if (display.location == 'F')
         {
-            printf("FRY");
+            printf(" FRY");
         }
         else if (display.location == 'C')
         {
-            printf("CHOP");
+            printf(" CHOP");
         }
         else if (display.location == 'M')
         {
-            printf("MIX");
+            printf(" MIX");
         }
         for (int j = 0; j < resep->childEff; j++)
         {
@@ -441,13 +447,14 @@ void rekomendasiMakanan(ListStatikM listMakanan, PrioQueue listInvenMakanan, Lis
     Set s;
     Address treeRekomen;
     Makanan rekomen;
-    boolean bisa;
+    boolean bisa, splash;
     int i, num;
 
     createSet(&s);
     makeSetFromListMakanan(&s, listMakanan);
     makeSetFromInventory(&s, listMakanan, listInvenMakanan);
     num = 1;
+    splash = true;
 
     for (i = 0; i < listResep.elEff; i++)
     {
@@ -464,10 +471,18 @@ void rekomendasiMakanan(ListStatikM listMakanan, PrioQueue listInvenMakanan, Lis
                 }
             }
 
+            if (bisa && splash) {
+                sprintCyan("\n\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2 REKOMENDASI \xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\n");
+                printf("==============================\n");
+                printf("No  Nama                      \n"); // TABLE TITLES !
+                printf("==============================\n");
+                splash = false;
+            }
+
             if (bisa)
             {
                 rekomen = getMakananFromId(treeRekomen->info, listMakanan);
-                printf("%d. %s\n", num, rekomen.name);
+                printf("%2d  %-20s\n", num, rekomen.name);
                 num++;
             }
         }
