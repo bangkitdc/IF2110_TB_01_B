@@ -59,7 +59,7 @@ void TulisTIME2 (TIME T)
 }
 
 void TulisTIME3 (TIME T) {
-   printf("Waktu: %d.%d\n", Hour(T), Minute(T));
+   printf("Waktu: %02d.%02d\n", Hour(T), Minute(T));
 }
 
 void TulisTIME4 (TIME T) {

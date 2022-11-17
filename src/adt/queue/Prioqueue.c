@@ -267,7 +267,7 @@ void PrintPrioQueue (PrioQueue Q) {
     if (IsEmptyPrioqueue(Q)) {
         sprintRed("\nInventorynya kosong.. :(\n");
     } else {
-        sprintCyan("         \xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2 INVENTORY \xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\n");
+        sprintCyan("\n         \xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2 INVENTORY \xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\n");
         printf("===============================================\n");
         printf("No  Nama                Expired In             \n"); // TABLE TITLES !
         printf("===============================================\n");
@@ -303,13 +303,17 @@ void PrintPrioQueueDelivery (PrioQueue Q) {
     if (IsEmptyPrioqueue(Q)) {
         sprintRed("\nDelivery list kosong.. :(\n");
     } else {
-        sprintCyan("\n============ Makanan sedang OTW ==========\n");
-        printf("(nama - waktu sisa delivery)\n");
+        sprintCyan("\n     \xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2 Food Is On The Way \xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\n");
+        printf("===============================================\n");
+        printf("No  Nama                Arrive In              \n"); // TABLE TITLES !
+        printf("===============================================\n");
+        // sprintCyan("\n============ Makanan sedang OTW ==========\n");
+        // printf("(nama - waktu sisa delivery)\n");
 
         ctr = 1;
         while (!IsEmptyPrioqueue(Q)) {
             Dequeue(&Q, &temp);
-            printf("  [%d] %s - ", ctr, NAME(Info(temp))); // dijadiin nama makanan dulu
+            printf("%2d  %-16s\t", ctr, NAME(Info(temp))); // dijadiin nama makanan dulu
             TulisTIME2(Time(temp));
             printf("\n");
             ctr++;

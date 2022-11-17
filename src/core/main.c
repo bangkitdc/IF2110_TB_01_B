@@ -490,7 +490,7 @@ int main() {
                                 printf("\n");
                                 DisplayMap(game.map, simulator.lokasi);
                             } else {
-                                sprintRed("Tidak bisa UNDO.\n");
+                                sprintRed("Tidak bisa UNDO. (UNDO max: 25 times)\n");
                             }
                         }
                         break;
@@ -531,12 +531,13 @@ int main() {
                                     if (!idtidakvalid) {
                                         if (Absis(SIZE(Info(tempinfotype))) * Ordinat(SIZE(Info(tempinfotype))) <= countElmtDummy(kulkas)) {
                                             // Minta input index pojok kiri atas dan index pojok kanan bawah
-                                            sprintYellow("Masukkan index pojok kiri atas, dan index pojok kanan bawah\n");
+                                            sprintYellow("\nMasukkan index pojok kiri atas, dan index pojok kanan bawah\n");
                                             sprintYellow("Urutannya: kiri atas kanan bawah\n");
+                                            printf("> ");
                                             tempindexkulkas = readLine();
                                             inputtempindexkulkas = MenuInput(tempindexkulkas.TabWords[0]);
                                             if (tempindexkulkas.Length != 4) {
-                                                sprintRed("Butuh 2 index\n");
+                                                sprintRed("Butuh 2 titik x1(a,b) x2(c,d)\n");
                                                 
                                                 // Kembalikan ID awal
                                                 hapusIdKulkas(&tempinfotype);

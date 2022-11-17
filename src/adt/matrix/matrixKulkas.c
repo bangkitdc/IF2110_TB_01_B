@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include "../../include/boolean.h"
 #include "matrixKulkas.h"
+#include "../../utility/color/color.h"
 
 /* rowEff >= 1 dan colEff >= 1 */
 /* Indeks matriks yang digunakan: [0..ROW_CAP_K-1][0..COL_CAP_K-1] */
@@ -79,9 +80,20 @@ void displayMatrixKulkas(MatrixKulkas m)
     for(int i=0;i<ROW_EFFK(m);i++){
         for(int j=0;j<COL_EFFK(m);j++){
             if(j>0){
-                printf(" ");
+                printf("|");
             }
-            printf("%d", ID(Info(ELMTK(m,i,j))));
+            
+            int color = ID(Info(ELMTK(m, i, j))) % 38;
+            while(color < 31) {
+                color += 6;
+            }
+
+            if (ID(Info(ELMTK(m,i,j))) == 0) {
+                printf("%5d", ID(Info(ELMTK(m, i, j))));
+            } else {
+                printf("\x1b[%dm%5d", color, ID(Info(ELMTK(m, i, j))));
+                printf("%s", RESET);
+            }
         }
         printf("\n");
     }
