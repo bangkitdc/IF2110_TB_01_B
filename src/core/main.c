@@ -516,6 +516,7 @@ int main() {
                         if (L.Length != 3) {
                             sprintRed("Command MASUKKULKAS memiliki 2 argumen. Coba Lagi!\n");
                         } else {
+                            displayMatrixKulkas(kulkas);
                             infotype tempinfotype;
                             boolean idtidakvalid;
                             ListWord tempindexkulkas;
@@ -674,6 +675,8 @@ int main() {
                                 // Ambil dari kulkas
                                 ambilDariKulkas(&simulator, tempidmakanan, &kulkas, &latest_notification);
                                 EmptyStack(&stack_redo);
+                                
+                                displayMatrixKulkas(kulkas);
                             }
                         }
                         break;
