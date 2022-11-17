@@ -64,8 +64,4 @@ boolean isMakananBoilable(Makanan M);
 boolean isMakananMixable(Makanan M);
 /* Mengembalikan true jika LOC(M) = MIX */
 
-/* Operasi */
-
-/* I/O */
-
 #endif
