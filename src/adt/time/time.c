@@ -56,6 +56,10 @@ void TulisTIME2 (TIME T)
       }
       printf("%d menit", T.MM);
    }
+
+   if (T.DD == 0 && T.HH == 0 && T.MM == 0) {
+      printf("0 menit");
+   }
 }
 
 void TulisTIME3 (TIME T) {
