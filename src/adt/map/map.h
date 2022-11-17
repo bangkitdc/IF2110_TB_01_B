@@ -13,7 +13,6 @@
 typedef struct
 {
     Matrix Peta;
-    //POINT S_Map;
     ListStatikP T_Map;
     ListStatikP M_Map;
     ListStatikP F_Map;
