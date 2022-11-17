@@ -271,8 +271,7 @@ void PrintPrioQueue (PrioQueue Q) {
         printf("===============================================\n");
         printf("No  Nama                Expired In             \n"); // TABLE TITLES !
         printf("===============================================\n");
-        // sprintCyan("\n================ Inventory ===============\n");
-        // printf("(nama - waktu sisa kedaluwarsa)\n");
+        
         ctr = 1;
         while (!IsEmptyPrioqueue(Q))
         {

@@ -19,7 +19,9 @@ typedef struct {
 } Game;
 
 void startGame(Game *game, Simulator *s);
+/* Inisiasi Game */
 
 boolean isEndGame(Game g);
+/* Menghasilkan true jika endGame = true, false jika tidak*/
 
 #endif

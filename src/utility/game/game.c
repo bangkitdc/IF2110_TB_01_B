@@ -26,15 +26,8 @@ void startGame(Game *game, Simulator *simulator) {
         L = readLine();
 
         if (L.Length == 1 && L.TabWords[0].Length <= 20) {
-            // int i;
-            // for (i = 0; i < L.TabWords[0].Length; i ++) {
-            //     name[i] = L.TabWords[0].TabWord[i];
-            // }
-            // name[i] = '\0';
             copyWord(L.TabWords[0], &name);
-            // name = { wordToString(L.TabWords[0]) };
         } else {
-            // name = {"-1", 2};
             copyWord(markName, &name);
         }
         if (isWordEq(name, markName)) {
