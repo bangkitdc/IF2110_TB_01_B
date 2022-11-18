@@ -51,9 +51,6 @@ void printCatalog(ListStatikM l) {
     printf("=====================================================================================================\n");
     printf("No  Nama\t\t Expired in\t\t Action\t\t\t Delivery time\t\t Size\n");  // TABLE TITLES !
     printf("=====================================================================================================\n");
-    
-    // sprintCyan("\n============== List Makanan ==============\n");
-    // printf("(nama - durasi kedaluwarsa - aksi yang diperlukan - delivery time - size)\n");
 
     if (listLengthStatikM(l) > 0) {
         for (i = 0; i < listLengthStatikM(l); i ++) {

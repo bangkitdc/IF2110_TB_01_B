@@ -18,9 +18,11 @@
 #include "../infotype/infotype.h"
 #include "../map/map.h"
 #include "../makanan/makanan.h"
+#include "../machine/charmachine.h"
+#include "../machine/wordmachine.h"
 
 typedef struct {
-    char* username;
+    Word username;
     POINT lokasi;
     PrioQueue inventory;
 } Simulator;
@@ -30,10 +32,10 @@ typedef struct {
 #define Inventory(x)    (x).inventory
 
 /* PRIMITIF SIMULATOR*/
-void createSimulator(Simulator* s, char* Username, POINT lokasi, PrioQueue inventory);
+void createSimulator(Simulator* s, Word Username, POINT lokasi, PrioQueue inventory);
 /* Mengassign simulator */
 
-void gantiUser(Simulator * s, char* username);
+void gantiUser(Simulator * s, Word username);
 /* Mengganti username */
 
 void gantiLokasi(Simulator * s, POINT p);
@@ -46,7 +48,7 @@ void simulatorToState(Simulator s, PrioQueue deliverylist, TIME currentTime, Lis
 /* mengkonversi simulator s ke State*/
 /* digunakan saat mau menyimpan State ke stack */
 
-void loadState(Simulator * s, PrioQueue * deliverylist, State st, char * currentUsername, ListDinMakanan * currentNotif, MatrixKulkas * currentKulkas, TIME * currentTime);
+void loadState(Simulator * s, PrioQueue * deliverylist, State st, Word currentUsername, ListDinMakanan * currentNotif, MatrixKulkas * currentKulkas, TIME * currentTime);
 /* mengkonversi State dari stack ke simulator dan menyimpannya di simulator */
 /* digunakan saat undo dan redo */
 
@@ -91,9 +93,6 @@ void displayListMakananAksi(ListStatikM listMakanan, ListStatikM *hasil, int *le
 
 Tree getTreeFromMakanan(Makanan makanan, ListStatikT listResep);
 // mendapatkan tree makanan dari adt makanan
-
-void mengolahMakanan(Makanan makananOlah, PrioQueue *inventory, ListStatikT listResep, ListStatikM listMakanan);
-// mengolah makanan
 
 Makanan getMakananFromId(int id, ListStatikM listMakanan);
 // mendapatkan makanan dari id

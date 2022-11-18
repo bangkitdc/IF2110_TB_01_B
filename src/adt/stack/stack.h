@@ -15,16 +15,16 @@
 #include "../liststatik/liststatikM.h"
 
 #define Nil -1
-#define MaxStack 20
+#define MaxStack 30
 /* Nil adalah stack dengan elemen kosong . */
 
 typedef struct {
-  TIME waktu; // Waktu terkini
-  POINT koordinat; // Posisi simulator
-  PrioQueue inventory; // Prioqueue berupa makanan dalam inventory yang disertai waktu expired
-  PrioQueue delivery; // Prioqueue berupa waktu delivery
   MatrixKulkas kulkas; // Isi kulkas terkini
   ListDinMakanan listMakanan; // List makanan yang berubah (misal abis di-FRY/di-BOIL/kedaluarsa)
+  POINT koordinat; // Posisi simulator
+  TIME waktu; // Waktu terkini
+  PrioQueue inventory; // Prioqueue berupa makanan dalam inventory yang disertai waktu expired
+  PrioQueue delivery; // Prioqueue berupa waktu delivery
 } State; // State yang disimpan di dalam stack
 typedef int address;   /* indeks tabel */
 
@@ -90,5 +90,8 @@ void Redo(Stack * SMain, Stack *SSecondary, State *currentState);
 /* Meng-redo aksi pada SMain */
 /* I.S. SSecondary tidak boleh kosong */
 /* F.S. Elemen TOP pada SSecondary telah di-pop, dan elemen tersebut dipush ke SMain */
+
+void ReallocateStack(Stack * S1);
+/* Mengurangi jumlah undo */
 
 #endif

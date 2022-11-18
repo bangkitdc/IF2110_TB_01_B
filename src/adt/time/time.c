@@ -56,10 +56,14 @@ void TulisTIME2 (TIME T)
       }
       printf("%d menit", T.MM);
    }
+
+   if (T.DD == 0 && T.HH == 0 && T.MM == 0) {
+      printf("0 menit");
+   }
 }
 
 void TulisTIME3 (TIME T) {
-   printf("Waktu: %d.%d\n", Hour(T), Minute(T));
+   printf("Waktu: %02d.%02d\n", Hour(T), Minute(T));
 }
 
 void TulisTIME4 (TIME T) {

@@ -1,20 +1,20 @@
-6
+8
 11
 Ayam Mentah
 1 0 0
 0 0 15
 Buy 0 0 2
-1 1
+2 2
 21
 Ayam Potong
 0 2 0
 0 0 0
 Chop 0 0 2
-1 1
+2 2
 10
 Tepung
 0 1 0
-0 0 30
+0 0 0
 Buy 0 0 3
 1 1
 15
@@ -22,16 +22,28 @@ Minyak Goreng
 0 1 30
 0 1 0
 Buy 0 0 3
-1 1
+1 2
 31
 Ayam Tepung
 0 0 30
 0 0 0
 Mix 0 0 5
-1 1
+2 2
 37
 Ayam Goreng
 0 0 15
 0 0 0
 Fry 0 0 10
+2 2
+18
+Bakmie Kuah
+0 0 30
+0 0 0
+Boil 0 0 3
+2 2
+19
+Mie
+0 0 20
+0 0 30
+Buy 0 0 2
 1 1

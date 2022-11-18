@@ -3,7 +3,7 @@
 #include "simulator.h"
 
 /* PRIMITIF SIMULATOR*/
-void createSimulator(Simulator* s, char* Username, POINT lokasi, PrioQueue inventory) {
+void createSimulator(Simulator* s, Word Username, POINT lokasi, PrioQueue inventory) {
 /* Mengassign simulator */
 
     // ALGORITMA
@@ -12,14 +12,15 @@ void createSimulator(Simulator* s, char* Username, POINT lokasi, PrioQueue inven
     setInventory(s, inventory);
 }
 
-void gantiUser(Simulator * s, char* username) {
+void gantiUser(Simulator * s, Word username) {
 /* Mengganti username */
 
     // KAMUS
     int i;
 
     // ALGORITMA
-    Username(*s) = username;
+    copyWord(username, &Username(*s));
+    // Username(*s) = username;
 }
 
 void gantiLokasi(Simulator * s, POINT p) {
@@ -60,7 +61,7 @@ void simulatorToState(Simulator s, PrioQueue deliverylist, TIME currentTime, Lis
     InfoDelivery(*temp) = deliverylist;
 }
 
-void loadState(Simulator * s, PrioQueue * deliverylist, State st, char * currentUsername, ListDinMakanan * currentNotif, MatrixKulkas * currentKulkas, TIME * currentTime) {
+void loadState(Simulator * s, PrioQueue * deliverylist, State st, Word currentUsername, ListDinMakanan * currentNotif, MatrixKulkas * currentKulkas, TIME * currentTime) {
 /* mengkonversi State dari stack ke simulator dan menyimpannya di simulator */
 /* digunakan saat undo dan redo */
 
@@ -81,13 +82,14 @@ void copySimulator(Simulator * s1, Simulator * s2) {
     // KAMUS
     PrioQueue temp;
     POINT temppoint;
-    char* tempname;
+    Word tempname;
 
     // ALGORITMA
     CreateEmptyPrioqueue(&temp, MaxElPrioqueue(Inventory(*s1)));
     CopyQueue(&Inventory(*s1), &temp);
     CreatePoint(&temppoint, Absis(Lokasi(*s1)), Ordinat(Lokasi(*s1)));
-    tempname = Username(*s1);
+    // tempname = Username(*s1);
+    copyWord(Username(*s1), &tempname);
 
     createSimulator(s2, tempname, temppoint, temp);
 }
@@ -354,57 +356,6 @@ Tree getTreeFromMakanan(Makanan makanan, ListStatikT listResep)
         }
     }
     return hasil;
-}
-
-void mengolahMakanan(Makanan makananOlah, PrioQueue *inventory, ListStatikT listResep, ListStatikM listMakanan){
-    Tree treeMakananOlah;
-    infotype tmp;
-    int id, idBahan[10];
-    boolean bisa, ada;
-
-    treeMakananOlah = getTreeFromMakanan(makananOlah, listResep);
-    bisa = false;
-    for(int i=0;i<treeMakananOlah->childEff;i++){            //menelusuri tiap bahan makanan
-        idBahan[i] = treeMakananOlah->children[i]->info;
-        id = idBahan[i];
-        ada = false;
-
-        if(!IsEmptyPrioqueue(*inventory)){
-            for(int j=inventory->HEAD;j<=inventory->TAIL;j++){    // mencari apakah ada bahan pada inventori
-                if(id == inventory->T[j].info.id){
-                    ada = true;
-                }
-            }
-        }
-
-        if(ada){           
-            idBahan[i] = -1;
-            if(i==0){
-                bisa = true;
-            }
-        }else{
-            bisa = false;
-        }
-    }
-
-    if(bisa){                                        // jika bisa dibuat
-        for(int i=0;i<treeMakananOlah->childEff;i++){
-            Delete(inventory, treeMakananOlah->children[i]->info, &tmp);
-        }
-        tmp.info = makananOlah;
-        tmp.time = makananOlah.expiry;
-        Enqueue(inventory, tmp);
-        printf("%s selesai dibuat dan sudah masuk inventory!\n", makananOlah.name);
-    }else{                                           // jika tidak bisa dibuat
-        printf("\nGagal membuat %s karena kamu tidak memiliki bahan berikut:\n", makananOlah.name);
-        int j=0;
-        for(int i=0;i<treeMakananOlah->childEff;i++){
-            if(idBahan[i]!=-1){
-                j++;
-                printf("  [%d] %s\n", j, getMakananFromId(idBahan[i],listMakanan).name);
-            }
-        }
-    }
 }
 
 Makanan getMakananFromId(int id, ListStatikM listMakanan){

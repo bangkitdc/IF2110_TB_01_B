@@ -1,7 +1,7 @@
-#include "stdio.h"
-#include "wordmachine.h"
-#include "tree.h"
-#include "liststatikT.h"
+// #include "stdio.h"
+// #include "wordmachine.h"
+// #include "tree.h"
+// #include "liststatikT.h"
 
 // void tambahBahan(Tree *parent, Tree child){
 //     if((*parent)->info==child->info && (*parent)->childEff==0){

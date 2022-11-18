@@ -31,6 +31,9 @@ void Push(Stack * S, State X) {
     if (IsStackEmpty(*S)) {
         Top(*S) = 0;
     } else {
+        if (Top(*S) >= 24) {
+            ReallocateStack(S);
+        }
         Top(*S) += 1;
     }
     InfoTop(*S) = X;
@@ -81,4 +84,13 @@ void Redo(Stack * SMain, Stack * SSecondary, State * currentState) {
     free(currentState);
     Pop(SSecondary, &temp);
     *currentState = temp;
+}
+
+void ReallocateStack(Stack * S1) {
+/* Mengurangi jumlah undo */
+
+    for (int i=0; i<= Top(*S1); i++) {
+    (S1)->T[i] = (S1)->T[i+1];
+    }
+    Top(*S1) -= 1; 
 }
