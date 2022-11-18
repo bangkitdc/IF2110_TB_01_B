@@ -1,5 +1,10 @@
 # IF2110_TB_01_B
 
+# BNMO
+With the viral video on toktok, Indra and Doni are willing to meet Siska Kol and ask her to have some dinner together. Unfortunately, Indra doesn't know how to cook at all. So he asks BNMO (his robot game) to prepare that dinner, but BNMO also doesn't have any idea about cooking some delicious foods. Your job is to help BNMO develop an app that would help him to cook delicious foods.
+
+BNMO is CLI (Command Line Interface) Game that we made using C language. This game includes a lot of data structures and also Abstract Data Types (ADT) that we made ourselves. Some of them are Stack, Queue, Tree, and many more. The purpose of the game is to help the player to order food and cook food with some delicious recipes from mama.
+
 # Pre-Requisite
 - CMake https://cmake.org/download/
 - Make https://gnuwin32.sourceforge.net/packages/make.htm
