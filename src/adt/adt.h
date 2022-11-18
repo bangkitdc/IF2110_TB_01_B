@@ -16,5 +16,7 @@
 #include "./time/time.h"
 #include "./tree/tree.h"
 #include "./map/map.h"
+#include "./infotype/infotype.h"
+#include "./set/set.h"
 
 #endif
